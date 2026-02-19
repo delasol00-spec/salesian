@@ -48,3 +48,9 @@ Thumbs.db
 *.mov
 *.wmv
 
+cms/wp-content/languages
+cms/wp-content/plugins
+cms/wp-content/uploads
+cms/wp-content/themes/twentytwentyfive
+cms/wp-content/themes/twentytwentyfour
+cms/wp-content/themes/twentytwentythree
