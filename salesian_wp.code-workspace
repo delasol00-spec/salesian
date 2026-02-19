@@ -1,0 +1,42 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "liveSassCompile.settings.includeItems": [
+      "/cms/wp-content/themes/salesian/assets/css/scss/*.scss" //  scss という名前のフォルダ内の .scss ファイルすべて
+    ],
+    "liveSassCompile.settings.formats": [
+      //Sassの出力内容の設定
+      {
+        "format": "expanded", //expanded,compressed
+        "extensionName": ".css",
+        "savePath": "/cms/wp-content/themes/salesian/assets/css",
+        "liveSassCompile.settings.generateMap": true
+      }
+    ],
+    "liveSassCompile.settings.excludeList": [
+      "**/node_modules/**",
+      ".vscode/**"
+    ],
+    "liveSassCompile.settings.autoprefix": [
+      "> 1%",
+      "last 2 versions",
+      "Firefox ESR",
+      "ie 8",
+      "ie 9"
+    ],
+    "workbench.colorTheme": "Slack Theme Dark Mode",
+    "[html]": {
+      "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "files.associations": {
+      "*.blade.php": "html"
+    },
+    // The number of spaces a tab is equal to.
+    "editor.tabSize": 2,
+    "editor.snippetSuggestions": "top"
+  }
+}
