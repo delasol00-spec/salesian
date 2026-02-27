@@ -37,10 +37,10 @@ define( 'NONCE_SALT',       getenv_docker('WORDPRESS_NONCE_SALT',       '89db50d
 $table_prefix = getenv_docker('WORDPRESS_TABLE_PREFIX', 'wp_');
 
 // ** サイトURL設定 ** //
-// WP_HOME  : ブラウザでアクセスするURL（ドキュメントルート）
-// WP_SITEURL: WordPressコアが設置されているURL
-define( 'WP_HOME',    'http://localhost:8110' );
-define( 'WP_SITEURL', 'http://localhost:8110/cms' );
+// WP_HOME  : ブラウザでアクセスするURL（フロントエンドのURL）
+// WP_SITEURL: WordPressコアが設置されているURL（管理画面のベースURL）
+define( 'WP_HOME',    'http://localhost:8110/seibi' );
+define( 'WP_SITEURL', 'http://localhost:8110/seibi/cms' );
 
 // ** デバッグ設定 ** //
 define( 'WP_DEBUG', false );
