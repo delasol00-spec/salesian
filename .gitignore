@@ -57,3 +57,7 @@ cms/wp-content/themes/twentytwentythree
 
 # ナレッジ・作業メモ（非公開）
 docs/
+CLAUDE.md
+gen_sitemap.py
+sitemap.xlsx
+settings.json
