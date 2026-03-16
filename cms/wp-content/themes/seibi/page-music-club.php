@@ -1,10 +1,7 @@
 <?php
 /**
- * 学校紹介 セクショントップテンプレート
- * URL: /about/
- * Slug: about
- *
- * 静的HTML受領後に html/about/index.html の内容を移植する。
+ * 特別音楽クラブ
+ * URL: /life/music-club/
  *
  * @package salesian
  */
@@ -12,14 +9,17 @@
 get_header(); ?>
 
 <!-- =======================================
-     MAIN: 学校紹介
-     html/about/index.html を参照して移植する
+     MAIN: 特別音楽クラブ
+     html/life/music-club/index.html を参照して移植する
      ======================================= -->
-<main id="main-about">
+<main id="main-music-club">
     <?php get_template_part( 'template-parts/breadcrumb' ); ?>
 
     <?php if ( have_posts() ) : the_post(); ?>
-        <?php the_content(); ?>
+        <article id="post-<?php the_ID(); ?>">
+            <h1><?php the_title(); ?></h1>
+            <?php the_content(); ?>
+        </article>
     <?php endif; ?>
 </main>
 <!-- /MAIN -->
