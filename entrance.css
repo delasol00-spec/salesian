@@ -1,0 +1,328 @@
+/* --- 基本リセット --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  height: 100%;
+  font-family: "meiryo", "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", Meiryo, メイリオ, Osaka, "MS PGothic", arial, helvetica, sans-serif;
+  overflow: hidden;
+}
+
+/* --- ナビゲーション & フッター --- */
+.navbar {
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 50px;
+  background: rgba(0, 82, 151, 0.85); /* 指定ブルー */
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 50px;
+  background: rgba(0, 82, 151, 0.85);
+  backdrop-filter: blur(8px);
+  color: white;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  z-index: 1000;
+}
+
+.footer-sns {
+  display: flex;
+  gap: 25px; /* アイコン同士の間隔 */
+}
+
+.footer-sns a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem; /* アイコンの大きさ */
+  opacity: 0.7;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+/* ホバー時に少し浮き上がって明るくなる */
+.footer-sns a:hover {
+  opacity: 1;
+  transform: translateY(-3px);
+}
+
+.navbar {
+  top: 0;
+}
+.footer {
+  bottom: 0;
+  color: white;
+  font-size: 0.75rem;
+  padding: 15px 50px;
+}
+
+.logo img {
+  max-width: 300px;
+  z-index: 1100;
+}
+.nav-links {
+  position: fixed;
+  top: -100vh;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background: rgba(0, 82, 151, 0.98);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  list-style: none;
+}
+.nav-links.active {
+  top: 0;
+}
+.nav-links li {
+  margin: 20px 0;
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+/* ロゴ以外のメニュー項目の間に線を入れる */
+.nav-links li:not(.nav-menu-logo)::after {
+  content: "";
+  position: absolute;
+  bottom: -20px; /* 上下のマージンの中間に配置 */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 340px; /* 一番長い文字列より少し長いくらい */
+  max-width: 80%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.4);
+}
+.nav-links a {
+  display: inline-block;
+  width: 340px;
+  max-width: 80%;
+  padding: 10px 0;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  transition: color 0.4s ease;
+}
+
+.nav-links a:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+.nav-menu-logo {
+  margin: 0 0 40px 0;
+}
+.nav-menu-logo img {
+  width: 250px;
+  height: auto;
+}
+.footer-sns {
+  display: flex;
+  gap: 20px;
+}
+.footer-sns a {
+  color: white;
+  text-decoration: none;
+  opacity: 0.7;
+}
+
+/* --- メニューボタン（ラッパー） --- */
+.menu-btn {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1100;
+}
+.menu-label {
+  color: white;
+  font-size: 0.8rem;
+  margin-right: 10px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  transition: opacity 0.3s ease;
+}
+.menu-btn.active .menu-label {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* --- ハンバーガーメニュー --- */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 20px;
+}
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: white;
+  transition: 0.4s;
+}
+.menu-btn.active .hamburger span:nth-child(1) {
+  transform: translateY(8.5px) rotate(45deg);
+}
+.menu-btn.active .hamburger span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+.menu-btn.active .hamburger span:nth-child(3) {
+  transform: translateY(-8.5px) rotate(-45deg);
+}
+
+/* --- 分割レイアウト --- */
+.split-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+.split-item {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: flex 0.7s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+/* 背景画像の設定 */
+.bg-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 1.2s ease;
+  z-index: 1;
+}
+.left .bg-img {
+  background-image: url("img/inter.webp");
+}
+.right .bg-img {
+  background-image: url("img/seibi.webp");
+}
+
+/* --- カラーオーバーレイ --- */
+.split-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  transition: background 0.8s ease;
+}
+.left::before {
+  background: rgba(0, 82, 151, 0.6);
+}
+.right::before {
+  background: rgba(246, 112, 136, 0.6);
+}
+
+.split-item:hover::before {
+  background: rgba(0, 0, 0, 0);
+}
+
+/* --- テキスト設定 --- */
+.content {
+  position: relative;
+  z-index: 3;
+  color: white;
+  text-align: center;
+}
+
+.content h1 {
+  font-size: 3rem;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 15px rgba(0, 0, 0, 0.8),
+    0 0 5px rgba(0, 0, 0, 1);
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.8);
+  transition: 0.6s ease;
+  white-space: nowrap;
+}
+
+.seibi {
+  font-family: "Noto Serif JP", serif; /* フォントを太い明朝体に指定 */
+  font-weight: 700; /* 最も太い設定 */
+  font-size: 3.2rem; /* 明朝体は少し細く見えるのでサイズを微増 */
+}
+
+/* ホバー時の挙動 */
+.split-item:hover {
+  flex: 1.8;
+}
+.split-item:hover .bg-img {
+  transform: scale(1.1);
+}
+
+/* --- レスポンシブ --- */
+@media (max-width: 992px) {
+  .navbar {
+    padding: 15px 30px;
+  }
+  .footer {
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px 20px;
+  }
+  .footer-sns {
+    gap: 30px;
+  }
+  .split-container {
+    flex-direction: column;
+  }
+  /* スマホ時はさらに少し小さく調整 */
+  .content h1 {
+    font-size: 1.5rem;
+    letter-spacing: 0.05rem;
+  }
+}
+
+/* --- スプラッシュ画面 --- */
+#splash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(0, 82, 151);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition:
+    transform 0.8s cubic-bezier(0.7, 0, 0.3, 1),
+    opacity 0.8s cubic-bezier(0.7, 0, 1, 1);
+}
+#splash.done {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+.splash-logo img {
+  width: 180px;
+  height: auto;
+}

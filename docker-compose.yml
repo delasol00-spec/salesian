@@ -5,6 +5,9 @@ services:
       - "8110:80"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./index.html:/var/www/html/index.html        # トップレベル静的ページ
+      - ./entrance.css:/var/www/html/entrance.css    # トップレベル静的ページ用CSS
+      - ./img/:/var/www/html/img/                    # トップレベル静的ページ用画像
       - ./index.php:/var/www/html/index.php
       - ./.htaccess:/var/www/html/.htaccess
       - ./seibi/:/var/www/html/seibi/           # /seibi/ サブディレクトリエントリポイント

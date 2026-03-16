@@ -43,10 +43,10 @@ function seibi_enqueue_scripts() {
     $version   = wp_get_theme()->get( 'Version' );
 
     // メインCSS（静的HTMLから移植後に追加）
-    // wp_enqueue_style( 'seibi-style', $theme_uri . '/assets/css/style.css', [], $version );
+    // wp_enqueue_style( 'seibi-style', $theme_uri . '/css/style.css', [], $version );
 
     // メインJS（静的HTMLから移植後に追加）
-    // wp_enqueue_script( 'seibi-script', $theme_uri . '/assets/js/main.js', [ 'jquery' ], $version, true );
+    // wp_enqueue_script( 'seibi-script', $theme_uri . '/js/main.js', [ 'jquery' ], $version, true );
 }
 add_action( 'wp_enqueue_scripts', 'seibi_enqueue_scripts' );
 
