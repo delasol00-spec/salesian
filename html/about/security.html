@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>災害･セキュリティ対策 - サレジアン国際学園小学校 - 星美クラス</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..25" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/menu.css" />
+    <link rel="stylesheet" href="../css/pages.css" />
+    <link rel="stylesheet" href="../css/loading.css" />
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <div id="seibi-splash">
+      <div class="splash-img"><img src="../img/loading.webp" alt="Loading..." /></div>
+      <div class="splash-wipe"></div>
+    </div>
+    <header class="mobile-header d-lg-none fixed-top">
+      <div class="d-flex justify-content-between align-items-center px-3 h-100">
+        <a href="#" class="mobile-logo">
+          <img src="../img/top-logo-sm.svg" alt="Logo" class="header-logo" />
+        </a>
+        <button class="navbar-toggler-custom" type="button" id="mobileMenuBtn"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
+      </div>
+    </header>
+
+    <div class="container-fluid p-0">
+      <main class="sub-page-view">
+        <div class="sub-hero">
+          <img src="img/about-bg.webp" alt="" class="sub-hero-img" />
+        </div>
+
+        <section class="page-title">
+          <h1>災害･セキュリティ対策</h1>
+          <div class="inner-border"></div>
+        </section>
+      </main>
+
+      <nav class="sidebar" id="sidebarMenu">
+        <div id="sidebar-handle">
+          <div class="handle-icon-wrapper">
+            <img src="../img/menu-icon.svg" alt="サレジアン国際学園小学校" class="handle-logo-img" />
+            <span class="handle-text">MENU</span>
+            <span class="material-symbols-outlined handle-arrow">arrow_right</span>
+          </div>
+        </div>
+
+        <div class="sidebar-container">
+          <div class="sidebar-content">
+            <div class="brand-area text-center py-4">
+              <a href="../"><img src="../img/menu-logo.webp" alt="サレジアン国際学園小学校" class="sidebar-logo" /></a>
+              <p class="school-branch-text">星美クラス</p>
+            </div>
+
+            <ul class="nav flex-column menu-list" id="sidebarMenuList">
+              <li class="nav-item">
+                <a href="../" class="nav-link">トップページ</a>
+              </li>
+
+              <li class="nav-item">
+                <a href="#menu-school" class="nav-link" data-toggle="collapse" aria-expanded="false"> 学校紹介 <span class="arrow">∨</span></a>
+                <div class="collapse sub-menu-wrapper" id="menu-school" data-parent="#sidebarMenuList">
+                  <ul class="sub-menu-list">
+                    <li><a href="../about/" class="nav-link sub-link">校長メッセージ</a></li>
+                    <li><a href="../about/method.html" class="nav-link sub-link">建学の精神･教育理念</a></li>
+                    <li><a href="../about/history.html" class="nav-link sub-link">星美の歩み</a></li>
+                    <li><a href="../about/uniform.html" class="nav-link sub-link">制服</a></li>
+                    <li><a href="../about/access.html" class="nav-link sub-link">アクセス</a></li>
+                    <li><a href="../about/area.html" class="nav-link sub-link">通学地域</a></li>
+                    <li><a href="../about/facility.html" class="nav-link sub-link">施設･設備･環境</a></li>
+                    <li><a href="../about/security.html" class="nav-link sub-link">災害･セキュリティ対策</a></li>
+                    <li><a href="../about/faq.html" class="nav-link sub-link">よくある質問</a></li>
+                    <li><a href="../about/download.html" class="nav-link sub-link">パンフレットダウンロード</a></li>
+                  </ul>
+                </div>
+              </li>
+
+              <li class="nav-item">
+                <a href="#menu-education" class="nav-link" data-toggle="collapse" aria-expanded="false"> 星美クラスの教育 <span class="arrow">∨</span> </a>
+                <div class="collapse sub-menu-wrapper" id="menu-education" data-parent="#sidebarMenuList">
+                  <ul class="sub-menu-list">
+                    <li><a href="../feature/" class="nav-link sub-link">星美クラスの特色</a></li>
+                    <li><a href="../feature/religion.html" class="nav-link sub-link">宗教教育</a></li>
+                    <li><a href="../feature/english" class="nav-link sub-link">6年間の英語教育</a></li>
+                    <li><a href="../feature/international.html" class="nav-link sub-link">国際理解教育</a></li>
+                    <li><a href="../feature/currciculum.html" class="nav-link sub-link">教科教育</a></li>
+                    <li><a href="../feature/assistenza.html" class="nav-link sub-link">アシステンツァ･異学年交流</a></li>
+                    <li><a href="../feature/barrierfree.html" class="nav-link sub-link">バリアフリー教育</a></li>
+                    <li><a href="../feature/stay.html" class="nav-link sub-link">宿泊体験</a></li>
+                    <li><a href="../feature/career.html" class="nav-link sub-link">卒業後の進路</a></li>
+                  </ul>
+                </div>
+              </li>
+
+              <li class="nav-item">
+                <a href="#menu-life" class="nav-link" data-toggle="collapse" aria-expanded="false"> 学校生活 <span class="arrow">∨</span> </a>
+                <div class="collapse sub-menu-wrapper" id="menu-life" data-parent="#sidebarMenuList">
+                  <ul class="sub-menu-list">
+                    <li><a href="../life/" class="nav-link sub-link">星美クラスの一日</a></li>
+                    <li><a href="../life/year.html" class="nav-link sub-link">年間行事</a></li>
+                    <li><a href="../life/activity.html" class="nav-link sub-link">委員会･クラブ活動</a></li>
+                    <li><a href="../life/music-club.html" class="nav-link sub-link">特別音楽クラブ</a></li>
+                    <li><a href="../life/after-school.html" class="nav-link sub-link">サレジアンアフタースクール</a></li>
+                    <li><a href="../life/cooperation.html" class="nav-link sub-link">家庭との連携･協力</a></li>
+                  </ul>
+                </div>
+              </li>
+
+              <li class="nav-item menu-admission">
+                <a href="#menu-admission" class="nav-link" data-toggle="collapse" aria-expanded="false"> 入試について <span class="arrow">∨</span> </a>
+                <div class="collapse sub-menu-wrapper" id="menu-admission" data-parent="#sidebarMenuList">
+                  <ul class="sub-menu-list">
+                    <li><a href="../admission/" class="nav-link sub-link">児童募集要項</a></li>
+                    <li><a href="../admission/flow.html" class="nav-link sub-link">入学までの流れ</a></li>
+                    <li><a href="../admission/briefing.html" class="nav-link sub-link">学校説明会･学外説明会</a></li>
+                    <li><a href="../admission/event.html" class="nav-link sub-link">公開行事</a></li>
+                    <li><a href="../admission/transfer.html" class="nav-link sub-link">編転入について</a></li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+
+            <div class="mobile-utility px-3 mt-4">
+              <div class="d-flex justify-content-between">
+                <a href="../about/faq.html" class="btn-slide-r btn-ss btn-pink-r">FAQ</a>
+                <a href="../about/access.html" class="btn-slide-r btn-ss btn-pink-r">アクセス</a>
+                <a href="../about/download.html" class="btn-slide-r btn-ss btn-pink-r">ダウンロード</a>
+              </div>
+            </div>
+
+            <div class="button-group px-3 mt-4 pb-5">
+              <a href="../eligible/examinee.html" class="btn btn-outline-light btn-block btn-sm mb-2">受験生の方</a>
+              <a href="../eligible/returnee.html" class="btn btn-outline-light btn-block btn-sm mb-2">帰国生の方</a>
+              <a href="../eligible/graduate.html" class="btn btn-outline-light btn-block btn-sm mb-2">卒業生の方</a>
+              <a href="../eligible/guardian.html" class="btn btn-white btn-block btn-sm mb-2"><span class="material-symbols-outlined">lock</span> 保護者の方</a>
+              <div class="inter-banner position-relative">
+                <img src="../img/to-inter.webp" class="img-fluid" />
+                <a href="../../inter/" class="stretched-link"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div id="sidebar-overlay"></div>
+
+    <section class="p-70-70">
+      <div class="container">
+        <h2 class="col-12 sec-title-pink pink">危機管理体制の徹底</h2>
+        <div class="row">
+          <div class="col-md-5 col-md-offset-0 col-sm-8 col-sm-offset-2 wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.3s">
+            <img src="security-img/security-img01.webp" alt="危機管理体制の徹底" class="img-fluid" />
+          </div>
+          <div class="col-md-7 col-sm-12 wow fadeInRight title-L" demo data-wow-duration="1s" data-wow-delay="0.3s">
+            <p>
+              星美では子どもたちの安全と安心を確保するため、様々な対策と訓練を実施しています。<br />
+              特に星美の子どもたちは都内近郊の様々な地区から通学しているため、通学時の危機管理も徹底しています。
+            </p>
+            <p>また、通学地区ごとに縦割り班を編成するなど、緊急時でも子どもが孤立しない体制づくりを整えています。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="p-70-70 bg-white">
+      <div class="container">
+        <h2 class="col-12 sec-title-pink pink">震災などの災害時対策</h2>
+        <div class="row">
+          <div class="col-lg-6 col-xs-12 security wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
+            <h3 class="title-s">防災訓練</h3>
+            <p>地震や火災などの災害時に、迅速かつ安全に子どもたちを校庭などの安全な屋外に避難させるための訓練を実施しています。</p>
+            <h3 class="title-s">地区別による班編成</h3>
+            <p>
+              住んでいる地域ごと、あるいは同じ方面に下校する子ども達が１０人前後の班を作り、緊急時に備えて集団下校できるようにしています。<br />
+              学期毎に一度、地区別班で昼食を摂ったり、遊んだりしながら、お互いに親しくなる機会をつくっています。
+            </p>
+            <h3 class="title-s">帰宅困難時の対応</h3>
+            <p>
+              電話またはメール、ホームページで、その旨を保護者に知らせ、学校に迎えに来ていただきます。<br />
+              保護者が迎えに来られるまでは、学校で責任をもって保護しています。
+            </p>
+          </div>
+          <div class="col-lg-6 col-xs-12 security wow fadeInUp">
+            <h3 class="title-s">防災倉庫の設置</h3>
+            <img src="security-img/security-img02.webp" alt="防災倉庫" class="img-fluid mb-2" />
+
+            <p>
+              中高アート広場に幼稚園から短大までの防災倉庫を設置し、有事の際にそなえています。<br />
+              防災倉庫の他にも、小学校校舎内に飲料水・非常用食料等の備蓄を行なっております。
+            </p>
+          </div>
+          <!--  //shisetsu -->
+        </div>
+        <!-- end row -->
+      </div>
+    </section>
+
+    <section class="p-70-70">
+      <div class="container">
+        <h2 class="col-12 sec-title-pink pink">防犯･セキュリティ対策</h2>
+        <div class="row">
+          <div class="col-sm-6 col-xs-12 security wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
+            <h3 class="title-s">守衛室の設置と入場者の管理</h3>
+            <img src="security-img/security-img03.webp" class="img-fluid mb-2" alt="守衛室" />
+            <p>星美では、学園正門に守衛室を設置。学外からの来校者はこの守衛室で入退場を管理され、不審者が入場できないよう監視しています。</p>
+            <h3 class="title-s">防犯訓練</h3>
+            <img src="security-img/security-img05.webp" class="img-fluid mb-2" alt="防犯訓練" />
+            <p>子どもたちを対象に防犯、不審者対応訓練を実施。地元警察署と連携し、犯罪に巻き込まれそうになった時、不審者に遭遇した時にどのように行動したら良いかを指導しています。</p>
+            <h5>&nbsp;</h5>
+          </div>
+          <div class="col-sm-6 col-xs-12 security wow fadeInUp">
+            <h3 class="title-s">登下校ミマモルメと保護者一斉メール配信</h3>
+            <img src="security-img/security-img04.webp" alt="ミマモルメ" class="img-fluid mb-2" />
+
+            <p>
+              平成23年9月から導入しました「登下校 ミマモルメ」は、子どもの登下校を見守ってくれます。子どものカバンなどに入れたICタグによって、子どもが校門を通過すると、ハンズフリーの無線ICタグが自動で感知してその情報を保護者様の携帯電話などにメールで自動配信します。子ども達と保護者様に安心をお届けすることができます。<br />
+              また、学校から、保護者様に対して、学級閉鎖や天候原因などによる登下校時間の変更などの通知といった緊急情報も、登録しているアドレスにメールで一斉送信することが可能です。電話連絡網で伝えるよりも確実に、素早く情報を伝達することができ「学校とお家を繋ぐ新しいコミュニケーションのツール」として機能します。
+            </p>
+          </div>
+          <!--  //shisetsu -->
+        </div>
+        <!-- end row -->
+      </div>
+    </section>
+
+    <section class="p-70-70 bg-white">
+      <div class="container wow FadeInUp" data-wow-duration="1s" data-wow-delay="1s">
+        <h2 class="col-12 sec-title-pink pink">交通安全に関する対策 / 指導</h2>
+        <div class="row">
+          <div class="col-sm-6 col-xs-12 security wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
+            <h3 class="title-s">交通指導</h3>
+            <p>１年生とその保護者対象に、歩道の歩き方、横断の仕方について、地元警察署の方に指導していただきます。</p>
+          </div>
+          <!--  //shisetsu -->
+
+          <div class="col-sm-6 col-xs-12 security wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
+            <h3 class="title-s">交通見守り</h3>
+            <img src="security-img/security-img06.webp" alt="校庭" class="img-fluid mb-2" />
+            <p>保護者様の協力で交通見守りを実施。子どもたちの安全を守るだけでなく、大人が見守ることで子どもたちに安心を与えます。</p>
+            <a class="btn-slide btn-m btn-pink" href="../../education/cooperation/parent/"><span class="text">父母の会 交通見守りについて</span></a>
+          </div>
+          <!--  //shisetsu -->
+        </div>
+        <!-- end row -->
+      </div>
+    </section>
+
+    <section class="p-70-70">
+<div class="container wow FadeInUp" data-wow-duration="1s" data-wow-delay="1s">
+			
+				<h2 class="col-12 sec-title-pink pink">その他の訓練 / 指導</h2>
+		<div class="row">
+			
+		<div class="col-sm-6 col-xs-12 security wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
+				<h3 class="title-s">応急救護</h3>
+				<img src="security-img/security-img07.webp" alt="応急救護" class="img-fluid mb-2"/>
+			<p>
+水泳指導の際、必要に応じて応急救護ができるようにするため、全教員を対象に、毎年、ＡＥＤと人工呼吸の訓練をしいてます。</p>
+		</div><!--  //shisetsu -->
+	</div><!-- end row -->
+	</div>
+
+
+</section>
+
+    <footer class="seibi-footer">
+      <div class="footer-inner">
+        <div class="footer-bg-deco">
+          <img src="../img/footer-maria.webp" loading="lazy" alt="" class="聖母マリア像" />
+        </div>
+
+        <div class="footer-top-logo">
+          <a href="../">
+            <img src="../img/top-logo-sm.svg" loading="lazy" alt="星美学園小学校" class="footer-logo img-fluid" />
+          </a>
+          <p>
+            〒115-8524 東京都北区赤羽台4-2-14<span class="d-none d-lg-inline">　</span> <br class="d-block d-lg-none" />TEL : 03-3906-0053 (代表)<br />
+            <span class="material-symbols-outlined">train</span> JR「赤羽駅」北改札口 徒歩約10分<span class="d-none d-lg-inline">　</span> <br class="d-block d-lg-none" /><span class="material-symbols-outlined">subway</span> 東京メトロ南北線・埼玉高速鉄道「赤羽岩淵駅」　2番出口より徒歩約8分
+          </p>
+        </div>
+
+        <div class="footer-sitemap-grid">
+          <div class="sitemap-col">
+            <h4 class="sitemap-head">学校紹介</h4>
+            <ul class="sitemap-links">
+              <li><a href="../about/">校長メッセージ</a></li>
+              <li><a href="../about/method.html">建学の精神･教育理念</a></li>
+              <li><a href="../about/history.html">星美の歩み</a></li>
+              <li><a href="../about/uniform.html">制服</a></li>
+              <li><a href="../about/access.html">アクセス</a></li>
+              <li><a href="../about/area.html">通学地域</a></li>
+              <li><a href="../about/facility.html">施設･設備･環境</a></li>
+              <li><a href="../about/security.html">災害･セキュリティ対策</a></li>
+              <li><a href="../about/faq.html">よくある質問</a></li>
+              <li><a href="../about/download.html">パンフレットダウンロード</a></li>
+            </ul>
+          </div>
+
+          <div class="sitemap-col">
+            <h4 class="sitemap-head">星美クラスの教育</h4>
+            <ul class="sitemap-links">
+              <li><a href="../feature/">星美クラスの特色</a></li>
+              <li><a href="../feature/religion.html">宗教教育</a></li>
+              <li><a href="../feature/english">6年間の英語教育</a></li>
+              <li><a href="../feature/international.html">国際理解教育</a></li>
+              <li><a href="../feature/currciculum.html">教科教育</a></li>
+              <li><a href="../feature/assistenza.html">アシステンツァ･異学年交流</a></li>
+              <li><a href="../feature/barrierfree.html">バリアフリー教育</a></li>
+              <li><a href="../feature/stay.html">宿泊体験</a></li>
+              <li><a href="../feature/career.html">卒業後の進路</a></li>
+            </ul>
+          </div>
+
+          <div class="sitemap-col">
+            <h4 class="sitemap-head">学校生活</h4>
+            <ul class="sitemap-links">
+              <li><a href="../life/">星美クラスの一日</a></li>
+              <li><a href="../life/year.html">年間行事</a></li>
+              <li><a href="../life/activity.html">委員会･クラブ活動</a></li>
+              <li><a href="../life/music-club.html">特別音楽クラブ</a></li>
+              <li><a href="../life/after-school.html">サレジアンアフタースクール</a></li>
+              <li><a href="../life/cooperation.html">家庭との連携･協力</a></li>
+            </ul>
+          </div>
+
+          <div class="sitemap-col">
+            <h4 class="sitemap-head">入試について</h4>
+            <ul class="sitemap-links">
+              <li><a href="../admission/">児童募集要項</a></li>
+              <li><a href="../admission/flow.html">入学までの流れ</a></li>
+              <li><a href="../admission/briefing.html">学校説明会･学外説明会</a></li>
+              <li><a href="../admission/event.html">公開行事</a></li>
+              <li><a href="../admission/transfer.html">編転入について</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom-links">
+          <div class="footer-bottom-inner">
+            <ul class="bottom-nav-left">
+              <li><a href="about/site.html">このサイトについて</a></li>
+              <li><a href="about/privacy.html">個人情報保護方針</a></li>
+            </ul>
+
+            <ul class="bottom-nav-right">
+              <li>
+                <a href="https://www.seibi.ac.jp/" target="_blank">星美学園<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-left: 2px">open_in_new</span></a>
+              </li>
+              <li>
+                <a href="https://www.seibi.ac.jp/ki/" target="_blank">星美学園幼稚園<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-left: 2px">open_in_new</span></a>
+              </li>
+              <li>
+                <a href="https://www.salesian.international.seibi.ac.jp/" target="_blank">サレジアン国際中学校高等学校<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-left: 2px">open_in_new</span></a>
+              </li>
+              <li>
+                <a href="https://www.c.seibi.ac.jp/" target="_blank">星美学園短期大学<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-left: 2px">open_in_new</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="copy">
+        <p class="copyright">&copy; SALESIAN INTERNATIONAL SCHOOL. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <div class="pagetop-container">
+      <a href="#top" class="pagetop-item top-link">
+        <span class="material-symbols-outlined">expand_less</span>
+        <span class="label">PAGEの<br />TOP</span>
+      </a>
+
+      <div class="separator"></div>
+
+      <a href="../" class="pagetop-item home-link">
+        <span class="material-symbols-outlined">home</span>
+        <span class="label">TOP</span>
+      </a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/loading.js"></script>
+  </body>
+</html>

@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>サレジアン国際学園小学校 - 星美クラス</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..25" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/menu.css" />
+    <link rel="stylesheet" href="css/loading.css" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  </head>
+  <body id="top">
+    <div id="seibi-splash">
+      <div class="splash-img"><img src="img/loading.webp" alt="Loading..." /></div>
+      <div class="splash-wipe"></div>
+    </div>
+    <header class="mobile-header d-lg-none fixed-top">
+      <div class="d-flex justify-content-between align-items-center px-3 h-100">
+        <a href="index.html" class="mobile-logo">
+          <img src="img/top-logo-sm.svg" alt="Logo" class="header-logo" />
+        </a>
+        <button class="navbar-toggler-custom" type="button" id="mobileMenuBtn"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
+      </div>
+    </header>
+
+    <div class="container-fluid p-0">
+      <main class="main-view">
+        <div class="utility-nav d-none d-lg-flex">
+          <a href="about/faq.html" class="btn-slide-r btn-ss btn-pink-r">よくある質問</a>
+          <a href="about/access.html" class="btn-slide-r btn-ss btn-pink-r ml-10">アクセス</a>
+          <a href="about/download.html" class="btn-slide-r btn-ss btn-pink-r ml-10">パンフレットダウンロード</a>
+        </div>
+
+        <div class="slideshow">
+          <div class="slide-item" data-text="共によろこび、共にいきる。"></div>
+          <div class="slide-item" data-text="清 い 心"></div>
+          <div class="slide-item" data-text="たゆまぬ努力"></div>
+          <div class="slide-item" data-text="笑顔あふれる、充実した学校生活。"></div>
+          <div class="slide-item" data-text="サレジアン国際学園小学校&#10;星美クラス"></div>
+
+          <div class="hero-caption">
+            <p id="caption-text"></p>
+          </div>
+        </div>
+      </main>
+
+      <div class="info-banner-section">
+        <div class="info-banner-wrapper">
+          <div class="info-banner-inner">
+            <button class="slider-arrow prev">
+              <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+
+            <div class="info-slider-container">
+              <div class="info-slider-track">
+                <a href="admission/briefing.html" class="info-card">
+                  <div class="card-header">
+                    <span class="info-tag bg-pink">説明会</span>
+                    <h4 class="event-title">第1回 学校説明会</h4>
+                  </div>
+                  <div class="card-body">
+                    <span class="material-symbols-outlined">calendar_month</span>
+                    <span class="event-date">2026年4月20日(月) 10:00〜</span>
+                  </div>
+                  <div class="card-footer">
+                    <span class="info-tag bg-blue">要予約</span>
+                  </div>
+                </a>
+
+                <a href="#" class="info-card">
+                  <div class="card-header">
+                    <span class="info-tag bg-pink">説明会</span>
+                    <h4 class="event-title">第2回 学校説明会</h4>
+                  </div>
+                  <div class="card-body">
+                    <span class="material-symbols-outlined">calendar_month</span>
+                    <span class="event-date">2026年4月20日(月) 10:00〜</span>
+                  </div>
+                  <div class="card-footer">
+                    <span class="info-tag bg-blue">要予約</span>
+                  </div>
+                </a>
+
+                <a href="#" class="info-card">
+                  <div class="card-header">
+                    <span class="info-tag bg-pink">説明会</span>
+                    <h4 class="event-title">第1回 学校見学</h4>
+                  </div>
+                  <div class="card-body">
+                    <span class="material-symbols-outlined">calendar_month</span>
+                    <span class="event-date">2026年4月20日(月) 10:00〜</span>
+                  </div>
+                  <div class="card-footer">
+                    <span class="info-tag bg-blue">要予約</span>
+                  </div>
+                </a>
+
+                <a href="#" class="info-card">
+                  <div class="card-header">
+                    <span class="info-tag bg-orange">イベント</span>
+                    <h4 class="event-title">運動会</h4>
+                  </div>
+                  <div class="card-body">
+                    <span class="material-symbols-outlined">calendar_month</span>
+                    <span class="event-date">2026年4月20日(月) 10:00〜</span>
+                  </div>
+                  <div class="card-footer">
+                    <span class="info-tag bg-blue">要予約</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <button class="slider-arrow next">
+              <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <nav class="sidebar" id="sidebarMenu">
+        <div id="sidebar-handle">
+          <div class="handle-icon-wrapper">
+            <a href="../"><img src="img/menu-icon.svg" alt="サレジアン国際学園小学校" class="handle-logo-img" /></a>
+            <span class="handle-text">MENU</span>
+            <span class="material-symbols-outlined handle-arrow">arrow_right</span>
+          </div>
+        </div>
+
+        <div class="sidebar-container">
+          <div class="sidebar-content">
+            <div class="brand-area text-center py-4">
+              <a href="../" class="d-block w-100"><img src="img/menu-logo.webp" alt="サレジアン国際学園小学校" class="sidebar-logo" /></a>
+              <p class="school-branch-text">星美クラス</p>
+            </div>
+
+            <ul class="nav flex-column menu-list" id="sidebarMenuList">
+              <li class="nav-item">
+                <a href="index.html" class="nav-link">トップページ</a>
+              </li>
+
+              <li class="nav-item">
+                <a href="#menu-school" class="nav-link" data-toggle="collapse" aria-expanded="false">学校紹介 <span class="arrow">∨</span></a>
+                <div class="collapse sub-menu-wrapper" id="menu-school" data-parent="#sidebarMenuList">
+                  <ul class="sub-menu-list">
+                    <li><a href="about/" class="nav-link sub-link">校長メッセージ</a></li>
+                    <li><a href="about/method.html" class="nav-link sub-link">建学の精神･教育理念</a></li>
+                    <li><a href="about/history.html" class="nav-link sub-link">星美の歩み</a></li>
+                    <li><a href="about/uniform.html" class="nav-link sub-link">制服</a></li>
+                    <li><a href="about/access.html" class="nav-link sub-link">アクセス</a></li>
+                    <li><a href="about/area.html" class="nav-link sub-link">通学地域</a></li>
+                    <li><a href="about/facility.html" class="nav-link sub-link">施設･設備･環境</a></li>
+                    <li><a href="about/security.html" class="nav-link sub-link">災害･セキュリティ対策</a></li>
+                    <li><a href="about/faq.html" class="nav-link sub-link">よくある質問</a></li>
+                    <li><a href="about/download.html" class="nav-link sub-link">パンフレットダウンロード</a></li>
+                  </ul>
+                </div>
+              </li>
+
+              <li class="nav-item">
+                <a href="#menu-education" class="nav-link" data-toggle="collapse" aria-expanded="false">星美クラスの教育 <span class="arrow">∨</span></a>
+                <div class="collapse sub-menu-wrapper" id="menu-education" data-parent="#sidebarMenuList">
+                  <ul class="sub-menu-list">
+                    <li><a href="feature/" class="nav-link sub-link">星美クラスの特色</a></li>
+                    <li><a href="feature/religion.html" class="nav-link sub-link">宗教教育</a></li>
+                    <li><a href="feature/english" class="nav-link sub-link">6年間の英語教育</a></li>
+                    <li><a href="feature/international.html" class="nav-link sub-link">国際理解教育</a></li>
+                    <li><a href="feature/currciculum.html" class="nav-link sub-link">教科教育</a></li>
+                    <li><a href="feature/assistenza.html" class="nav-link sub-link">アシステンツァ･異学年交流</a></li>
+                    <li><a href="feature/barrierfree.html" class="nav-link sub-link">バリアフリー教育</a></li>
+                    <li><a href="feature/stay.html" class="nav-link sub-link">宿泊体験</a></li>
+                    <li><a href="feature/career.html" class="nav-link sub-link">卒業後の進路</a></li>
+                  </ul>
+                </div>
+              </li>
+
+              <li class="nav-item">
+                <a href="#menu-life" class="nav-link" data-toggle="collapse" aria-expanded="false">学校生活 <span class="arrow">∨</span></a>
+                <div class="collapse sub-menu-wrapper" id="menu-life" data-parent="#sidebarMenuList">
+                  <ul class="sub-menu-list">
+                    <li><a href="life/" class="nav-link sub-link">星美クラスの一日</a></li>
+                    <li><a href="life/year.html" class="nav-link sub-link">年間行事</a></li>
+                    <li><a href="life/activity.html" class="nav-link sub-link">委員会･クラブ活動</a></li>
+                    <li><a href="life/music-club.html" class="nav-link sub-link">特別音楽クラブ</a></li>
+                    <li><a href="life/after-school.html" class="nav-link sub-link">サレジアンアフタースクール</a></li>
+                    <li><a href="life/cooperation.html" class="nav-link sub-link">家庭との連携･協力</a></li>
+                  </ul>
+                </div>
+              </li>
+
+              <li class="nav-item menu-admission">
+                <a href="#menu-admission" class="nav-link" data-toggle="collapse" aria-expanded="false">入試について <span class="arrow">∨</span></a>
+                <div class="collapse sub-menu-wrapper" id="menu-admission" data-parent="#sidebarMenuList">
+                  <ul class="sub-menu-list">
+                    <li><a href="admission/" class="nav-link sub-link">児童募集要項</a></li>
+                    <li><a href="admission/flow.html" class="nav-link sub-link">入学までの流れ</a></li>
+                    <li><a href="admission/briefing.html" class="nav-link sub-link">学校説明会･学外説明会</a></li>
+                    <li><a href="admission/event.html" class="nav-link sub-link">公開行事</a></li>
+                    <li><a href="admission/transfer.html" class="nav-link sub-link">編転入について</a></li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+
+            <div class="mobile-utility px-3 mt-4">
+              <div class="d-flex justify-content-between">
+                <a href="about/faq.html" class="btn-slide-r btn-ss btn-pink-r">FAQ</a>
+                <a href="about/access.html" class="btn-slide-r btn-ss btn-pink-r">アクセス</a>
+                <a href="about/download.html" class="btn-slide-r btn-ss btn-pink-r">ダウンロード</a>
+              </div>
+            </div>
+
+            <div class="button-group px-3 mt-4 pb-5">
+              <a href="eligible/examinee.html" class="btn btn-outline-light btn-block btn-sm mb-2">受験生の方</a>
+              <a href="eligible/returnee.html" class="btn btn-outline-light btn-block btn-sm mb-2">帰国生の方</a>
+              <a href="eligible/graduate.html" class="btn btn-outline-light btn-block btn-sm mb-2">卒業生の方</a>
+              <a href="eligible/guardian.html" class="btn btn-white btn-block btn-sm mb-2"><span class="material-symbols-outlined">lock</span> 保護者の方</a>
+              <div class="inter-banner position-relative">
+                <img src="img/to-inter.webp" class="img-fluid" />
+                <a href="../inter/" class="stretched-link"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div id="sidebar-overlay"></div>
+
+    <section class="news news-bg">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 sec-title pink">NEWS & TOPICS</div>
+          <div class="news-cate-container">
+            <a href="#" class="btn-slide btn-s btn-pink">全て</a>
+            <a href="#" class="btn-slide btn-s btn-blue">学校生活</a>
+            <a href="#" class="btn-slide btn-s btn-green">入試関連</a>
+            <a href="#" class="btn-slide btn-s btn-orange">イベント</a>
+            <a href="#" class="btn-slide btn-s btn-purple">お知らせ</a>
+          </div>
+        </div>
+      </div>
+      <div class="news-card-grid">
+        <article class="news-card">
+          <a href="#" class="news-card-link">
+            <div class="news-card-header">
+              <span class="news-date">2026.02.28</span>
+              <span class="news-category bg-blue">学校生活</span>
+            </div>
+
+            <div class="news-card-image">
+              <img src="img/edu01.webp" alt="ブログタイトル" />
+            </div>
+
+            <div class="news-card-body">
+              <h3 class="news-card-title">聖ドミニコ・サビオの祝日をお祝いしました。</h3>
+            </div>
+          </a>
+        </article>
+        <article class="news-card">
+          <a href="#" class="news-card-link">
+            <div class="news-card-header">
+              <span class="news-date">2026.02.20</span>
+              <span class="news-category bg-blue">学校生活</span>
+            </div>
+
+            <div class="news-card-image">
+              <img src="img/260217.webp" loading="lazy" alt="ブログタイトル" />
+            </div>
+
+            <div class="news-card-body">
+              <h3 class="news-card-title">マラソン大会を行いました</h3>
+            </div>
+          </a>
+        </article>
+        <article class="news-card">
+          <a href="#" class="news-card-link">
+            <div class="news-card-header">
+              <span class="news-date">2024.05.20</span>
+              <span class="news-category bg-green">入試関連</span>
+            </div>
+
+            <div class="news-card-image">
+              <img src="img/seibo.jpg" loading="lazy" alt="ブログタイトル" />
+            </div>
+
+            <div class="news-card-body">
+              <h3 class="news-card-title">学校説明会を行います</h3>
+            </div>
+          </a>
+        </article>
+        <article class="news-card">
+          <a href="#" class="news-card-link">
+            <div class="news-card-header">
+              <span class="news-date">2024.05.20</span>
+              <span class="news-category bg-orange">イベント</span>
+            </div>
+
+            <div class="news-card-image">
+              <img src="img/04.webp" loading="lazy" alt="ブログタイトル" />
+            </div>
+
+            <div class="news-card-body">
+              <h3 class="news-card-title">2年生　たこあげを行いました。</h3>
+            </div>
+          </a>
+        </article>
+        <article class="news-card">
+          <a href="#" class="news-card-link">
+            <div class="news-card-header">
+              <span class="news-date">2026.02.28</span>
+              <span class="news-category bg-blue">学校生活</span>
+            </div>
+
+            <div class="news-card-image">
+              <img src="img/edu01.webp" loading="lazy" alt="ブログタイトル" />
+            </div>
+
+            <div class="news-card-body">
+              <h3 class="news-card-title">聖ドミニコ・サビオの祝日をお祝いしました。</h3>
+            </div>
+          </a>
+        </article>
+        <article class="news-card">
+          <a href="#" class="news-card-link">
+            <div class="news-card-header">
+              <span class="news-date">2026.02.20</span>
+              <span class="news-category bg-blue">学校生活</span>
+            </div>
+
+            <div class="news-card-image">
+              <img src="img/260217.webp" loading="lazy" alt="ブログタイトル" />
+            </div>
+
+            <div class="news-card-body">
+              <h3 class="news-card-title">マラソン大会を行いました</h3>
+            </div>
+          </a>
+        </article>
+        <article class="news-card">
+          <a href="#" class="news-card-link">
+            <div class="news-card-header">
+              <span class="news-date">2024.05.20</span>
+              <span class="news-category bg-green">入試関連</span>
+            </div>
+
+            <div class="news-card-image">
+              <img src="img/seibo.jpg" loading="lazy" alt="ブログタイトル" />
+            </div>
+
+            <div class="news-card-body">
+              <h3 class="news-card-title">学校説明会を行います</h3>
+            </div>
+          </a>
+        </article>
+        <article class="news-card">
+          <a href="#" class="news-card-link">
+            <div class="news-card-header">
+              <span class="news-date">2024.05.20</span>
+              <span class="news-category bg-orange">イベント</span>
+            </div>
+
+            <div class="news-card-image">
+              <img src="img/04.webp" loading="lazy" alt="ブログタイトル" />
+            </div>
+
+            <div class="news-card-body">
+              <h3 class="news-card-title">2年生　たこあげを行いました。</h3>
+            </div>
+          </a>
+        </article>
+      </div>
+      <div class="col-12 mb-lg-5 mt-lg-5">
+        <a class="btn-slide btn-l btn-pink" href="#"><span class="text">NEWS & TOPICS一覧</span></a>
+      </div>
+    </section>
+
+    <section class="sec01">
+      <div class="container">
+        <div class="row justify-content-lg-end justyfy-content-md-center">
+          <div class="sec01-col">
+            <p>
+              子どもを愛するだけではたりません。<br />
+              子どもたちが愛されていると<br />
+              感じなければなりません。
+            </p>
+            <span>(ドン・ボスコ)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section50 always-bg">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 sec-title pink">星美の予防教育法</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery-section with-sidebar-offset">
+      <div class="container-fluid p-0">
+        <div class="row no-gutters">
+          <div class="col-md-6 order-1">
+            <div class="gallery-item">
+              <div class="curtain-overlay"></div>
+              <img src="img/edu03.webp" loading="lazy" alt="愛情による信頼と理解" />
+            </div>
+          </div>
+
+          <div class="col-md-6 order-2">
+            <div class="gallery-item2">
+              <div class="icon-wrapper">
+                <img src="img/yobou03.svg" class="icon-white" />
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 order-4 order-md-3">
+            <div class="gallery-item2 gallery-bg-p">
+              <div class="icon-wrapper">
+                <img src="img/yobou02.svg" class="icon-white" />
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 order-3 order-md-4">
+            <div class="gallery-item">
+              <div class="curtain-overlay curtain-overlay2"></div>
+              <img src="img/edu02.webp" loading="lazy" alt="共に生きる愛の現存" />
+            </div>
+          </div>
+
+          <div class="col-md-6 order-5">
+            <div class="gallery-item">
+              <div class="curtain-overlay curtain-overlay3"></div>
+              <img src="img/edu01.webp" loading="lazy" alt="祈りと心の喜び" />
+            </div>
+          </div>
+
+          <div class="col-md-6 order-6">
+            <div class="gallery-item2 gallery-bg-g">
+              <div class="icon-wrapper">
+                <img src="img/yobou01.svg" class="icon-white" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="zoom-section">
+      <div class="zoom-container">
+        <div class="zoom-image-wrapper">
+          <img src="img/assistenza.webp" loading="lazy" class="zoom-img" />
+        </div>
+        <div class="zoom-text">
+          <h2>アシステンツァ</h2>
+          <p>子どもたちに安心感と信頼感を</p>
+          <div class="col-12">
+            <a class="btn-slide btn-l btn-pink" href="#"><span class="text">アシステンツァについて</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="school-topics">
+      <div class="school-topics-container">
+        <a href="#" class="school-topics-box">
+          <div class="school-topics-image">
+            <img src="img/english.webp" loading="lazy" alt="6年間の英語教育" />
+          </div>
+          <div class="school-topics-content">
+            <h3 class="school-topics-title">6年間の英語教育</h3>
+            <p class="school-topics-text">星美の英語教育は、１年生から６年生までの６年間実施しています。 英語の音に慣れ親しみ、英語で表現する基本的なコミュニケーション能力の育成はもちろん、コミュニケーションを通して海外の文化に目を向け、国際理解の感覚を養うことを大切にしています。</p>
+            <div class="btn-slide school-topics-link-ui">詳しく見る</div>
+          </div>
+        </a>
+
+        <a href="#" class="school-topics-box">
+          <div class="school-topics-image">
+            <img src="img/shukyo.webp" loading="lazy" alt="宗教教育" />
+          </div>
+          <div class="school-topics-content">
+            <h3 class="school-topics-title">宗教教育</h3>
+            <p class="school-topics-text">星美クラスでは、ミッションスクールとしてカトリック教育を土台とした宗教教育を行い、人生の目的と意義を指し示し、神と人との前に誠実な心、人のために奉仕する愛の心を育てる教育活動を展開しています。</p>
+            <div class="btn-slide school-topics-link-ui">詳しく見る</div>
+          </div>
+        </a>
+
+        <a href="#" class="school-topics-box">
+          <div class="school-topics-image">
+            <img src="img/sougou.webp" loading="lazy" alt="総合的な学習" />
+          </div>
+          <div class="school-topics-content">
+            <h3 class="school-topics-title">総合的な学習</h3>
+            <p class="school-topics-text">人と自然、人と人の「関わり」を大切にし、「心」と「生きる力」を総合的な学習の中で実体験を通して学んでいきます。</p>
+            <div class="btn-slide school-topics-link-ui">詳しく見る</div>
+          </div>
+        </a>
+
+        <a href="#" class="school-topics-box">
+          <div class="school-topics-image">
+            <img src="img/shukuhaku.webp" loading="lazy" alt="宿泊学習" />
+          </div>
+          <div class="school-topics-content">
+            <h3 class="school-topics-title">宿泊学習</h3>
+            <p class="school-topics-text">各学年の学習テーマ探求のため、テーマに沿った場所で宿泊学習を実施しています。実体験をもとにした正しい価値観、考え方の教育を大切にしています。</p>
+            <div class="btn-slide school-topics-link-ui">詳しく見る</div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <footer class="seibi-footer">
+      <div class="footer-inner">
+        <div class="footer-bg-deco">
+          <img src="img/footer-maria.webp" loading="lazy" alt="" class="聖母マリア像" />
+        </div>
+
+        <div class="footer-top-logo">
+          <a href="../">
+            <img src="img/top-logo-sm.svg" loading="lazy" alt="星美学園小学校" class="footer-logo img-fluid" />
+          </a>
+          <p>
+            〒115-8524 東京都北区赤羽台4-2-14<span class="d-none d-lg-inline">　</span> <br class="d-block d-lg-none" />TEL : 03-3906-0053 (代表)<br />
+            <span class="material-symbols-outlined">train</span> JR「赤羽駅」北改札口 徒歩約10分<span class="d-none d-lg-inline">　</span> <br class="d-block d-lg-none" /><span class="material-symbols-outlined">subway</span> 東京メトロ南北線・埼玉高速鉄道「赤羽岩淵駅」　2番出口より徒歩約8分
+          </p>
+        </div>
+
+        <div class="footer-sitemap-grid">
+          <div class="sitemap-col">
+            <h4 class="sitemap-head">学校紹介</h4>
+            <ul class="sitemap-links">
+              <li><a href="about/">校長メッセージ</a></li>
+              <li><a href="about/method.html">建学の精神･教育理念</a></li>
+              <li><a href="about/history.html">星美の歩み</a></li>
+              <li><a href="about/uniform.html">制服</a></li>
+              <li><a href="about/access.html">アクセス</a></li>
+              <li><a href="about/area.html">通学地域</a></li>
+              <li><a href="about/facility.html">施設･設備･環境</a></li>
+              <li><a href="about/security.html">災害･セキュリティ対策</a></li>
+              <li><a href="about/faq.html">よくある質問</a></li>
+              <li><a href="about/download.html">パンフレットダウンロード</a></li>
+            </ul>
+          </div>
+
+          <div class="sitemap-col">
+            <h4 class="sitemap-head">星美クラスの教育</h4>
+            <ul class="sitemap-links">
+              <li><a href="feature/">星美クラスの特色</a></li>
+              <li><a href="feature/religion.html">宗教教育</a></li>
+              <li><a href="feature/english">6年間の英語教育</a></li>
+              <li><a href="feature/international.html">国際理解教育</a></li>
+              <li><a href="feature/currciculum.html">教科教育</a></li>
+              <li><a href="feature/assistenza.html">アシステンツァ･異学年交流</a></li>
+              <li><a href="feature/barrierfree.html">バリアフリー教育</a></li>
+              <li><a href="feature/stay.html">宿泊体験</a></li>
+              <li><a href="feature/career.html">卒業後の進路</a></li>
+            </ul>
+          </div>
+
+          <div class="sitemap-col">
+            <h4 class="sitemap-head">学校生活</h4>
+            <ul class="sitemap-links">
+              <li><a href="life/">星美クラスの一日</a></li>
+              <li><a href="life/year.html">年間行事</a></li>
+              <li><a href="life/activity.html">委員会･クラブ活動</a></li>
+              <li><a href="life/music-club.html">特別音楽クラブ</a></li>
+              <li><a href="life/after-school.html">サレジアンアフタースクール</a></li>
+              <li><a href="life/cooperation.html">家庭との連携･協力</a></li>
+            </ul>
+          </div>
+
+          <div class="sitemap-col">
+            <h4 class="sitemap-head">入試について</h4>
+            <ul class="sitemap-links">
+              <li><a href="admission/">児童募集要項</a></li>
+              <li><a href="admission/flow.html">入学までの流れ</a></li>
+              <li><a href="admission/briefing.html">学校説明会･学外説明会</a></li>
+              <li><a href="admission/event.html">公開行事</a></li>
+              <li><a href="admission/transfer.html">編転入について</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom-links">
+          <div class="footer-bottom-inner">
+            <ul class="bottom-nav-left">
+              <li><a href="about/site.html">このサイトについて</a></li>
+              <li><a href="about/privacy.html">個人情報保護方針</a></li>
+            </ul>
+
+            <ul class="bottom-nav-right">
+              <li>
+                <a href="https://www.seibi.ac.jp/" target="_blank">星美学園<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-left: 2px">open_in_new</span></a>
+              </li>
+              <li>
+                <a href="https://www.seibi.ac.jp/ki/" target="_blank">星美学園幼稚園<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-left: 2px">open_in_new</span></a>
+              </li>
+              <li>
+                <a href="https://www.salesian.international.seibi.ac.jp/" target="_blank">サレジアン国際中学校高等学校<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-left: 2px">open_in_new</span></a>
+              </li>
+              <li>
+                <a href="https://www.c.seibi.ac.jp/" target="_blank">星美学園短期大学<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-left: 2px">open_in_new</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="copy">
+        <p class="copyright">&copy; SALESIAN INTERNATIONAL SCHOOL. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <div class="pagetop-container">
+      <a href="#top" class="pagetop-item top-link">
+        <span class="material-symbols-outlined">expand_less</span>
+        <span class="label">PAGEの<br />TOP</span>
+      </a>
+
+      <div class="separator"></div>
+
+      <a href="index.html" class="pagetop-item home-link">
+        <span class="material-symbols-outlined">home</span>
+        <span class="label">TOP</span>
+      </a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/loading.js"></script>
+  </body>
+</html>

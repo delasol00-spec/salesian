@@ -1,0 +1,49 @@
+/* --- 星美クラス用スプラッシュ画面設定 --- */
+#seibi-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.splash-img {
+  transition: opacity 0.5s ease;
+  z-index: 2;
+}
+
+.splash-wipe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background-color: transparent;
+  /* 画面全体を覆う影 (初期状態: 不透明ピンク #fef0f3) */
+  box-shadow: 0 0 0 200vmax rgba(254, 240, 243, 1);
+  pointer-events: none;
+  z-index: 1;
+  transition: box-shadow 0.5s ease;
+}
+
+/* Phase 1: 画像フェードアウト & 背景色 80% */
+#seibi-splash.phase1 .splash-img {
+  opacity: 0;
+}
+#seibi-splash.phase1 .splash-wipe {
+  box-shadow: 0 0 0 200vmax rgba(254, 240, 243, 0.8);
+}
+
+/* Phase 2: 丸が拡がって消える & 背景色 0% */
+#seibi-splash.phase2 .splash-wipe {
+  width: 150vmax;
+  height: 150vmax;
+  box-shadow: 0 0 0 200vmax rgba(254, 240, 243, 0);
+  transition:
+    width 0.8s cubic-bezier(0.7, 0, 0.3, 1),
+    height 0.8s cubic-bezier(0.7, 0, 0.3, 1),
+    box-shadow 0.8s ease;
+}
