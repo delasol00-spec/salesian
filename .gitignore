@@ -57,7 +57,9 @@ cms/wp-content/themes/twentytwentyfour
 cms/wp-content/themes/twentytwentythree
 
 # ナレッジ・作業メモ（非公開）
-docs/
+docs/*
+!docs/制作会社確認事項.md
+
 CLAUDE.md
 gen_sitemap.py
 sitemap.xlsx
