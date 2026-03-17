@@ -3,25 +3,33 @@
  * アシステンツァ・異学年交流
  * URL: /feature/assistenza/
  *
- * @package salesian
+ * @package seibi
  */
 
 get_header(); ?>
 
-<!-- =======================================
-     MAIN: アシステンツァ・異学年交流
-     html/feature/assistenza/index.html を参照して移植する
-     ======================================= -->
-<main id="main-assistenza">
-    <?php get_template_part( 'template-parts/breadcrumb' ); ?>
+<div class="container-fluid p-0">
+  <main class="sub-page-view">
+    <div class="sub-hero">
+      <img src="<?php echo get_template_directory_uri(); ?>/img/assistenza.webp" alt="" class="sub-hero-img" />
+    </div>
+    <section class="page-title">
+      <h1><?php the_title(); ?></h1>
+      <div class="inner-border"></div>
+    </section>
+  </main>
+</div>
 
-    <?php if ( have_posts() ) : the_post(); ?>
-        <article id="post-<?php the_ID(); ?>">
-            <h1><?php the_title(); ?></h1>
-            <?php the_content(); ?>
-        </article>
-    <?php endif; ?>
-</main>
-<!-- /MAIN -->
+<section class="p-70-70">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <?php if ( have_posts() ) : the_post(); ?>
+        <?php the_content(); ?>
+        <?php endif; ?>
+      </div>
+    </div>
+  </div>
+</section>
 
 <?php get_footer();

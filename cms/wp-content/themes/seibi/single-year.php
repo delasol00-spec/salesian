@@ -3,22 +3,49 @@
  * 年間行事 詳細テンプレート
  * カスタム投稿タイプ: year
  *
- * 静的HTML受領後に詳細ページのデザインを移植する。
- *
- * @package salesian
+ * @package seibi
  */
 
 get_header(); ?>
 
-<main id="main-year-single">
-    <?php get_template_part( 'template-parts/breadcrumb' ); ?>
+<div class="container-fluid p-0">
+  <main class="sub-page-view">
+    <div class="sub-hero">
+      <img src="<?php echo get_template_directory_uri(); ?>/img/school-life-bg.webp" alt="" class="sub-hero-img" />
+    </div>
+    <section class="page-title">
+      <h1><?php the_title(); ?></h1>
+      <div class="inner-border"></div>
+    </section>
+  </main>
+</div>
 
+<section class="p-70-70">
+  <div class="container">
     <?php if ( have_posts() ) : the_post(); ?>
-        <article id="post-<?php the_ID(); ?>">
-            <h1><?php the_title(); ?></h1>
-            <?php the_content(); ?>
-        </article>
+    <div class="row justify-content-center">
+      <?php if ( has_post_thumbnail() ) : ?>
+      <div class="col-lg-8 mb-4">
+        <?php the_post_thumbnail( 'full', [ 'alt' => get_the_title(), 'class' => 'img-fluid w-100' ] ); ?>
+      </div>
+      <?php endif; ?>
+
+      <div class="col-lg-8">
+        <div class="single-year-content">
+          <?php the_content(); ?>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col-12 text-center">
+        <a class="btn-slide btn-l btn-pink" href="<?php echo esc_url( get_post_type_archive_link( 'year' ) ); ?>">
+          <span class="text">年間行事一覧へ戻る</span>
+        </a>
+      </div>
+    </div>
     <?php endif; ?>
-</main>
+  </div>
+</section>
 
 <?php get_footer();

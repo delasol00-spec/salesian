@@ -4,26 +4,57 @@
  * URL: /admission/event/
  * カスタム投稿タイプ: event
  *
- * 静的HTML受領後に html/admission/event/index.html の内容を移植する。
- *
- * @package salesian
+ * @package seibi
  */
 
 get_header(); ?>
 
-<!-- =======================================
-     MAIN: 公開行事 一覧
-     html/admission/event/index.html を参照して移植する
-     ======================================= -->
-<main id="main-event">
-    <?php get_template_part( 'template-parts/breadcrumb' ); ?>
+<div class="container-fluid p-0">
+  <main class="sub-page-view">
+    <div class="sub-hero">
+      <img src="<?php echo get_template_directory_uri(); ?>/img/admission/admission-bg.webp" alt="" class="sub-hero-img" />
+    </div>
+    <section class="page-title">
+      <h1>公開行事</h1>
+      <div class="inner-border"></div>
+    </section>
+  </main>
+</div>
 
-    <?php if ( have_posts() ) : ?>
-        <?php while ( have_posts() ) : the_post(); ?>
-            <?php get_template_part( 'template-parts/content' ); ?>
+<section class="p-70-70">
+  <div class="container">
+    <div class="row justify-content-center">
+      <?php
+      $event_query = new WP_Query( [
+          'post_type'      => 'event',
+          'posts_per_page' => -1,
+          'orderby'        => 'date',
+          'order'          => 'ASC',
+      ] );
+
+      if ( $event_query->have_posts() ) : ?>
+      <div class="col-lg-8">
+        <div class="sec-title-pink pink">公開行事</div>
+        <?php while ( $event_query->have_posts() ) : $event_query->the_post(); ?>
+        <div class="event-col-pink">
+          <h3><?php the_title(); ?></h3>
+          <div class="event-spec">
+            <?php the_content(); ?>
+          </div>
+        </div>
         <?php endwhile; ?>
-    <?php endif; ?>
-</main>
-<!-- /MAIN -->
+        <?php wp_reset_postdata(); ?>
+      </div>
+      <?php else : ?>
+      <div class="col-lg-8">
+        <div class="sec-title-pink pink">公開行事</div>
+        <div class="event-col-pink">
+          <p>現在、公開行事の予定はありません。</p>
+        </div>
+      </div>
+      <?php endif; ?>
+    </div>
+  </div>
+</section>
 
 <?php get_footer();

@@ -1,0 +1,561 @@
+@charset "UTF-8";
+
+/* スマホヘッダーのロゴ（横長対応） */
+.mobile-logo {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* PCサイドバーのロゴエリア（修正） */
+.mobile-logo img,
+.header-logo,
+.sidebar-logo {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: 46px !important;
+  width: auto !important;
+  min-width: 100px !important; /* 最低限の幅を確保 */
+}
+
+.brand-area {
+  padding-top: 50px !important;
+  padding-bottom: 30px !important;
+  width: 100%;
+  display: flex;
+  flex-direction: column; /* 縦に並べる */
+  align-items: center; /* 左右中央に配置 */
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.brand-area a {
+  display: block;
+  width: 100%;
+}
+
+.sidebar-logo {
+  display: block !important;
+  height: 46px !important; 
+  width: auto !important;
+  margin: 0 auto; /* 中央に寄せる */
+}
+
+.school-branch-text {
+  color: #f9f8f6;
+  font-size: 1.4rem; /* ロゴの下に添えるのに程よいサイズ */
+  font-family: "Noto Serif JP", serif; /* フォントを太い明朝体に指定 */
+  font-weight: 700; /* 最も太い設定 */
+  letter-spacing: 0.1rem; /* 文字の間隔を広げて高級感を出す */
+  margin-bottom: 0;
+  text-shadow: 2px 3px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* PCサイドバーのロゴ本体（修正） */
+.sidebar-logo {
+  max-width: 90%; /* サイドバーからはみ出さないガード */
+  flex-shrink: 0; /* これが重要！勝手に小さくなるのを防ぎます */
+  height: auto !important;
+  margin-bottom: 5px; /* 下の文字との間隔 */
+  display: block;
+  /* もしこれでも寄って見えるなら、数ピクセル左に微調整する「隠し技」 */
+  /* transform: translateX(-2px); */
+}
+
+/* --- メニューリストの装飾 (style.cssから移動) --- */
+.menu-list {
+  padding: 0;
+  margin: 0;
+}
+.menu-list .nav-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  display: block;
+  width: 100%;
+}
+.menu-list .nav-link {
+  color: #f9f8f6;
+  padding: 15px 20px;
+  font-size: 0.95rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+.menu-list .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* --- プルダウン (style.cssから移動) --- */
+.sub-menu-wrapper {
+  background-color: rgba(0, 0, 0, 0.2);
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.sub-menu-wrapper ul {
+  list-style: none;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.sub-menu-wrapper .nav-link.sub-link {
+  padding: 10px 20px 10px 20px !important;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.8) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  display: block;
+  text-decoration: none;
+}
+
+/*.sub-menu-wrapper .nav-link.sub-link {
+  padding: 12px 20px 12px 30px !important;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.8) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  display: block;
+  text-decoration: none;
+}*/
+
+.sub-menu-wrapper ul li:last-child .sub-link {
+  border-bottom: 0 !important;
+}
+
+/* --- 入試情報 */
+.menu-admission > .nav-link {
+  background-color: #f67088;
+  color: #f9f8f6 !important;
+  font-weight: bold;
+  border-bottom: none !important;
+}
+.menu-admission > .nav-link:hover {
+  background-color: #f78397;
+}
+/* 「入試について」専用のサブメニュー背景 */
+.menu-admission .sub-menu-wrapper {
+  background-color: #e56078 !important;
+}
+
+/* サブメニュー内のリンクの色や枠線も調整する場合 */
+.menu-admission .sub-menu-wrapper .nav-link.sub-link {
+  color: #fff !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+/* 1. 土台となる span.arrow の設定 */
+.nav-item .arrow {
+  display: inline-flex !important; /* inline-blockより安定します */
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 20px !important; /* 枠を広めに取って「欠け」を防ぐ */
+  height: 20px !important;
+  color: transparent !important;
+  margin-left: 10px; /* 文字との距離 */
+  margin-right: 5px; /* 右端にぶつからないよう隙間を作る */
+  overflow: visible !important; /* 絶対に中身を切り取らない */
+}
+
+/* 2. 左右対称な「角度の広いV」を作る */
+.nav-item .arrow::after {
+  content: "";
+  position: absolute;
+  /* 枠の中心に配置 */
+  top: 50%;
+  left: 50%;
+
+  width: 10px;
+  height: 10px;
+
+  /* 右と下の線でVを作る */
+  border-right: 2px solid rgba(255, 255, 255, 0.8) !important;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.8) !important;
+
+  /* 45度回転させてV字にし、中心を合わせる */
+  transform: translate(-50%, -70%) rotate(45deg);
+  transition: transform 0.3s ease;
+}
+
+/* 3. 開いた時の回転（∧にする） */
+/* セレクタを長くして、!important をつけることで、他のCSSに絶対に負けないようにします */
+.nav-item a.nav-link[aria-expanded="true"] .arrow::after {
+  /* 位置は閉じている時とほぼ同じ、角度だけをマイナス方向に回す */
+  transform: translate(-50%, -30%) rotate(-135deg) !important;
+}
+
+/* 1. サブメニューのリストを時間差で表示 */
+.sub-menu-list li {
+  opacity: 0; /* 最初は透明 */
+  transform: translateX(-15px); /* 移動距離も少し短くすると、より速く感じます */
+  transition:
+    opacity 0.2s ease-out,
+    transform 0.1s ease-out;
+}
+
+/* 2. アコーディオンが開いた（showクラスがついた）時の動き */
+/* Bootstrapが展開時に付与する .show クラスを利用します */
+.collapse.show .sub-menu-list li {
+  opacity: 1; /* 表示する */
+  transform: translateX(0); /* 定位置に戻る */
+}
+
+/* 3. 上から順に時間差で出す（ディレイの設定） */
+.sub-menu-list li:nth-child(1) {
+  transition-delay: 0.1s;
+}
+.sub-menu-list li:nth-child(2) {
+  transition-delay: 0.15s;
+}
+.sub-menu-list li:nth-child(3) {
+  transition-delay: 0.2s;
+}
+.sub-menu-list li:nth-child(4) {
+  transition-delay: 0.25s;
+}
+.sub-menu-list li:nth-child(5) {
+  transition-delay: 0.3s;
+}
+.sub-menu-list li:nth-child(6) {
+  transition-delay: 0.35s;
+}
+
+#sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* 黒い半透明の幕 */
+  z-index: 1999 !important; /* サイドバー(2000)のすぐ下 */
+}
+
+/* メニューが開いている時だけ幕を表示 */
+#sidebarMenu.active + #sidebar-overlay, /* 隣接している場合 */
+body.menu-open #sidebar-overlay {
+  display: block;
+}
+
+/* --- スマホ固定ヘッダー --- */
+.mobile-header {
+  height: 60px;
+  background-color: #004f99;
+  z-index: 1050;
+}
+
+/* --- ハンバーガーボタンの調整（既存部分を書き換え/追記） --- */
+.navbar-toggler-custom {
+  background: transparent;
+  border: none;
+  width: 25px;
+  height: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0;
+  z-index: 2100 !important;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* メニューが開いているとき、ボタンを固定して色などを微調整したい場合 */
+.active .navbar-toggler-custom, /* 親にactiveがついた時用 */
+.navbar-toggler-custom.active {
+  position: fixed; /* メニューと一緒にスクロールしないよう固定 */
+  top: 20px; /* mobile-header内の位置に合わせる */
+  right: 16px; /* px-3（約16px）に合わせる */
+}
+
+/* --- 三本線を「×」に変形させるアニメーション --- */
+.navbar-toggler-custom .bar {
+  width: 100%;
+  height: 2px;
+  background-color: #f9f8f6;
+  transition: all 0.3s ease; /* アニメーションを追加 */
+  transform-origin: left center; /* 回転の軸を左側に */
+}
+
+/* 1番目の棒を右下がりに回転 */
+.navbar-toggler-custom.active .bar:nth-child(1) {
+  transform: rotate(45deg);
+  width: 28px; /* 斜めになる分、少し長さを出す */
+}
+
+/* 2番目の棒（真ん中）を消す */
+.navbar-toggler-custom.active .bar:nth-child(2) {
+  opacity: 0;
+  transform: translateX(10px);
+}
+
+/* 3番目の棒を右上がりに回転 */
+.navbar-toggler-custom.active .bar:nth-child(3) {
+  transform: rotate(-45deg);
+  width: 28px;
+}
+
+/* --- サイドバー (PC) --- */
+/*.sidebar {
+  background-color: rgba(0, 82, 151, 0.95);
+  color: white;
+  width: 260px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  transition: transform 0.4s ease;
+  overflow-y: auto;
+}*/
+
+/* --- サイドバー本体 --- */
+#sidebarMenu {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100vh;
+  background-color: rgba(0, 51, 102, 0.95) !important; /* メニュー全開時は青の半透明 */
+  z-index: 2000;
+  transform: translateX(0);
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+  overflow-y: auto; /* コンテンツが溢れたらスクロールさせる */
+  scrollbar-width: thin; /* Firefox用: 細く */
+  scrollbar-color: rgba(255, 255, 255, 0.4) transparent; /* Firefox用 */
+}
+
+/* --- サイドバーのスクロールバーを細くカスタマイズ (Webkit系) --- */
+#sidebarMenu::-webkit-scrollbar {
+  width: 5px; /* 幅を5pxに設定（かなり細め） */
+}
+
+#sidebarMenu::-webkit-scrollbar-track {
+  background: transparent; /* 背景は透明 */
+}
+
+#sidebarMenu::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.4); /* 半透明の白 */
+  border-radius: 10px; /* 丸みをつける */
+}
+
+/* --- 隠れている状態：帯の幅を50px〜60pxほど見せる --- */
+#sidebarMenu.is-hidden {
+  /* 280px - 55px(帯の幅) = 225px分を左へ隠す */
+  transform: translateX(-225px) !important;
+  overflow: hidden !important;
+}
+
+/* --- ピンクの操作帯（#e56078） --- */
+#sidebar-handle {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 55px; /* アイコンが余裕を持って入る幅 */
+  height: 100%;
+  background-color: #e56078; /* ご指定のピンク */
+  cursor: pointer;
+  z-index: 2001;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s;
+}
+
+/* アイコンと文字を包むエリア */
+.handle-icon-wrapper {
+  margin-top: 25px; /* 上からの位置調整 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* ロゴ画像：丸枠なしで直接配置 */
+.handle-logo-img {
+  width: 40px; /* アイコンサイズ */
+  height: auto;
+  margin-bottom: 8px;
+  /* 白抜きのロゴならより綺麗に見えます */
+}
+
+/* MENUの文字 */
+.handle-text {
+  color: #f9f8f6;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+
+/* MENU下の矢印アイコン */
+.handle-arrow {
+  color: #f9f8f6;
+  font-size: 36px !important;
+  margin-top: 2px;
+  line-height: 1;
+}
+
+/* インターバナー */
+.inter-banner {
+  background: #fff;
+  padding: 10px;
+  margin-top: 30px;
+}
+
+.inter-banner img {
+  transition: 0.5s;
+  opacity: 1;
+}
+
+.position-relative:hover img {
+  opacity: 0.7;
+  transform: scale(1.02);
+}
+
+/* --- メニュー全開時は帯を消す --- */
+/* --- [1] スマホ・タブレット（共通/初期状態） --- */
+#sidebarMenu {
+  position: fixed !important;
+  top: 0;
+  left: -100%; /* スマホでは完全に隠す */
+  width: 100%; /* スマホでは画面一杯、またはお好みの幅 */
+  height: 100vh;
+  z-index: 2000 !important;
+  transition: all 0.3s ease;
+}
+
+/* スマホで開いた時 */
+#sidebarMenu.active {
+  left: 0;
+}
+
+/* スマホではピンクの帯は出さない */
+#sidebar-handle {
+  display: none !important;
+}
+
+/* --- [2] PCサイズ（992px以上）の時だけ、例の「欲張り機能」を発動させる --- */
+@media (min-width: 992px) {
+  #sidebarMenu {
+    left: 0 !important;
+    width: 280px;
+    /* 最初は全開 */
+    transform: translateX(0);
+    background-color: rgba(0, 79, 153, 0.95) !important;
+  }
+
+  /* PCでスクロールした時だけ隠す */
+  #sidebarMenu.is-hidden {
+    transform: translateX(-225px) !important;
+  }
+
+  /* PCの時だけピンクの帯を表示する */
+  #sidebar-handle {
+    display: flex !important; /* ここで復活させる */
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 55px;
+    height: 100%;
+    background-color: #e56078;
+    cursor: pointer;
+  }
+
+  /* メニュー全開時は帯を消す */
+  #sidebarMenu:not(.is-hidden) #sidebar-handle {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  /* スマホ用の「active」が残っていると邪魔なのでPCでは無効化 */
+  #sidebarMenu.active {
+    left: 0 !important;
+  }
+}
+
+/* --- スマホ・タブレット用の設定（991px以下） --- */
+@media (max-width: 991px) {
+  #sidebarMenu {
+    position: fixed !important;
+    top: 0;
+    /* [修正ポイント1] 初期位置を左端へ。!importantでPC版の干渉を防ぐ */
+    left: -100% !important;
+
+    /* [修正ポイント2] PC用のtransform（is-hiddenなど）をスマホでは完全に無効化 */
+    transform: none !important;
+
+    width: 280px;
+    max-width: 85%;
+    height: 100vh;
+    background-color: rgba(0, 79, 153, 0.98) !important;
+
+    /* [修正ポイント3] z-indexを幕(1999)より高く、ボタン(2100)より低く設定 */
+    z-index: 2000 !important;
+    transition: left 0.3s ease !important;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+    display: block !important;
+  }
+
+  /* メニューが開いた時の状態 */
+  #sidebarMenu.active {
+    left: 0 !important;
+  }
+
+  /* スマホではピンクの帯（取っ手）は絶対に出さない */
+  #sidebar-handle {
+    display: none !important;
+  }
+
+  /* ハンバーガーボタンをメニューより上に配置し、×印にする準備 */
+  .navbar-toggler-custom {
+    z-index: 2100 !important; /* メニュー(2000)より上に */
+    position: relative;
+  }
+
+  /* メニューが開いている時、ボタンを固定して色などを調整 */
+  .navbar-toggler-custom.active {
+    position: fixed;
+    top: 20px;
+    right: 16px;
+  }
+}
+
+/* アクティブな項目の基本スタイル */
+.menu-list .nav-link.current-active {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #fff !important;
+  font-weight: bold;
+  position: relative;
+}
+
+/* 左端にアクセントラインを入れる */
+.menu-list .nav-link.current-active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background-color: #f67088;
+}
+
+/* サブメニュー（階層下）がアクティブな時のスタイル */
+.sub-menu-wrapper .nav-link.sub-link.current-active {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  color: #fff !important;
+  padding-left: 30px !important;
+}
+
+/* 入試情報など元々色が違う項目の場合 */
+.menu-admission .nav-link.current-active {
+  background-color: #d44d64 !important;
+}
+
+.menu-admission .nav-link.current-active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background-color: #005297;
+}

@@ -8,20 +8,60 @@
 
 get_header(); ?>
 
-<!-- =======================================
-     MAIN: 通学地域
-     html/about/area/index.html を参照して移植する
-     ======================================= -->
-<main id="main-area">
-    <?php get_template_part( 'template-parts/breadcrumb' ); ?>
+<div class="container-fluid p-0">
+  <main class="sub-page-view">
+    <div class="sub-hero">
+      <img src="<?php echo get_template_directory_uri(); ?>/img/about/about-bg.webp" alt="" class="sub-hero-img" />
+    </div>
+    <section class="page-title">
+      <h1><?php the_title(); ?></h1>
+      <div class="inner-border"></div>
+    </section>
+  </main>
+</div>
 
-    <?php if ( have_posts() ) : the_post(); ?>
-        <article id="post-<?php the_ID(); ?>">
-            <h1><?php the_title(); ?></h1>
-            <?php the_content(); ?>
-        </article>
-    <?php endif; ?>
-</main>
-<!-- /MAIN -->
+<section class="p-70-70">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-8 area">
+        <p>都内近郊のさまざまな地区から子どもたちが通学する星美学園小学校では、子どもたちに目が行き届くよう、通学地区別に班を編成しております。<br>
+        登下校だけでなく、災害時などの緊急時の際にも、この地区別編成で行動いたします。</p>
+      </div>
+      <div class="col-md-10">
+        <table class="area-formation">
+          <tr class="bgp"><td>ブロック</td><td>番号</td><td>地域／行き先／駅名等</td></tr>
+          <tr><td rowspan="2" class="bgpb">徒歩西側</td><td class="bg-ppink">１</td><td>赤羽台、小豆沢、志村、浮間、赤羽北、桐ヶ丘（坂をおりない）</td></tr>
+          <tr><td class="bg-ppink">２</td><td>赤羽西、赤羽台一部（坂をおりる）</td></tr>
+          <tr class="bgpg"><td class="bg-ppblue">徒歩東側</td><td class="bg-ppink2">３</td><td>赤羽、赤羽南、岩淵、志茂</td></tr>
+          <tr><td rowspan="3" class="bgpb">国際興業バス<br>（ＪＲ赤羽駅西口）</td><td class="bg-ppink">４</td><td>成増（０１）（０２）</td></tr>
+          <tr><td class="bg-ppink">５</td><td>常盤台（５３）、赤羽循環（５２・５４）、高島平（５６）、赤羽車庫（80）</td></tr>
+          <tr><td class="bg-ppink">６</td><td>池袋（５１）、王子（５０）</td></tr>
+          <tr class="bgpg"><td class="bg-ppblue" nowrap>国際興業バス/<br class="d-inline d-md-none" />都営バス<br />（ＪＲ赤羽駅東口）</td><td class="bg-ppink2">７</td><td>鳩ヶ谷（２０・２１・２２）、高円寺（３１）、<br />西新井（２３・２４・２７）、舎人団地（２６）<br />ハートアイランド循環（２５）、都営バス</td></tr>
+          <tr><td rowspan="2" class="bgpb">埼玉高速鉄道</td><td class="bg-ppink">８</td><td>川口元郷駅、南鳩ヶ谷駅</td></tr>
+          <tr><td class="bg-ppink">９</td><td>鳩ヶ谷駅、新井宿駅、戸塚安行駅、東川口駅、浦和美園駅</td></tr>
+          <tr class="bgpg"><td class="bg-ppblue">東京メトロ南北線</td><td class="bg-ppink2" nowrap>１０</td><td>地下鉄南北線</td></tr>
+          <tr><td rowspan="3" class="bgpb">ＪＲ京浜東北線<br>（北方面）</td><td class="bg-ppink">１１</td><td>川口駅</td></tr>
+          <tr><td class="bg-ppink">１２</td><td>西川口駅、蕨駅、浦和駅、北浦和駅、与野駅、さいたま新都心駅、大宮駅</td></tr>
+          <tr><td class="bg-ppink">１３</td><td>南浦和駅、武蔵野線（南浦和駅乗り換え）</td></tr>
+          <tr class="bgpg"><td rowspan="4" class="bg-ppblue">ＪＲ京浜東北線<br>（南方面）</td><td class="bg-ppink2">１４</td><td>東十条駅、上中里駅、田端駅、尾久駅（高崎線※宇都宮線を含む）、王子駅</td></tr>
+          <tr class="bgpg"><td class="bg-ppink2">１５</td><td>西日暮里駅、日暮里駅、鴬谷駅、上野駅、上野駅以南</td></tr>
+          <tr class="bgpg"><td class="bg-ppink2">１６</td><td>地下鉄千代田線、舎人ライナー（西日暮里駅乗り換え）</td></tr>
+          <tr class="bgpg"><td class="bg-ppink2">１７</td><td>常磐線、京成線、舎人ライナー（西日暮里駅乗り換え）</td></tr>
+          <tr><td rowspan="4" class="bgpb">ＪＲ埼京線<br>（北方面）</td><td class="bg-ppink">１８</td><td>北赤羽駅、浮間舟渡駅</td></tr>
+          <tr><td class="bg-ppink">１９</td><td>戸田公園駅、戸田駅</td></tr>
+          <tr><td class="bg-ppink">２０</td><td>北戸田駅、中浦和駅、西大宮駅、南与野駅、与野本町駅、北与野駅、川越駅、川越線</td></tr>
+          <tr><td class="bg-ppink">２１</td><td>武蔵浦和駅、武蔵野線（武蔵浦和駅乗り換え）</td></tr>
+          <tr class="bgpg"><td rowspan="4" class="bg-ppblue">ＪＲ埼京線<br>（南方面）</td><td class="bg-ppink2">２２</td><td>十条駅、板橋駅、池袋駅</td></tr>
+          <tr class="bgpg"><td class="bg-ppink2">２３</td><td>西武線（池袋駅乗り換え）</td></tr>
+          <tr class="bgpg"><td class="bg-ppink2">２４</td><td>ＪＲ線、東武線、地下鉄（池袋駅乗り換え）</td></tr>
+          <tr class="bgpg"><td class="bg-ppink2">２５</td><td>山手線、新宿駅、新宿駅以南（新宿駅乗り換え）</td></tr>
+          <tr><td rowspan="3" class="bgpb">JR高崎線、<br class="d-inline d-md-none" />JR宇都宮線</td><td class="bg-ppink">２６</td><td>浦和駅、さいたま新都心駅</td></tr>
+          <tr><td class="bg-ppink">２７</td><td>大宮駅（含大宮駅乗り換え）</td></tr>
+          <tr><td class="bg-ppink">２８</td><td>高崎線、宇都宮線</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
 
 <?php get_footer();
