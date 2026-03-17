@@ -296,11 +296,10 @@ function seibi_get_category_groups(): array {
             ],
         ],
         [
-            'label'    => '学校説明会',
-            'taxonomy' => 'briefing-category',
+            'label'    => '学校説明会 表示設定',
+            'taxonomy' => 'briefing-flag',
             'items'    => [
-                [ 'name' => '学校説明会', 'slug' => 'school-briefing'   ],
-                [ 'name' => '学外説明会', 'slug' => 'external-briefing' ],
+                [ 'name' => 'トップページ', 'slug' => 'top-page' ],
             ],
         ],
     ];
@@ -483,8 +482,8 @@ function seibi_setup_page() {
 
             <hr>
 
-            <h2>2. お知らせカテゴリーの作成</h2>
-            <p>カスタム分類 <code>information-category</code> にカテゴリーを登録します。既存のカテゴリーはスキップされます。</p>
+            <h2>2. カテゴリー・タームの作成</h2>
+            <p>各カスタム分類にカテゴリー・タームを登録します。既存のものはスキップされます。</p>
 
             <table class="widefat striped" style="margin-bottom: 16px;">
                 <thead>
