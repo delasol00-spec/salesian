@@ -3,10 +3,78 @@
  * 児童募集要項
  * URL: /admission/requirements/
  *
+ * カスタムフィールド一覧:
+ *   req_fiscal_year          : 年度表示
+ *   req_seibi_count          : 星美 募集人数（全日程共通）
+ *   req_seibi_app_a/b/c      : 星美 出願期間 A/B/C日程
+ *   req_seibi_int_a/b/c      : 星美 面接期間 A/B/C日程
+ *   req_seibi_exam_a/b/c     : 星美 入学試験 A/B/C日程
+ *   req_seibi_result_a/b/c   : 星美 合格発表 A/B/C日程
+ *   req_seibi_exam_fee       : 星美 受験料（全日程共通）
+ *   req_seibi_entry_fee      : 星美 入学金（全日程共通）
+ *   req_seibi_pdf_text       : 星美 募集要項ボタンテキスト
+ *   req_seibi_pdf_url        : 星美 募集要項 PDF URL
+ *   req_seibi_selection      : 星美 選考内容の概要（textarea）
+ *   req_seibi_interview      : 星美 面接の説明（textarea）
+ *   req_seibi_belongings     : 星美 持ち物・服装（textarea）
+ *   req_seibi_enroll_note    : 星美 入学手続と納付金 注記（textarea）
+ *   req_seibi_tuition        : 星美 授業料（年額）
+ *   req_seibi_edu_fee        : 星美 教育充実費（年額）
+ *   req_seibi_facility_fee   : 星美 施設設備費（年額）
+ *   req_seibi_pta_fee        : 星美 父母の会入会金
+ *   req_seibi_misc_fee       : 星美 諸経費（年額）
+ *   req_seibi_tuition_note   : 星美 学費その他経費・注記（textarea）
+ *   req_inter_detail_url     : インターナショナルクラス 詳細ページURL
+ *   req_returnee_detail_url  : 帰国生入試 詳細ページURL
+ *
  * @package seibi
  */
 
-get_header(); ?>
+get_header();
+
+$id = get_the_ID();
+
+// ── カスタムフィールド読み込み ───────────────────────────────────────
+$fiscal_year = get_post_meta( $id, 'req_fiscal_year', true );
+
+// 星美クラス 日程別
+$schedules = [
+    'A' => [
+        'show'      => get_post_meta( $id, 'req_seibi_show_a',      true ),
+        'count'     => get_post_meta( $id, 'req_seibi_count_a',     true ),
+        'app'       => get_post_meta( $id, 'req_seibi_app_a',       true ),
+        'int'       => get_post_meta( $id, 'req_seibi_int_a',       true ),
+        'exam'      => get_post_meta( $id, 'req_seibi_exam_a',      true ),
+        'result'    => get_post_meta( $id, 'req_seibi_result_a',    true ),
+        'exam_fee'  => get_post_meta( $id, 'req_seibi_exam_fee_a',  true ),
+        'entry_fee' => get_post_meta( $id, 'req_seibi_entry_fee_a', true ),
+        'pdf_id'    => (int) get_post_meta( $id, 'req_seibi_pdf_id_a', true ),
+    ],
+    'B' => [
+        'show'      => get_post_meta( $id, 'req_seibi_show_b',      true ),
+        'count'     => get_post_meta( $id, 'req_seibi_count_b',     true ),
+        'app'       => get_post_meta( $id, 'req_seibi_app_b',       true ),
+        'int'       => get_post_meta( $id, 'req_seibi_int_b',       true ),
+        'exam'      => get_post_meta( $id, 'req_seibi_exam_b',      true ),
+        'result'    => get_post_meta( $id, 'req_seibi_result_b',    true ),
+        'exam_fee'  => get_post_meta( $id, 'req_seibi_exam_fee_b',  true ),
+        'entry_fee' => get_post_meta( $id, 'req_seibi_entry_fee_b', true ),
+        'pdf_id'    => (int) get_post_meta( $id, 'req_seibi_pdf_id_b', true ),
+    ],
+    'C' => [
+        'show'      => get_post_meta( $id, 'req_seibi_show_c',      true ),
+        'count'     => get_post_meta( $id, 'req_seibi_count_c',     true ),
+        'app'       => get_post_meta( $id, 'req_seibi_app_c',       true ),
+        'int'       => get_post_meta( $id, 'req_seibi_int_c',       true ),
+        'exam'      => get_post_meta( $id, 'req_seibi_exam_c',      true ),
+        'result'    => get_post_meta( $id, 'req_seibi_result_c',    true ),
+        'exam_fee'  => get_post_meta( $id, 'req_seibi_exam_fee_c',  true ),
+        'entry_fee' => get_post_meta( $id, 'req_seibi_entry_fee_c', true ),
+        'pdf_id'    => (int) get_post_meta( $id, 'req_seibi_pdf_id_c', true ),
+    ],
+];
+
+?>
 
 <div class="container-fluid p-0">
   <main class="sub-page-view">
@@ -24,61 +92,74 @@ get_header(); ?>
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-10">
-        <div class="sec-title-blue blue">令和9年度（2027年度） 児童募集要項</div>
-        <div class="mini-nav">
-          <a href="#seibi" class="btn-slide-r btn-ss btn-pink-r">星美クラス</a>
-          <a href="#inter" class="btn-slide-r btn-ss btn-pink-r ml-md-3">インターナショナルクラス</a>
-          <a href="#returnee" class="btn-slide-r btn-ss btn-pink-r ml-md-3">帰国生入試</a>
-        </div>
-        <div class="table-responsive" id="seibi">
-          <table class="table table-bordered table-striped admission" style="min-width: 800px">
+
+        <?php if ( $fiscal_year ) : ?>
+        <div class="sec-title-blue blue"><?php echo esc_html( $fiscal_year ); ?></div>
+        <?php endif; ?>
+
+        <!-- ▼ 星美クラス A/B/C日程 テーブル（縦積み） -->
+        <?php
+        $schedule_labels = array_keys( $schedules );
+        $last_label      = end( $schedule_labels );
+        foreach ( $schedules as $label => $s ) :
+            if ( '1' !== $s['show'] ) continue;
+            $mb_class = ( $label === $last_label ) ? 'mb-5' : 'mb-3';
+        ?>
+        <div class="table <?php echo esc_attr( $mb_class ); ?>">
+          <table class="table table-bordered table-striped admission">
             <tr>
-              <th colspan="3" class="bg-pink text-white">星美クラス</th>
-            </tr>
-            <tr>
-              <th></th>
-              <th>A日程</th>
-              <th>B日程</th>
+              <th colspan="2" class="bg-pink text-white">星美クラス <?php echo esc_html( $label ); ?>日程</th>
             </tr>
             <tr>
               <th>募集人数</th>
-              <td colspan="2">第１学年(男、女)「星美クラス」「インターナショナルクラス」合わせて120名</td>
+              <td><?php echo esc_html( $s['count'] ); ?></td>
             </tr>
             <tr>
               <th>出願期間（Web出願）</th>
-              <td>10月1日(木)〜10月4日（日）</td>
-              <td>11月10日(火)〜11月14日（土）</td>
+              <td><?php echo esc_html( $s['app'] ); ?></td>
             </tr>
             <tr>
               <th>面接期間</th>
-              <td>10月8日（木）〜10月20日（火）</td>
-              <td>11月16日（月）〜 11月19日（木）</td>
+              <td><?php echo esc_html( $s['int'] ); ?></td>
             </tr>
             <tr>
               <th>入学試験</th>
-              <td>11月1日（日）8:50開始</td>
-              <td>11月20日（金）8:50開始</td>
+              <td><?php echo esc_html( $s['exam'] ); ?></td>
             </tr>
             <tr>
               <th>合格発表（Web発表）</th>
-              <td>11月2日（月）</td>
-              <td>11月21日（土）</td>
+              <td><?php echo esc_html( $s['result'] ); ?></td>
             </tr>
             <tr>
               <th>出願費用</th>
-              <td colspan="2">受験料　25,000円</td>
+              <td>受験料　<?php echo esc_html( $s['exam_fee'] ); ?></td>
             </tr>
             <tr>
               <th>入学手続き</th>
-              <td colspan="2">入学金　250,000円</td>
+              <td>入学金　<?php echo esc_html( $s['entry_fee'] ); ?></td>
             </tr>
+            <?php if ( $s['pdf_id'] ) :
+                $pdf_url  = wp_get_attachment_url( $s['pdf_id'] );
+                $pdf_file = get_attached_file( $s['pdf_id'] );
+                $pdf_size = '';
+                if ( $pdf_file && file_exists( $pdf_file ) ) {
+                    $pdf_size = number_format( filesize( $pdf_file ) / 1048576, 1 ) . 'MB';
+                }
+            ?>
             <tr>
               <th>児童募集要項</th>
-              <td colspan="2"><a href="#seibi" class="btn-slide-r btn-ss btn-pink-r">こちらからダウンロードいただけます (PDF 0.0MB)</a></td>
+              <td>
+                <a href="<?php echo esc_url( $pdf_url ); ?>" class="btn-slide-r btn-ss btn-pink-r" target="_blank" rel="noopener noreferrer">
+                  こちらからダウンロードいただけます<?php echo $pdf_size ? ' (PDF ' . esc_html( $pdf_size ) . ')' : ''; ?>
+                </a>
+              </td>
             </tr>
+            <?php endif; ?>
           </table>
         </div>
+        <?php endforeach; ?>
 
+        <!-- ▼ 選考内容 -->
         <div class="event-col-white">
           <h3><strong>【星美クラス】</strong> 選考内容</h3>
           <div class="event-spec">
@@ -141,6 +222,7 @@ get_header(); ?>
           </div>
         </div>
 
+        <!-- ▼ 持ち物・服装 -->
         <div class="event-col-white">
           <h3><strong>【星美クラス】</strong>持ち物／服装について</h3>
           <div class="event-spec">
@@ -151,6 +233,7 @@ get_header(); ?>
           </div>
         </div>
 
+        <!-- ▼ 入学手続と納付金 -->
         <div class="event-col-white">
           <h3><strong>【星美クラス】</strong>入学手続と納付金</h3>
           <div class="event-spec">
@@ -168,6 +251,7 @@ get_header(); ?>
           </div>
         </div>
 
+        <!-- ▼ 学費・その他 -->
         <div class="event-col-white">
           <h3><strong>【星美クラス】</strong>学費・その他</h3>
           <div class="event-spec">
@@ -203,126 +287,38 @@ get_header(); ?>
             </p>
           </div>
         </div>
+
       </div>
     </div>
   </div>
 </section>
 
+<!-- ================================================================ -->
+<!-- インターナショナルクラス・帰国生入試 -->
+<!-- ================================================================ -->
 <section class="p-70-70" id="inter">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-10">
-        <div class="table-responsive">
-          <table class="table table-bordered table-striped inter" style="min-width: 800px">
-            <tr>
-              <th colspan="4" class="bg-blue text-white">インターナショナルクラス</th>
-            </tr>
-            <tr>
-              <th></th>
-              <th>A日程</th>
-              <th>B日程</th>
-              <th>C日程</th>
-            </tr>
-            <tr>
-              <th>募集人数</th>
-              <td colspan="3">第１学年(男、女)「星美クラス」「インターナショナルクラス」合わせて120名</td>
-            </tr>
-            <tr>
-              <th>出願期間（Web出願）</th>
-              <td>10月1日（木）〜<br />10月12日（月）</td>
-              <td>11月5日（木）〜<br />11月15日（日）</td>
-              <td>12月14日（月）〜<br />12月27日（日）</td>
-            </tr>
-            <tr>
-              <th>面接期間</th>
-              <td>10月18日（日）まで</td>
-              <td>11月16日（日）まで</td>
-              <td>2027年1月4日（月）まで</td>
-            </tr>
-            <tr>
-              <th>入学試験</th>
-              <td>11月2日（月）未定</td>
-              <td>11月20日（金）未定</td>
-              <td>2027年1月6日（水）未定</td>
-            </tr>
-            <tr>
-              <th>合格発表（Web発表）</th>
-              <td>11月5日（木）17:00</td>
-              <td>11月24日（火）17:00</td>
-              <td>2027年1月8日（金）17:00</td>
-            </tr>
-            <tr>
-              <th>出願費用</th>
-              <td colspan="3">受験料　25,000円</td>
-            </tr>
-          </table>
-        </div>
+
         <div class="event-col-white inter-title">
           <h3><strong>【インターナショナルクラス】</strong>選考内容他</h3>
           <div class="event-spec">
             <p>
-              <a href="https://www.el.seibi.ac.jp/international/enrolment/application_guidelines/">詳細はインターナショナルクラスHPでご確認ください。<span class="material-symbols-outlined">open_in_new</span></a>
+              <a href="https://www.el.seibi.ac.jp/international/enrolment/application_guidelines/" target="_blank" rel="noopener noreferrer">詳細はインターナショナルクラスHPでご確認ください。<span class="material-symbols-outlined">open_in_new</span></a>
             </p>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section class="p-70-70" id="returnee">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-10">
-        <div class="table-responsive">
-          <table class="table table-bordered table-striped inter" style="min-width: 800px">
-            <tr>
-              <th colspan="3" class="bg-blue text-white">帰国生入試</th>
-            </tr>
-            <tr>
-              <th></th>
-              <th>第1回</th>
-              <th>第2回</th>
-            </tr>
-            <tr>
-              <th>募集人数</th>
-              <td colspan="2">若干名</td>
-            </tr>
-            <tr>
-              <th>出願期間（Web出願）</th>
-              <td>2025年10/1(水)～10/5(日)</td>
-              <td>2025年12/15(月)～2026年1/4(日)</td>
-            </tr>
-            <tr>
-              <th>親子面接</th>
-              <td>2025年10/20(月)～10/23(木)</td>
-              <td>2026年1/7(水)</td>
-            </tr>
-            <tr>
-              <th>入学試験</th>
-              <td>2025年10/25(土)午後</td>
-              <td>2026年1/7(水)</td>
-            </tr>
-            <tr>
-              <th>合格発表（Web発表）</th>
-              <td>2025年10/26(日)17:00</td>
-              <td>2026年1/8(木)17:00</td>
-            </tr>
-            <tr>
-              <th>入学金振込期間</th>
-              <td>2025年10/26(日)17:00～10/29(水)23:59</td>
-              <td>2026年1/8(木)17:00～1/11(日)23:59</td>
-            </tr>
-          </table>
-        </div>
         <div class="event-col-white inter-title">
           <h3><strong>【帰国生入試】</strong>選考内容他</h3>
           <div class="event-spec">
             <p>
-              <a href="https://www.el.seibi.ac.jp/international/enrolment/application_guidelines/">詳細はインターナショナルクラスHPでご確認ください。<span class="material-symbols-outlined">open_in_new</span></a>
+              <a href="https://www.el.seibi.ac.jp/international/enrolment/application_guidelines/" target="_blank" rel="noopener noreferrer">詳細はインターナショナルクラスHPでご確認ください。<span class="material-symbols-outlined">open_in_new</span></a>
             </p>
           </div>
         </div>
+
       </div>
     </div>
   </div>

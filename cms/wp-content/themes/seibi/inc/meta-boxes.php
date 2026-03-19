@@ -171,3 +171,263 @@ function seibi_briefing_meta_save( $post_id ) {
     update_post_meta( $post_id, 'outside_description', sanitize_textarea_field( wp_unslash( $_POST['outside_description'] ?? '' ) ) );
 }
 add_action( 'save_post_briefing', 'seibi_briefing_meta_save' );
+
+
+// ================================================================
+// 児童募集要項 カスタムフィールド（page slug = requirements）
+// ================================================================
+
+/**
+ * requirements ページにのみメタボックスを追加
+ *
+ * @param WP_Post $post 現在の投稿オブジェクト
+ */
+function seibi_requirements_add_meta_boxes( $post ) {
+    if ( 'requirements' !== $post->post_name ) {
+        return;
+    }
+    add_meta_box( 'req_general',       '年度・共通設定',           'seibi_req_general_cb',       'page', 'normal', 'high' );
+    add_meta_box( 'req_seibi_a', '星美クラス — A日程', 'seibi_req_seibi_a_cb', 'page', 'normal', 'high' );
+    add_meta_box( 'req_seibi_b', '星美クラス — B日程', 'seibi_req_seibi_b_cb', 'page', 'normal', 'high' );
+    add_meta_box( 'req_seibi_c', '星美クラス — C日程', 'seibi_req_seibi_c_cb', 'page', 'normal', 'high' );
+}
+add_action( 'add_meta_boxes_page', 'seibi_requirements_add_meta_boxes' );
+
+/**
+ * 児童募集要項ページの編集画面でメディアアップローダーを有効化
+ */
+function seibi_requirements_admin_scripts( $hook ) {
+    if ( ! in_array( $hook, [ 'post.php', 'post-new.php' ], true ) ) {
+        return;
+    }
+    $screen = get_current_screen();
+    if ( ! $screen || 'page' !== $screen->post_type ) {
+        return;
+    }
+    wp_enqueue_media();
+    wp_add_inline_script( 'jquery-core', "(function($){
+        $(document).on('click','.req-media-upload',function(e){
+            e.preventDefault();
+            var btn=\$(this), targetId=btn.data('target');
+            var frame=wp.media({title:'PDFを選択',button:{text:'選択'},multiple:false,library:{type:'application/pdf'}});
+            frame.on('select',function(){
+                var a=frame.state().get('selection').first().toJSON();
+                \$('#'+targetId).val(a.id);
+                \$('#'+targetId+'_filename').text(a.filename||a.url);
+                btn.siblings('.req-media-remove').show();
+            });
+            frame.open();
+        });
+        \$(document).on('click','.req-media-remove',function(e){
+            e.preventDefault();
+            var targetId=\$(this).data('target');
+            \$('#'+targetId).val('');
+            \$('#'+targetId+'_filename').text('選択されていません');
+            \$(this).hide();
+        });
+    })(jQuery);" );
+}
+add_action( 'admin_enqueue_scripts', 'seibi_requirements_admin_scripts' );
+
+// -----------------------------------------------
+// 内部ヘルパー関数
+// -----------------------------------------------
+
+/** 表示切り替えチェックボックス行 */
+function _req_show_checkbox( $post, $key ) {
+    $checked = get_post_meta( $post->ID, $key, true );
+    printf(
+        '<tr><td colspan="2" style="padding:8px 0 12px;">'
+        . '<label style="font-size:14px; font-weight:bold;">'
+        . '<input type="checkbox" name="%1$s" value="1"%2$s style="margin-right:6px;" />'
+        . 'この日程を表示する'
+        . '</label></td></tr>',
+        esc_attr( $key ),
+        checked( $checked, '1', false )
+    );
+}
+
+/** テキスト入力行 */
+function _req_text_row( $post, $key, $label, $placeholder = '' ) {
+    $v = get_post_meta( $post->ID, $key, true );
+    printf(
+        '<tr><th style="width:220px;"><label for="%1$s">%2$s</label></th>'
+        . '<td><input type="text" id="%1$s" name="%1$s" value="%3$s" class="widefat" placeholder="%4$s" /></td></tr>',
+        esc_attr( $key ),
+        esc_html( $label ),
+        esc_attr( $v ),
+        esc_attr( $placeholder )
+    );
+}
+
+/** テキストエリア行 */
+function _req_textarea_row( $post, $key, $label, $rows = 3 ) {
+    $v = get_post_meta( $post->ID, $key, true );
+    printf(
+        '<tr><th style="width:220px;"><label for="%1$s">%2$s</label></th>'
+        . '<td><textarea id="%1$s" name="%1$s" class="widefat" rows="%4$d">%3$s</textarea></td></tr>',
+        esc_attr( $key ),
+        esc_html( $label ),
+        esc_textarea( $v ),
+        $rows
+    );
+}
+
+/** メディアアップロード行（添付ファイルID を保存） */
+function _req_media_row( $post, $key, $label ) {
+    $attachment_id = (int) get_post_meta( $post->ID, $key, true );
+    $filename = '';
+    if ( $attachment_id ) {
+        $file     = get_attached_file( $attachment_id );
+        $filename = $file ? basename( $file ) : '（ファイルが見つかりません）';
+    }
+    printf(
+        '<tr><th style="width:220px;"><label>%1$s</label></th>'
+        . '<td>'
+        . '<input type="hidden" id="%2$s" name="%2$s" value="%3$s" />'
+        . '<button type="button" class="button req-media-upload" data-target="%2$s">PDFを選択</button> '
+        . '<button type="button" class="button req-media-remove" data-target="%2$s"%4$s>削除</button>'
+        . '<span id="%2$s_filename" style="margin-left:8px;color:#555;">%5$s</span>'
+        . '</td></tr>',
+        esc_html( $label ),
+        esc_attr( $key ),
+        esc_attr( $attachment_id ?: '' ),
+        $attachment_id ? '' : ' style="display:none;"',
+        esc_html( $filename ?: '選択されていません' )
+    );
+}
+
+/** URL 入力行 */
+function _req_url_row( $post, $key, $label ) {
+    $v = get_post_meta( $post->ID, $key, true );
+    printf(
+        '<tr><th style="width:220px;"><label for="%1$s">%2$s</label></th>'
+        . '<td><input type="url" id="%1$s" name="%1$s" value="%3$s" class="widefat" placeholder="https://" /></td></tr>',
+        esc_attr( $key ),
+        esc_html( $label ),
+        esc_attr( $v )
+    );
+}
+
+/** セクション区切りヘッダー行 */
+function _req_section_header( $label ) {
+    printf(
+        '<tr><td colspan="2" style="padding:10px 0 4px; font-weight:bold; color:#2271b1; border-bottom:2px solid #2271b1; font-size:12px;">%s</td></tr>',
+        esc_html( $label )
+    );
+}
+
+// -----------------------------------------------
+// コールバック: 年度・共通設定
+// -----------------------------------------------
+function seibi_req_general_cb( $post ) {
+    wp_nonce_field( 'seibi_requirements_meta_save', 'seibi_requirements_meta_nonce' );
+    echo '<table class="form-table"><tbody>';
+    _req_text_row( $post, 'req_fiscal_year', '年度表示', '例: 令和9年度（2027年度）' );
+    echo '</tbody></table>';
+}
+
+// -----------------------------------------------
+// コールバック: 星美クラス — A日程
+// -----------------------------------------------
+function seibi_req_seibi_a_cb( $post ) {
+    echo '<table class="form-table"><tbody>';
+    _req_show_checkbox( $post, 'req_seibi_show_a' );
+    _req_text_row( $post, 'req_seibi_count_a',    '募集人数',           '例: 第１学年(男、女)「星美クラス」「インターナショナルクラス」合わせて120名' );
+    _req_text_row( $post, 'req_seibi_app_a',      '出願期間（Web出願）', '例: 10月1日(木)〜10月4日（日）' );
+    _req_text_row( $post, 'req_seibi_int_a',      '面接期間',           '例: 10月8日（木）〜10月20日（火）' );
+    _req_text_row( $post, 'req_seibi_exam_a',     '入学試験',           '例: 11月1日（日）8:50開始' );
+    _req_text_row( $post, 'req_seibi_result_a',   '合格発表（Web発表）', '例: 11月2日（月）' );
+    _req_section_header( '費用' );
+    _req_text_row( $post, 'req_seibi_exam_fee_a',  '受験料', '例: 25,000円' );
+    _req_text_row( $post, 'req_seibi_entry_fee_a', '入学金', '例: 250,000円' );
+    _req_section_header( '児童募集要項ダウンロード' );
+    _req_media_row( $post, 'req_seibi_pdf_id_a', 'PDFファイル' );
+    echo '</tbody></table>';
+}
+
+// -----------------------------------------------
+// コールバック: 星美クラス — B日程
+// -----------------------------------------------
+function seibi_req_seibi_b_cb( $post ) {
+    echo '<table class="form-table"><tbody>';
+    _req_show_checkbox( $post, 'req_seibi_show_b' );
+    _req_text_row( $post, 'req_seibi_count_b',    '募集人数',           '例: 第１学年(男、女)「星美クラス」「インターナショナルクラス」合わせて120名' );
+    _req_text_row( $post, 'req_seibi_app_b',      '出願期間（Web出願）', '例: 11月10日(火)〜11月14日（土）' );
+    _req_text_row( $post, 'req_seibi_int_b',      '面接期間',           '例: 11月16日（月）〜 11月19日（木）' );
+    _req_text_row( $post, 'req_seibi_exam_b',     '入学試験',           '例: 11月20日（金）8:50開始' );
+    _req_text_row( $post, 'req_seibi_result_b',   '合格発表（Web発表）', '例: 11月21日（土）' );
+    _req_section_header( '費用' );
+    _req_text_row( $post, 'req_seibi_exam_fee_b',  '受験料', '例: 25,000円' );
+    _req_text_row( $post, 'req_seibi_entry_fee_b', '入学金', '例: 250,000円' );
+    _req_section_header( '児童募集要項ダウンロード' );
+    _req_media_row( $post, 'req_seibi_pdf_id_b', 'PDFファイル' );
+    echo '</tbody></table>';
+}
+
+// -----------------------------------------------
+// コールバック: 星美クラス — C日程
+// -----------------------------------------------
+function seibi_req_seibi_c_cb( $post ) {
+    echo '<table class="form-table"><tbody>';
+    _req_show_checkbox( $post, 'req_seibi_show_c' );
+    _req_text_row( $post, 'req_seibi_count_c',    '募集人数',           '例: 第１学年(男、女)「星美クラス」「インターナショナルクラス」合わせて120名' );
+    _req_text_row( $post, 'req_seibi_app_c',      '出願期間（Web出願）', '例: 12月14日（月）〜12月27日（日）' );
+    _req_text_row( $post, 'req_seibi_int_c',      '面接期間',           '例: 2027年1月4日（月）まで' );
+    _req_text_row( $post, 'req_seibi_exam_c',     '入学試験',           '例: 2027年1月6日（水）未定' );
+    _req_text_row( $post, 'req_seibi_result_c',   '合格発表（Web発表）', '例: 2027年1月8日（金）17:00' );
+    _req_section_header( '費用' );
+    _req_text_row( $post, 'req_seibi_exam_fee_c',  '受験料', '例: 25,000円' );
+    _req_text_row( $post, 'req_seibi_entry_fee_c', '入学金', '例: 250,000円' );
+    _req_section_header( '児童募集要項ダウンロード' );
+    _req_media_row( $post, 'req_seibi_pdf_id_c', 'PDFファイル' );
+    echo '</tbody></table>';
+}
+
+
+// -----------------------------------------------
+// 保存処理
+// -----------------------------------------------
+function seibi_requirements_meta_save( $post_id ) {
+    if ( ! isset( $_POST['seibi_requirements_meta_nonce'] ) ) {
+        return;
+    }
+    if ( ! wp_verify_nonce( $_POST['seibi_requirements_meta_nonce'], 'seibi_requirements_meta_save' ) ) {
+        return;
+    }
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return;
+    }
+    if ( ! current_user_can( 'edit_post', $post_id ) ) {
+        return;
+    }
+
+    $text_fields = [
+        'req_fiscal_year',
+        // 星美クラス A日程
+        'req_seibi_count_a',
+        'req_seibi_app_a',    'req_seibi_int_a',    'req_seibi_exam_a',    'req_seibi_result_a',
+        'req_seibi_exam_fee_a', 'req_seibi_entry_fee_a',
+        // 星美クラス B日程
+        'req_seibi_count_b',
+        'req_seibi_app_b',    'req_seibi_int_b',    'req_seibi_exam_b',    'req_seibi_result_b',
+        'req_seibi_exam_fee_b', 'req_seibi_entry_fee_b',
+        // 星美クラス C日程
+        'req_seibi_count_c',
+        'req_seibi_app_c',    'req_seibi_int_c',    'req_seibi_exam_c',    'req_seibi_result_c',
+        'req_seibi_exam_fee_c', 'req_seibi_entry_fee_c',
+    ];
+    foreach ( $text_fields as $key ) {
+        update_post_meta( $post_id, $key, sanitize_text_field( wp_unslash( $_POST[ $key ] ?? '' ) ) );
+    }
+
+    foreach ( [ 'req_seibi_pdf_id_a', 'req_seibi_pdf_id_b', 'req_seibi_pdf_id_c' ] as $key ) {
+        update_post_meta( $post_id, $key, absint( $_POST[ $key ] ?? 0 ) );
+    }
+
+    // 表示切り替えチェックボックス（未チェック時はPOSTに含まれないため個別処理）
+    foreach ( [ 'req_seibi_show_a', 'req_seibi_show_b', 'req_seibi_show_c' ] as $key ) {
+        update_post_meta( $post_id, $key, isset( $_POST[ $key ] ) ? '1' : '0' );
+    }
+}
+add_action( 'save_post_page', 'seibi_requirements_meta_save' );
