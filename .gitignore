@@ -60,6 +60,7 @@ cms/wp-content/themes/twentytwentythree
 # ナレッジ・作業メモ（非公開）
 docs/*
 !docs/制作会社確認事項.md
+!docs/デラソル様確認事項.md
 
 CLAUDE.md
 gen_sitemap.py
