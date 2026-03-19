@@ -26,15 +26,96 @@ get_header(); ?>
       <h2 class="sec-title-pink pink">入学／入試／学費について</h2>
       <div class="col-md-8">
         <div class="faq-q r-top-10">通学可能地域の基準・指定はありますか。</div>
-        <div class="faq-a r-bottom-10">特にありません。</div>
+        <div class="faq-a r-bottom-10">
+          特にありません。
+          <div class="btn-group">
+            <a href="<?php echo esc_url( home_url( '/about/area/' ) ); ?>" class="btn-slide btn-mini btn-pink btn-right">通学地域 <span class="material-symbols-outlined"> keyboard_double_arrow_right </span></a>
+          </div>
+        </div>
+
         <div class="faq-q r-top-10">保育園出身者は、受験で不利になりますか。</div>
         <div class="faq-a r-bottom-10">そのようなことは全くありません。子どもを差別する学校ではありませんので、ご安心ください。</div>
+
         <div class="faq-q r-top-10">カトリック教会と関わりのある人が有利であると聞きましたが、本当でしょうか。</div>
         <div class="faq-a r-bottom-10">そのようなことは全くありません。本校は入学を希望してくださる方すべてに平等に開かれている学校です。</div>
+
         <div class="faq-q r-top-10">推薦入試はありますか。</div>
         <div class="faq-a r-bottom-10">原則として「なし」となっています。</div>
+
         <div class="faq-q r-top-10">転・編入試験はありますか。</div>
-        <div class="faq-a r-bottom-10">随時受け付けております。詳しくはお問い合わせください。<br>お問い合せ先：星美学園小学校　事務室　03-3906-0053（午前9：00～午後4：30）</div>
+        <div class="faq-a r-bottom-10">
+          随時受け付けております。詳しくはお問い合わせください。<br />
+          お問い合せ先：星美学園小学校　事務室　03-3906-0053（午前9：00～午後4：30）
+          <div class="btn-group">
+            <a href="<?php echo esc_url( home_url( '/admission/transfer/' ) ); ?>" class="btn-slide btn-mini btn-pink btn-right">転入について <span class="material-symbols-outlined"> keyboard_double_arrow_right </span></a>
+          </div>
+        </div>
+
+        <div class="faq-q r-top-10">受験料はどのように納入すればよいですか。</div>
+        <div class="faq-a r-bottom-10">銀行振り込みとなります。</div>
+
+        <div class="faq-q r-top-10">受験票は、どれくらいで受け取ることができますか。</div>
+        <div class="faq-a r-bottom-10">
+          面接資料が提出され次第、順次返送いたします。三日を経っても届かない場合は、お問い合わせください。<br />
+          <div class="btn-group">
+            <a href="<?php echo esc_url( home_url( '/admission/requirements/' ) ); ?>" class="btn-slide btn-mini btn-pink btn-right">児童募集要項 <span class="material-symbols-outlined"> keyboard_double_arrow_right </span></a>
+            <a href="<?php echo esc_url( home_url( '/admission/flow/' ) ); ?>" class="btn-slide btn-mini btn-pink btn-right">入学までの流れ <span class="material-symbols-outlined"> keyboard_double_arrow_right </span></a>
+          </div>
+        </div>
+
+        <div class="faq-q r-top-10">試験内容が知りたいのですが。</div>
+        <div class="faq-a r-bottom-10">
+          学校説明会にお越しください。学校説明会で試験内容のご案内をしております。<br />
+          <div class="btn-group">
+            <a href="<?php echo esc_url( home_url( '/admission/briefing/' ) ); ?>" class="btn-slide btn-mini btn-pink btn-right">学校説明会 <span class="material-symbols-outlined"> keyboard_double_arrow_right </span></a>
+            <a href="<?php echo esc_url( home_url( '/admission/requirements/' ) ); ?>" class="btn-slide btn-mini btn-pink btn-right">児童募集要項 <span class="material-symbols-outlined"> keyboard_double_arrow_right </span></a>
+          </div>
+        </div>
+
+        <div class="faq-q r-top-10">面接は両親とも出席しなければならないのでしょうか。</div>
+        <div class="faq-a r-bottom-10">ご都合がつく限り、ご両親でお越しください。</div>
+
+        <div class="faq-q r-top-10">選考日当日の保護者の服装に指定はありますか。</div>
+        <div class="faq-a r-bottom-10">特にありません。</div>
+
+        <div class="faq-q r-top-10">外国籍なのですが、入学手続き等で準備しなくてはならないものはありますか。</div>
+        <div class="faq-a r-bottom-10 mb-5">
+          外国籍の方は出願手続の際、「住民票」を提出していただきます。<br />
+          手続きについては、「児童募集要項」を参照ください。
+          <div class="btn-group">
+            <a href="<?php echo esc_url( home_url( '/admission/requirements/' ) ); ?>" class="btn-slide btn-mini btn-pink btn-right">児童募集要項 <span class="material-symbols-outlined"> keyboard_double_arrow_right </span></a>
+          </div>
+        </div>
+
+        <h2 class="sec-title-pink pink">説明会／イベントについて</h2>
+
+        <div class="faq-q r-top-10">友人と一緒に参加することは可能でしょうか。</div>
+        <div class="faq-a r-bottom-10">
+          可能です。お誘い合わせのうえ、ご参加ください。<br>
+          予約が必要な行事に参加される場合は、ご家庭ごとにお申し込み手続が必要となります。
+          <div class="btn-group">
+            <a href="<?php echo esc_url( home_url( '/admission/event/' ) ); ?>" class="btn-slide btn-mini btn-pink btn-right">公開行事 <span class="material-symbols-outlined"> keyboard_double_arrow_right </span></a>
+          </div>
+        </div>
+
+        <div class="faq-q r-top-10">説明会・公開行事の会場で募集要項・面接資料を入手することはできますか。</div>
+        <div class="faq-a r-bottom-10 mb-5">
+          会場の後方にて面接資料販売を行います。<br>
+          通常は小学校1階の事務室にて販売しております。
+          <div class="btn-group">
+            <a href="<?php echo esc_url( home_url( '/admission/event/' ) ); ?>" class="btn-slide btn-mini btn-pink btn-right">面接資料／入学案内の入手方法 <span class="material-symbols-outlined"> keyboard_double_arrow_right </span></a>
+          </div>
+        </div>
+
+        <h2 class="sec-title-pink pink">その他</h2>
+
+        <div class="faq-q r-top-10">保護者が参加する行事はどれくらいありますか。</div>
+        <div class="faq-a r-bottom-10">
+          「家庭との連携･教育」のページをご参照ください。
+          <div class="btn-group">
+            <a href="<?php echo esc_url( home_url( '/life/cooperation/' ) ); ?>" class="btn-slide btn-mini btn-pink btn-right">家庭との連携･教育 <span class="material-symbols-outlined"> keyboard_double_arrow_right </span></a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
