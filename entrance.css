@@ -10,6 +10,8 @@ html {
   height: 100%;
   font-family: "meiryo", "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", Meiryo, メイリオ, Osaka, "MS PGothic", arial, helvetica, sans-serif;
   overflow: hidden;
+  background: #F9F8F6;
+  color: #555;
 }
 
 /* --- ナビゲーション & フッター --- */
@@ -25,21 +27,57 @@ html {
   z-index: 1000;
 }
 
+section {
+  padding: 100px 0;
+}
+
+/* --- フッター基本設定（全ページ共通） --- */
 .footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 15px 50px;
   background: rgba(0, 82, 151, 0.85);
   backdrop-filter: blur(8px);
   color: white;
+  z-index: 1000;
+  
+  /* 横並びにする設定 */
+  display: flex;
+  flex-direction: row;      /* PCでは横並び */
+  align-items: center;      /* 上下中央（上ずり防止） */
+  justify-content: space-between; /* 左右に振り分け */
+}
+
+.footer p {
+  margin: 0 !important;     /* Bootstrapなどの余計な余白をリセット */
   font-size: 0.75rem;
   letter-spacing: 1px;
-  z-index: 1000;
+  line-height: 1;
+}
+
+/* --- 固定したいページ専用の設定 --- */
+.fixed-footer-page .footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+/* --- 注意！固定ページのbodyはoverflowを隠す必要がある --- */
+.fixed-footer-page {
+  overflow: hidden;
+}
+
+/* --- 普通のスクロールするページのbody --- */
+body:not(.fixed-footer-page) {
+  overflow-y: auto; /* スクロールを許可 */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 普通のページでコンテンツが少ない時もフッターを一番下に置くための工夫 */
+body:not(.fixed-footer-page) main, 
+body:not(.fixed-footer-page) .split-container {
+  flex: 1;
 }
 
 .footer-sns {
@@ -99,7 +137,7 @@ html {
   text-align: center;
   position: relative;
 }
-/* ロゴ以外のメニュー項目の間に線を入れる */
+
 .nav-links li:not(.nav-menu-logo)::after {
   content: "";
   position: absolute;
@@ -279,16 +317,164 @@ html {
   transform: scale(1.1);
 }
 
+/* ヘッダ */
+.page-header {
+        background-image: url("img/header-img.webp");
+        background-size: cover;
+        background-position: center;
+        height: 400px; /* 高さは適宜調整してください */
+        margin-top: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+      }
+      .page-header h1 {
+        font-family: "Noto Serif JP", serif;
+        font-weight: 700;
+        font-size: 3rem;
+        text-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+      }
+
+/* --- 固定フッターではない（＝普通のスクロール）ページ用のリセット --- */
+body:not(.fixed-footer-page),
+html:not(.fixed-footer-page) {
+  height: auto !important;     /* 高さを固定せず、中身に合わせる */
+  overflow: visible !important; /* スクロールを許可する */
+}
+
+/* --- ヘッダー画像の表示を安定させる --- */
+.page-header {
+  min-height: 400px; /* 最低限の高さを確保 */
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 70px; /* メニューを避ける */
+}
+
+/* --- アクセス --- */
+.access-col {
+  background: #FFF;
+  text-align: center;
+  padding: 30px 30px 10px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.access-col p {
+  line-height: 2;
+  font-size: 1.2rem;
+}
+
+.access-col h1 {
+  margin-bottom: 20px;
+  font-family: "Noto Serif JP", serif;
+  font-weight: 700;
+  font-size: 2rem;
+  color: rgba(0, 82, 151, 1);
+}
+
+.access-col p {
+  display: inline-block; /* 固まりとして扱う */
+  text-align: left;      /* 住所などの複数行は左揃えにする */
+  vertical-align: top;
+}
+
+.access-col .material-symbols-outlined {
+  vertical-align: middle;    /* 垂直方向の基準を中央に */
+  margin-top: -0.2em;        /* 視覚的に「ほんの少し」上に持ち上げる（お好みで調整） */
+  margin-right: 4px;         /* アイコンと文字の間の隙間 */
+  
+  /* アイコンのサイズを文字に合わせるなら */
+  font-size: 1.2rem;
+}
+
+.access-map {
+  background: #FFF;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  
+}
+
+/* 画像を少し浮かせるための微調整 */
+.modal-content {
+  box-shadow: none;
+}
+
+.access-map img {
+  cursor: zoom-in;
+  transition: opacity 0.3s;
+}
+
+.access-map img:hover {
+  opacity: 0.8;
+}
+
+/* --- 沿革 --*/
+.history-table {
+  width: 100%;
+  margin-top: 30px;
+  background: #fff;
+}
+
+.history-table tr td {
+  padding: 8px 10px 5px;
+  border-top: 1px dotted #aaa;
+  border-bottom: 1px dotted #aaa;
+}
+
+.bg-pgray {
+  background: #f5f7ff;
+}
+
+/* -- 学校長挨拶 ---*/
+.greeting p {
+  margin-bottom: 0;
+  line-height: 2;
+  font-size: 1.2rem
+}
+
+.right {
+  text-align: right;
+}
+
 /* --- レスポンシブ --- */
 @media (max-width: 992px) {
   .navbar {
-    padding: 15px 30px;
+    padding: 10px 20px;
   }
-  .footer {
-    flex-direction: column;
-    gap: 10px;
-    padding: 15px 20px;
-  }
+
+  .logo img {
+    padding-top: 5px;
+  max-width: 200px;
+}
+
+.page-header {
+        background-image: url("img/header-img.webp");
+        background-size: cover;
+        background-position: -50px;
+        min-height: 300px;
+    margin-top: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+      }
+      .page-header h1 {
+        font-size: 2rem;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+      }
+
+      .footer {
+        flex-direction: column; /* スマホでは縦に並べる */
+        gap: 10px;              /* 2行の間の隙間 */
+        padding: 15px 20px;
+        text-align: center;
+      }
   .footer-sns {
     gap: 30px;
   }
@@ -326,3 +512,4 @@ html {
   width: 180px;
   height: auto;
 }
+
