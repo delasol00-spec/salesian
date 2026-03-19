@@ -52,6 +52,8 @@ cms/wp-content/languages
 cms/wp-content/plugins/*
 !cms/wp-content/plugins/seibi-setup/
 !cms/wp-content/plugins/duplicate-post/
+!cms/wp-content/plugins/intuitive-custom-post-order/
+!cms/wp-content/plugins/all-in-one-wp-migration/
 cms/wp-content/uploads
 cms/wp-content/themes/twentytwentyfive
 cms/wp-content/themes/twentytwentyfour
