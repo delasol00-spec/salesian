@@ -32,7 +32,7 @@ get_header(); ?>
         <div class="access-col">
           <h4 class="access-title">JR赤羽駅から</h4>
           <p>
-            赤羽駅西口より 北方向へ<br />徒歩約11分<br />
+            赤羽駅西口より 北方向へ<br />徒歩約10分<br />
             <small>(線路沿い北側に見えています)</small>
           </p>
         </div>
