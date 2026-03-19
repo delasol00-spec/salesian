@@ -289,6 +289,7 @@ function seibi_get_category_groups(): array {
             'label'    => 'お知らせ',
             'taxonomy' => 'information-category',
             'items'    => [
+                [ 'name' => 'お知らせ', 'slug' => 'news'        ],
                 [ 'name' => '学校生活', 'slug' => 'school-life' ],
                 [ 'name' => '入試関連', 'slug' => 'admission'   ],
                 [ 'name' => 'イベント', 'slug' => 'event'       ],
@@ -296,10 +297,9 @@ function seibi_get_category_groups(): array {
         ],
         [
             'label'    => '学校説明会',
-            'taxonomy' => 'briefing-category',
+            'taxonomy' => 'briefing-flag',
             'items'    => [
-                [ 'name' => '学校説明会', 'slug' => 'school-briefing'   ],
-                [ 'name' => '学外説明会', 'slug' => 'external-briefing' ],
+                [ 'name' => 'トップページ', 'slug' => 'top-page' ],
             ],
         ],
     ];
