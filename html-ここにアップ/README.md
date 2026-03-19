@@ -22,7 +22,7 @@
 ## ディレクトリ構成
 
 ```
-html/
+html-ここにアップ/
 ├── README.md
 ├── favicon.svg
 ├── index.html              # トップページ
@@ -112,7 +112,7 @@ CSSは `style.css → menu.css → [pages.css] → loading.css` の順に読み�
 ## ブラウザでの確認方法
 
 ```bash
-open html/index.html
+open html-ここにアップ/index.html
 ```
 
 または VS Code の Live Server 拡張機能を使う。
