@@ -305,14 +305,23 @@ a:hover {
   padding: 0.7rem 1.25rem;
 }
 .card-body .material-symbols-outlined {
-  font-size: 14px;
+  font-size: 0.8rem;
   color: #005297;
+}
+
+.info-card .card-body .material-symbols-outlined {
+  position: relative;
+  top: -1px;
 }
 
 /* 3段目：ブルー背景×白抜き（要予約） */
 .card-footer {
   display: flex;
   justify-content: flex-start;
+  font-size: 0.8rem;
+  color: #555;
+  align-items: baseline;
+  gap: 8px;
 }
 .status-badge {
   background: #005297;
@@ -324,7 +333,7 @@ a:hover {
   line-height: 1.4;
 }
 
-/* ホバー時に少し浮き上がる演出 */
+
 .info-card:hover {
   background: rgba(255, 255, 255, 0.95);
   transform: translateY(-2px);
@@ -1184,7 +1193,7 @@ a:hover {
 }
 @media (min-width: 992px) {
   .seibi-footer {
-    padding-left: 55px;
+    padding-left: 280px;
   }
 }
 
@@ -1207,7 +1216,7 @@ a:hover {
 }
 @media (min-width: 992px) {
   .footer-bg-deco {
-    left: 55px;
+    left: 280px;
   }
 }
 
@@ -1286,6 +1295,21 @@ a:hover {
   text-decoration: none;
   font-size: 0.9rem;
   transition: 0.3s;
+}
+
+.sitemap-links a.active {
+  color: #fff;
+  border-left: 2px solid #f67088;
+  padding-left: 7px;
+  padding-top: 2px;
+  color: #f67088;
+  filter: none;
+}
+
+.sitemap-links a.active:hover {
+  color: #f67088;
+  padding-left: 7px;
+  
 }
 
 .sitemap-links a:hover {
@@ -1591,54 +1615,6 @@ a:hover {
   }
 }
 
-/* =================================================
-  TOPへ戻るボタン
-  =================================================
-#backToTop {
-  position: fixed;
-  bottom: 30px;
-  right: 15px;
-  width: 50px;
-  height: 50px;
-  background-color: #f67088;
-  color: #f9f8f6;
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 2500;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-
-
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(20px);
-  transition: all 0.4s ease;
-}
-#backToTop.show {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-#backToTop:hover {
-  background-color: #d44d64;
-  transform: scale(1.1);
-}
-
-#backToTop i {
-  font-size: 20px;
-  line-height: 1;
-}
-
-#backToTop span {
-  font-size: 10px;
-  font-weight: bold;
-  margin-top: 2px;
-}*/
-
 /* 外枠のコンテナ */
 .pagetop-container {
   position: fixed;
@@ -1772,6 +1748,46 @@ a:hover {
 .p-70-70 img {
   margin-bottom: 30px;
 }
+
+.row.row-gutter-5 {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  gap: 5px;
+}
+
+.row.row-gutter-5 > [class*="col-"] {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* 見出し等、col 以外の全幅子要素 */
+.row.row-gutter-5 > .sec-title-pink {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 992px) {
+  .row.row-gutter-5 > .col-lg-4 {
+    flex: 0 0 calc((100% - 10px) / 3);
+    max-width: calc((100% - 10px) / 3);
+  }
+}
+
+@media (max-width: 991.98px) {
+  .row.row-gutter-5 > .col-6 {
+    flex: 0 0 calc((100% - 5px) / 2);
+    max-width: calc((100% - 5px) / 2);
+  }
+}
+
+@media (min-width: 992px) {
+  .sub-page-view,
+  .p-70-70 > .container {
+    padding-left: 55px;
+  }
+}
 /* =================================================
   スペーサー
   ================================================= */
@@ -1790,8 +1806,13 @@ a:hover {
   font-size: 2.5rem;
 }
 
+.text-m {
+  font-size: 1.2rem;
+  letter-spacing: 0.05rem;
+}
+
 p small {
-  display:block;
+  display: block;
   line-height: 1.5;
 }
 
@@ -1844,80 +1865,29 @@ p small {
 /* =================================================
   角R
   ================================================= */
-  .r-top-10 {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-  }
-
-  .r-bottom-10 {
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-  }
-
-
-
-/* =================================================
-  ボタンサイズ
-  ================================================= */
-.btn-ss {
-  padding: 8px 20px;
-  font-size: 0.8rem;
+.r-top-10 {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
-.btn-s {
-  padding: 8px 18px;
-  font-size: 0.8rem;
-  min-width: 150px;
-  padding: 10px 20px;
-}
-
-.btn-m {
-  padding: 14px 24px 12px;
-  font-size: 1rem;
-  min-width: 150px;
-  line-height: 1;
-}
-
-.btn-l {
-  padding: 15px 60px 17px;
-  font-size: 1.5rem;
-}
-
-.btn-sm {
-  padding: 0.25rem 0.5rem;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  border-radius: 100vh;
-}
-
-.btn-sm:hover {
-  color: #005297;
-}
-
-.link-center {
-  text-align: center;
-  margin-top: 30px;
-}
-
-@media (max-width: 599px) {
-  .btn-l {
-    font-size: 1.1rem;
-    padding: 15px 30px 17px;
-  }
+.r-bottom-10 {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 /* =================================================
   スライドボタン
   ================================================= */
 .btn-slide {
-  display: inline-block;
-  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
   outline: none;
   position: relative;
   transition:
     color 0.5s ease,
-    border-color 0.5s ease; /* 枠線の変化も滑らかに */
+    border-color 0.5s ease;
   border-radius: 100vh;
   overflow: hidden;
   z-index: 1;
@@ -1926,7 +1896,7 @@ p small {
 }
 
 .btn-slide:hover {
-  color: #fff !important; /* ホバー時は一律で白文字 */
+  color: #fff !important;
 }
 
 .btn-slide::before {
@@ -1958,7 +1928,7 @@ p small {
   position: relative;
   transition:
     color 0.5s ease,
-    border-color 0.5s ease; /* 枠線の変化も滑らかに */
+    border-color 0.5s ease;
   border-radius: 100vh;
   overflow: hidden;
   z-index: 1;
@@ -1966,7 +1936,7 @@ p small {
 }
 
 .btn-slide-r:hover {
-  color: #f67088 !important; /* ホバー時は一律で白文字 */
+  color: #f67088 !important;
 }
 
 .btn-slide-r::before {
@@ -1991,17 +1961,98 @@ p small {
 
 /* スマホメニュー内のユーティリティボタン調整 */
 .mobile-utility .btn-slide-r {
-  flex: 1; /* 3つのボタンを均等幅に */
-  padding: 6px 0 4px; /* 左右パディングをなくして文字数に依存させない */
-  justify-content: center; /* 文字を中央揃え */
-  margin-left: 5px; /* ボタン間の隙間 */
-  font-size: 0.72rem; /* 文字がはみ出さないよう少し小さく */
+  flex: 1;
+  padding: 6px 0 4px;
+  justify-content: center;
+  margin-left: 5px;
+  font-size: 0.72rem;
 }
 .mobile-utility .btn-slide-r:first-child {
-  margin-left: 0; /* 最初のボタンの左隙間は不要 */
+  margin-left: 0;
 }
 
-/* ボタンカラー */
+/* =================================================
+  ボタンサイズ
+  ================================================= */
+.btn-ss {
+  padding: 8px 20px;
+  font-size: 0.8rem;
+}
+
+.btn-s {
+  padding: 8px 18px;
+  font-size: 0.8rem;
+  min-width: 150px;
+  padding: 10px 20px;
+}
+
+.btn-m {
+  padding: 14px 24px 12px;
+  font-size: 1rem;
+  min-width: 150px;
+  line-height: 1;
+}
+
+.btn-l {
+  padding: 15px 60px 12px;
+  font-size: 1.2rem;
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 100vh;
+}
+
+.btn-mini {
+  padding: 3px 10px 2px;
+  font-size: 0.8rem;
+}
+
+.btn-sm:hover {
+  color: #005297;
+}
+
+.link-center {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.btn-right {
+  display: flex;
+  width: fit-content;
+}
+
+.btn-end {
+  display: flex;
+  align-items: end;
+}
+
+.btn-slide span {
+  vertical-align: middle;
+  font-size: 1.2em;
+  line-height: 1;
+}
+
+@media (max-width: 599px) {
+  .btn-l {
+    font-size: 1.1rem;
+    padding: 15px 30px 17px;
+  }
+}
+
+/* =================================================
+  ボタンカラー
+  ================================================= */
 .btn-pink {
   color: #f67088;
   border: 1px solid #f67088;

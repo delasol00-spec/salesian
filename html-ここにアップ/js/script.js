@@ -2,73 +2,309 @@
 gsap.registerPlugin(ScrollTrigger);
 
 $(document).ready(function () {
-  const $sidebar = $("#sidebarMenu");
   const $mobileBtn = $("#mobileMenuBtn");
   const $overlay = $("#sidebar-overlay");
   let isLocked = false;
+  const getSidebar = () => $("#sidebarMenu");
 
-  // --- 1. 初期状態のクリア ---
-  // スマホの時はPC用の隠しクラスを最初から持たせない
-  if (window.innerWidth <= 991) {
-    $sidebar.removeClass("is-hidden");
+  /** サイドバー／フッター現在地判定で共通利用 */
+  function normalizeUrlForCompare(url) {
+    try {
+      url = decodeURIComponent(url);
+    } catch (e) {}
+    return url
+      .split("#")[0]
+      .split("?")[0]
+      .replace(/\/index\.html$/, "")
+      .replace(/\/$/, "")
+      .replace(/\.html$/, "");
   }
 
-  // --- 2. PC用コントロール（992px以上のみ動作） ---
+  function initBackToTop() {
+    const $backToTop = $(".pagetop-container");
+    if ($backToTop.length === 0) return;
+
+    $(window)
+      .off("scroll.backToTop")
+      .on("scroll.backToTop", function () {
+        if ($(window).scrollTop() > 600) {
+          $backToTop.addClass("show");
+        } else {
+          $backToTop.removeClass("show");
+        }
+      });
+
+    $backToTop.off("click.backToTop").on("click.backToTop", function () {
+      $("html, body").animate({ scrollTop: 0 }, 600, "swing");
+    });
+
+    // 初期表示状態も反映
+    $(window).triggerHandler("scroll.backToTop");
+  }
+
+  function applyCurrentNavState() {
+    const $sidebar = getSidebar();
+    if ($sidebar.length === 0) return;
+
+    // --- 5. 現在地のアコーディオン自動展開（再々修正版） ---
+    // 現在のページの絶対URLを正規化
+    const currentUrl = normalizeUrlForCompare(window.location.href);
+    const currentPath = normalizeUrlForCompare(window.location.pathname);
+
+    $sidebar.find("a").each(function () {
+      const $link = $(this);
+      const hrefAttr = $link.attr("href");
+
+      // アコーディオンの開閉ボタン（data-toggle="collapse"）は除外
+      if ($link.attr("data-toggle") === "collapse") {
+        return;
+      }
+
+      // 無効なリンク、および「#」から始まるリンクは無視
+      // ※ href="#" のままだと、すべての「#」リンクが「現在地」と判定されてしまうため
+      if (!hrefAttr || hrefAttr.startsWith("#") || hrefAttr.startsWith("javascript:")) {
+        return;
+      }
+
+      // リンク先のパスとURLを取得
+      const linkUrl = normalizeUrlForCompare(this.href);
+      const linkPath = normalizeUrlForCompare(this.pathname);
+
+      // 判定：完全一致 または パスが末尾一致（絶対パス記述対策）
+      let isMatch = false;
+      if (linkUrl === currentUrl) {
+        isMatch = true;
+      } else if (linkPath !== "" && currentPath.endsWith(linkPath)) {
+        isMatch = true;
+      }
+
+      if (isMatch) {
+        $link.addClass("current-active");
+
+        // 親のアコーディオンを展開
+        const $parentCollapse = $link.closest(".collapse");
+        if ($parentCollapse.length) {
+          $parentCollapse.addClass("show");
+
+          // このアコーディオンを操作するトリガーボタンの状態も更新（矢印の向きなど）
+          const triggerId = $parentCollapse.attr("id");
+          if (triggerId) {
+            // href="#id" または data-target="#id" で指定されているトリガーを探す
+            const $trigger = $sidebar.find(`[data-toggle="collapse"][href="#${triggerId}"], [data-toggle="collapse"][data-target="#${triggerId}"]`);
+            $trigger.attr("aria-expanded", "true");
+            $trigger.removeClass("collapsed");
+            $trigger.closest(".nav-item").addClass("open"); // 矢印操作用クラス
+          }
+        }
+      }
+    });
+  }
+
+  /** フッターサイトマップの現在ページリンクに .active を付与 */
+  function applyFooterSitemapActive() {
+    const $links = $(".seibi-footer .sitemap-links a");
+    if ($links.length === 0) return;
+
+    $links.removeClass("active");
+
+    const currentUrl = normalizeUrlForCompare(window.location.href);
+    const currentPath = normalizeUrlForCompare(window.location.pathname);
+
+    $links.each(function () {
+      const hrefAttr = $(this).attr("href");
+      if (!hrefAttr || hrefAttr.startsWith("#") || hrefAttr.startsWith("javascript:")) {
+        return;
+      }
+
+      const linkUrl = normalizeUrlForCompare(this.href);
+      const linkPath = normalizeUrlForCompare(this.pathname);
+
+      let isMatch = false;
+      if (linkUrl === currentUrl) {
+        isMatch = true;
+      } else if (linkPath !== "" && currentPath.endsWith(linkPath)) {
+        isMatch = true;
+      }
+
+      if (isMatch) {
+        $(this).addClass("active");
+      }
+    });
+  }
+
+  function getIncludePrefix() {
+    const pathname = window.location.pathname || "";
+    const pathParts = pathname.split("/").filter(Boolean);
+    const seibiIndex = pathParts.lastIndexOf("seibi");
+    const afterSeibi = seibiIndex >= 0 ? pathParts.slice(seibiIndex + 1) : pathParts;
+    // `/about/` のように末尾が `/` のURLでも index.html 相当として 1 階層深い扱いにする
+    const isDirectoryUrl = pathname.endsWith("/");
+    const depth = Math.max(0, afterSeibi.length - (isDirectoryUrl ? 0 : 1));
+    return "../".repeat(depth);
+  }
+
+  function rewriteRelativeLinks(containerEl) {
+    const prefix = getIncludePrefix();
+    if (!prefix) return;
+
+    const shouldSkip = (v) =>
+      !v ||
+      v.startsWith("#") ||
+      v.startsWith("/") ||
+      v.startsWith("./") ||
+      v.startsWith("../") ||
+      v.startsWith("http://") ||
+      v.startsWith("https://") ||
+      v.startsWith("mailto:") ||
+      v.startsWith("tel:") ||
+      v.startsWith("javascript:");
+
+    containerEl.querySelectorAll("[href]").forEach((node) => {
+      const v = node.getAttribute("href");
+      if (shouldSkip(v)) return;
+      node.setAttribute("href", prefix + v);
+    });
+
+    containerEl.querySelectorAll("[src]").forEach((node) => {
+      const v = node.getAttribute("src");
+      if (shouldSkip(v)) return;
+      node.setAttribute("src", prefix + v);
+    });
+  }
+
+  async function loadPartial(el) {
+    const includePath = el.getAttribute("data-include");
+    if (!includePath) return;
+
+    try {
+      const res = await fetch(includePath, { cache: "no-cache" });
+      if (!res.ok) return;
+      el.innerHTML = await res.text();
+      rewriteRelativeLinks(el);
+    } catch (e) {
+      // 読み込み失敗時は何もしない（既存DOMで動作継続）
+    }
+  }
+
+  async function loadPartialsIfNeeded() {
+    const targets = Array.from(document.querySelectorAll("[data-include]"));
+    if (targets.length === 0) return;
+    await Promise.all(targets.map((el) => loadPartial(el)));
+  }
+
   function isPC() {
     return window.innerWidth >= 992;
   }
 
-  $sidebar
-    .on("mouseenter", function () {
-      if (isPC()) $sidebar.removeClass("is-hidden");
-    })
-    .on("mouseleave", function () {
-      if (isPC() && !isLocked && $(window).scrollTop() > 50) {
-        $sidebar.addClass("is-hidden");
-      }
-    });
+  function isTopPage() {
+    const path = window.location.pathname || "";
+    return path.endsWith("/seibi/") || path.endsWith("/seibi/index.html");
+  }
 
-  $("#sidebar-handle").on("click", function (e) {
-    if (isPC()) {
-      e.stopPropagation();
-      isLocked = !isLocked;
-      $(this).css("background-color", isLocked ? "#d44d64" : "");
-      if (isLocked) $sidebar.removeClass("is-hidden");
+  function isPageBottom(buffer = 400) {
+    const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+    // スクロール余地が少ないページでは途中判定を避ける
+    if (scrollableHeight <= buffer) return false;
+    return window.scrollY >= scrollableHeight - buffer;
+  }
+
+  function initSidebarControls() {
+    const $sidebar = getSidebar();
+    if ($sidebar.length === 0) return;
+
+    // --- 1. 初期状態のクリア ---
+    if (window.innerWidth <= 991) {
+      $sidebar.removeClass("is-hidden");
     }
-  });
 
-  $(window).on("scroll", function () {
+    // --- 2. PC用コントロール（992px以上のみ動作） ---
+    $(document)
+      .off("mouseenter.sidebarPC", "#sidebarMenu")
+      .on("mouseenter.sidebarPC", "#sidebarMenu", function () {
+        if (isPC()) getSidebar().removeClass("is-hidden");
+      })
+      .off("mouseleave.sidebarPC", "#sidebarMenu")
+      .on("mouseleave.sidebarPC", "#sidebarMenu", function () {
+        if (isPC() && !isLocked && $(window).scrollTop() > 50) {
+          // 非トップページでは最下部時は表示を維持
+          if (!isTopPage() && isPageBottom()) {
+            getSidebar().removeClass("is-hidden");
+          } else {
+            getSidebar().addClass("is-hidden");
+          }
+        }
+      })
+      .off("click.sidebarHandle", "#sidebar-handle")
+      .on("click.sidebarHandle", "#sidebar-handle", function (e) {
+        if (isPC()) {
+          e.stopPropagation();
+          isLocked = !isLocked;
+          $(this).css("background-color", isLocked ? "#d44d64" : "");
+          if (isLocked) getSidebar().removeClass("is-hidden");
+        }
+      });
+
+    $(window)
+      .off("scroll.sidebarAutoHide")
+      .on("scroll.sidebarAutoHide", function () {
+        if (isPC() && !isLocked) {
+          if (!isTopPage() && isPageBottom()) {
+            // 非トップページは最下部到達時に自動表示
+            getSidebar().removeClass("is-hidden");
+          } else if ($(window).scrollTop() > 50) {
+            getSidebar().addClass("is-hidden");
+          } else {
+            // トップページだけ上部で表示、それ以外は上部でも閉じた状態
+            if (isTopPage()) {
+              getSidebar().removeClass("is-hidden");
+            } else {
+              getSidebar().addClass("is-hidden");
+            }
+          }
+        }
+      });
+
+    // 初期表示状態をスクロール位置に合わせて反映
     if (isPC() && !isLocked) {
-      if ($(window).scrollTop() > 50) {
-        $sidebar.addClass("is-hidden");
+      if (!isTopPage()) {
+        if (isPageBottom()) {
+          $sidebar.removeClass("is-hidden");
+        } else {
+          $sidebar.addClass("is-hidden");
+        }
       } else {
         $sidebar.removeClass("is-hidden");
       }
     }
-  });
 
-  // --- 3. スマホ用コントロール（991px以下のみ動作） ---
-  $("#mobileMenuBtn, #sidebar-overlay").on("click", function (e) {
-    if (window.innerWidth <= 991) {
-      e.preventDefault();
+    // --- 3. スマホ用コントロール（991px以下のみ動作） ---
+    $("#mobileMenuBtn, #sidebar-overlay")
+      .off("click.sidebarMobile")
+      .on("click.sidebarMobile", function (e) {
+        if (window.innerWidth <= 991) {
+          e.preventDefault();
 
-      // スマホ時はPC用のクラスを完全に排除
-      $sidebar.removeClass("is-hidden");
+          const $sidebarNow = getSidebar();
+          if ($sidebarNow.length === 0) return;
 
-      const isOpen = $sidebar.hasClass("active");
-      if (!isOpen) {
-        $sidebar.addClass("active");
-        $mobileBtn.addClass("active");
-        $overlay.stop().fadeIn(300);
-        $("body").css("overflow", "hidden");
-      } else {
-        $sidebar.removeClass("active");
-        $mobileBtn.removeClass("active");
-        $overlay.stop().fadeOut(300);
-        $("body").css("overflow", "");
-      }
-    }
-  });
+          // スマホ時はPC用のクラスを完全に排除
+          $sidebarNow.removeClass("is-hidden");
+
+          const isOpen = $sidebarNow.hasClass("active");
+          if (!isOpen) {
+            $sidebarNow.addClass("active");
+            $mobileBtn.addClass("active");
+            $overlay.stop().fadeIn(300);
+            $("body").css("overflow", "hidden");
+          } else {
+            $sidebarNow.removeClass("active");
+            $mobileBtn.removeClass("active");
+            $overlay.stop().fadeOut(300);
+            $("body").css("overflow", "");
+          }
+        }
+      });
+  }
 
   // --- 4. スライドショー・トップへ戻る（共通機能） ---
   // (ここには以前のスライドショーやトップへ戻るボタンのコードをそのまま入れてください)
@@ -84,84 +320,15 @@ $(document).ready(function () {
   }
   updateCaption();
   setInterval(updateCaption, 5000);
+  initBackToTop();
+  initSidebarControls();
 
-  const $backToTop = $(".pagetop-container");
-  $(window).on("scroll", function () {
-    if ($(window).scrollTop() > 600) {
-      $backToTop.addClass("show");
-    } else {
-      $backToTop.removeClass("show");
-    }
-  });
-  $backToTop.on("click", function () {
-    $("html, body").animate({ scrollTop: 0 }, 600, "swing");
-  });
-
-  // --- 5. 現在地のアコーディオン自動展開（再々修正版） ---
-  // URLを正規化して比較しやすくする関数
-  const normalize = (url) => {
-    try {
-      url = decodeURIComponent(url); // 日本語ファイル名などの文字化け対応
-    } catch (e) {}
-    // ハッシュやクエリパラメータを除去し、末尾の / index.html .html を削除
-    return url
-      .split("#")[0]
-      .split("?")[0]
-      .replace(/\/index\.html$/, "")
-      .replace(/\/$/, "")
-      .replace(/\.html$/, "");
-  };
-
-  // 現在のページの絶対URLを正規化
-  const currentUrl = normalize(window.location.href);
-  const currentPath = normalize(window.location.pathname);
-
-  $sidebar.find("a").each(function () {
-    const $link = $(this);
-    const hrefAttr = $link.attr("href");
-
-    // アコーディオンの開閉ボタン（data-toggle="collapse"）は除外
-    if ($link.attr("data-toggle") === "collapse") {
-      return;
-    }
-
-    // 無効なリンク、および「#」から始まるリンクは無視
-    // ※ href="#" のままだと、すべての「#」リンクが「現在地」と判定されてしまうため
-    if (!hrefAttr || hrefAttr.startsWith("#") || hrefAttr.startsWith("javascript:")) {
-      return;
-    }
-
-    // リンク先のパスとURLを取得
-    const linkUrl = normalize(this.href);
-    const linkPath = normalize(this.pathname);
-
-    // 判定：完全一致 または パスが末尾一致（絶対パス記述対策）
-    let isMatch = false;
-    if (linkUrl === currentUrl) {
-      isMatch = true;
-    } else if (linkPath !== "" && currentPath.endsWith(linkPath)) {
-      isMatch = true;
-    }
-
-    if (isMatch) {
-      $link.addClass("current-active");
-
-      // 親のアコーディオンを展開
-      const $parentCollapse = $link.closest(".collapse");
-      if ($parentCollapse.length) {
-        $parentCollapse.addClass("show");
-
-        // このアコーディオンを操作するトリガーボタンの状態も更新（矢印の向きなど）
-        const triggerId = $parentCollapse.attr("id");
-        if (triggerId) {
-          // href="#id" または data-target="#id" で指定されているトリガーを探す
-          const $trigger = $sidebar.find(`[data-toggle="collapse"][href="#${triggerId}"], [data-toggle="collapse"][data-target="#${triggerId}"]`);
-          $trigger.attr("aria-expanded", "true");
-          $trigger.removeClass("collapsed");
-          $trigger.closest(".nav-item").addClass("open"); // 矢印操作用クラス
-        }
-      }
-    }
+  // --- 5. 外部HTML（サイドバー/フッター等）読み込み→現在地反映 ---
+  loadPartialsIfNeeded().finally(() => {
+    initSidebarControls();
+    applyCurrentNavState();
+    applyFooterSitemapActive();
+    initBackToTop();
   });
 
   // --- 6. ページ内リンクのスムーススクロール ---
@@ -190,7 +357,7 @@ $(document).ready(function () {
 });
 
 // スルスル戻る動き（上段のボタンをクリックした時）
-$(".top-link").on("click", function (e) {
+$(document).on("click", ".top-link", function (e) {
   e.preventDefault();
 
   // 以前の指定より少し時間を延ばし、動きを滑らかにします
@@ -317,6 +484,7 @@ if ($(".info-slider-track").length > 0) {
   const $prevBtn = $(".slider-arrow.prev");
   const $nextBtn = $(".slider-arrow.next");
   let cardIndex = 0;
+  let autoSlideTimer = null;
 
   function updateSliderVisibility() {
     let visibleCount = window.innerWidth > 1199 ? 3 : window.innerWidth > 767 ? 2 : 1;
@@ -345,7 +513,7 @@ if ($(".info-slider-track").length > 0) {
     $track.css("transform", `translateX(-${moveDistance}px)`);
   }
 
-  $nextBtn.on("click", function () {
+  function goNext() {
     let visibleCount = window.innerWidth > 1199 ? 3 : window.innerWidth > 767 ? 2 : 1;
     if (cardIndex < $cards.length - visibleCount) {
       cardIndex++;
@@ -353,9 +521,9 @@ if ($(".info-slider-track").length > 0) {
       cardIndex = 0;
     }
     moveSlider();
-  });
+  }
 
-  $prevBtn.on("click", function () {
+  function goPrev() {
     let visibleCount = window.innerWidth > 1199 ? 3 : window.innerWidth > 767 ? 2 : 1;
     if (cardIndex > 0) {
       cardIndex--;
@@ -363,6 +531,23 @@ if ($(".info-slider-track").length > 0) {
       cardIndex = $cards.length - visibleCount;
     }
     moveSlider();
+  }
+
+  function startAutoSlide() {
+    if (autoSlideTimer) {
+      clearInterval(autoSlideTimer);
+    }
+    autoSlideTimer = setInterval(goNext, 7000);
+  }
+
+  $nextBtn.on("click", function () {
+    goNext();
+    startAutoSlide();
+  });
+
+  $prevBtn.on("click", function () {
+    goPrev();
+    startAutoSlide();
   });
 
   let touchStartX = 0;
@@ -384,10 +569,11 @@ if ($(".info-slider-track").length > 0) {
     const diff = touchStartX - touchMoveX;
     if (Math.abs(diff) > 50) {
       if (diff > 0) {
-        $nextBtn.trigger("click");
+        goNext();
       } else {
-        $prevBtn.trigger("click");
+        goPrev();
       }
+      startAutoSlide();
     }
   });
 
@@ -396,4 +582,6 @@ if ($(".info-slider-track").length > 0) {
     moveSlider();
   });
   updateSliderVisibility();
+  moveSlider();
+  startAutoSlide();
 }
