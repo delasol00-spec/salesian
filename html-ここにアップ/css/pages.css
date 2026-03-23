@@ -519,6 +519,10 @@ tr th {
 /* ----------------------
    宗教教育
   ---------------------- */
+.general-box {
+  margin-bottom: 30px;
+}
+
 .religion-points {
   list-style: none;
   padding-left: 0;
@@ -538,55 +542,7 @@ tr th {
   margin-right: 0;
 }
 
-.religion-parallax {
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  overflow: hidden;
-}
 
-.religion-parallax-image {
-  position: relative;
-  min-height: 300px;
-  background: url("../feature/religion-img/02.webp") left center / cover no-repeat fixed;
-  padding: 80px 0;
-}
-
-.religion-parallax-image::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  pointer-events: none;
-}
-
-.religion-parallax h2 {
-  color: #f67088;
-  font-family: "Noto Serif JP", serif; /* フォントを太い明朝体に指定 */
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.religion-parallax h3 {
-  color: #fff;
-  font-weight: bold;
-  font-size: 1.2rem;
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.gakunen-pill {
-  background: #f67088;
-  display: inline-block;
-  padding: 10px 10px 7px;
-  border-radius: 100vh;
-  color: #fff;
-  font-size: 0.9rem;
-  margin-bottom: 7px;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-  line-height: 1;
-}
 
 .religion-text {
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
@@ -633,6 +589,77 @@ tr th {
     font-size: 1rem;
   }
 }
+
+/* ----------------------
+   英語教育
+  ---------------------- */
+  .english-text p {
+    color: #fff;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  
+  .english-text p span {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+
+ /* ----------------------
+   パララックス
+  ---------------------- */ 
+  .page-parallax {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    overflow: hidden;
+  }
+  
+  .page-parallax-image {
+    position: relative;
+    min-height: 300px;
+    padding: 80px 0;
+  }
+  
+  .page-parallax-image::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+  
+  .page-parallax h2 {
+    color: #f67088;
+    font-family: "Noto Serif JP", serif; /* フォントを太い明朝体に指定 */
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .page-parallax h3 {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .page-parallax p {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+  }
+
+  .religion-para-img {
+    background: url("../feature/religion-img/02.webp") left center / cover no-repeat fixed;
+  }
+
+  .english-para-img {
+    background: url("../feature/english-img/para.webp") left center / cover no-repeat fixed;
+  }
+
+  .general-para-img {
+    background: url("../feature/general-img/para.webp") left center / cover no-repeat fixed;
+  }
 
 /* ----------------------
    レスポンシブ
