@@ -34,6 +34,7 @@ function seibi_enqueue_scripts() {
     wp_enqueue_script( 'gsap-scrolltrigger', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js',    [ 'gsap' ], null, true );
 
     // --- ローカル JS ---
+    wp_enqueue_script( 'seibi-gtag',    $theme_uri . '/js/gtag.js',    [], $ver, true );
     wp_enqueue_script( 'seibi-script',  $theme_uri . '/js/script.js',  [ 'jquery', 'gsap-scrolltrigger' ], $ver, true );
     wp_enqueue_script( 'seibi-loading', $theme_uri . '/js/loading.js', [ 'seibi-script' ], $ver, true );
 }

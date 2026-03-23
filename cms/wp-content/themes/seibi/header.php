@@ -56,7 +56,7 @@
               <li><a href="<?php echo esc_url( home_url( '/about/area/' ) ); ?>" class="nav-link sub-link">通学地域</a></li>
               <li><a href="<?php echo esc_url( home_url( '/about/facility/' ) ); ?>" class="nav-link sub-link">施設･設備･環境</a></li>
               <li><a href="<?php echo esc_url( home_url( '/about/security/' ) ); ?>" class="nav-link sub-link">災害･セキュリティ対策</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/about/faq/' ) ); ?>" class="nav-link sub-link">よくある質問</a></li>
+              <li><a href="<?php echo esc_url( home_url( '/about/faq/' ) ); ?>" class="nav-link sub-link">よくお寄せいただく質問</a></li>
               <li><a href="<?php echo esc_url( home_url( '/about/download/' ) ); ?>" class="nav-link sub-link">パンフレットダウンロード</a></li>
             </ul>
           </div>
@@ -116,7 +116,11 @@
       </div>
 
       <div class="button-group px-3 mt-4 pb-5">
-        <div class="inter-banner position-relative">
+        <a href="#" class="btn btn-outline-light btn-block btn-sm mb-2">受験生の方</a>
+        <a href="#" class="btn btn-outline-light btn-block btn-sm mb-2">帰国生の方</a>
+        <a href="#" class="btn btn-outline-light btn-block btn-sm mb-2">卒業生の方</a>
+        <a href="#" class="btn btn-white btn-block btn-sm mb-2"><span class="material-symbols-outlined">lock</span> 保護者の方</a>
+        <div class="inter-banner position-relative mt-3">
           <img src="<?php echo get_template_directory_uri(); ?>/img/to-inter.webp" class="img-fluid" alt="サレジアン国際学園" />
           <a href="https://www.salesian.international.seibi.ac.jp/" target="_blank" class="stretched-link"></a>
         </div>
