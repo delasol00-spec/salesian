@@ -64,3 +64,62 @@ function seibi_redirect_no_single() {
     }
 }
 add_action( 'template_redirect', 'seibi_redirect_no_single' );
+
+// -----------------------------------------------
+// 編集者の固定ページアクセス制限（児童募集要項のみ許可）
+// -----------------------------------------------
+
+/**
+ * 固定ページ一覧を「児童募集要項」のみに絞り込む
+ */
+function seibi_editor_filter_pages( $query ) {
+    if ( ! is_admin() || ! $query->is_main_query() ) {
+        return;
+    }
+    if ( $query->get( 'post_type' ) !== 'page' ) {
+        return;
+    }
+    $user = wp_get_current_user();
+    if ( ! in_array( 'editor', (array) $user->roles, true ) ) {
+        return;
+    }
+
+    $allowed = get_page_by_path( 'admission/requirements' );
+    $query->set( 'post__in', $allowed ? [ $allowed->ID ] : [ 0 ] );
+}
+add_action( 'pre_get_posts', 'seibi_editor_filter_pages' );
+
+/**
+ * 許可ページ以外の編集画面・新規作成画面へのアクセスをブロック
+ */
+function seibi_editor_restrict_page_edit() {
+    if ( ! is_admin() ) {
+        return;
+    }
+    $user = wp_get_current_user();
+    if ( ! in_array( 'editor', (array) $user->roles, true ) ) {
+        return;
+    }
+
+    $screen = get_current_screen();
+    if ( ! $screen ) {
+        return;
+    }
+
+    // 固定ページの新規作成を禁止
+    if ( $screen->base === 'post-new' && $screen->post_type === 'page' ) {
+        wp_safe_redirect( admin_url( 'edit.php?post_type=page' ) );
+        exit;
+    }
+
+    // 固定ページの編集画面：許可ページ以外を禁止
+    if ( $screen->base === 'post' && $screen->post_type === 'page' ) {
+        $post_id = isset( $_GET['post'] ) ? (int) $_GET['post'] : 0;
+        $allowed  = get_page_by_path( 'admission/requirements' );
+        if ( ! $allowed || $post_id !== $allowed->ID ) {
+            wp_safe_redirect( admin_url( 'edit.php?post_type=page' ) );
+            exit;
+        }
+    }
+}
+add_action( 'current_screen', 'seibi_editor_restrict_page_edit' );
