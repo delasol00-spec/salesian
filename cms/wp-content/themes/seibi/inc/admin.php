@@ -123,3 +123,23 @@ function seibi_editor_restrict_page_edit() {
     }
 }
 add_action( 'current_screen', 'seibi_editor_restrict_page_edit' );
+
+// -----------------------------------------------
+// 児童募集要項の本文入力エリアを非表示
+// -----------------------------------------------
+
+/**
+ * add_meta_boxes より前に発火する admin_init で editor サポートを外す。
+ * ブロックエディター・クラシックエディター双方に効く。
+ */
+function seibi_remove_editor_for_requirements() {
+    $post_id = isset( $_GET['post'] ) ? (int) $_GET['post'] : 0;
+    if ( ! $post_id ) {
+        return;
+    }
+    $page = get_page_by_path( 'admission/requirements' );
+    if ( $page && $post_id === $page->ID ) {
+        remove_post_type_support( 'page', 'editor' );
+    }
+}
+add_action( 'admin_init', 'seibi_remove_editor_for_requirements' );
