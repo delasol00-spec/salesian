@@ -1,4 +1,5 @@
 <?php
+
 /**
  * トップページ兼フォールバックテンプレート
  * front-page.php・home.php は使用しない。
@@ -11,9 +12,9 @@ get_header(); ?>
 <div class="container-fluid p-0">
   <main class="main-view">
     <div class="utility-nav d-none d-lg-flex">
-      <a href="<?php echo esc_url( home_url( '/about/faq/' ) ); ?>" class="btn-slide-r btn-ss btn-pink-r">よくある質問</a>
-      <a href="<?php echo esc_url( home_url( '/about/access/' ) ); ?>" class="btn-slide-r btn-ss btn-pink-r ml-10">アクセス</a>
-      <a href="<?php echo esc_url( home_url( '/about/download/' ) ); ?>" class="btn-slide-r btn-ss btn-pink-r ml-10">パンフレットダウンロード</a>
+      <a href="<?php echo esc_url(home_url('/about/faq/')); ?>" class="btn-slide-r btn-ss btn-pink-r">よくある質問</a>
+      <a href="<?php echo esc_url(home_url('/about/access/')); ?>" class="btn-slide-r btn-ss btn-pink-r ml-10">アクセス</a>
+      <a href="<?php echo esc_url(home_url('/about/download/')); ?>" class="btn-slide-r btn-ss btn-pink-r ml-10">パンフレットダウンロード</a>
     </div>
 
     <div class="slideshow">
@@ -41,50 +42,50 @@ get_header(); ?>
         <div class="info-slider-track">
           <?php
           // briefing: 「トップページ」タームがついたものだけ
-          $briefing_ids = get_posts( [
-              'post_type'   => 'briefing',
-              'numberposts' => -1,
-              'fields'      => 'ids',
-              'tax_query'   => [ [
-                  'taxonomy' => 'briefing-flag',
-                  'field'    => 'slug',
-                  'terms'    => 'top-page',
-              ] ],
-          ] );
+          $briefing_ids = get_posts([
+            'post_type'   => 'briefing',
+            'numberposts' => -1,
+            'fields'      => 'ids',
+            'tax_query'   => [[
+              'taxonomy' => 'briefing-flag',
+              'field'    => 'slug',
+              'terms'    => 'top-page',
+            ]],
+          ]);
           // event: 全件
-          $event_ids = get_posts( [
-              'post_type'   => 'event',
-              'numberposts' => -1,
-              'fields'      => 'ids',
-          ] );
-          $top_ids = array_merge( $briefing_ids, $event_ids );
+          $event_ids = get_posts([
+            'post_type'   => 'event',
+            'numberposts' => -1,
+            'fields'      => 'ids',
+          ]);
+          $top_ids = array_merge($briefing_ids, $event_ids);
 
-          $info_query = ! empty( $top_ids ) ? new WP_Query( [
-              'post_type'      => [ 'briefing', 'event' ],
-              'post__in'       => $top_ids,
-              'posts_per_page' => 8,
-              'orderby'        => 'date',
-              'order'          => 'DESC',
-          ] ) : null;
-          if ( $info_query && $info_query->have_posts() ) :
-              while ( $info_query->have_posts() ) : $info_query->the_post();
-                  $post_type = get_post_type();
-                  $tag_class = ( 'briefing' === $post_type ) ? 'bg-pink' : 'bg-orange';
-                  $tag_label = ( 'briefing' === $post_type ) ? '説明会' : 'イベント';
-                  ?>
-                  <a href="<?php the_permalink(); ?>" class="info-card">
-                    <div class="card-header">
-                      <span class="info-tag <?php echo esc_attr( $tag_class ); ?>"><?php echo esc_html( $tag_label ); ?></span>
-                      <h4 class="event-title"><?php the_title(); ?></h4>
-                    </div>
-                    <div class="card-body">
-                      <span class="material-symbols-outlined">calendar_month</span>
-                      <span class="event-date"><?php echo get_the_date( 'Y年n月j日(D) H:i〜' ); ?></span>
-                    </div>
-                  </a>
-                  <?php
-              endwhile;
-              wp_reset_postdata();
+          $info_query = ! empty($top_ids) ? new WP_Query([
+            'post_type'      => ['briefing', 'event'],
+            'post__in'       => $top_ids,
+            'posts_per_page' => 8,
+            'orderby'        => 'menu_order',
+            'order'          => 'ASC',
+          ]) : null;
+          if ($info_query && $info_query->have_posts()) :
+            while ($info_query->have_posts()) : $info_query->the_post();
+              $post_type = get_post_type();
+              $tag_class = ('briefing' === $post_type) ? 'bg-pink' : 'bg-orange';
+              $tag_label = ('briefing' === $post_type) ? '説明会' : 'イベント';
+          ?>
+              <a href="<?php the_permalink(); ?>" class="info-card">
+                <div class="card-header">
+                  <span class="info-tag <?php echo esc_attr($tag_class); ?>"><?php echo esc_html($tag_label); ?></span>
+                  <h4 class="event-title"><?php the_title(); ?></h4>
+                </div>
+                <div class="card-body">
+                  <span class="material-symbols-outlined">calendar_month</span>
+                  <span class="event-date"><?php echo get_the_date('Y年n月j日(D) H:i〜'); ?></span>
+                </div>
+              </a>
+          <?php
+            endwhile;
+            wp_reset_postdata();
           endif;
           ?>
         </div>
@@ -102,66 +103,66 @@ get_header(); ?>
     <div class="row">
       <div class="col-12 sec-title pink">NEWS & TOPICS</div>
       <div class="news-cate-container">
-        <a href="<?php echo esc_url( get_post_type_archive_link( 'information' ) ); ?>" class="btn-slide btn-s btn-pink">全て</a>
-        <a href="<?php echo esc_url( add_query_arg( 'information-category', 'school-life', get_post_type_archive_link( 'information' ) ) ); ?>" class="btn-slide btn-s btn-blue">学校生活</a>
-        <a href="<?php echo esc_url( add_query_arg( 'information-category', 'admission', get_post_type_archive_link( 'information' ) ) ); ?>" class="btn-slide btn-s btn-green">入試関連</a>
-        <a href="<?php echo esc_url( add_query_arg( 'information-category', 'event', get_post_type_archive_link( 'information' ) ) ); ?>" class="btn-slide btn-s btn-orange">イベント</a>
-        <a href="<?php echo esc_url( add_query_arg( 'information-category', 'notice', get_post_type_archive_link( 'information' ) ) ); ?>" class="btn-slide btn-s btn-purple">お知らせ</a>
+        <a href="<?php echo esc_url(get_post_type_archive_link('information')); ?>" class="btn-slide btn-s btn-pink">全て</a>
+        <a href="<?php echo esc_url(add_query_arg('information-category', 'school-life', get_post_type_archive_link('information'))); ?>" class="btn-slide btn-s btn-blue">学校生活</a>
+        <a href="<?php echo esc_url(add_query_arg('information-category', 'admission', get_post_type_archive_link('information'))); ?>" class="btn-slide btn-s btn-green">入試関連</a>
+        <a href="<?php echo esc_url(add_query_arg('information-category', 'event', get_post_type_archive_link('information'))); ?>" class="btn-slide btn-s btn-orange">イベント</a>
+        <a href="<?php echo esc_url(add_query_arg('information-category', 'notice', get_post_type_archive_link('information'))); ?>" class="btn-slide btn-s btn-purple">お知らせ</a>
       </div>
     </div>
   </div>
   <div class="news-card-grid">
     <?php
-    $news_query = new WP_Query( [
-        'post_type'      => 'information',
-        'posts_per_page' => 8,
-        'orderby'        => 'date',
-        'order'          => 'DESC',
-    ] );
-    if ( $news_query->have_posts() ) :
-        while ( $news_query->have_posts() ) : $news_query->the_post();
-            $terms     = get_the_terms( get_the_ID(), 'information-category' );
-            $term      = ( $terms && ! is_wp_error( $terms ) ) ? $terms[0] : null;
-            $cat_label = $term ? esc_html( $term->name ) : '';
-            $cat_slug  = $term ? $term->slug : '';
-            $bg_map    = [
-                'school-life' => 'bg-blue',
-                'admission'   => 'bg-green',
-                'event'       => 'bg-orange',
-                'notice'      => 'bg-purple',
-            ];
-            $cat_class = isset( $bg_map[ $cat_slug ] ) ? $bg_map[ $cat_slug ] : 'bg-blue';
-            ?>
-            <article class="news-card">
-              <a href="<?php the_permalink(); ?>" class="news-card-link">
-                <div class="news-card-header">
-                  <span class="news-date"><?php echo get_the_date( 'Y.m.d' ); ?></span>
-                  <?php if ( $cat_label ) : ?>
-                  <span class="news-category <?php echo esc_attr( $cat_class ); ?>"><?php echo $cat_label; ?></span>
-                  <?php endif; ?>
-                </div>
+    $news_query = new WP_Query([
+      'post_type'      => 'information',
+      'posts_per_page' => 8,
+      'orderby'        => 'menu_order',
+      'order'          => 'ASC',
+    ]);
+    if ($news_query->have_posts()) :
+      while ($news_query->have_posts()) : $news_query->the_post();
+        $terms     = get_the_terms(get_the_ID(), 'information-category');
+        $term      = ($terms && ! is_wp_error($terms)) ? $terms[0] : null;
+        $cat_label = $term ? esc_html($term->name) : '';
+        $cat_slug  = $term ? $term->slug : '';
+        $bg_map    = [
+          'school-life' => 'bg-blue',
+          'admission'   => 'bg-green',
+          'event'       => 'bg-orange',
+          'notice'      => 'bg-purple',
+        ];
+        $cat_class = isset($bg_map[$cat_slug]) ? $bg_map[$cat_slug] : 'bg-blue';
+    ?>
+        <article class="news-card">
+          <a href="<?php the_permalink(); ?>" class="news-card-link">
+            <div class="news-card-header">
+              <span class="news-date"><?php echo get_the_date('Y.m.d'); ?></span>
+              <?php if ($cat_label) : ?>
+                <span class="news-category <?php echo esc_attr($cat_class); ?>"><?php echo $cat_label; ?></span>
+              <?php endif; ?>
+            </div>
 
-                <div class="news-card-image">
-                  <?php if ( has_post_thumbnail() ) : ?>
-                    <?php the_post_thumbnail( 'medium', [ 'alt' => get_the_title() ] ); ?>
-                  <?php else : ?>
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/news_title.svg" alt="<?php the_title_attribute(); ?>" />
-                  <?php endif; ?>
-                </div>
+            <div class="news-card-image">
+              <?php if (has_post_thumbnail()) : ?>
+                <?php the_post_thumbnail('medium', ['alt' => get_the_title()]); ?>
+              <?php else : ?>
+                <img src="<?php echo get_template_directory_uri(); ?>/img/news_title.svg" alt="<?php the_title_attribute(); ?>" />
+              <?php endif; ?>
+            </div>
 
-                <div class="news-card-body">
-                  <h3 class="news-card-title"><?php the_title(); ?></h3>
-                </div>
-              </a>
-            </article>
-            <?php
-        endwhile;
-        wp_reset_postdata();
+            <div class="news-card-body">
+              <h3 class="news-card-title"><?php the_title(); ?></h3>
+            </div>
+          </a>
+        </article>
+    <?php
+      endwhile;
+      wp_reset_postdata();
     endif;
     ?>
   </div>
   <div class="col-12 mb-lg-5 mt-lg-5">
-    <a class="btn-slide btn-l btn-pink" href="<?php echo esc_url( get_post_type_archive_link( 'information' ) ); ?>"><span class="text">NEWS & TOPICS一覧</span></a>
+    <a class="btn-slide btn-l btn-pink" href="<?php echo esc_url(get_post_type_archive_link('information')); ?>"><span class="text">NEWS & TOPICS一覧</span></a>
   </div>
 </section>
 
@@ -248,7 +249,7 @@ get_header(); ?>
       <h2>アシステンツァ</h2>
       <p>子どもたちに安心感と信頼感を</p>
       <div class="col-12">
-        <a class="btn-slide btn-l btn-pink" href="<?php echo esc_url( home_url( '/feature/assistenza/' ) ); ?>"><span class="text">アシステンツァについて</span></a>
+        <a class="btn-slide btn-l btn-pink" href="<?php echo esc_url(home_url('/feature/assistenza/')); ?>"><span class="text">アシステンツァについて</span></a>
       </div>
     </div>
   </div>
@@ -256,7 +257,7 @@ get_header(); ?>
 
 <section class="school-topics">
   <div class="school-topics-container">
-    <a href="<?php echo esc_url( home_url( '/feature/english/' ) ); ?>" class="school-topics-box">
+    <a href="<?php echo esc_url(home_url('/feature/english/')); ?>" class="school-topics-box">
       <div class="school-topics-image">
         <img src="<?php echo get_template_directory_uri(); ?>/img/english.webp" loading="lazy" alt="6年間の英語教育" />
       </div>
@@ -267,7 +268,7 @@ get_header(); ?>
       </div>
     </a>
 
-    <a href="<?php echo esc_url( home_url( '/feature/religion/' ) ); ?>" class="school-topics-box">
+    <a href="<?php echo esc_url(home_url('/feature/religion/')); ?>" class="school-topics-box">
       <div class="school-topics-image">
         <img src="<?php echo get_template_directory_uri(); ?>/img/shukyo.webp" loading="lazy" alt="宗教教育" />
       </div>
@@ -278,7 +279,7 @@ get_header(); ?>
       </div>
     </a>
 
-    <a href="<?php echo esc_url( home_url( '/feature/currciculum/' ) ); ?>" class="school-topics-box">
+    <a href="<?php echo esc_url(home_url('/feature/currciculum/')); ?>" class="school-topics-box">
       <div class="school-topics-image">
         <img src="<?php echo get_template_directory_uri(); ?>/img/sougou.webp" loading="lazy" alt="総合的な学習" />
       </div>
@@ -289,7 +290,7 @@ get_header(); ?>
       </div>
     </a>
 
-    <a href="<?php echo esc_url( home_url( '/feature/stay/' ) ); ?>" class="school-topics-box">
+    <a href="<?php echo esc_url(home_url('/feature/stay/')); ?>" class="school-topics-box">
       <div class="school-topics-image">
         <img src="<?php echo get_template_directory_uri(); ?>/img/shukuhaku.webp" loading="lazy" alt="宿泊学習" />
       </div>

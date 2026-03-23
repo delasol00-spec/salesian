@@ -117,3 +117,44 @@ function seibi_register_briefing_flag() {
     ] );
 }
 add_action( 'init', 'seibi_register_briefing_flag' );
+
+// -----------------------------------------------
+// カスタム投稿タイプ パーマリンク（/{slug}/{post_id}/ 形式）
+// -----------------------------------------------
+function seibi_custom_post_type_rewrite_rules() {
+    $post_types = [
+        'information' => 'information',
+        'year'        => 'life/year',
+    ];
+
+    foreach ( $post_types as $post_type => $slug ) {
+        add_rewrite_rule(
+            '^' . $slug . '/(\d+)/?$',
+            'index.php?post_type=' . $post_type . '&p=$matches[1]',
+            'top'
+        );
+    }
+}
+add_action( 'init', 'seibi_custom_post_type_rewrite_rules' );
+
+function seibi_post_type_link( $post_link, $post ) {
+    $slugs = [
+        'information' => 'information',
+        'year'        => 'life/year',
+    ];
+
+    if ( ! isset( $slugs[ $post->post_type ] ) ) {
+        return $post_link;
+    }
+
+    return home_url( '/' . $slugs[ $post->post_type ] . '/' . $post->ID . '/' );
+}
+add_filter( 'post_type_link', 'seibi_post_type_link', 10, 2 );
+
+function seibi_flush_post_type_rewrite_once() {
+    if ( get_option( 'seibi_post_id_rewrite_v1' ) !== '1' ) {
+        flush_rewrite_rules();
+        update_option( 'seibi_post_id_rewrite_v1', '1' );
+    }
+}
+add_action( 'wp_loaded', 'seibi_flush_post_type_rewrite_once' );
