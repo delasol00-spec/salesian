@@ -73,7 +73,7 @@ function seibi_get_page_definitions(): array {
             'parent' => 'about',
         ],
         [
-            'title'  => 'よくある質問',
+            'title'  => 'よくお寄せいただく質問',
             'slug'   => 'faq',
             'parent' => 'about',
         ],
