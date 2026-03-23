@@ -5,55 +5,96 @@ gsap.registerPlugin(ScrollTrigger);
 (function ($) {
 
 $(document).ready(function () {
-  const $sidebar = $("#sidebarMenu");
   const $mobileBtn = $("#mobileMenuBtn");
   const $overlay = $("#sidebar-overlay");
   let isLocked = false;
+  const getSidebar = () => $("#sidebarMenu");
 
-  // --- 1. 初期状態のクリア ---
-  // スマホの時はPC用の隠しクラスを最初から持たせない
-  if (window.innerWidth <= 991) {
-    $sidebar.removeClass("is-hidden");
-  }
-
-  // --- 2. PC用コントロール（992px以上のみ動作） ---
+  // --- ユーティリティ関数 ---
   function isPC() {
     return window.innerWidth >= 992;
   }
 
-  $sidebar
-    .on("mouseenter", function () {
-      if (isPC()) $sidebar.removeClass("is-hidden");
+  function isTopPage() {
+    const path = window.location.pathname || "";
+    return path.endsWith("/seibi/") || path.endsWith("/seibi/index.html");
+  }
+
+  function isPageBottom(buffer = 400) {
+    const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+    // スクロール余地が少ないページでは途中判定を避ける
+    if (scrollableHeight <= buffer) return false;
+    return window.scrollY >= scrollableHeight - buffer;
+  }
+
+  // --- 1. 初期状態のクリア ---
+  // スマホの時はPC用の隠しクラスを最初から持たせない
+  if (window.innerWidth <= 991) {
+    getSidebar().removeClass("is-hidden");
+  }
+
+  // --- 2. PC用コントロール（992px以上のみ動作） ---
+  $(document)
+    .on("mouseenter", "#sidebarMenu", function () {
+      if (isPC()) getSidebar().removeClass("is-hidden");
     })
-    .on("mouseleave", function () {
+    .on("mouseleave", "#sidebarMenu", function () {
       if (isPC() && !isLocked && $(window).scrollTop() > 50) {
-        $sidebar.addClass("is-hidden");
+        // 非トップページでは最下部時は表示を維持
+        if (!isTopPage() && isPageBottom()) {
+          getSidebar().removeClass("is-hidden");
+        } else {
+          getSidebar().addClass("is-hidden");
+        }
+      }
+    })
+    .on("click", "#sidebar-handle", function (e) {
+      if (isPC()) {
+        e.stopPropagation();
+        isLocked = !isLocked;
+        $(this).css("background-color", isLocked ? "#d44d64" : "");
+        if (isLocked) getSidebar().removeClass("is-hidden");
       }
     });
 
-  $("#sidebar-handle").on("click", function (e) {
-    if (isPC()) {
-      e.stopPropagation();
-      isLocked = !isLocked;
-      $(this).css("background-color", isLocked ? "#d44d64" : "");
-      if (isLocked) $sidebar.removeClass("is-hidden");
-    }
-  });
-
   $(window).on("scroll", function () {
     if (isPC() && !isLocked) {
-      if ($(window).scrollTop() > 50) {
-        $sidebar.addClass("is-hidden");
+      if (!isTopPage() && isPageBottom()) {
+        // 非トップページは最下部到達時に自動表示
+        getSidebar().removeClass("is-hidden");
+      } else if ($(window).scrollTop() > 50) {
+        getSidebar().addClass("is-hidden");
       } else {
-        $sidebar.removeClass("is-hidden");
+        // トップページだけ上部で表示、それ以外は上部でも閉じた状態
+        if (isTopPage()) {
+          getSidebar().removeClass("is-hidden");
+        } else {
+          getSidebar().addClass("is-hidden");
+        }
       }
     }
   });
+
+  // 初期表示状態をスクロール位置に合わせて反映
+  if (isPC() && !isLocked) {
+    if (!isTopPage()) {
+      if (isPageBottom()) {
+        getSidebar().removeClass("is-hidden");
+      } else {
+        getSidebar().addClass("is-hidden");
+      }
+    } else {
+      getSidebar().removeClass("is-hidden");
+    }
+  }
 
   // --- 3. スマホ用コントロール（991px以下のみ動作） ---
   $("#mobileMenuBtn, #sidebar-overlay").on("click", function (e) {
     if (window.innerWidth <= 991) {
       e.preventDefault();
+
+      const $sidebar = getSidebar();
+      if ($sidebar.length === 0) return;
 
       // スマホ時はPC用のクラスを完全に排除
       $sidebar.removeClass("is-hidden");
@@ -73,8 +114,7 @@ $(document).ready(function () {
     }
   });
 
-  // --- 4. スライドショー・トップへ戻る（共通機能） ---
-  // (ここには以前のスライドショーやトップへ戻るボタンのコードをそのまま入れてください)
+  // --- 4. スライドショーキャプション ---
   const slides = $(".slideshow .slide-item");
   const captionTextElement = $("#caption-text");
   let currentSlideIndex = 0;
@@ -88,6 +128,7 @@ $(document).ready(function () {
   updateCaption();
   setInterval(updateCaption, 5000);
 
+  // --- トップへ戻るボタン ---
   const $backToTop = $(".pagetop-container");
   $(window).on("scroll", function () {
     if ($(window).scrollTop() > 600) {
@@ -119,7 +160,7 @@ $(document).ready(function () {
   const currentUrl = normalize(window.location.href);
   const currentPath = normalize(window.location.pathname);
 
-  $sidebar.find("a").each(function () {
+  getSidebar().find("a").each(function () {
     const $link = $(this);
     const hrefAttr = $link.attr("href");
 
@@ -158,7 +199,7 @@ $(document).ready(function () {
         const triggerId = $parentCollapse.attr("id");
         if (triggerId) {
           // href="#id" または data-target="#id" で指定されているトリガーを探す
-          const $trigger = $sidebar.find(`[data-toggle="collapse"][href="#${triggerId}"], [data-toggle="collapse"][data-target="#${triggerId}"]`);
+          const $trigger = getSidebar().find(`[data-toggle="collapse"][href="#${triggerId}"], [data-toggle="collapse"][data-target="#${triggerId}"]`);
           $trigger.attr("aria-expanded", "true");
           $trigger.removeClass("collapsed");
           $trigger.closest(".nav-item").addClass("open"); // 矢印操作用クラス
@@ -193,7 +234,7 @@ $(document).ready(function () {
 });
 
 // スルスル戻る動き（上段のボタンをクリックした時）
-$(".top-link").on("click", function (e) {
+$(document).on("click", ".top-link", function (e) {
   e.preventDefault();
 
   // 以前の指定より少し時間を延ばし、動きを滑らかにします
@@ -320,6 +361,7 @@ if ($(".info-slider-track").length > 0) {
   const $prevBtn = $(".slider-arrow.prev");
   const $nextBtn = $(".slider-arrow.next");
   let cardIndex = 0;
+  let autoSlideTimer = null;
 
   function updateSliderVisibility() {
     let visibleCount = window.innerWidth > 1199 ? 3 : window.innerWidth > 767 ? 2 : 1;
@@ -334,6 +376,7 @@ if ($(".info-slider-track").length > 0) {
       $nextBtn.removeClass("is-hidden");
     }
   }
+
   function moveSlider() {
     let visibleCount = window.innerWidth > 1199 ? 3 : window.innerWidth > 767 ? 2 : 1;
 
@@ -348,7 +391,7 @@ if ($(".info-slider-track").length > 0) {
     $track.css("transform", `translateX(-${moveDistance}px)`);
   }
 
-  $nextBtn.on("click", function () {
+  function goNext() {
     let visibleCount = window.innerWidth > 1199 ? 3 : window.innerWidth > 767 ? 2 : 1;
     if (cardIndex < $cards.length - visibleCount) {
       cardIndex++;
@@ -356,9 +399,9 @@ if ($(".info-slider-track").length > 0) {
       cardIndex = 0;
     }
     moveSlider();
-  });
+  }
 
-  $prevBtn.on("click", function () {
+  function goPrev() {
     let visibleCount = window.innerWidth > 1199 ? 3 : window.innerWidth > 767 ? 2 : 1;
     if (cardIndex > 0) {
       cardIndex--;
@@ -366,6 +409,23 @@ if ($(".info-slider-track").length > 0) {
       cardIndex = $cards.length - visibleCount;
     }
     moveSlider();
+  }
+
+  function startAutoSlide() {
+    if (autoSlideTimer) {
+      clearInterval(autoSlideTimer);
+    }
+    autoSlideTimer = setInterval(goNext, 7000);
+  }
+
+  $nextBtn.on("click", function () {
+    goNext();
+    startAutoSlide();
+  });
+
+  $prevBtn.on("click", function () {
+    goPrev();
+    startAutoSlide();
   });
 
   let touchStartX = 0;
@@ -387,10 +447,11 @@ if ($(".info-slider-track").length > 0) {
     const diff = touchStartX - touchMoveX;
     if (Math.abs(diff) > 50) {
       if (diff > 0) {
-        $nextBtn.trigger("click");
+        goNext();
       } else {
-        $prevBtn.trigger("click");
+        goPrev();
       }
+      startAutoSlide();
     }
   });
 
@@ -399,6 +460,8 @@ if ($(".info-slider-track").length > 0) {
     moveSlider();
   });
   updateSliderVisibility();
+  moveSlider();
+  startAutoSlide();
 }
 
 })(jQuery); // no-conflict ラッパー終端
