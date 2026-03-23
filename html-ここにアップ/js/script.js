@@ -132,12 +132,30 @@ $(document).ready(function () {
     });
   }
 
+  /**
+   * 現在ページから seibi ルートまでの相対（../）を返す。
+   * footer/side-menu 内の「seibi 直下相対」リンクを、深い階層からも正しく辿れるようにする。
+   */
   function getIncludePrefix() {
-    const pathname = window.location.pathname || "";
+    const pathname = decodeURIComponent(window.location.pathname || "");
+    const marker = "/seibi/";
+    const idx = pathname.indexOf(marker);
+
+    if (idx !== -1) {
+      let rest = pathname.slice(idx + marker.length);
+      if (!rest) return "";
+      const segments = rest.split("/").filter(Boolean);
+      if (segments.length === 0) return "";
+      const lastSeg = segments[segments.length - 1];
+      const isFile = lastSeg.includes(".");
+      const depth = isFile ? segments.length - 1 : segments.length;
+      return "../".repeat(Math.max(0, depth));
+    }
+
+    // フォールバック（marker が無い環境・旧ロジック）
     const pathParts = pathname.split("/").filter(Boolean);
     const seibiIndex = pathParts.lastIndexOf("seibi");
     const afterSeibi = seibiIndex >= 0 ? pathParts.slice(seibiIndex + 1) : pathParts;
-    // `/about/` のように末尾が `/` のURLでも index.html 相当として 1 階層深い扱いにする
     const isDirectoryUrl = pathname.endsWith("/");
     const depth = Math.max(0, afterSeibi.length - (isDirectoryUrl ? 0 : 1));
     return "../".repeat(depth);
@@ -172,18 +190,52 @@ $(document).ready(function () {
     });
   }
 
+  function loadTextViaXHR(url) {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", url, true);
+      xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          resolve(xhr.responseText);
+        } else {
+          reject(new Error("HTTP " + xhr.status));
+        }
+      };
+      xhr.onerror = function () {
+        reject(new Error("network"));
+      };
+      xhr.send();
+    });
+  }
+
   async function loadPartial(el) {
     const includePath = el.getAttribute("data-include");
     if (!includePath) return;
 
+    const resolvedUrl = new URL(includePath, window.location.href).href;
+
+    let html = null;
     try {
-      const res = await fetch(includePath, { cache: "no-cache" });
-      if (!res.ok) return;
-      el.innerHTML = await res.text();
-      rewriteRelativeLinks(el);
-    } catch (e) {
-      // 読み込み失敗時は何もしない（既存DOMで動作継続）
+      const res = await fetch(resolvedUrl, { cache: "no-cache" });
+      if (!res.ok) {
+        throw new Error("HTTP " + res.status);
+      }
+      html = await res.text();
+    } catch (e1) {
+      try {
+        html = await loadTextViaXHR(resolvedUrl);
+      } catch (e2) {
+        console.warn(
+          "[include] 読み込み失敗（file:// で直開きの場合は fetch/XHR とも不可なことがあります。`python3 -m http.server` 等で http 表示してください）",
+          resolvedUrl,
+          e1,
+        );
+        return;
+      }
     }
+
+    el.innerHTML = html;
+    rewriteRelativeLinks(el);
   }
 
   async function loadPartialsIfNeeded() {
@@ -325,10 +377,14 @@ $(document).ready(function () {
 
   // --- 5. 外部HTML（サイドバー/フッター等）読み込み→現在地反映 ---
   loadPartialsIfNeeded().finally(() => {
-    initSidebarControls();
-    applyCurrentNavState();
-    applyFooterSitemapActive();
-    initBackToTop();
+    try {
+      initSidebarControls();
+      applyCurrentNavState();
+      applyFooterSitemapActive();
+      initBackToTop();
+    } catch (e) {
+      console.warn("[include] 初期化エラー", e);
+    }
   });
 
   // --- 6. ページ内リンクのスムーススクロール ---
