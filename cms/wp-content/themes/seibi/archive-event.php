@@ -40,12 +40,13 @@ get_header(); ?>
         if ( $event_query->have_posts() ) : ?>
         <div class="row">
           <?php while ( $event_query->have_posts() ) : $event_query->the_post();
-            $event_date     = get_post_meta( get_the_ID(), 'event_date', true );
-            $event_place    = get_post_meta( get_the_ID(), 'event_place', true );
-            $event_target   = get_post_meta( get_the_ID(), 'event_target', true );
-            $event_method   = get_post_meta( get_the_ID(), 'event_method', true );
-            $event_period   = get_post_meta( get_the_ID(), 'event_period', true );
+            $event_date       = get_post_meta( get_the_ID(), 'event_date', true );
+            $event_place      = get_post_meta( get_the_ID(), 'event_place', true );
+            $event_target     = get_post_meta( get_the_ID(), 'event_target', true );
+            $event_method     = get_post_meta( get_the_ID(), 'event_method', true );
+            $event_period     = get_post_meta( get_the_ID(), 'event_period', true );
             $event_link_label = get_post_meta( get_the_ID(), 'event_link_label', true );
+            $event_link_url   = get_post_meta( get_the_ID(), 'event_link_url', true ) ?: get_permalink();
           ?>
           <div class="col-lg-6">
             <div class="event-box">
@@ -75,9 +76,9 @@ get_header(); ?>
                 <dt><?php echo esc_html( $event_period ); ?></dt>
                 <?php endif; ?>
               </dl>
-              <?php if ( get_the_content() ) : ?>
+              <?php if ( $event_link_url ) : ?>
               <div class="text-center mb-4">
-                <a class="btn-slide btn-s btn-pink" href="<?php the_permalink(); ?>">
+                <a class="btn-slide btn-s btn-pink" href="<?php echo esc_url( $event_link_url ); ?>">
                   <span class="text"><?php echo $event_link_label ? esc_html( $event_link_label ) : '詳細・参加予約はこちらから'; ?><span class="material-symbols-outlined">open_in_new</span></span>
                 </a>
               </div>

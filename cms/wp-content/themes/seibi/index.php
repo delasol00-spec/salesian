@@ -52,11 +52,16 @@ get_header(); ?>
               'terms'    => 'top-page',
             ]],
           ]);
-          // event: 全件
+          // event: 「トップページ」タームがついたものだけ
           $event_ids = get_posts([
             'post_type'   => 'event',
             'numberposts' => -1,
             'fields'      => 'ids',
+            'tax_query'   => [[
+              'taxonomy' => 'event-flag',
+              'field'    => 'slug',
+              'terms'    => 'top-page',
+            ]],
           ]);
           $top_ids = array_merge($briefing_ids, $event_ids);
 

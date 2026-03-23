@@ -452,7 +452,7 @@ add_action( 'add_meta_boxes', 'seibi_event_add_meta_box' );
 function seibi_event_meta_box_callback( $post ) {
     wp_nonce_field( 'seibi_event_meta_save', 'seibi_event_meta_nonce' );
 
-    $fields = [
+    $text_fields = [
         'event_date'       => '日時',
         'event_place'      => '場所',
         'event_target'     => '参加対象',
@@ -461,7 +461,7 @@ function seibi_event_meta_box_callback( $post ) {
         'event_link_label' => 'ボタンテキスト（省略時: 詳細・参加予約はこちらから）',
     ];
     echo '<table class="form-table"><tbody>';
-    foreach ( $fields as $key => $label ) {
+    foreach ( $text_fields as $key => $label ) {
         $value = get_post_meta( $post->ID, $key, true );
         printf(
             '<tr><th style="width:260px;"><label for="%1$s">%2$s</label></th>'
@@ -471,6 +471,12 @@ function seibi_event_meta_box_callback( $post ) {
             esc_attr( $value )
         );
     }
+    $link_url = get_post_meta( $post->ID, 'event_link_url', true );
+    printf(
+        '<tr><th style="width:260px;"><label for="event_link_url">リンク先URL（省略時: 投稿詳細ページ）</label></th>'
+        . '<td><input type="url" id="event_link_url" name="event_link_url" value="%s" class="widefat" placeholder="https://" /></td></tr>',
+        esc_attr( $link_url )
+    );
     echo '</tbody></table>';
 }
 
@@ -488,12 +494,13 @@ function seibi_event_meta_save( $post_id ) {
         return;
     }
 
-    $fields = [
+    $text_fields = [
         'event_date', 'event_place', 'event_target',
         'event_method', 'event_period', 'event_link_label',
     ];
-    foreach ( $fields as $key ) {
+    foreach ( $text_fields as $key ) {
         update_post_meta( $post_id, $key, sanitize_text_field( wp_unslash( $_POST[ $key ] ?? '' ) ) );
     }
+    update_post_meta( $post_id, 'event_link_url', esc_url_raw( wp_unslash( $_POST['event_link_url'] ?? '' ) ) );
 }
 add_action( 'save_post_event', 'seibi_event_meta_save' );

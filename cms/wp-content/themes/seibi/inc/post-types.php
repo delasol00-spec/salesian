@@ -55,7 +55,7 @@ function seibi_register_post_types() {
         'rewrite'      => [ 'slug' => 'admission/event' ],
         'show_in_rest' => true,
         'menu_icon'    => 'dashicons-calendar',
-        'supports'     => [ 'title', 'editor' ],
+        'supports'     => [ 'title', 'thumbnail' ],
     ] );
 
     // 年間行事（ギャラリー形式）
@@ -117,6 +117,27 @@ function seibi_register_briefing_flag() {
     ] );
 }
 add_action( 'init', 'seibi_register_briefing_flag' );
+
+// -----------------------------------------------
+// event 表示設定タクソノミー
+// 「トップページ」タームにチェックした投稿のみトップに表示
+// -----------------------------------------------
+function seibi_register_event_flag() {
+    register_taxonomy( 'event-flag', 'event', [
+        'labels'       => [
+            'name'          => '表示設定',
+            'singular_name' => '表示設定',
+            'add_new_item'  => '表示設定を追加',
+            'edit_item'     => '表示設定を編集',
+        ],
+        'hierarchical' => true,
+        'public'       => false,
+        'show_ui'      => true,
+        'show_in_rest' => false,
+        'rewrite'      => false,
+    ] );
+}
+add_action( 'init', 'seibi_register_event_flag' );
 
 // -----------------------------------------------
 // カスタム投稿タイプ パーマリンク（/{slug}/{post_id}/ 形式）

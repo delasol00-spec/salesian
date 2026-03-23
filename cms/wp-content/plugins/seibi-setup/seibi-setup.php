@@ -302,6 +302,13 @@ function seibi_get_category_groups(): array {
                 [ 'name' => 'トップページ', 'slug' => 'top-page' ],
             ],
         ],
+        [
+            'label'    => '公開行事',
+            'taxonomy' => 'event-flag',
+            'items'    => [
+                [ 'name' => 'トップページ', 'slug' => 'top-page' ],
+            ],
+        ],
     ];
 }
 
