@@ -431,3 +431,69 @@ function seibi_requirements_meta_save( $post_id ) {
     }
 }
 add_action( 'save_post_page', 'seibi_requirements_meta_save' );
+
+
+// ================================================================
+// 公開行事 カスタムフィールド（post type = event）
+// ================================================================
+
+function seibi_event_add_meta_box() {
+    add_meta_box(
+        'event_details',
+        '行事詳細',
+        'seibi_event_meta_box_callback',
+        'event',
+        'normal',
+        'high'
+    );
+}
+add_action( 'add_meta_boxes', 'seibi_event_add_meta_box' );
+
+function seibi_event_meta_box_callback( $post ) {
+    wp_nonce_field( 'seibi_event_meta_save', 'seibi_event_meta_nonce' );
+
+    $fields = [
+        'event_date'       => '日時',
+        'event_place'      => '場所',
+        'event_target'     => '参加対象',
+        'event_method'     => '参加方法',
+        'event_period'     => '予約期間',
+        'event_link_label' => 'ボタンテキスト（省略時: 詳細・参加予約はこちらから）',
+    ];
+    echo '<table class="form-table"><tbody>';
+    foreach ( $fields as $key => $label ) {
+        $value = get_post_meta( $post->ID, $key, true );
+        printf(
+            '<tr><th style="width:260px;"><label for="%1$s">%2$s</label></th>'
+            . '<td><input type="text" id="%1$s" name="%1$s" value="%3$s" class="widefat" /></td></tr>',
+            esc_attr( $key ),
+            esc_html( $label ),
+            esc_attr( $value )
+        );
+    }
+    echo '</tbody></table>';
+}
+
+function seibi_event_meta_save( $post_id ) {
+    if ( ! isset( $_POST['seibi_event_meta_nonce'] ) ) {
+        return;
+    }
+    if ( ! wp_verify_nonce( $_POST['seibi_event_meta_nonce'], 'seibi_event_meta_save' ) ) {
+        return;
+    }
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return;
+    }
+    if ( ! current_user_can( 'edit_post', $post_id ) ) {
+        return;
+    }
+
+    $fields = [
+        'event_date', 'event_place', 'event_target',
+        'event_method', 'event_period', 'event_link_label',
+    ];
+    foreach ( $fields as $key ) {
+        update_post_meta( $post_id, $key, sanitize_text_field( wp_unslash( $_POST[ $key ] ?? '' ) ) );
+    }
+}
+add_action( 'save_post_event', 'seibi_event_meta_save' );

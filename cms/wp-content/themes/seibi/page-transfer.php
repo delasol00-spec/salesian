@@ -23,10 +23,15 @@ get_header(); ?>
 <section class="p-70-70">
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-lg-8">
-        <?php if ( have_posts() ) : the_post(); ?>
-        <?php the_content(); ?>
-        <?php endif; ?>
+      <div class="col-lg-10">
+
+        <div class="event-col-white">
+          <h3 class="r-top-10">転入試験のお知らせ</h3>
+          <div class="event-spec">
+            <p>本年度の転入試験は、終了いたしました。</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
