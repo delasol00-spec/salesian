@@ -1,5 +1,7 @@
-// GSAPプラグインを最初に一度だけ登録
-gsap.registerPlugin(ScrollTrigger);
+// GSAPプラグイン登録（CDN未読込時でも処理全体が止まらないようにガード）
+if (window.gsap && window.ScrollTrigger) {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 $(document).ready(function () {
   const $mobileBtn = $("#mobileMenuBtn");
