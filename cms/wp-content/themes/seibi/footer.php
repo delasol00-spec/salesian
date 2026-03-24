@@ -26,7 +26,7 @@
           <li><a href="<?php echo esc_url( home_url( '/about/area/' ) ); ?>">通学地域</a></li>
           <li><a href="<?php echo esc_url( home_url( '/about/facility/' ) ); ?>">施設･設備･環境</a></li>
           <li><a href="<?php echo esc_url( home_url( '/about/security/' ) ); ?>">災害･セキュリティ対策</a></li>
-          <li><a href="<?php echo esc_url( home_url( '/about/faq/' ) ); ?>">よくある質問</a></li>
+          <li><a href="<?php echo esc_url( home_url( '/about/faq/' ) ); ?>">よくお寄せいただく質問</a></li>
           <li><a href="<?php echo esc_url( home_url( '/about/download/' ) ); ?>">パンフレットダウンロード</a></li>
         </ul>
       </div>

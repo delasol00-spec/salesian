@@ -45,8 +45,8 @@ get_header(); ?>
   </div>
 </section>
 
-<section class="religion-parallax">
-  <div class="religion-parallax-image" role="img" aria-label="宗教教育の風景">
+<section class="page-parallax">
+  <div class="page-parallax-image religion-para-img" role="img" aria-label="宗教教育の風景">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10">

@@ -2105,3 +2105,33 @@ p small {
   position: relative;
   z-index: 2;
 }
+
+/* col-md-6：flex + gap があると 50%+50%+gap で折り返すため幅を補正（col-lg-* 付きは既存の列幅指定を優先） */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .row.row-gutter-5 > .col-md-6 {
+    flex: 0 0 calc((100% - 5px) / 2);
+    max-width: calc((100% - 5px) / 2);
+  }
+}
+
+@media (min-width: 992px) {
+  .row.row-gutter-5 > .col-md-6:not([class*="col-lg-"]) {
+    flex: 0 0 calc((100% - 5px) / 2);
+    max-width: calc((100% - 5px) / 2);
+  }
+}
+
+/* =================================================
+  ピル
+  ================================================= */
+.gakunen-pill {
+  background: #f67088;
+  display: inline-block;
+  padding: 5px 10px 3px;
+  border-radius: 100vh;
+  color: #fff;
+  font-size: 0.9rem;
+  margin-bottom: 7px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  line-height: 1;
+}
