@@ -54,7 +54,7 @@ get_header(); ?>
             <div class="event-box">
               <h2><?php the_title(); ?></h2>
               <?php if ( has_post_thumbnail() ) : ?>
-              <img src="<?php the_post_thumbnail_url( 'large' ); ?>" alt="<?php the_title_attribute(); ?>" class="img-fluid" />
+              <img src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'large' ) ); ?>" alt="<?php the_title_attribute(); ?>" class="img-fluid" />
               <?php endif; ?>
               <dl class="event-detail">
                 <?php if ( $event_date ) : ?>

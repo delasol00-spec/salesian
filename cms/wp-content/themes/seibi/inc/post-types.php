@@ -172,6 +172,17 @@ function seibi_post_type_link( $post_link, $post ) {
 }
 add_filter( 'post_type_link', 'seibi_post_type_link', 10, 2 );
 
+// -----------------------------------------------
+// information-category タクソノミーページをアーカイブへ 301 リダイレクト
+// テンプレートが存在しないため 500 エラー防止
+// -----------------------------------------------
+add_action( 'template_redirect', function () {
+	if ( is_tax( 'information-category' ) ) {
+		wp_redirect( get_post_type_archive_link( 'information' ), 301 );
+		exit;
+	}
+} );
+
 function seibi_flush_post_type_rewrite_once() {
     if ( get_option( 'seibi_post_id_rewrite_v1' ) !== '1' ) {
         flush_rewrite_rules();
