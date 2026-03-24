@@ -243,7 +243,6 @@ h3.sub-title {
 p.img-title {
   font-size: 1.2rem;
   text-align: center;
-  background: #f67088;
   color: #fff;
   font-weight: bold;
   padding: 10px 0 8px;
@@ -542,8 +541,6 @@ tr th {
   margin-right: 0;
 }
 
-
-
 .religion-text {
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   margin-bottom: 20px;
@@ -604,6 +601,73 @@ tr th {
     font-weight: bold;
   }
 
+  /* ----------------------
+   宿泊学習
+  ---------------------- */
+  .stay-box {
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+  }
+
+  .stay-box h3 {
+    font-size: 1.1rem;
+    background: #f67088;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0 8px;
+    margin-bottom: 0;
+  }
+
+  .stay-box img {
+    margin-bottom: 5px;
+  }
+
+  .stay-box p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 0;
+    padding: 10px 20px;
+  }
+
+ /* ----------------------
+   教科教育
+  ---------------------- */
+  
+  .curriculum {
+    padding: 70px 0;
+  }
+  .curriculum h3 {
+    font-family: "Noto Serif JP", serif;
+    font-weight: 400;
+    font-size: 3rem;
+    color: #005297;
+    text-align: center;
+    letter-spacing: 1rem;
+  }
+
+  .curriculum h4 {
+    font-family: "Noto Serif JP", serif;
+    font-weight: 400;
+    font-size: 1.2rem;
+    color: #005297;
+    border-left: 3px solid #f67088;
+    padding-left: 10px;
+    margin-bottom: 10px;
+  }
+
+  .curriculum p {
+    margin-bottom: 30px;
+    font-size: 1rem;
+    line-height: 2;
+  }
+
+  .curriculum-box {
+    padding: 50px;
+  }
 
  /* ----------------------
    パララックス
