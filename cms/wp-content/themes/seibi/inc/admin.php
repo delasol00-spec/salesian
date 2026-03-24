@@ -45,25 +45,6 @@ function seibi_remove_comment_support() {
 add_action( 'init', 'seibi_remove_comment_support', 99 );
 
 // -----------------------------------------------
-// 詳細ページを持たないカスタム投稿タイプのリダイレクト
-// briefing（学校説明会）と event（公開行事）は
-// 一覧ページのみ。詳細URLへのアクセスはアーカイブへリダイレクト。
-// -----------------------------------------------
-function seibi_redirect_no_single() {
-    $no_single_types = [ 'briefing', 'event' ];
-
-    if ( is_singular( $no_single_types ) ) {
-        $post_type   = get_post_type();
-        $archive_url = get_post_type_archive_link( $post_type );
-        if ( $archive_url ) {
-            wp_redirect( $archive_url, 301 );
-            exit;
-        }
-        wp_redirect( home_url( '/' ), 301 );
-        exit;
-    }
-}
-add_action( 'template_redirect', 'seibi_redirect_no_single' );
 
 // -----------------------------------------------
 // 編集者の固定ページアクセス制限（児童募集要項のみ許可）

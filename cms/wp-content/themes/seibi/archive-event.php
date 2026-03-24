@@ -47,6 +47,8 @@ get_header(); ?>
             $event_period     = get_post_meta( get_the_ID(), 'event_period', true );
             $event_link_label = get_post_meta( get_the_ID(), 'event_link_label', true );
             $event_link_url   = get_post_meta( get_the_ID(), 'event_link_url', true ) ?: get_permalink();
+            $is_external      = ( strpos( $event_link_url, home_url() ) !== 0 );
+            $link_target      = $is_external ? ' target="_blank" rel="noopener noreferrer"' : '';
           ?>
           <div class="col-lg-6">
             <div class="event-box">
@@ -78,7 +80,7 @@ get_header(); ?>
               </dl>
               <?php if ( $event_link_url ) : ?>
               <div class="text-center mb-4">
-                <a class="btn-slide btn-s btn-pink" href="<?php echo esc_url( $event_link_url ); ?>">
+                <a class="btn-slide btn-s btn-pink" href="<?php echo esc_url( $event_link_url ); ?>"<?php echo $link_target; ?>>
                   <span class="text"><?php echo $event_link_label ? esc_html( $event_link_label ) : '詳細・参加予約はこちらから'; ?><span class="material-symbols-outlined">open_in_new</span></span>
                 </a>
               </div>

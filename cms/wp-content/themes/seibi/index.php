@@ -77,8 +77,31 @@ get_header(); ?>
               $post_type = get_post_type();
               $tag_class = ('briefing' === $post_type) ? 'bg-pink' : 'bg-orange';
               $tag_label = ('briefing' === $post_type) ? '説明会' : 'イベント';
+
+              // リンク先URL（カスタムフィールド → 空の場合はパーマリンク）
+              if ( 'briefing' === $post_type ) {
+                  $btype    = get_post_meta( get_the_ID(), 'briefing_type', true ) ?: 'school';
+                  $url_key  = ( 'outside' === $btype ) ? 'outside_button_url' : 'briefing_button_url';
+                  $card_url = get_post_meta( get_the_ID(), $url_key, true ) ?: get_the_permalink();
+              } else {
+                  $card_url = get_post_meta( get_the_ID(), 'event_link_url', true ) ?: get_the_permalink();
+              }
+
+              // 要予約フラグ
+              $res_key     = ( 'briefing' === $post_type ) ? 'briefing_reservation_required' : 'event_reservation_required';
+              $is_required = get_post_meta( get_the_ID(), $res_key, true ) === '1';
+              $res_label   = $is_required ? '要予約' : '予約不要';
+              if ( 'briefing' === $post_type ) {
+                  $res_period = $is_required ? get_post_meta( get_the_ID(), 'briefing_web_cancel_period', true ) : '';
+              } else {
+                  $res_period = get_post_meta( get_the_ID(), 'event_period', true );
+              }
+
+              // 外部リンク判定
+              $is_external = ( strpos( $card_url, home_url() ) !== 0 );
+              $link_target = $is_external ? ' target="_blank" rel="noopener noreferrer"' : '';
           ?>
-              <a href="<?php the_permalink(); ?>" class="info-card">
+              <a href="<?php echo esc_url($card_url); ?>"<?php echo $link_target; ?> class="info-card">
                 <div class="card-header">
                   <span class="info-tag <?php echo esc_attr($tag_class); ?>"><?php echo esc_html($tag_label); ?></span>
                   <h4 class="event-title"><?php the_title(); ?></h4>
@@ -86,6 +109,9 @@ get_header(); ?>
                 <div class="card-body">
                   <span class="material-symbols-outlined">calendar_month</span>
                   <span class="event-date"><?php echo get_the_date('Y年n月j日(D) H:i〜'); ?></span>
+                </div>
+                <div class="card-footer">
+                  <span class="info-tag bg-blue"><?php echo esc_html($res_label); ?></span><?php if ( $res_period ) echo esc_html($res_period); ?>
                 </div>
               </a>
           <?php

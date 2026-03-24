@@ -48,6 +48,13 @@ function seibi_briefing_meta_box_callback( $post ) {
         'outside_description' => '説明文',
     ];
     ?>
+    <div style="margin-bottom:12px; padding:8px 12px; background:#f0f6fc; border:1px solid #c3d9f0; border-radius:4px;">
+      <label style="font-size:13px; font-weight:bold;">
+        <input type="checkbox" name="briefing_reservation_required" value="1" <?php checked( get_post_meta( $post->ID, 'briefing_reservation_required', true ), '1' ); ?> style="margin-right:6px;" />
+        要予約（チェックなし = 予約不要）
+      </label>
+    </div>
+
     <div style="margin-bottom:16px; padding:12px; background:#f9f9f9; border:1px solid #ddd; border-radius:4px;">
       <strong>種別</strong>&nbsp;&nbsp;
       <label style="margin-right:16px;">
@@ -138,6 +145,9 @@ function seibi_briefing_meta_save( $post_id ) {
     if ( ! current_user_can( 'edit_post', $post_id ) ) {
         return;
     }
+
+    // 要予約フラグ
+    update_post_meta( $post_id, 'briefing_reservation_required', isset( $_POST['briefing_reservation_required'] ) ? '1' : '0' );
 
     // 種別
     $type = isset( $_POST['briefing_type'] ) && $_POST['briefing_type'] === 'outside' ? 'outside' : 'school';
@@ -460,6 +470,14 @@ function seibi_event_meta_box_callback( $post ) {
         'event_period'     => '予約期間',
         'event_link_label' => 'ボタンテキスト（省略時: 詳細・参加予約はこちらから）',
     ];
+    printf(
+        '<div style="margin-bottom:12px; padding:8px 12px; background:#f0f6fc; border:1px solid #c3d9f0; border-radius:4px;">'
+        . '<label style="font-size:13px; font-weight:bold;">'
+        . '<input type="checkbox" name="event_reservation_required" value="1"%s style="margin-right:6px;" />'
+        . '要予約（チェックなし = 予約不要）'
+        . '</label></div>',
+        checked( get_post_meta( $post->ID, 'event_reservation_required', true ), '1', false )
+    );
     echo '<table class="form-table"><tbody>';
     foreach ( $text_fields as $key => $label ) {
         $value = get_post_meta( $post->ID, $key, true );
@@ -502,5 +520,6 @@ function seibi_event_meta_save( $post_id ) {
         update_post_meta( $post_id, $key, sanitize_text_field( wp_unslash( $_POST[ $key ] ?? '' ) ) );
     }
     update_post_meta( $post_id, 'event_link_url', esc_url_raw( wp_unslash( $_POST['event_link_url'] ?? '' ) ) );
+    update_post_meta( $post_id, 'event_reservation_required', isset( $_POST['event_reservation_required'] ) ? '1' : '0' );
 }
 add_action( 'save_post_event', 'seibi_event_meta_save' );
