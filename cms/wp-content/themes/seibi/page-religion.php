@@ -50,7 +50,7 @@ get_header(); ?>
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10">
-          <h2>宗教の授業を通して目指すこと</h2>
+          <h2 class="col-12 sec-title-pink pink">宗教の授業を通して目指すこと</h2>
           <h3>星美では週2時間、宗教の授業を行っています。</h3>
           <div class="religion-text">
             <p class="gakunen-pill">1年生</p>

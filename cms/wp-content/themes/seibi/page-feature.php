@@ -1,27 +1,13 @@
 <?php
 /**
- * 星美クラスの教育 セクション親ページ
+ * 星美クラスの教育（リダイレクト）
  * URL: /feature/
- * Slug: feature
  *
- * このページ単独のコンテンツは存在しない。
- * 最初の子ページ（星美クラスの特色）へリダイレクトする。
- *
- * @package salesian
+ * @package seibi
  */
 
-$children = get_pages( [
-    'parent'      => get_the_ID(),
-    'sort_order'  => 'ASC',
-    'sort_column' => 'menu_order',
-    'number'      => 1,
-] );
-
-if ( $children ) {
-    wp_redirect( get_permalink( $children[0]->ID ), 301 );
+$first_child = get_page_by_path( 'feature/integrated-studies' );
+if ( $first_child ) {
+    wp_redirect( get_permalink( $first_child->ID ), 301 );
     exit;
 }
-
-// 子ページが見つからない場合はトップへ
-wp_redirect( home_url( '/' ), 301 );
-exit;

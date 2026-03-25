@@ -66,15 +66,13 @@
           <a href="#menu-education" class="nav-link" data-toggle="collapse" aria-expanded="false">星美クラスの教育 <span class="arrow">∨</span></a>
           <div class="collapse sub-menu-wrapper" id="menu-education" data-parent="#sidebarMenuList">
             <ul class="sub-menu-list">
-              <li><a href="<?php echo esc_url( home_url( '/feature/characteristics/' ) ); ?>" class="nav-link sub-link">星美クラスの特色</a></li>
               <li><a href="<?php echo esc_url( home_url( '/feature/religion/' ) ); ?>" class="nav-link sub-link">宗教教育</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/feature/english/' ) ); ?>" class="nav-link sub-link">6年間の英語教育</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/feature/international/' ) ); ?>" class="nav-link sub-link">国際理解教育</a></li>
+              <li><a href="<?php echo esc_url( home_url( '/feature/english/' ) ); ?>" class="nav-link sub-link">英語教育</a></li>
+              <li><a href="<?php echo esc_url( home_url( '/feature/integrated-studies/' ) ); ?>" class="nav-link sub-link">総合的な学習</a></li>
+              <li><a href="<?php echo esc_url( home_url( '/feature/stay/' ) ); ?>" class="nav-link sub-link">宿泊学習</a></li>
               <li><a href="<?php echo esc_url( home_url( '/feature/currciculum/' ) ); ?>" class="nav-link sub-link">教科教育</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/feature/assistenza/' ) ); ?>" class="nav-link sub-link">アシステンツァ･異学年交流</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/feature/barrierfree/' ) ); ?>" class="nav-link sub-link">バリアフリー教育</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/feature/stay/' ) ); ?>" class="nav-link sub-link">宿泊体験</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/feature/career/' ) ); ?>" class="nav-link sub-link">卒業後の進路</a></li>
+              <li><a href="<?php echo esc_url( home_url( '/feature/career/' ) ); ?>" class="nav-link sub-link">進学実績</a></li>
+              <li><a href="<?php echo esc_url( home_url( '/feature/assistenza/' ) ); ?>" class="nav-link sub-link">アシステンツァ</a></li>
             </ul>
           </div>
         </li>
@@ -85,10 +83,8 @@
             <ul class="sub-menu-list">
               <li><a href="<?php echo esc_url( home_url( '/life/daily/' ) ); ?>" class="nav-link sub-link">星美クラスの一日</a></li>
               <li><a href="<?php echo esc_url( home_url( '/life/year/' ) ); ?>" class="nav-link sub-link">年間行事</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/life/activity/' ) ); ?>" class="nav-link sub-link">委員会･クラブ活動</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/life/music-club/' ) ); ?>" class="nav-link sub-link">特別音楽クラブ</a></li>
+              <li><a href="<?php echo esc_url( home_url( '/life/activity/' ) ); ?>" class="nav-link sub-link">委員会・クラブ活動（特別音楽クラブ）</a></li>
               <li><a href="<?php echo esc_url( home_url( '/life/after-school/' ) ); ?>" class="nav-link sub-link">サレジアンアフタースクール</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/life/cooperation/' ) ); ?>" class="nav-link sub-link">家庭との連携･協力</a></li>
             </ul>
           </div>
         </li>

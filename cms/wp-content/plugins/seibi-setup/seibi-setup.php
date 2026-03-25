@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Seibi Setup
  * Description: 固定ページの一括作成・サイト初期設定を行うセットアップツール
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author: DELASOL
  */
 
@@ -100,23 +100,23 @@ function seibi_get_page_definitions(): array {
             'parent' => '',
         ],
         [
-            'title'  => '星美クラスの特色',
-            'slug'   => 'characteristics',
-            'parent' => 'feature',
-        ],
-        [
             'title'  => '宗教教育',
             'slug'   => 'religion',
             'parent' => 'feature',
         ],
         [
-            'title'  => '6年間の英語教育',
+            'title'  => '英語教育',
             'slug'   => 'english',
             'parent' => 'feature',
         ],
         [
-            'title'  => '国際理解教育',
-            'slug'   => 'international',
+            'title'  => '総合的な学習',
+            'slug'   => 'integrated-studies',
+            'parent' => 'feature',
+        ],
+        [
+            'title'  => '宿泊学習',
+            'slug'   => 'stay',
             'parent' => 'feature',
         ],
         [
@@ -125,23 +125,13 @@ function seibi_get_page_definitions(): array {
             'parent' => 'feature',
         ],
         [
-            'title'  => 'アシステンツァ・異学年交流',
-            'slug'   => 'assistenza',
-            'parent' => 'feature',
-        ],
-        [
-            'title'  => 'バリアフリー教育',
-            'slug'   => 'barrierfree',
-            'parent' => 'feature',
-        ],
-        [
-            'title'  => '宿泊体験',
-            'slug'   => 'stay',
-            'parent' => 'feature',
-        ],
-        [
-            'title'  => '卒業後の進路',
+            'title'  => '進学実績',
             'slug'   => 'career',
+            'parent' => 'feature',
+        ],
+        [
+            'title'  => 'アシステンツァ',
+            'slug'   => 'assistenza',
             'parent' => 'feature',
         ],
 
@@ -157,23 +147,13 @@ function seibi_get_page_definitions(): array {
             'parent' => 'life',
         ],
         [
-            'title'  => '委員会・クラブ活動',
+            'title'  => '委員会・クラブ活動（特別音楽クラブ）',
             'slug'   => 'activity',
-            'parent' => 'life',
-        ],
-        [
-            'title'  => '特別音楽クラブ',
-            'slug'   => 'music-club',
             'parent' => 'life',
         ],
         [
             'title'  => 'サレジアンアフタースクール',
             'slug'   => 'after-school',
-            'parent' => 'life',
-        ],
-        [
-            'title'  => '家庭との連携・協力',
-            'slug'   => 'cooperation',
             'parent' => 'life',
         ],
 
@@ -281,6 +261,32 @@ function seibi_create_pages(): array {
 }
 
 // -----------------------------------------------
+// 全固定ページ削除処理
+// -----------------------------------------------
+function seibi_delete_all_pages(): array {
+    $pages = get_posts( [
+        'post_type'      => 'page',
+        'post_status'    => [ 'publish', 'draft', 'private', 'trash' ],
+        'numberposts'    => -1,
+        'fields'         => 'ids',
+    ] );
+
+    $results = [];
+    foreach ( $pages as $id ) {
+        $title = get_the_title( $id );
+        $slug  = get_post_field( 'post_name', $id );
+        $del   = wp_delete_post( $id, true ); // true = 完全削除（ゴミ箱をスキップ）
+        $results[] = [
+            'status' => $del ? 'deleted' : 'error',
+            'id'     => $id,
+            'title'  => $title,
+            'slug'   => $slug,
+        ];
+    }
+    return $results;
+}
+
+// -----------------------------------------------
 // カテゴリー定義（タクソノミー別）
 // -----------------------------------------------
 function seibi_get_category_groups(): array {
@@ -367,6 +373,12 @@ function seibi_create_categories(): array {
 function seibi_setup_page() {
     $create_results   = null;
     $category_results = null;
+    $delete_results   = null;
+
+    // 全固定ページ削除
+    if ( isset( $_POST['seibi_delete_pages'] ) && check_admin_referer( 'seibi_setup' ) ) {
+        $delete_results = seibi_delete_all_pages();
+    }
 
     // 固定ページ作成
     if ( isset( $_POST['seibi_create_pages'] ) && check_admin_referer( 'seibi_setup' ) ) {
@@ -383,6 +395,33 @@ function seibi_setup_page() {
     ?>
     <div class="wrap">
         <h1>Seibi セットアップ</h1>
+
+        <?php if ( $delete_results !== null ) : ?>
+            <div class="notice notice-warning">
+                <p><?php echo count( $delete_results ); ?> 件の固定ページを削除しました。</p>
+            </div>
+            <table class="widefat striped" style="margin-bottom: 20px;">
+                <thead>
+                    <tr><th>状態</th><th>ID</th><th>スラッグ</th><th>ページタイトル</th></tr>
+                </thead>
+                <tbody>
+                    <?php foreach ( $delete_results as $r ) : ?>
+                        <tr>
+                            <td>
+                                <?php if ( $r['status'] === 'deleted' ) : ?>
+                                    <span style="color:green;">✓ 削除</span>
+                                <?php else : ?>
+                                    <span style="color:red;">✗ エラー</span>
+                                <?php endif; ?>
+                            </td>
+                            <td><?php echo esc_html( $r['id'] ); ?></td>
+                            <td><code><?php echo esc_html( $r['slug'] ); ?></code></td>
+                            <td><?php echo esc_html( $r['title'] ); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php endif; ?>
 
         <?php if ( $create_results !== null ) : ?>
             <div class="notice notice-success">
@@ -447,6 +486,23 @@ function seibi_setup_page() {
 
         <form method="post">
             <?php wp_nonce_field( 'seibi_setup' ); ?>
+
+            <h2>0. 固定ページの全削除</h2>
+            <p style="color:#b32d2e;"><strong>⚠ 注意:</strong> サイト内のすべての固定ページを完全に削除します（ゴミ箱をスキップ）。実行後は元に戻せません。</p>
+            <?php
+            $existing_page_count = wp_count_posts( 'page' );
+            $total = array_sum( (array) $existing_page_count );
+            ?>
+            <p>現在の固定ページ数: <strong><?php echo intval( $total ); ?> 件</strong></p>
+            <p>
+                <button type="submit" name="seibi_delete_pages" class="button button-large"
+                    style="background:#b32d2e;color:#fff;border-color:#8a1f1f;"
+                    onclick="return confirm('すべての固定ページを完全に削除します。よろしいですか？');">
+                    全固定ページを削除する
+                </button>
+            </p>
+
+            <hr>
 
             <h2>1. 固定ページの一括作成</h2>
             <p>サイトマップに基づいてすべての固定ページを作成します。既存のページはスキップされます。</p>
