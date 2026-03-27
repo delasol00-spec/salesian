@@ -333,7 +333,6 @@ a:hover {
   line-height: 1.4;
 }
 
-
 .info-card:hover {
   background: rgba(255, 255, 255, 0.95);
   transform: translateY(-2px);
@@ -1309,7 +1308,6 @@ a:hover {
 .sitemap-links a.active:hover {
   color: #f67088;
   padding-left: 7px;
-  
 }
 
 .sitemap-links a:hover {
@@ -1691,6 +1689,9 @@ a:hover {
   padding: 0;
 }
 
+/* =================================================
+  タイトル
+  ================================================= */
 .title-s {
   font-weight: bold;
   color: #f67088;
@@ -1730,6 +1731,19 @@ a:hover {
   .pagetop-container .separator {
     width: 70%;
   }
+}
+
+.title-box-s {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.title-box-s h2 {
+  margin-bottom: 20px;
+}
+
+.title-box-s h3 {
+  font-size: 1.1rem;
 }
 
 /* =================================================
@@ -2018,6 +2032,10 @@ p small {
   font-size: 0.875rem;
   line-height: 1.5;
   border-radius: 100vh;
+}
+
+.btn-sm span {
+  font-size: 0.7rem;
 }
 
 .btn-mini {

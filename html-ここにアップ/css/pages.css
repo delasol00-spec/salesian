@@ -191,7 +191,7 @@
 
 h3.sub-title {
   font-size: 1.3rem;
-  font-family: "Noto Serif JP", serif; /* フォントを太い明朝体に指定 */
+  font-family: "Noto Serif JP", serif;
   font-weight: 700;
   /*background: #FEF0F3;*/
   background: #fff;
@@ -590,140 +590,201 @@ tr th {
 /* ----------------------
    英語教育
   ---------------------- */
-  .english-text p {
-    color: #fff;
-    font-size: 0.95rem;
-    line-height: 1.6;
-  }
-  
-  .english-text p span {
-    font-size: 1rem;
-    font-weight: bold;
-  }
+.english-text p {
+  color: #fff;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
 
-  /* ----------------------
+.english-text p span {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* ----------------------
    宿泊学習
   ---------------------- */
-  .stay-box {
-    background: #fff;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
-    margin-bottom: 30px;
-  }
+.stay-box {
+  background: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
+}
 
-  .stay-box h3 {
-    font-size: 1.1rem;
-    background: #f67088;
-    font-weight: bold;
-    color: #fff;
-    text-align: center;
-    padding: 10px 0 8px;
-    margin-bottom: 0;
-  }
+.stay-box h3 {
+  font-size: 1.1rem;
+  background: #f67088;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0 8px;
+  margin-bottom: 0;
+}
 
-  .stay-box img {
-    margin-bottom: 5px;
-  }
+.stay-box img {
+  margin-bottom: 5px;
+}
 
-  .stay-box p {
-    font-size: 1rem;
-    line-height: 1.5;
-    margin-bottom: 0;
-    padding: 10px 20px;
-  }
+.stay-box p {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 0;
+  padding: 10px 20px;
+}
 
- /* ----------------------
+/* ----------------------
    教科教育
   ---------------------- */
-  
-  .curriculum {
-    padding: 70px 0;
-  }
-  .curriculum h3 {
-    font-family: "Noto Serif JP", serif;
-    font-weight: 400;
-    font-size: 3rem;
-    color: #005297;
-    text-align: center;
-    letter-spacing: 1rem;
-  }
 
-  .curriculum h4 {
-    font-family: "Noto Serif JP", serif;
-    font-weight: 400;
-    font-size: 1.2rem;
-    color: #005297;
-    border-left: 3px solid #f67088;
-    padding-left: 10px;
-    margin-bottom: 10px;
-  }
-
-  .curriculum p {
-    margin-bottom: 30px;
-    font-size: 1rem;
-    line-height: 2;
-  }
-
-  .curriculum-box {
-    padding: 50px;
-  }
-
- /* ----------------------
-   パララックス
-  ---------------------- */ 
-  .page-parallax {
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-    overflow: hidden;
-  }
-  
-  .page-parallax-image {
-    position: relative;
-    min-height: 300px;
-    padding: 80px 0;
-  }
-  
-  .page-parallax-image::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    pointer-events: none;
+.curriculum {
+  padding: 70px 0;
 }
-  
-  .page-parallax h2 {
-    color: #f67088;
-    font-family: "Noto Serif JP", serif; /* フォントを太い明朝体に指定 */
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  
-  .page-parallax h3 {
-    color: #fff;
-    font-weight: bold;
-    font-size: 1.2rem;
-    text-align: center;
-    margin-bottom: 30px;
-  }
+.curriculum h3 {
+  font-family: "Noto Serif JP", serif;
+  font-weight: 400;
+  font-size: 3rem;
+  color: #005297;
+  text-align: center;
+  letter-spacing: 1rem;
+}
 
-  .page-parallax p {
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
-  }
+.curriculum h4 {
+  font-family: "Noto Serif JP", serif;
+  font-weight: 400;
+  font-size: 1.2rem;
+  color: #005297;
+  border-left: 3px solid #f67088;
+  padding-left: 10px;
+  margin-bottom: 10px;
+}
 
-  .religion-para-img {
-    background: url("../feature/religion-img/02.webp") left center / cover no-repeat fixed;
-  }
+.curriculum p {
+  margin-bottom: 30px;
+  font-size: 1rem;
+  line-height: 2;
+}
 
-  .english-para-img {
-    background: url("../feature/english-img/para.webp") left center / cover no-repeat fixed;
-  }
+.curriculum-box {
+  padding: 50px;
+}
 
-  .general-para-img {
-    background: url("../feature/general-img/para.webp") left center / cover no-repeat fixed;
+/* ----------------------
+   進学実績
+  ---------------------- */
+
+/* ----------------------
+   パララックス
+  ---------------------- */
+.page-parallax {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  overflow: hidden;
+}
+
+.page-parallax-image {
+  position: relative;
+  min-height: 300px;
+  padding: 80px 0;
+}
+
+.page-parallax-image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+.page-parallax h2 {
+  color: #f67088;
+  font-family: "Noto Serif JP", serif;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 30px;
+  /*-webkit-text-stroke: 2px rgba(255, 255, 255, 1);
+  paint-order: stroke;*/
+}
+
+.page-parallax h3 {
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.page-parallax p {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+}
+
+.religion-para-img {
+  background: url("../feature/religion-img/02.webp") left center / cover no-repeat fixed;
+}
+
+.english-para-img {
+  background: url("../feature/english-img/para.webp") left center / cover no-repeat fixed;
+}
+
+.general-para-img {
+  background: url("../feature/general-img/para.webp") left center / cover no-repeat fixed;
+}
+
+.assistenza-para-img {
+  background: url("../feature/assistenza-img/para.webp") left center / cover no-repeat fixed;
+}
+
+/* ----------------------
+   進学実績
+---------------------- */
+.career-result-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: 3rem;
+  row-gap: 0;
+}
+
+@media (min-width: 768px) {
+  .career-result-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
+}
+
+@media (min-width: 992px) {
+  .career-result-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.career-result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.45rem 0;
+  border-bottom: 1px dotted #ccc;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.career-result-item span:last-child {
+  flex-shrink: 0;
+  margin-left: 0.5rem;
+  text-align: right;
+}
+
+/* ----------------------
+   アシステンツァ
+---------------------- */
+h3.assistenza-title {
+  font-size: 1.2rem;
+  font-family: "Noto Serif JP", serif;
+  font-weight: 700;
+  color: #f67088;
+  margin-bottom: 10px;
+  margin-top: 15px;
+  text-align: left;
+}
 
 /* ----------------------
    レスポンシブ
