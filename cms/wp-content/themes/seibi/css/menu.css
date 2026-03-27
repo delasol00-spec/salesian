@@ -37,7 +37,7 @@
 
 .sidebar-logo {
   display: block !important;
-  height: 46px !important; 
+  height: 46px !important;
   width: auto !important;
   margin: 0 auto; /* 中央に寄せる */
 }
@@ -317,21 +317,33 @@ body.menu-open #sidebar-overlay {
   z-index: 2000;
   transform: translateX(0);
   transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
-  overflow-y: auto; /* コンテンツが溢れたらスクロールさせる */
+  overflow: hidden; /* スクロールは中身（.sidebar-container）側で行う */
+}
+
+/* --- サイドバーのスクロールバーを細くカスタマイズ --- */
+#sidebarMenu .sidebar-container {
+  height: 100%;
+  overflow-y: auto;
+  padding-right: 0;
   scrollbar-width: thin; /* Firefox用: 細く */
   scrollbar-color: rgba(255, 255, 255, 0.4) transparent; /* Firefox用 */
 }
 
+/* サイドバーが隠れてピンク帯が見えている時だけ、帯の下に潜り込まないよう余白を確保 */
+#sidebarMenu.is-hidden .sidebar-container {
+  padding-right: 55px;
+}
+
 /* --- サイドバーのスクロールバーを細くカスタマイズ (Webkit系) --- */
-#sidebarMenu::-webkit-scrollbar {
+#sidebarMenu .sidebar-container::-webkit-scrollbar {
   width: 5px; /* 幅を5pxに設定（かなり細め） */
 }
 
-#sidebarMenu::-webkit-scrollbar-track {
+#sidebarMenu .sidebar-container::-webkit-scrollbar-track {
   background: transparent; /* 背景は透明 */
 }
 
-#sidebarMenu::-webkit-scrollbar-thumb {
+#sidebarMenu .sidebar-container::-webkit-scrollbar-thumb {
   background-color: rgba(255, 255, 255, 0.4); /* 半透明の白 */
   border-radius: 10px; /* 丸みをつける */
 }
@@ -487,6 +499,7 @@ body.menu-open #sidebar-overlay {
     max-width: 85%;
     height: 100vh;
     background-color: rgba(0, 79, 153, 0.98) !important;
+    overflow-y: auto; /* モバイルでは中身がちゃんと見えるようスクロールさせる */
 
     /* [修正ポイント3] z-indexを幕(1999)より高く、ボタン(2100)より低く設定 */
     z-index: 2000 !important;
@@ -498,6 +511,19 @@ body.menu-open #sidebar-overlay {
   /* メニューが開いた時の状態 */
   #sidebarMenu.active {
     left: 0 !important;
+  }
+
+  /* 念のため、モバイル時は中身のテキストが確実に見えるようにする */
+  #sidebarMenu .sidebar-content {
+    position: relative;
+    z-index: 1;
+    color: #f9f8f6;
+  }
+
+  #sidebarMenu .menu-list .nav-link,
+  #sidebarMenu .menu-list .nav-link:hover,
+  #sidebarMenu .sub-menu-wrapper .nav-link.sub-link {
+    color: #f9f8f6 !important;
   }
 
   /* スマホではピンクの帯（取っ手）は絶対に出さない */
