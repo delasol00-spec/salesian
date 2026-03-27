@@ -658,6 +658,61 @@ tr th {
   background: url("../feature/general-img/para.webp") left center / cover no-repeat fixed;
 }
 
+.assistenza-para-img {
+  background: url("../feature/assistenza-img/para.webp") left center / cover no-repeat fixed;
+}
+
+/* ----------------------
+   進学実績
+---------------------- */
+.career-result-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: 3rem;
+  row-gap: 0;
+}
+
+@media (min-width: 768px) {
+  .career-result-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
+  .career-result-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.career-result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.45rem 0;
+  border-bottom: 1px dotted #ccc;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.career-result-item span:last-child {
+  flex-shrink: 0;
+  margin-left: 0.5rem;
+  text-align: right;
+}
+
+/* ----------------------
+   アシステンツァ
+---------------------- */
+h3.assistenza-title {
+  font-size: 1.2rem;
+  font-family: "Noto Serif JP", serif;
+  font-weight: 700;
+  color: #f67088;
+  margin-bottom: 10px;
+  margin-top: 15px;
+  text-align: left;
+}
+
 /* ----------------------
    宿泊学習
   ---------------------- */

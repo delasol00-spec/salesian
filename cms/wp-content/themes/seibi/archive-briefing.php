@@ -68,11 +68,15 @@ get_header(); ?>
               <?php endif; endforeach; ?>
               </p>
               <?php
-              $btn_text = get_post_meta( $id, 'briefing_button_text', true );
-              $btn_url  = get_post_meta( $id, 'briefing_button_url', true );
-              if ( $btn_text && $btn_url ) : ?>
-              <a class="btn-slide btn-m btn-pink" href="<?php echo esc_url( $btn_url ); ?>" target="_blank" rel="noopener noreferrer"><span class="text"><?php echo esc_html( $btn_text ); ?><span class="material-symbols-outlined">open_in_new</span></span></a>
-              <?php endif; ?>
+              $link_type = get_post_meta( $id, 'briefing_link_type', true ) ?: 'none';
+              if ( $link_type === 'detail' ) : ?>
+              <a class="btn-slide btn-m btn-pink" href="<?php echo esc_url( get_permalink() ); ?>"><span class="text">詳細・参加予約はこちらから</span></a>
+              <?php elseif ( $link_type === 'external' ) :
+                  $btn_label = get_post_meta( $id, 'briefing_link_label', true );
+                  $btn_url   = get_post_meta( $id, 'briefing_link_url', true );
+                  if ( $btn_label && $btn_url ) : ?>
+              <a class="btn-slide btn-m btn-pink" href="<?php echo esc_url( $btn_url ); ?>" target="_blank" rel="noopener noreferrer"><span class="text"><?php echo esc_html( $btn_label ); ?><span class="material-symbols-outlined">open_in_new</span></span></a>
+              <?php endif; endif; ?>
             </div>
           </div>
           <?php endwhile; ?>
@@ -126,11 +130,15 @@ get_header(); ?>
               <?php endif; endif; endforeach; ?>
               </p>
               <?php
-              $btn_text = get_post_meta( $id, 'outside_button_text', true );
-              $btn_url  = get_post_meta( $id, 'outside_button_url', true );
-              if ( $btn_text && $btn_url ) : ?>
-              <a class="btn-slide btn-m btn-pink" href="<?php echo esc_url( $btn_url ); ?>" target="_blank" rel="noopener noreferrer"><span class="text"><?php echo esc_html( $btn_text ); ?><span class="material-symbols-outlined">open_in_new</span></span></a>
-              <?php endif; ?>
+              $link_type = get_post_meta( $id, 'outside_link_type', true ) ?: 'none';
+              if ( $link_type === 'detail' ) : ?>
+              <a class="btn-slide btn-m btn-pink" href="<?php echo esc_url( get_permalink() ); ?>"><span class="text">詳細・参加予約はこちらから</span></a>
+              <?php elseif ( $link_type === 'external' ) :
+                  $btn_label = get_post_meta( $id, 'outside_link_label', true );
+                  $btn_url   = get_post_meta( $id, 'outside_link_url', true );
+                  if ( $btn_label && $btn_url ) : ?>
+              <a class="btn-slide btn-m btn-pink" href="<?php echo esc_url( $btn_url ); ?>" target="_blank" rel="noopener noreferrer"><span class="text"><?php echo esc_html( $btn_label ); ?><span class="material-symbols-outlined">open_in_new</span></span></a>
+              <?php endif; endif; ?>
             </div>
           </div>
           <?php endwhile; ?>

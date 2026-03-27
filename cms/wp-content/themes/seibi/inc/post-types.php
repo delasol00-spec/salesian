@@ -35,8 +35,8 @@ function seibi_register_post_types() {
             'edit_item'     => '学校説明会を編集',
         ],
         'public'       => true,
-        'has_archive'  => true,
-        'rewrite'      => [ 'slug' => 'admission/briefing' ],
+        'has_archive'  => 'admission/briefing',
+        'rewrite'      => [ 'slug' => 'briefing' ],
         'show_in_rest' => true,
         'menu_icon'    => 'dashicons-calendar-alt',
         'supports'     => [ 'title' ],
@@ -51,8 +51,8 @@ function seibi_register_post_types() {
             'edit_item'     => '公開行事を編集',
         ],
         'public'       => true,
-        'has_archive'  => true,
-        'rewrite'      => [ 'slug' => 'admission/event' ],
+        'has_archive'  => 'admission/event',
+        'rewrite'      => [ 'slug' => 'event' ],
         'show_in_rest' => true,
         'menu_icon'    => 'dashicons-calendar',
         'supports'     => [ 'title', 'thumbnail' ],
@@ -146,6 +146,8 @@ function seibi_custom_post_type_rewrite_rules() {
     $post_types = [
         'information' => 'information',
         'year'        => 'life/year',
+        'event'       => 'event',
+        'briefing'    => 'briefing',
     ];
 
     foreach ( $post_types as $post_type => $slug ) {
@@ -162,6 +164,8 @@ function seibi_post_type_link( $post_link, $post ) {
     $slugs = [
         'information' => 'information',
         'year'        => 'life/year',
+        'event'       => 'event',
+        'briefing'    => 'briefing',
     ];
 
     if ( ! isset( $slugs[ $post->post_type ] ) ) {
@@ -184,9 +188,9 @@ add_action( 'template_redirect', function () {
 } );
 
 function seibi_flush_post_type_rewrite_once() {
-    if ( get_option( 'seibi_post_id_rewrite_v1' ) !== '1' ) {
+    if ( get_option( 'seibi_post_id_rewrite_v3' ) !== '1' ) {
         flush_rewrite_rules();
-        update_option( 'seibi_post_id_rewrite_v1', '1' );
+        update_option( 'seibi_post_id_rewrite_v3', '1' );
     }
 }
 add_action( 'wp_loaded', 'seibi_flush_post_type_rewrite_once' );

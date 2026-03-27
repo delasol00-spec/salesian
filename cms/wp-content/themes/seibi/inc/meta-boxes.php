@@ -67,6 +67,11 @@ function seibi_briefing_meta_box_callback( $post ) {
       </label>
     </div>
 
+    <?php
+    $school_link_type  = get_post_meta( $post->ID, 'briefing_link_type', true ) ?: 'none';
+    $outside_link_type = get_post_meta( $post->ID, 'outside_link_type',  true ) ?: 'none';
+    ?>
+
     <div id="briefing-school-fields" style="<?php echo $type === 'school' ? '' : 'display:none;'; ?>">
       <table class="form-table"><tbody>
       <?php foreach ( $school_fields as $key => $label ) :
@@ -78,12 +83,33 @@ function seibi_briefing_meta_box_callback( $post ) {
       <?php endforeach; ?>
         <tr><td colspan="2"><hr style="margin:8px 0;" /></td></tr>
         <tr>
-          <th><label for="briefing_button_text">ボタンテキスト</label></th>
-          <td><input type="text" id="briefing_button_text" name="briefing_button_text" value="<?php echo esc_attr( get_post_meta( $post->ID, 'briefing_button_text', true ) ); ?>" class="widefat" /></td>
-        </tr>
-        <tr>
-          <th><label for="briefing_button_url">リンク先URL</label></th>
-          <td><input type="url" id="briefing_button_url" name="briefing_button_url" value="<?php echo esc_attr( get_post_meta( $post->ID, 'briefing_button_url', true ) ); ?>" class="widefat" placeholder="https://" /></td>
+          <th>ボタン・リンク</th>
+          <td>
+            <label style="display:block; margin-bottom:6px;">
+              <input type="radio" name="briefing_link_type" value="none" <?php checked( $school_link_type, 'none' ); ?> />
+              リンクなし
+            </label>
+            <label style="display:block; margin-bottom:6px;">
+              <input type="radio" name="briefing_link_type" value="detail" <?php checked( $school_link_type, 'detail' ); ?> />
+              詳細ページ（ボタン名:「詳細・参加予約はこちらから」）
+            </label>
+            <label style="display:block;">
+              <input type="radio" name="briefing_link_type" value="external" <?php checked( $school_link_type, 'external' ); ?> />
+              外部URL
+            </label>
+            <div id="briefing-link-external" style="<?php echo $school_link_type === 'external' ? '' : 'display:none;'; ?> margin-top:10px; padding:10px 12px; background:#f9f9f9; border:1px solid #ddd; border-radius:4px;">
+              <table class="form-table" style="margin:0;"><tbody>
+                <tr>
+                  <th style="width:120px;"><label for="briefing_link_label">ボタン名</label></th>
+                  <td><input type="text" id="briefing_link_label" name="briefing_link_label" value="<?php echo esc_attr( get_post_meta( $post->ID, 'briefing_link_label', true ) ); ?>" class="widefat" /></td>
+                </tr>
+                <tr>
+                  <th><label for="briefing_link_url">リンク先URL</label></th>
+                  <td><input type="url" id="briefing_link_url" name="briefing_link_url" value="<?php echo esc_attr( get_post_meta( $post->ID, 'briefing_link_url', true ) ); ?>" class="widefat" placeholder="https://" /></td>
+                </tr>
+              </tbody></table>
+            </div>
+          </td>
         </tr>
       </tbody></table>
     </div>
@@ -103,25 +129,63 @@ function seibi_briefing_meta_box_callback( $post ) {
       <?php endforeach; ?>
         <tr><td colspan="2"><hr style="margin:8px 0;" /></td></tr>
         <tr>
-          <th><label for="outside_button_text">ボタンテキスト</label></th>
-          <td><input type="text" id="outside_button_text" name="outside_button_text" value="<?php echo esc_attr( get_post_meta( $post->ID, 'outside_button_text', true ) ); ?>" class="widefat" /></td>
-        </tr>
-        <tr>
-          <th><label for="outside_button_url">リンク先URL</label></th>
-          <td><input type="url" id="outside_button_url" name="outside_button_url" value="<?php echo esc_attr( get_post_meta( $post->ID, 'outside_button_url', true ) ); ?>" class="widefat" placeholder="https://" /></td>
+          <th>ボタン・リンク</th>
+          <td>
+            <label style="display:block; margin-bottom:6px;">
+              <input type="radio" name="outside_link_type" value="none" <?php checked( $outside_link_type, 'none' ); ?> />
+              リンクなし
+            </label>
+            <label style="display:block; margin-bottom:6px;">
+              <input type="radio" name="outside_link_type" value="detail" <?php checked( $outside_link_type, 'detail' ); ?> />
+              詳細ページ（ボタン名:「詳細・参加予約はこちらから」）
+            </label>
+            <label style="display:block;">
+              <input type="radio" name="outside_link_type" value="external" <?php checked( $outside_link_type, 'external' ); ?> />
+              外部URL
+            </label>
+            <div id="outside-link-external" style="<?php echo $outside_link_type === 'external' ? '' : 'display:none;'; ?> margin-top:10px; padding:10px 12px; background:#f9f9f9; border:1px solid #ddd; border-radius:4px;">
+              <table class="form-table" style="margin:0;"><tbody>
+                <tr>
+                  <th style="width:120px;"><label for="outside_link_label">ボタン名</label></th>
+                  <td><input type="text" id="outside_link_label" name="outside_link_label" value="<?php echo esc_attr( get_post_meta( $post->ID, 'outside_link_label', true ) ); ?>" class="widefat" /></td>
+                </tr>
+                <tr>
+                  <th><label for="outside_link_url">リンク先URL</label></th>
+                  <td><input type="url" id="outside_link_url" name="outside_link_url" value="<?php echo esc_attr( get_post_meta( $post->ID, 'outside_link_url', true ) ); ?>" class="widefat" placeholder="https://" /></td>
+                </tr>
+              </tbody></table>
+            </div>
+          </td>
         </tr>
       </tbody></table>
     </div>
 
     <script>
     (function() {
-        var radios = document.querySelectorAll('input[name="briefing_type"]');
-        var schoolDiv  = document.getElementById('briefing-school-fields');
-        var outsideDiv = document.getElementById('briefing-outside-fields');
-        radios.forEach(function(radio) {
+        // 種別（学校説明会 / 学外説明会）切り替え
+        var typeRadios  = document.querySelectorAll('input[name="briefing_type"]');
+        var schoolDiv   = document.getElementById('briefing-school-fields');
+        var outsideDiv  = document.getElementById('briefing-outside-fields');
+        typeRadios.forEach(function(radio) {
             radio.addEventListener('change', function() {
                 schoolDiv.style.display  = this.value === 'school'  ? '' : 'none';
                 outsideDiv.style.display = this.value === 'outside' ? '' : 'none';
+            });
+        });
+
+        // リンクパターン切り替え（学校説明会）
+        document.querySelectorAll('input[name="briefing_link_type"]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                document.getElementById('briefing-link-external').style.display =
+                    this.value === 'external' ? '' : 'none';
+            });
+        });
+
+        // リンクパターン切り替え（学外説明会）
+        document.querySelectorAll('input[name="outside_link_type"]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                document.getElementById('outside-link-external').style.display =
+                    this.value === 'external' ? '' : 'none';
             });
         });
     })();
@@ -154,30 +218,38 @@ function seibi_briefing_meta_save( $post_id ) {
     update_post_meta( $post_id, 'briefing_type', $type );
 
     // 学校説明会フィールド
-    $school_fields = [
+    $school_text_fields = [
         'briefing_datetime',
         'briefing_target',
         'briefing_reception',
         'briefing_session',
         'briefing_web_cancel_period',
-        'briefing_button_text',
-        'briefing_button_url',
+        'briefing_link_label',
     ];
-    foreach ( $school_fields as $key ) {
+    foreach ( $school_text_fields as $key ) {
         update_post_meta( $post_id, $key, sanitize_text_field( wp_unslash( $_POST[ $key ] ?? '' ) ) );
     }
+    $briefing_link_type = in_array( $_POST['briefing_link_type'] ?? '', [ 'none', 'detail', 'external' ], true )
+        ? $_POST['briefing_link_type']
+        : 'none';
+    update_post_meta( $post_id, 'briefing_link_type', $briefing_link_type );
+    update_post_meta( $post_id, 'briefing_link_url', esc_url_raw( wp_unslash( $_POST['briefing_link_url'] ?? '' ) ) );
 
     // 学外説明会フィールド
-    $outside_fields = [
+    $outside_text_fields = [
         'outside_datetime',
         'outside_venue',
         'outside_time',
-        'outside_button_text',
-        'outside_button_url',
+        'outside_link_label',
     ];
-    foreach ( $outside_fields as $key ) {
+    foreach ( $outside_text_fields as $key ) {
         update_post_meta( $post_id, $key, sanitize_text_field( wp_unslash( $_POST[ $key ] ?? '' ) ) );
     }
+    $outside_link_type = in_array( $_POST['outside_link_type'] ?? '', [ 'none', 'detail', 'external' ], true )
+        ? $_POST['outside_link_type']
+        : 'none';
+    update_post_meta( $post_id, 'outside_link_type', $outside_link_type );
+    update_post_meta( $post_id, 'outside_link_url', esc_url_raw( wp_unslash( $_POST['outside_link_url'] ?? '' ) ) );
     update_post_meta( $post_id, 'outside_description', sanitize_textarea_field( wp_unslash( $_POST['outside_description'] ?? '' ) ) );
 }
 add_action( 'save_post_briefing', 'seibi_briefing_meta_save' );
@@ -463,13 +535,13 @@ function seibi_event_meta_box_callback( $post ) {
     wp_nonce_field( 'seibi_event_meta_save', 'seibi_event_meta_nonce' );
 
     $text_fields = [
-        'event_date'       => '日時',
-        'event_place'      => '場所',
-        'event_target'     => '参加対象',
-        'event_method'     => '参加方法',
-        'event_period'     => '予約期間',
-        'event_link_label' => 'ボタンテキスト（省略時: 詳細・参加予約はこちらから）',
+        'event_date'   => '日時',
+        'event_place'  => '場所',
+        'event_target' => '参加対象',
+        'event_method' => '参加方法',
+        'event_period' => '予約期間',
     ];
+    $event_link_type = get_post_meta( $post->ID, 'event_link_type', true ) ?: 'none';
     printf(
         '<div style="margin-bottom:12px; padding:8px 12px; background:#f0f6fc; border:1px solid #c3d9f0; border-radius:4px;">'
         . '<label style="font-size:13px; font-weight:bold;">'
@@ -489,12 +561,47 @@ function seibi_event_meta_box_callback( $post ) {
             esc_attr( $value )
         );
     }
-    $link_url = get_post_meta( $post->ID, 'event_link_url', true );
-    printf(
-        '<tr><th style="width:260px;"><label for="event_link_url">リンク先URL（省略時: 投稿詳細ページ）</label></th>'
-        . '<td><input type="url" id="event_link_url" name="event_link_url" value="%s" class="widefat" placeholder="https://" /></td></tr>',
-        esc_attr( $link_url )
-    );
+    ?>
+    <tr>
+      <th>ボタン・リンク</th>
+      <td>
+        <label style="display:block; margin-bottom:6px;">
+          <input type="radio" name="event_link_type" value="none" <?php checked( $event_link_type, 'none' ); ?> />
+          リンクなし
+        </label>
+        <label style="display:block; margin-bottom:6px;">
+          <input type="radio" name="event_link_type" value="detail" <?php checked( $event_link_type, 'detail' ); ?> />
+          詳細ページ（ボタン名:「詳細・参加予約はこちらから」）
+        </label>
+        <label style="display:block;">
+          <input type="radio" name="event_link_type" value="external" <?php checked( $event_link_type, 'external' ); ?> />
+          外部URL
+        </label>
+        <div id="event-link-external" style="<?php echo $event_link_type === 'external' ? '' : 'display:none;'; ?> margin-top:10px; padding:10px 12px; background:#f9f9f9; border:1px solid #ddd; border-radius:4px;">
+          <table class="form-table" style="margin:0;"><tbody>
+            <tr>
+              <th style="width:120px;"><label for="event_link_label">ボタン名</label></th>
+              <td><input type="text" id="event_link_label" name="event_link_label" value="<?php echo esc_attr( get_post_meta( $post->ID, 'event_link_label', true ) ); ?>" class="widefat" /></td>
+            </tr>
+            <tr>
+              <th><label for="event_link_url">リンク先URL</label></th>
+              <td><input type="url" id="event_link_url" name="event_link_url" value="<?php echo esc_attr( get_post_meta( $post->ID, 'event_link_url', true ) ); ?>" class="widefat" placeholder="https://" /></td>
+            </tr>
+          </tbody></table>
+        </div>
+      </td>
+    </tr>
+    <script>
+    (function() {
+        document.querySelectorAll('input[name="event_link_type"]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                document.getElementById('event-link-external').style.display =
+                    this.value === 'external' ? '' : 'none';
+            });
+        });
+    })();
+    </script>
+    <?php
     echo '</tbody></table>';
 }
 
@@ -519,6 +626,10 @@ function seibi_event_meta_save( $post_id ) {
     foreach ( $text_fields as $key ) {
         update_post_meta( $post_id, $key, sanitize_text_field( wp_unslash( $_POST[ $key ] ?? '' ) ) );
     }
+    $event_link_type = in_array( $_POST['event_link_type'] ?? '', [ 'none', 'detail', 'external' ], true )
+        ? $_POST['event_link_type']
+        : 'none';
+    update_post_meta( $post_id, 'event_link_type', $event_link_type );
     update_post_meta( $post_id, 'event_link_url', esc_url_raw( wp_unslash( $_POST['event_link_url'] ?? '' ) ) );
     update_post_meta( $post_id, 'event_reservation_required', isset( $_POST['event_reservation_required'] ) ? '1' : '0' );
 }
