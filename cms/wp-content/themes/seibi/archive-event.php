@@ -40,15 +40,12 @@ get_header(); ?>
         if ( $event_query->have_posts() ) : ?>
         <div class="row">
           <?php while ( $event_query->have_posts() ) : $event_query->the_post();
-            $event_date       = get_post_meta( get_the_ID(), 'event_date', true );
-            $event_place      = get_post_meta( get_the_ID(), 'event_place', true );
-            $event_target     = get_post_meta( get_the_ID(), 'event_target', true );
-            $event_method     = get_post_meta( get_the_ID(), 'event_method', true );
-            $event_period     = get_post_meta( get_the_ID(), 'event_period', true );
-            $event_link_label = get_post_meta( get_the_ID(), 'event_link_label', true );
-            $event_link_url   = get_post_meta( get_the_ID(), 'event_link_url', true ) ?: get_permalink();
-            $is_external      = ( strpos( $event_link_url, home_url() ) !== 0 );
-            $link_target      = $is_external ? ' target="_blank" rel="noopener noreferrer"' : '';
+            $event_date      = get_post_meta( get_the_ID(), 'event_date', true );
+            $event_place     = get_post_meta( get_the_ID(), 'event_place', true );
+            $event_target    = get_post_meta( get_the_ID(), 'event_target', true );
+            $event_method    = get_post_meta( get_the_ID(), 'event_method', true );
+            $event_period    = get_post_meta( get_the_ID(), 'event_period', true );
+            $event_link_type = get_post_meta( get_the_ID(), 'event_link_type', true ) ?: 'none';
           ?>
           <div class="col-lg-6">
             <div class="event-box">
@@ -78,13 +75,22 @@ get_header(); ?>
                 <dt><?php echo esc_html( $event_period ); ?></dt>
                 <?php endif; ?>
               </dl>
-              <?php if ( $event_link_url ) : ?>
+              <?php if ( $event_link_type === 'detail' ) : ?>
               <div class="text-center mb-4">
-                <a class="btn-slide btn-s btn-pink" href="<?php echo esc_url( $event_link_url ); ?>"<?php echo $link_target; ?>>
-                  <span class="text"><?php echo $event_link_label ? esc_html( $event_link_label ) : '詳細・参加予約はこちらから'; ?><span class="material-symbols-outlined">open_in_new</span></span>
+                <a class="btn-slide btn-s btn-pink" href="<?php echo esc_url( get_permalink() ); ?>">
+                  <span class="text">詳細・参加予約はこちらから</span>
                 </a>
               </div>
-              <?php endif; ?>
+              <?php elseif ( $event_link_type === 'external' ) :
+                $btn_label = get_post_meta( get_the_ID(), 'event_link_label', true );
+                $btn_url   = get_post_meta( get_the_ID(), 'event_link_url', true );
+                if ( $btn_label && $btn_url ) : ?>
+              <div class="text-center mb-4">
+                <a class="btn-slide btn-s btn-pink" href="<?php echo esc_url( $btn_url ); ?>" target="_blank" rel="noopener noreferrer">
+                  <span class="text"><?php echo esc_html( $btn_label ); ?><span class="material-symbols-outlined">open_in_new</span></span>
+                </a>
+              </div>
+              <?php endif; endif; ?>
             </div>
           </div>
           <?php endwhile; ?>

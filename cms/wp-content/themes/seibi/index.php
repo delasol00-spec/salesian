@@ -78,14 +78,33 @@ get_header(); ?>
               $tag_class = ('briefing' === $post_type) ? 'bg-pink' : 'bg-orange';
               $tag_label = ('briefing' === $post_type) ? '説明会' : 'イベント';
 
-              // リンク先URL（カスタムフィールド → 空の場合はパーマリンク）
+              // リンク先URL・外部リンク判定
+              $card_url    = '';
+              $is_external = false;
               if ( 'briefing' === $post_type ) {
-                  $btype    = get_post_meta( get_the_ID(), 'briefing_type', true ) ?: 'school';
-                  $url_key  = ( 'outside' === $btype ) ? 'outside_button_url' : 'briefing_button_url';
-                  $card_url = get_post_meta( get_the_ID(), $url_key, true ) ?: get_the_permalink();
+                  $btype     = get_post_meta( get_the_ID(), 'briefing_type', true ) ?: 'school';
+                  $type_key  = ( 'outside' === $btype ) ? 'outside_link_type' : 'briefing_link_type';
+                  $url_key   = ( 'outside' === $btype ) ? 'outside_link_url'  : 'briefing_link_url';
+                  $link_type = get_post_meta( get_the_ID(), $type_key, true ) ?: 'none';
+                  if ( $link_type === 'detail' ) {
+                      $card_url = get_the_permalink();
+                  } elseif ( $link_type === 'external' ) {
+                      $card_url    = get_post_meta( get_the_ID(), $url_key, true );
+                      $is_external = true;
+                  }
+                  // 'none' のときは $card_url = '' のままにする
               } else {
-                  $card_url = get_post_meta( get_the_ID(), 'event_link_url', true ) ?: get_the_permalink();
+                  $ev_link_type = get_post_meta( get_the_ID(), 'event_link_type', true ) ?: 'none';
+                  if ( $ev_link_type === 'detail' ) {
+                      $card_url    = get_the_permalink();
+                      $is_external = false;
+                  } elseif ( $ev_link_type === 'external' ) {
+                      $card_url    = get_post_meta( get_the_ID(), 'event_link_url', true );
+                      $is_external = true;
+                  }
+                  // 'none' のときは $card_url = '' のままにする
               }
+              $link_target = $is_external ? ' target="_blank" rel="noopener noreferrer"' : '';
 
               // 要予約フラグ
               $res_key     = ( 'briefing' === $post_type ) ? 'briefing_reservation_required' : 'event_reservation_required';
@@ -96,12 +115,12 @@ get_header(); ?>
               } else {
                   $res_period = get_post_meta( get_the_ID(), 'event_period', true );
               }
-
-              // 外部リンク判定
-              $is_external = ( strpos( $card_url, home_url() ) !== 0 );
-              $link_target = $is_external ? ' target="_blank" rel="noopener noreferrer"' : '';
           ?>
+              <?php if ( $card_url ) : ?>
               <a href="<?php echo esc_url($card_url); ?>"<?php echo $link_target; ?> class="info-card">
+              <?php else : ?>
+              <div class="info-card">
+              <?php endif; ?>
                 <div class="card-header">
                   <span class="info-tag <?php echo esc_attr($tag_class); ?>"><?php echo esc_html($tag_label); ?></span>
                   <h4 class="event-title"><?php the_title(); ?></h4>
@@ -113,7 +132,11 @@ get_header(); ?>
                 <div class="card-footer">
                   <span class="info-tag bg-blue"><?php echo esc_html($res_label); ?></span><?php if ( $res_period ) echo esc_html($res_period); ?>
                 </div>
+              <?php if ( $card_url ) : ?>
               </a>
+              <?php else : ?>
+              </div>
+              <?php endif; ?>
           <?php
             endwhile;
             wp_reset_postdata();
