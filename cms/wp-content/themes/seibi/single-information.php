@@ -41,7 +41,7 @@ get_header(); ?>
             $cat_class = isset( $bg_map[ $cat_slug ] ) ? $bg_map[ $cat_slug ] : 'bg-blue';
             ?>
             <div class="d-flex align-items-center mb-2">
-              <span class="news-date mr-3"><?php echo get_the_date( 'Y.m.d' ); ?></span>
+              <span class="news-date mr-3"><?php echo esc_html( get_the_date( 'Y.m.d' ) ); ?></span>
               <?php if ( $cat_label ) : ?>
               <span class="news-category <?php echo esc_attr( $cat_class ); ?>"><?php echo $cat_label; ?></span>
               <?php endif; ?>

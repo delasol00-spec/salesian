@@ -127,7 +127,7 @@ get_header(); ?>
                 </div>
                 <div class="card-body">
                   <span class="material-symbols-outlined">calendar_month</span>
-                  <span class="event-date"><?php echo get_the_date('Y年n月j日(D) H:i〜'); ?></span>
+                  <span class="event-date"><?php echo esc_html( get_the_date('Y年n月j日(D) H:i〜') ); ?></span>
                 </div>
                 <div class="card-footer">
                   <span class="info-tag bg-blue"><?php echo esc_html($res_label); ?></span><?php if ( $res_period ) echo esc_html($res_period); ?>
@@ -190,7 +190,7 @@ get_header(); ?>
         <article class="news-card">
           <a href="<?php the_permalink(); ?>" class="news-card-link">
             <div class="news-card-header">
-              <span class="news-date"><?php echo get_the_date('Y.m.d'); ?></span>
+              <span class="news-date"><?php echo esc_html( get_the_date('Y.m.d') ); ?></span>
               <?php if ($cat_label) : ?>
                 <span class="news-category <?php echo esc_attr($cat_class); ?>"><?php echo $cat_label; ?></span>
               <?php endif; ?>

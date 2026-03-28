@@ -6,6 +6,12 @@ Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains
 Header always set X-Frame-Options "SAMEORIGIN"
 Header always set X-Content-Type-Options "nosniff"
 Header always set X-XSS-Protection "1; mode=block"
+# ----------------------------------------------------------------------
+# CSP（Content-Security-Policy）— Report-Only モード
+# ブラウザの DevTools > Console で違反ログを確認後、問題なければ
+# Content-Security-Policy-Report-Only → Content-Security-Policy に書き換える
+# ----------------------------------------------------------------------
+Header always set Content-Security-Policy-Report-Only "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.google.com https://www.googletagmanager.com; worker-src 'self' blob:; object-src 'none'"
 </IfModule>
 
 # BEGIN WordPress
