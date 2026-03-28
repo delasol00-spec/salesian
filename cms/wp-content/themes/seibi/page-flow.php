@@ -22,7 +22,7 @@ get_header(); ?>
             <p>４月から９月の３回実施される学校説明会にご参加ください。
               学校説明会では、入試に関する説明の他、星美学園小学校の特徴や取り組みなどを紹介いたします。</p>
             <div class="btn-group d-flex justify-content-end w-100">
-              <a href="<?php echo esc_url( home_url( '/admission/event/' ) ); ?>" class="btn-slide btn-mini btn-pink btn-right">学校説明会 <span class="material-symbols-outlined"> keyboard_double_arrow_right </span></a>
+              <a href="<?php echo esc_url( home_url( '/admission/briefing/' ) ); ?>" class="btn-slide btn-mini btn-pink btn-right">学校説明会 <span class="material-symbols-outlined"> keyboard_double_arrow_right </span></a>
             </div>
           </div>
         </div>
