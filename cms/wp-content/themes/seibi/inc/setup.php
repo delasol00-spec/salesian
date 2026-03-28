@@ -56,3 +56,28 @@ function seibi_set_permalink_structure() {
     }
 }
 add_action( 'after_setup_theme', 'seibi_set_permalink_structure' );
+
+// -----------------------------------------------
+// セクション親ページ: 最初の子ページへリダイレクト
+// -----------------------------------------------
+/**
+ * 現在のページの最初の子ページへ 301 リダイレクトする。
+ * 子ページが存在しない場合はトップページへ。
+ * page-about.php / page-admission.php / page-life.php から呼び出す。
+ */
+function seibi_redirect_to_first_child() {
+    $children = get_pages( [
+        'parent'      => get_the_ID(),
+        'sort_order'  => 'ASC',
+        'sort_column' => 'menu_order',
+        'number'      => 1,
+    ] );
+
+    if ( $children ) {
+        wp_redirect( get_permalink( $children[0]->ID ), 301 );
+        exit;
+    }
+
+    wp_redirect( home_url( '/' ), 301 );
+    exit;
+}

@@ -8,17 +8,7 @@
 
 get_header(); ?>
 
-<div class="container-fluid p-0">
-  <main class="sub-page-view">
-    <div class="sub-hero">
-      <img src="<?php echo get_template_directory_uri(); ?>/img/seibi.webp" alt="" class="sub-hero-img" />
-    </div>
-    <section class="page-title">
-      <h1><?php the_title(); ?></h1>
-      <div class="inner-border"></div>
-    </section>
-  </main>
-</div>
+<?php get_template_part( 'template-parts/page-hero', null, [ 'hero_img' => 'img/seibi.webp' ] ); ?>
 
 <section class="p-70-70">
   <div class="container">

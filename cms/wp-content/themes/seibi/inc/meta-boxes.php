@@ -9,6 +9,34 @@
  */
 
 // -----------------------------------------------
+// 共通: メタボックス nonce 検証
+// -----------------------------------------------
+/**
+ * メタボックス保存時のセキュリティチェックをまとめて行う。
+ * いずれかのチェックに失敗した場合は false を返す。
+ *
+ * @param string $nonce_field $_POST のキー名
+ * @param string $nonce_action nonce アクション文字列
+ * @param int    $post_id      投稿 ID
+ * @return bool 保存処理を続行してよければ true
+ */
+function seibi_verify_meta_nonce( $nonce_field, $nonce_action, $post_id ) {
+    if ( ! isset( $_POST[ $nonce_field ] ) ) {
+        return false;
+    }
+    if ( ! wp_verify_nonce( $_POST[ $nonce_field ], $nonce_action ) ) {
+        return false;
+    }
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return false;
+    }
+    if ( ! current_user_can( 'edit_post', $post_id ) ) {
+        return false;
+    }
+    return true;
+}
+
+// -----------------------------------------------
 // メタボックス登録
 // -----------------------------------------------
 function seibi_briefing_add_meta_box() {
@@ -197,16 +225,7 @@ function seibi_briefing_meta_box_callback( $post ) {
 // メタボックス保存
 // -----------------------------------------------
 function seibi_briefing_meta_save( $post_id ) {
-    if ( ! isset( $_POST['seibi_briefing_meta_nonce'] ) ) {
-        return;
-    }
-    if ( ! wp_verify_nonce( $_POST['seibi_briefing_meta_nonce'], 'seibi_briefing_meta_save' ) ) {
-        return;
-    }
-    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-        return;
-    }
-    if ( ! current_user_can( 'edit_post', $post_id ) ) {
+    if ( ! seibi_verify_meta_nonce( 'seibi_briefing_meta_nonce', 'seibi_briefing_meta_save', $post_id ) ) {
         return;
     }
 
@@ -339,10 +358,7 @@ function seibi_year_gallery_meta_box_callback( $post ) {
 }
 
 function seibi_year_gallery_save( $post_id ) {
-    if ( ! isset( $_POST['seibi_year_gallery_nonce'] ) ) return;
-    if ( ! wp_verify_nonce( $_POST['seibi_year_gallery_nonce'], 'seibi_year_gallery_save' ) ) return;
-    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
-    if ( ! current_user_can( 'edit_post', $post_id ) ) return;
+    if ( ! seibi_verify_meta_nonce( 'seibi_year_gallery_nonce', 'seibi_year_gallery_save', $post_id ) ) return;
 
     $raw = isset( $_POST['year_gallery_ids'] ) ? wp_unslash( $_POST['year_gallery_ids'] ) : '';
     // カンマ区切りの数値IDのみ許可
@@ -568,16 +584,7 @@ function seibi_req_seibi_c_cb( $post ) {
 // 保存処理
 // -----------------------------------------------
 function seibi_requirements_meta_save( $post_id ) {
-    if ( ! isset( $_POST['seibi_requirements_meta_nonce'] ) ) {
-        return;
-    }
-    if ( ! wp_verify_nonce( $_POST['seibi_requirements_meta_nonce'], 'seibi_requirements_meta_save' ) ) {
-        return;
-    }
-    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-        return;
-    }
-    if ( ! current_user_can( 'edit_post', $post_id ) ) {
+    if ( ! seibi_verify_meta_nonce( 'seibi_requirements_meta_nonce', 'seibi_requirements_meta_save', $post_id ) ) {
         return;
     }
 
@@ -703,16 +710,7 @@ function seibi_event_meta_box_callback( $post ) {
 }
 
 function seibi_event_meta_save( $post_id ) {
-    if ( ! isset( $_POST['seibi_event_meta_nonce'] ) ) {
-        return;
-    }
-    if ( ! wp_verify_nonce( $_POST['seibi_event_meta_nonce'], 'seibi_event_meta_save' ) ) {
-        return;
-    }
-    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-        return;
-    }
-    if ( ! current_user_can( 'edit_post', $post_id ) ) {
+    if ( ! seibi_verify_meta_nonce( 'seibi_event_meta_nonce', 'seibi_event_meta_save', $post_id ) ) {
         return;
     }
 

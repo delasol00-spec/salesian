@@ -113,11 +113,17 @@ function seibi_register_taxonomies() {
 add_action( 'init', 'seibi_register_taxonomies' );
 
 // -----------------------------------------------
-// briefing 表示設定タクソノミー
+// 「表示設定」タクソノミー共通登録ヘルパー
 // 「トップページ」タームにチェックした投稿のみトップに表示
 // -----------------------------------------------
-function seibi_register_briefing_flag() {
-    register_taxonomy( 'briefing-flag', 'briefing', [
+/**
+ * 非公開の「表示設定」タクソノミーを登録する。
+ *
+ * @param string $taxonomy  タクソノミースラッグ（例: 'briefing-flag'）
+ * @param string $post_type 対象投稿タイプ（例: 'briefing'）
+ */
+function seibi_register_flag_taxonomy( $taxonomy, $post_type ) {
+    register_taxonomy( $taxonomy, $post_type, [
         'labels'       => [
             'name'          => '表示設定',
             'singular_name' => '表示設定',
@@ -131,28 +137,12 @@ function seibi_register_briefing_flag() {
         'rewrite'      => false,
     ] );
 }
-add_action( 'init', 'seibi_register_briefing_flag' );
 
-// -----------------------------------------------
-// event 表示設定タクソノミー
-// 「トップページ」タームにチェックした投稿のみトップに表示
-// -----------------------------------------------
-function seibi_register_event_flag() {
-    register_taxonomy( 'event-flag', 'event', [
-        'labels'       => [
-            'name'          => '表示設定',
-            'singular_name' => '表示設定',
-            'add_new_item'  => '表示設定を追加',
-            'edit_item'     => '表示設定を編集',
-        ],
-        'hierarchical' => true,
-        'public'       => false,
-        'show_ui'      => true,
-        'show_in_rest' => false,
-        'rewrite'      => false,
-    ] );
+function seibi_register_flag_taxonomies() {
+    seibi_register_flag_taxonomy( 'briefing-flag', 'briefing' );
+    seibi_register_flag_taxonomy( 'event-flag', 'event' );
 }
-add_action( 'init', 'seibi_register_event_flag' );
+add_action( 'init', 'seibi_register_flag_taxonomies' );
 
 // -----------------------------------------------
 // カスタム投稿タイプ パーマリンク（/{slug}/{post_id}/ 形式）
