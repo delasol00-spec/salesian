@@ -256,6 +256,103 @@ add_action( 'save_post_briefing', 'seibi_briefing_meta_save' );
 
 
 // ================================================================
+// 年間行事 ギャラリー（カスタム投稿タイプ: year）
+// ================================================================
+
+function seibi_year_gallery_add_meta_box() {
+    add_meta_box(
+        'year_gallery',
+        'ギャラリー画像',
+        'seibi_year_gallery_meta_box_callback',
+        'year',
+        'normal',
+        'high'
+    );
+}
+add_action( 'add_meta_boxes', 'seibi_year_gallery_add_meta_box' );
+
+function seibi_year_gallery_meta_box_callback( $post ) {
+    wp_nonce_field( 'seibi_year_gallery_save', 'seibi_year_gallery_nonce' );
+    $ids_str  = get_post_meta( $post->ID, '_year_gallery_ids', true );
+    $id_array = $ids_str ? array_filter( explode( ',', $ids_str ) ) : [];
+    ?>
+    <p style="color:#666;margin-bottom:12px;">画像を追加すると、年間行事ページでクリックしてギャラリーを表示できるようになります。画像がない場合はリンクなしのテキスト表示になります。</p>
+    <div id="year-gallery-preview" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;min-height:40px;padding:8px;border:1px solid #ddd;border-radius:4px;background:#fafafa;">
+        <?php foreach ( $id_array as $id ) :
+            $url = wp_get_attachment_image_url( (int) $id, 'thumbnail' );
+            if ( ! $url ) continue; ?>
+            <div class="year-gallery-thumb" data-id="<?php echo esc_attr( $id ); ?>" style="position:relative;width:80px;height:80px;">
+                <img src="<?php echo esc_url( $url ); ?>" style="width:80px;height:80px;object-fit:cover;display:block;" />
+                <button type="button" class="year-gallery-remove" data-id="<?php echo esc_attr( $id ); ?>" style="position:absolute;top:2px;right:2px;background:rgba(0,0,0,.6);color:#fff;border:none;cursor:pointer;width:20px;height:20px;border-radius:50%;line-height:1;padding:0;font-size:14px;">×</button>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    <input type="hidden" id="year_gallery_ids" name="year_gallery_ids" value="<?php echo esc_attr( $ids_str ); ?>" />
+    <button type="button" id="year-gallery-add" class="button">＋ 画像を追加</button>
+    <button type="button" id="year-gallery-clear" class="button" style="margin-left:6px;color:#a00;">すべて削除</button>
+    <script>
+    (function($) {
+        var frame;
+        $('#year-gallery-add').on('click', function(e) {
+            e.preventDefault();
+            if (frame) { frame.open(); return; }
+            frame = wp.media({
+                title: '画像を選択',
+                button: { text: '追加' },
+                multiple: true
+            });
+            frame.on('select', function() {
+                var selection = frame.state().get('selection');
+                var ids = $('#year_gallery_ids').val() ? $('#year_gallery_ids').val().split(',').filter(Boolean) : [];
+                selection.each(function(attachment) {
+                    var id = String(attachment.get('id'));
+                    if (ids.indexOf(id) !== -1) return;
+                    ids.push(id);
+                    var sizes = attachment.get('sizes');
+                    var thumb = sizes && sizes.thumbnail ? sizes.thumbnail.url : attachment.get('url');
+                    $('#year-gallery-preview').append(
+                        '<div class="year-gallery-thumb" data-id="' + id + '" style="position:relative;width:80px;height:80px;">' +
+                        '<img src="' + thumb + '" style="width:80px;height:80px;object-fit:cover;display:block;" />' +
+                        '<button type="button" class="year-gallery-remove" data-id="' + id + '" style="position:absolute;top:2px;right:2px;background:rgba(0,0,0,.6);color:#fff;border:none;cursor:pointer;width:20px;height:20px;border-radius:50%;line-height:1;padding:0;font-size:14px;">×</button>' +
+                        '</div>'
+                    );
+                });
+                $('#year_gallery_ids').val(ids.join(','));
+            });
+            frame.open();
+        });
+
+        $(document).on('click', '.year-gallery-remove', function() {
+            var id = String($(this).data('id'));
+            $(this).closest('.year-gallery-thumb').remove();
+            var ids = $('#year_gallery_ids').val().split(',').filter(function(v) { return v && v !== id; });
+            $('#year_gallery_ids').val(ids.join(','));
+        });
+
+        $('#year-gallery-clear').on('click', function() {
+            $('#year-gallery-preview').empty();
+            $('#year_gallery_ids').val('');
+        });
+    })(jQuery);
+    </script>
+    <?php
+}
+
+function seibi_year_gallery_save( $post_id ) {
+    if ( ! isset( $_POST['seibi_year_gallery_nonce'] ) ) return;
+    if ( ! wp_verify_nonce( $_POST['seibi_year_gallery_nonce'], 'seibi_year_gallery_save' ) ) return;
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+    if ( ! current_user_can( 'edit_post', $post_id ) ) return;
+
+    $raw = isset( $_POST['year_gallery_ids'] ) ? wp_unslash( $_POST['year_gallery_ids'] ) : '';
+    // カンマ区切りの数値IDのみ許可
+    $ids = array_filter( array_map( 'intval', explode( ',', $raw ) ) );
+    update_post_meta( $post_id, '_year_gallery_ids', implode( ',', $ids ) );
+}
+add_action( 'save_post_year', 'seibi_year_gallery_save' );
+
+
+// ================================================================
 // 児童募集要項 カスタムフィールド（page slug = requirements）
 // ================================================================
 

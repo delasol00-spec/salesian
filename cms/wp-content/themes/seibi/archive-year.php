@@ -3,7 +3,8 @@
  * 年間行事 アーカイブ（一覧）テンプレート
  * URL: /life/year/
  * カスタム投稿タイプ: year
- * ギャラリー形式（アイキャッチ画像のみ）
+ * タクソノミー: year_month（月カテゴリー）
+ * ギャラリー: メタフィールド _year_gallery_ids → Bootstrap Modal で表示
  *
  * @package seibi
  */
@@ -13,7 +14,7 @@ get_header(); ?>
 <div class="container-fluid p-0">
   <main class="sub-page-view">
     <div class="sub-hero">
-      <img src="<?php echo get_template_directory_uri(); ?>/img/school-life-bg.webp" alt="" class="sub-hero-img" />
+      <img src="<?php echo get_template_directory_uri(); ?>/img/year-img/main.webp" alt="年間行事" class="sub-hero-img" />
     </div>
     <section class="page-title">
       <h1>年間行事</h1>
@@ -22,44 +23,75 @@ get_header(); ?>
   </main>
 </div>
 
+<?php
+// 学年暦順（4月〜3月）の月定義
+$months = [
+    [ 'name' => '4月',  'img' => '04.webp' ],
+    [ 'name' => '5月',  'img' => '05.webp' ],
+    [ 'name' => '6月',  'img' => '06.webp' ],
+    [ 'name' => '7月',  'img' => '07.webp' ],
+    [ 'name' => '8月',  'img' => '08.webp' ],
+    [ 'name' => '9月',  'img' => '09.webp' ],
+    [ 'name' => '10月', 'img' => '10.webp' ],
+    [ 'name' => '11月', 'img' => '11.webp' ],
+    [ 'name' => '12月', 'img' => '12.webp' ],
+    [ 'name' => '1月',  'img' => '01.webp' ],
+    [ 'name' => '2月',  'img' => '02.webp' ],
+    [ 'name' => '3月',  'img' => '03.webp' ],
+];
+?>
+
 <section class="p-70-70">
   <div class="container">
-    <div class="row">
-      <?php if ( have_posts() ) : ?>
-        <?php while ( have_posts() ) : the_post(); ?>
-        <div class="col-md-4 col-6 mb-4">
-          <a href="<?php the_permalink(); ?>" class="year-gallery-item d-block">
-            <div class="year-gallery-img">
-              <?php if ( has_post_thumbnail() ) : ?>
-                <?php the_post_thumbnail( 'medium_large', [ 'alt' => get_the_title(), 'class' => 'img-fluid w-100' ] ); ?>
-              <?php else : ?>
-                <img src="<?php echo get_template_directory_uri(); ?>/img/news_title.svg" alt="<?php the_title_attribute(); ?>" class="img-fluid w-100" />
-              <?php endif; ?>
-            </div>
-            <p class="year-gallery-title text-center mt-2"><?php the_title(); ?></p>
-          </a>
-        </div>
-        <?php endwhile; ?>
-      <?php else : ?>
-        <div class="col-12">
-          <p>現在、年間行事のギャラリーはありません。</p>
-        </div>
-      <?php endif; ?>
-    </div>
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="row">
+          <?php foreach ( $months as $month_data ) :
+            $term  = get_term_by( 'name', $month_data['name'], 'year_month' );
+            $posts = [];
+            if ( $term ) {
+                $q = new WP_Query( [
+                    'post_type'      => 'year',
+                    'tax_query'      => [ [
+                        'taxonomy' => 'year_month',
+                        'field'    => 'term_id',
+                        'terms'    => $term->term_id,
+                    ] ],
+                    'posts_per_page' => -1,
+                    'orderby'        => 'menu_order',
+                    'order'          => 'ASC',
+                ] );
+                $posts = $q->posts;
+            }
+          ?>
+          <div class="col-lg-4 col-md-6 col-12">
+            <div class="year-box">
+              <h2><?php echo esc_html( $month_data['name'] ); ?></h2>
+              <img src="<?php echo get_template_directory_uri(); ?>/img/year-img/<?php echo esc_attr( $month_data['img'] ); ?>" alt="<?php echo esc_attr( $month_data['name'] ); ?>" class="img-fluid" />
+              <div class="year-detail">
+                <?php if ( $posts ) :
+                  foreach ( $posts as $post ) :
+                    $ids_str = get_post_meta( $post->ID, '_year_gallery_ids', true );
+                    $ids     = $ids_str ? array_filter( array_map( 'intval', explode( ',', $ids_str ) ) ) : [];
 
-    <?php if ( $GLOBALS['wp_query']->max_num_pages > 1 ) : ?>
-    <div class="row mt-4">
-      <div class="col-12 text-center">
-        <?php
-        the_posts_pagination( [
-            'mid_size'  => 2,
-            'prev_text' => '<span class="material-symbols-outlined">chevron_left</span>',
-            'next_text' => '<span class="material-symbols-outlined">chevron_right</span>',
-        ] );
-        ?>
+                    if ( ! empty( $ids ) ) : ?>
+                      <p>
+                        <a href="<?php echo esc_url( get_permalink( $post->ID ) ); ?>">
+                          <?php echo esc_html( get_the_title( $post ) ); ?>
+                        </a>
+                      </p>
+                    <?php else : ?>
+                      <p><?php echo esc_html( get_the_title( $post ) ); ?></p>
+                    <?php endif;
+                  endforeach;
+                endif; ?>
+              </div>
+            </div>
+          </div>
+          <?php endforeach; ?>
+        </div>
       </div>
     </div>
-    <?php endif; ?>
   </div>
 </section>
 

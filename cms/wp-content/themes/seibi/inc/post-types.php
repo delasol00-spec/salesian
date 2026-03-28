@@ -71,7 +71,7 @@ function seibi_register_post_types() {
         'rewrite'      => [ 'slug' => 'life/year' ],
         'show_in_rest' => true,
         'menu_icon'    => 'dashicons-images-alt2',
-        'supports'     => [ 'title', 'thumbnail' ],
+        'supports'     => [ 'title', 'page-attributes' ],
     ] );
 }
 add_action( 'init', 'seibi_register_post_types' );
@@ -80,6 +80,21 @@ add_action( 'init', 'seibi_register_post_types' );
 // カスタムタクソノミー
 // -----------------------------------------------
 function seibi_register_taxonomies() {
+
+    // 年間行事 月カテゴリー
+    register_taxonomy( 'year_month', 'year', [
+        'labels'       => [
+            'name'          => '月',
+            'singular_name' => '月',
+            'add_new_item'  => '月を追加',
+            'edit_item'     => '月を編集',
+        ],
+        'hierarchical' => true,
+        'public'       => false,
+        'show_ui'      => true,
+        'show_in_rest' => true,
+        'rewrite'      => false,
+    ] );
 
     // お知らせカテゴリー
     register_taxonomy( 'information-category', 'information', [
@@ -194,3 +209,20 @@ function seibi_flush_post_type_rewrite_once() {
     }
 }
 add_action( 'wp_loaded', 'seibi_flush_post_type_rewrite_once' );
+
+// -----------------------------------------------
+// year_month デフォルトターム（4月〜3月）自動作成
+// -----------------------------------------------
+function seibi_create_year_month_defaults() {
+    if ( get_option( 'seibi_year_month_terms_created' ) === '1' ) {
+        return;
+    }
+    $months = [ '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月', '1月', '2月', '3月' ];
+    foreach ( $months as $month ) {
+        if ( ! term_exists( $month, 'year_month' ) ) {
+            wp_insert_term( $month, 'year_month' );
+        }
+    }
+    update_option( 'seibi_year_month_terms_created', '1' );
+}
+add_action( 'init', 'seibi_create_year_month_defaults', 20 );

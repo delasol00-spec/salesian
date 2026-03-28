@@ -6,6 +6,17 @@
  */
 
 // -----------------------------------------------
+// 年間行事 編集画面でメディアアップローダーを有効化
+// -----------------------------------------------
+function seibi_enqueue_media_for_year( $hook ) {
+    $screen = get_current_screen();
+    if ( $screen && $screen->post_type === 'year' && in_array( $hook, [ 'post.php', 'post-new.php' ], true ) ) {
+        wp_enqueue_media();
+    }
+}
+add_action( 'admin_enqueue_scripts', 'seibi_enqueue_media_for_year' );
+
+// -----------------------------------------------
 // デフォルト「投稿」「コメント」を無効化
 // -----------------------------------------------
 function seibi_remove_post_menu() {
