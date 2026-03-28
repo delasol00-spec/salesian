@@ -287,6 +287,95 @@ function seibi_delete_all_pages(): array {
 }
 
 // -----------------------------------------------
+// 年間行事 月ターム 並び順フィルター（4月〜3月）
+// get_terms() を使う箇所すべてに適用（管理画面・フロントエンド共通）
+// -----------------------------------------------
+add_filter( 'get_terms', function( $terms, $taxonomies ) {
+    if ( ! in_array( 'year_month', (array) $taxonomies, true ) ) {
+        return $terms;
+    }
+    if ( ! is_array( $terms ) ) {
+        return $terms;
+    }
+    $order = [ '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月', '1月', '2月', '3月' ];
+    usort( $terms, function( $a, $b ) use ( $order ) {
+        if ( ! is_object( $a ) || ! is_object( $b ) ) {
+            return 0;
+        }
+        $pos_a = array_search( $a->name, $order, true );
+        $pos_b = array_search( $b->name, $order, true );
+        $pos_a = ( $pos_a === false ) ? 99 : $pos_a;
+        $pos_b = ( $pos_b === false ) ? 99 : $pos_b;
+        return $pos_a - $pos_b;
+    } );
+    return $terms;
+}, 10, 3 );
+
+// -----------------------------------------------
+// 年間行事 月ターム定義
+// -----------------------------------------------
+function seibi_get_year_month_terms(): array {
+    return [
+        [ 'name' => '4月',  'slug' => 'month-04' ],
+        [ 'name' => '5月',  'slug' => 'month-05' ],
+        [ 'name' => '6月',  'slug' => 'month-06' ],
+        [ 'name' => '7月',  'slug' => 'month-07' ],
+        [ 'name' => '8月',  'slug' => 'month-08' ],
+        [ 'name' => '9月',  'slug' => 'month-09' ],
+        [ 'name' => '10月', 'slug' => 'month-10' ],
+        [ 'name' => '11月', 'slug' => 'month-11' ],
+        [ 'name' => '12月', 'slug' => 'month-12' ],
+        [ 'name' => '1月',  'slug' => 'month-01' ],
+        [ 'name' => '2月',  'slug' => 'month-02' ],
+        [ 'name' => '3月',  'slug' => 'month-03' ],
+    ];
+}
+
+// -----------------------------------------------
+// 年間行事 月ターム作成処理
+// -----------------------------------------------
+function seibi_create_year_month_terms(): array {
+    $terms   = seibi_get_year_month_terms();
+    $results = [];
+
+    foreach ( $terms as $def ) {
+        $existing = get_term_by( 'slug', $def['slug'], 'year_month' );
+
+        if ( $existing ) {
+            $results[] = [
+                'status' => 'skip',
+                'name'   => $def['name'],
+                'slug'   => $def['slug'],
+                'id'     => $existing->term_id,
+            ];
+            continue;
+        }
+
+        $term = wp_insert_term( $def['name'], 'year_month', [
+            'slug' => $def['slug'],
+        ] );
+
+        if ( is_wp_error( $term ) ) {
+            $results[] = [
+                'status'  => 'error',
+                'name'    => $def['name'],
+                'slug'    => $def['slug'],
+                'message' => $term->get_error_message(),
+            ];
+        } else {
+            $results[] = [
+                'status' => 'created',
+                'name'   => $def['name'],
+                'slug'   => $def['slug'],
+                'id'     => $term['term_id'],
+            ];
+        }
+    }
+
+    return $results;
+}
+
+// -----------------------------------------------
 // カテゴリー定義（タクソノミー別）
 // -----------------------------------------------
 function seibi_get_category_groups(): array {
@@ -371,9 +460,10 @@ function seibi_create_categories(): array {
 // 管理画面ページ
 // -----------------------------------------------
 function seibi_setup_page() {
-    $create_results   = null;
-    $category_results = null;
-    $delete_results   = null;
+    $create_results      = null;
+    $category_results    = null;
+    $year_month_results  = null;
+    $delete_results      = null;
 
     // 全固定ページ削除
     if ( isset( $_POST['seibi_delete_pages'] ) && check_admin_referer( 'seibi_setup' ) ) {
@@ -388,6 +478,11 @@ function seibi_setup_page() {
     // カテゴリー作成
     if ( isset( $_POST['seibi_create_categories'] ) && check_admin_referer( 'seibi_setup' ) ) {
         $category_results = seibi_create_categories();
+    }
+
+    // 年間行事 月ターム作成
+    if ( isset( $_POST['seibi_create_year_months'] ) && check_admin_referer( 'seibi_setup' ) ) {
+        $year_month_results = seibi_create_year_month_terms();
     }
 
     // 現在の状態を取得
@@ -576,6 +671,69 @@ function seibi_setup_page() {
             <p>
                 <button type="submit" name="seibi_create_categories" class="button button-primary button-large">
                     カテゴリーを一括作成する
+                </button>
+            </p>
+
+            <hr>
+
+            <h2>3. 年間行事（月）タームの作成</h2>
+            <p>タクソノミー <code>year_month</code> に4月〜3月のタームを登録します。既存のタームはスキップされます。</p>
+
+            <?php if ( $year_month_results !== null ) : ?>
+                <div class="notice notice-success" style="margin: 10px 0;">
+                    <p>年間行事タームの作成処理が完了しました。</p>
+                </div>
+                <table class="widefat striped" style="margin-bottom: 16px;">
+                    <thead>
+                        <tr><th>状態</th><th>ターム名</th><th>スラッグ</th><th>ID</th></tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ( $year_month_results as $r ) : ?>
+                            <tr>
+                                <td>
+                                    <?php if ( $r['status'] === 'created' ) : ?>
+                                        <span style="color:green;">✓ 作成</span>
+                                    <?php elseif ( $r['status'] === 'skip' ) : ?>
+                                        <span style="color:gray;">— スキップ（既存）</span>
+                                    <?php else : ?>
+                                        <span style="color:red;">✗ エラー: <?php echo esc_html( $r['message'] ?? '' ); ?></span>
+                                    <?php endif; ?>
+                                </td>
+                                <td><?php echo esc_html( $r['name'] ); ?></td>
+                                <td><code><?php echo esc_html( $r['slug'] ); ?></code></td>
+                                <td><?php echo isset( $r['id'] ) ? esc_html( $r['id'] ) : '—'; ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php endif; ?>
+
+            <table class="widefat striped" style="margin-bottom: 16px;">
+                <thead>
+                    <tr><th>ターム名</th><th>スラッグ</th><th>現在の状態</th></tr>
+                </thead>
+                <tbody>
+                    <?php foreach ( seibi_get_year_month_terms() as $term_def ) :
+                        $existing_term = get_term_by( 'slug', $term_def['slug'], 'year_month' );
+                    ?>
+                        <tr>
+                            <td><?php echo esc_html( $term_def['name'] ); ?></td>
+                            <td><code><?php echo esc_html( $term_def['slug'] ); ?></code></td>
+                            <td>
+                                <?php if ( $existing_term ) : ?>
+                                    <span style="color:green;">✓ 作成済み (ID: <?php echo esc_html( $existing_term->term_id ); ?>)</span>
+                                <?php else : ?>
+                                    <span style="color:#aaa;">未作成</span>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+
+            <p>
+                <button type="submit" name="seibi_create_year_months" class="button button-primary button-large">
+                    年間行事タームを一括作成する
                 </button>
             </p>
 
