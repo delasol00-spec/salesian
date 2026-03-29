@@ -1736,6 +1736,7 @@ a:hover {
 .title-box-s {
   text-align: center;
   margin-bottom: 30px;
+  margin-top: 30px;
 }
 
 .title-box-s h2 {
@@ -1750,7 +1751,11 @@ a:hover {
   セクション
   ================================================= */
 .p-70-70 {
-  padding: 70px 0;
+  padding: 90px 0;
+}
+
+.p-100-100 {
+  padding: 100px 0;
 }
 
 .p-70-white {
@@ -1772,6 +1777,10 @@ a:hover {
 
 .section50 {
   padding: 50px 0;
+}
+
+.pb-70 {
+  padding-bottom: 70px;
 }
 
 
@@ -2133,6 +2142,14 @@ p small {
   .btn-l {
     font-size: 1.1rem;
     padding: 15px 30px 17px;
+  }
+
+  .btn-slide span {
+    font-size: 0.9rem;
+    ;
+  }
+  .btn-m {
+    padding: 10px 18px 8px;
   }
 }
 

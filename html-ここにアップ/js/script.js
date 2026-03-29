@@ -280,8 +280,8 @@ $(document).ready(function () {
       .off("mouseleave.sidebarPC", "#sidebarMenu")
       .on("mouseleave.sidebarPC", "#sidebarMenu", function () {
         if (isPC() && !isLocked && $(window).scrollTop() > 50) {
-          // 非トップページでは最下部時は表示を維持
-          if (!isTopPage() && isPageBottom()) {
+          // 最下部付近ではハンドル露出を維持（トップ／下層共通）
+          if (isPageBottom()) {
             getSidebar().removeClass("is-hidden");
           } else {
             getSidebar().addClass("is-hidden");
@@ -302,8 +302,8 @@ $(document).ready(function () {
       .off("scroll.sidebarAutoHide")
       .on("scroll.sidebarAutoHide", function () {
         if (isPC() && !isLocked) {
-          if (!isTopPage() && isPageBottom()) {
-            // 非トップページは最下部到達時に自動表示
+          if (isPageBottom()) {
+            // 最下部到達時は自動表示（トップ／下層共通）
             getSidebar().removeClass("is-hidden");
           } else if ($(window).scrollTop() > 50) {
             getSidebar().addClass("is-hidden");
@@ -320,14 +320,14 @@ $(document).ready(function () {
 
     // 初期表示状態をスクロール位置に合わせて反映
     if (isPC() && !isLocked) {
-      if (!isTopPage()) {
-        if (isPageBottom()) {
-          $sidebar.removeClass("is-hidden");
-        } else {
-          $sidebar.addClass("is-hidden");
-        }
-      } else {
+      if (isPageBottom()) {
         $sidebar.removeClass("is-hidden");
+      } else if ($(window).scrollTop() > 50) {
+        $sidebar.addClass("is-hidden");
+      } else if (isTopPage()) {
+        $sidebar.removeClass("is-hidden");
+      } else {
+        $sidebar.addClass("is-hidden");
       }
     }
 

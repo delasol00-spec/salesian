@@ -21,21 +21,40 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 15px; /* 影のグラデーションの高さ */
-  /* 下から上に向かって、黒から透明になるグラデーション */
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.1), transparent);
+  height: 30px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent);
   pointer-events: none; /* 画像のクリックなどの邪魔をしない */
 }
 
 .sub-hero-img {
-  width: 100%;
-  height: auto;
   display: block;
+  height: auto;
 }
 
+/* PC: 横幅いっぱい（縦は画像比率どおり） */
+@media (min-width: 992px) {
+  .sub-hero-img {
+    width: 100%;
+  }
+}
+
+/* スマホ: 画像は実寸の天地（縦は切らない）／横幅ははみ出してよいので親でクリップ／中央寄せ */
 @media (max-width: 991px) {
   .sub-page-view {
     padding-top: 60px; /* スマホヘッダー分 */
+  }
+
+  .sub-hero {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .sub-hero-img {
+    width: auto;
+    height: auto;
+    max-width: none;
+    flex-shrink: 0;
   }
 }
 
@@ -49,7 +68,7 @@
   position: relative;
   margin-top: -97px;
   border-radius: 20px 20px 0 0;
-  box-shadow: 0 -10px 10px -5px rgba(0, 0, 0, 0.2);
+  /*box-shadow: 0 -10px 10px -5px rgba(0, 0, 0, 0.4);*/
 }
 
 .page-title h1 {
@@ -89,6 +108,8 @@
   background: #f5f8fb;
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
   margin-bottom: 30px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .event-col-blue h3,
@@ -97,12 +118,16 @@
   background: #005297;
   color: #fff;
   padding: 10px 0 8px 15px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .event-col-pink {
   background: #fef0f3;
   box-shadow: 0 0px 15px 0 rgba(0, 0, 0, 0.2);
   margin-bottom: 30px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .event-col-pink h3,
@@ -111,6 +136,8 @@
   background: #f67088;
   color: #fff;
   padding: 10px 0 8px 15px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .event-col-white {
@@ -121,7 +148,7 @@
 }
 
 .event-spec {
-  padding: 10px 30px;
+  padding: 10px 30px
 }
 
 .event-spec h4 {
@@ -361,6 +388,31 @@ tr th {
   text-align: center;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+}
+
+.shisetsu-blue h5 {
+  background: #005297;
+}
+
+.shisetsu-blue a {
+  display: block;
+  overflow: hidden;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.shisetsu-blue a img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.35s;
+}
+
+.shisetsu-blue a:hover img,
+.shisetsu-blue a:focus-visible img {
+  transform: scale(1.05);
+  opacity: 0.8;
+
 }
 
 .shisetsu p {
@@ -732,6 +784,45 @@ tr th {
 }
 
 /* ----------------------
+   委員会･クラブ活動
+  ---------------------- */
+
+  .activity-box {
+    margin-top: 30px;
+  }
+  .activity-box h4 {
+    font-family: "Noto Serif JP", serif;
+    font-weight: 400;
+    font-size: 2.4rem;
+    color: #005297;
+    text-align: center;
+    letter-spacing: 0.1rem;
+    margin-top: 50px;
+    margin-bottom: 30px;
+  }
+  
+  .activity-box h5 {
+    font-family: "Noto Serif JP", serif;
+    font-weight: 400;
+    font-size: 1.25rem;
+    color: #005297;
+    border-left: 3px solid #f67088;
+    padding-left: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .activity-box p {
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    line-height: 2;
+  }
+
+  .activity-box img {
+    margin-bottom: 50px;
+  }
+  
+
+/* ----------------------
    アシステンツァ
 ---------------------- */
 h4.assistenza-title {
@@ -744,8 +835,234 @@ h4.assistenza-title {
   text-align: left !important;
 }
 
+/* ----------------------
+   アフタースクール
+  ---------------------- */
+  .after-col {
+    background: #f5f8fb;
+    padding: 0;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+    margin-bottom: 15px;
+    overflow: hidden; /* 背景の角に子要素（画像）を合わせてクリップ */
+  }
+
+  .after-col h6 {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+    background: #f67088;
+    margin-bottom: 10px;
+    padding: 7px 0 5px 15px; /* 左右は列端までピンクを伸ばす */
+  }
+
+  .after-col > .row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  /* 左列の画像をカード左端に寄せ、角を背景の border-radius に合わせる */
+  .after-col > .row > [class*="col-"]:first-child {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* テキスト列：左右パディングなし（左は画像に密着、右はカード端＝親の角に合わせる） */
+  .after-col > .row > [class*="col-"]:last-child {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* 本文だけ少し余白（h6 は全幅ピンクのまま） */
+  .after-col > .row > [class*="col-"]:last-child p {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .after-flow-arrow {
+    font-size: 2.75rem;
+    line-height: 1;
+    color: #f67088;
+    font-variation-settings:
+      "FILL" 0,
+      "wght" 400,
+      "GRAD" 0,
+      "opsz" 48;
+  }
+
+  .after-col img {
+    margin-bottom: 0;
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  @media (min-width: 768px) {
+    .after-col > .row > [class*="col-"]:first-child img {
+      border-radius: 10px 0 0 10px;
+    }
+
+    /* ピンク見出し右上をカードの border-radius（10px）に合わせる */
+    .after-col h6 {
+      border-top-right-radius: 10px;
+    }
+  }
+
+  .program-box {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+    border: 1px solid #ddd;
+    margin-bottom: 0;
+  }
+
+  .special-progrum img {
+    margin-bottom: 5px;
+  }
+
+  .special-progrum p {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    margin-bottom: 0;
+    text-align: right;
+  }
+
+  /* 行の stretch + h-100 では .program-box の margin-bottom が潰れやすいのでカラムで縦間隔を取る */
+  section.bg-white:not(.p-70-70) > .container > .row > .col-lg-4 {
+    margin-bottom: 30px;
+  }
+
+  .program-box img {
+    margin-bottom: 15px;
+    min-width: 100%;
+
+  }
+
+  .program-box h6 {
+    font-size: 0.9rem;
+    color: #f67088;
+    margin-bottom: 5px;
+  }
+
+  .program-box h5 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #005297;
+    margin-bottom: 10px;
+  }
+  .program-box p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 0;
+  }
+
+  .after-table {
+    width: 100% ;
+    margin-top: 30px ;
+    margin-bottom: 50px ;
+  }
+  
+  .after-table tr td:first-child {
+    background: #fff ;
+  }
+  
+  .after-table tr td:nth-child(3),
+  .after-table tr td:nth-child(5) {
+    background: #FAFAFA ;
+  }
+  
+  .after-table tr td, tr th {
+    padding: 10px ;
+    border-top: 1px dotted #bbb ;
+    border-bottom: 1px dotted #bbb ;
+  
+  }
+  
+  .after-table th {
+  background:  #fffcfc ;
+    text-align: center ;
+  }
+  
+  .after-table td span {
+  font-weight: bold ;
+  font-size: 1.3em ;
+  }
+
+  .after-inq {
+    border: 1px solid #ff8298 ;
+    border-radius: 10px ;
+    padding: 25px ;
+    line-height: 1.8em ;
+    box-shadow:rgba(122, 122, 122, 0.0588235) 0px 0px 6px 3px;
+    -webkit-box-shadow:rgba(122, 122, 122, 0.0588235) 0px 0px 6px 3px;
+    -moz-box-shadow:rgba(122, 122, 122, 0.0588235) 0px 0px 6px 3px;
+    background: #fffcfc ;
+    font-size: 1.1em ;
+    margin-bottom: 15px ;
+    }
+
+    /* アフタースクール Q&A */
 
 
+
+  @media (max-width: 767.98px) {
+    .after-col > .row > [class*="col-"]:first-child img {
+      border-radius: 10px 10px 0 0;
+    }
+    .after-col {
+      margin: 5px 15px;
+    }
+  }
+
+/* ----------------------
+   入学をお考えの方へ
+  ---------------------- */
+  .examinee-blog-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .examinee-blog-list > li {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 30px;
+    padding: 10px 20px;
+    background-color: transparent;
+    transition: background-color 0.25s ease;
+    border-bottom: 1px dotted #bbb;
+  }
+
+  .examinee-blog-list > li:hover {
+    background-color: #f5f8fb;
+  }
+  
+  .examinee-blog-list > li:last-child {
+    margin-bottom: 0;
+  }
+  
+  .examinee-blog-list time {
+    flex: 0 0 auto;
+    font-size: 0.95rem;
+    color: #555;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+  }
+  
+  .examinee-blog-list a {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 1.05rem;
+    color: #005297;
+    text-decoration: none;
+    transition: color 0.25s ease;
+  }
+
+  .examinee-blog-list > li:hover a {
+    color: #f67088;
+  }
 /* ----------------------
    パララックス
   ---------------------- */
@@ -807,6 +1124,21 @@ h4.assistenza-title {
 .assistenza-para-img {
   background: url("../feature/assistenza-img/para.webp") left center / cover no-repeat fixed;
 }
+
+/* ----------------------
+   このサイトについて
+  ---------------------- */
+.about-site p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.about-site li {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
 
 /* ----------------------
    レスポンシブ
