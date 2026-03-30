@@ -174,7 +174,7 @@ function seibi_get_page_definitions(): array {
             'parent' => 'admission',
         ],
         [
-            'title'  => '編転入学について',
+            'title'  => '編転入について',
             'slug'   => 'transfer',
             'parent' => 'admission',
         ],
