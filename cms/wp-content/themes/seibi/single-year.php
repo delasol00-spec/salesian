@@ -43,20 +43,20 @@ if ( ! $hero_url ) {
       <div class="col-12">
 
         <?php if ( ! empty( $id_array ) ) : ?>
-        <div class="row" style="margin-left:-4px;margin-right:-4px;">
+        <div class="row row-gutter-1">
           <?php foreach ( $id_array as $attachment_id ) :
             $img_url = wp_get_attachment_image_url( $attachment_id, 'large' );
             $img_full = wp_get_attachment_image_url( $attachment_id, 'full' );
             if ( ! $img_url ) continue;
           ?>
-          <div class="col-lg-3 col-md-4 col-sm-6" style="padding-left:4px;padding-right:4px;margin-bottom:8px;">
+          <div class="col-lg-3 col-md-4 col-sm-6">
             <img src="<?php echo esc_url( $img_url ); ?>"
                  data-full="<?php echo esc_url( $img_full ); ?>"
                  alt="<?php the_title_attribute(); ?>"
-                 class="img-fluid js-year-zoom"
+                 class="img-fluid year-grid-img js-year-zoom"
                  role="button"
                  tabindex="0"
-                 style="cursor:zoom-in;width:100%;aspect-ratio:4/3;object-fit:cover;display:block;" />
+                 style="cursor:zoom-in;" />
           </div>
           <?php endforeach; ?>
         </div>
