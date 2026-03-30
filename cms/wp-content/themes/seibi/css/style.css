@@ -1755,6 +1755,10 @@ a:hover {
   padding: 70px 0;
 }
 
+.p-100-100 {
+  padding: 100px 0;
+}
+
 .p-70-white {
   padding: 70px 0;
   background-color: #fff;
@@ -1784,10 +1788,42 @@ a:hover {
   max-width: 100%;
 }
 
+.row.row-gutter-1 {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  gap: 1px;
+}
+
+.row.row-gutter-1 > [class*="col-"] {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* .p-70-70 img の共通 margin-bottom:30px を打ち消して、天地も1pxガターに統一 */
+.row.row-gutter-1 img {
+  margin-bottom: 0;
+}
+
+/* 入学式ギャラリー: 縦長画像は上下をトリミングして横幅を揃える */
+.year-grid-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
 @media (min-width: 992px) {
   .row.row-gutter-5 > .col-lg-4 {
     flex: 0 0 calc((100% - 10px) / 3);
     max-width: calc((100% - 10px) / 3);
+  }
+
+  .row.row-gutter-1 > .col-lg-3 {
+    flex: 0 0 calc((100% - 3px) / 4);
+    max-width: calc((100% - 3px) / 4);
   }
 }
 
@@ -1795,6 +1831,26 @@ a:hover {
   .row.row-gutter-5 > .col-6 {
     flex: 0 0 calc((100% - 5px) / 2);
     max-width: calc((100% - 5px) / 2);
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .row.row-gutter-1 > .col-sm-6 {
+    flex: 0 0 calc((100% - 1px) / 2);
+    max-width: calc((100% - 1px) / 2);
+  }
+}
+
+/* col-md-6：flex + gap があると 50%+50%+gap で折り返すため幅を補正（col-lg-* 付きは既存の列幅指定を優先） */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .row.row-gutter-5 > .col-md-6 {
+    flex: 0 0 calc((100% - 5px) / 2);
+    max-width: calc((100% - 5px) / 2);
+  }
+
+  .row.row-gutter-1 > .col-md-4 {
+    flex: 0 0 calc((100% - 2px) / 3);
+    max-width: calc((100% - 2px) / 3);
   }
 }
 
@@ -1813,6 +1869,10 @@ a:hover {
 
 .section50 {
   padding: 50px 0;
+}
+
+.pb-70 {
+  padding-bottom: 70px;
 }
 
 /* =================================================

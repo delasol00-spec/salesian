@@ -703,14 +703,15 @@ tr th {
 /* ----------------------
    アシステンツァ
 ---------------------- */
-h3.assistenza-title {
+h3.assistenza-title,
+h4.assistenza-title {
   font-size: 1.2rem;
   font-family: "Noto Serif JP", serif;
   font-weight: 700;
   color: #f67088;
-  margin-bottom: 10px;
-  margin-top: 15px;
-  text-align: left;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  text-align: left !important;
 }
 
 /* ----------------------
@@ -807,5 +808,209 @@ h3.assistenza-title {
     border: 1px solid #005297;
     border-radius: 5px 5px 0 0;
     pointer-events: none; /* 下にある文字の邪魔をしない */
+  }
+}
+
+/* ----------------------
+   委員会･クラブ活動
+  ---------------------- */
+.activity-box {
+  margin-top: 30px;
+}
+.activity-box h4 {
+  font-family: "Noto Serif JP", serif;
+  font-weight: 400;
+  font-size: 2.4rem;
+  color: #005297;
+  text-align: center;
+  letter-spacing: 0.1rem;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+.activity-box h5 {
+  font-family: "Noto Serif JP", serif;
+  font-weight: 400;
+  font-size: 1.25rem;
+  color: #005297;
+  border-left: 3px solid #f67088;
+  padding-left: 10px;
+  margin-bottom: 10px;
+}
+
+.activity-box p {
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+  line-height: 2;
+}
+
+.activity-box img {
+  margin-bottom: 50px;
+}
+
+/* ----------------------
+   アフタースクール
+  ---------------------- */
+.after-col {
+  background: #f5f8fb;
+  padding: 0;
+  border-radius: 10px;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+
+.after-col h6 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fff;
+  background: #f67088;
+  margin-bottom: 10px;
+  padding: 7px 0 5px 15px;
+}
+
+.after-col > .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.after-col > .row > [class*="col-"]:first-child {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.after-col > .row > [class*="col-"]:last-child {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.after-col > .row > [class*="col-"]:last-child p {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.after-flow-arrow {
+  font-size: 2.75rem;
+  line-height: 1;
+  color: #f67088;
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 48;
+}
+
+.after-col img {
+  margin-bottom: 0;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (min-width: 768px) {
+  .after-col > .row > [class*="col-"]:first-child img {
+    border-radius: 10px 0 0 10px;
+  }
+
+  .after-col h6 {
+    border-top-right-radius: 10px;
+  }
+}
+
+.program-box {
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid #ddd;
+  margin-bottom: 0;
+}
+
+.special-progrum img {
+  margin-bottom: 5px;
+}
+
+.special-progrum p {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  margin-bottom: 0;
+  text-align: right;
+}
+
+section.bg-white:not(.p-70-70) > .container > .row > .col-lg-4 {
+  margin-bottom: 30px;
+}
+
+.program-box img {
+  margin-bottom: 15px;
+  min-width: 100%;
+}
+
+.program-box h6 {
+  font-size: 0.9rem;
+  color: #f67088;
+  margin-bottom: 5px;
+}
+
+.program-box h5 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #005297;
+  margin-bottom: 10px;
+}
+
+.program-box p {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
+.after-table {
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+.after-table tr td:first-child {
+  background: #fff;
+}
+
+.after-table tr td:nth-child(3),
+.after-table tr td:nth-child(5) {
+  background: #FAFAFA;
+}
+
+.after-table tr td, tr th {
+  padding: 10px;
+  border-top: 1px dotted #bbb;
+  border-bottom: 1px dotted #bbb;
+}
+
+.after-table th {
+  background: #fffcfc;
+  text-align: center;
+}
+
+.after-table td span {
+  font-weight: bold;
+  font-size: 1.3em;
+}
+
+.after-inq {
+  border: 1px solid #ff8298;
+  border-radius: 10px;
+  padding: 25px;
+  line-height: 1.8em;
+  box-shadow: rgba(122, 122, 122, 0.0588235) 0px 0px 6px 3px;
+  background: #fffcfc;
+  font-size: 1.1em;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 767.98px) {
+  .after-col > .row > [class*="col-"]:first-child img {
+    border-radius: 10px 10px 0 0;
+  }
+  .after-col {
+    margin: 5px 15px;
   }
 }
