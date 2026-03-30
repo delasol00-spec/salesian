@@ -178,6 +178,13 @@ function seibi_get_page_definitions(): array {
             'slug'   => 'transfer',
             'parent' => 'admission',
         ],
+
+        // 保護者の方
+        [
+            'title'  => '保護者の方',
+            'slug'   => 'guardians',
+            'parent' => '',
+        ],
     ];
 }
 
