@@ -6,7 +6,7 @@
  */
 
 /**
- * 「保護者の方」ページ（スラッグ: parents）にのみ Basic 認証をかける。
+ * 「保護者の方」ページ（スラッグ: guardians）にのみ Basic 認証をかける。
  * template_redirect は出力前に実行されるため、ヘッダー送信が可能。
  */
 function seibi_basic_auth_parents() {
