@@ -16,6 +16,7 @@ if ( have_posts() ) :
         'briefing_datetime'          => '日時',
         'briefing_venue'             => '場所',
         'briefing_reception'         => '受付',
+        'briefing_session'           => '説明会',
         'briefing_target'            => '対象',
         'briefing_method'            => '参加方法',
         'briefing_web_cancel_period' => '予約期間',
