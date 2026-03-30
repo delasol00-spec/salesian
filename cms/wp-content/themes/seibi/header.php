@@ -113,7 +113,7 @@
 
       <div class="button-group px-3 mt-4 pb-5">
         <a href="<?php echo esc_url( home_url( '/examinee/' ) ); ?>" class="btn btn-outline-light btn-block btn-sm mb-2">入学をお考えの方</a>
-        <a href="https://www.el.seibi.ac.jp/international/" target="_blank" class="btn btn-outline-light btn-block btn-sm mb-2">帰国生の方<span> (インターナショナルクラス)</span></a>
+        <a href="https://www.el.seibi.ac.jp/international/" target="_blank" class="btn btn-outline-light btn-block btn-sm mb-2">帰国生の方<span> (インターナショナルクラス)</span><span class="material-symbols-outlined">open_in_new</span></a>
         <a href="<?php echo esc_url( home_url( '/graduate/' ) ); ?>" class="btn btn-outline-light btn-block btn-sm mb-2">卒業生の方</a>
         <a href="<?php echo esc_url( home_url( '/guardian/' ) ); ?>" class="btn btn-white btn-block btn-sm mb-2"><span class="material-symbols-outlined">lock</span> 保護者の方</a>
         <div class="inter-banner position-relative">

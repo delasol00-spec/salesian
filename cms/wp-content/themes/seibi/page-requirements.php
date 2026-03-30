@@ -140,7 +140,7 @@ $schedules = [
               <th>児童募集要項</th>
               <td>
                 <a href="<?php echo esc_url( $pdf_url ); ?>" class="btn-slide-r btn-ss btn-pink-r" target="_blank" rel="noopener noreferrer">
-                  こちらからダウンロードいただけます<?php echo $pdf_size ? ' (PDF ' . esc_html( $pdf_size ) . ')' : ''; ?>
+                  こちらからダウンロードいただけます<?php echo $pdf_size ? ' (PDF ' . esc_html( $pdf_size ) . ')' : ''; ?><span class="material-symbols-outlined">open_in_new</span>
                 </a>
               </td>
             </tr>

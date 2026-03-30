@@ -70,7 +70,7 @@ get_header(); ?>
               <?php
               $link_type = get_post_meta( $id, 'briefing_link_type', true ) ?: 'none';
               if ( $link_type === 'detail' ) : ?>
-              <a class="btn-slide btn-m btn-pink" href="<?php echo esc_url( get_permalink() ); ?>"><span class="text">詳細・参加予約はこちらから</span></a>
+              <a class="btn-slide btn-m btn-pink" href="<?php echo esc_url( get_permalink() ); ?>"><span class="text">詳細・参加予約はこちらから<span class="material-symbols-outlined">open_in_new</span></span></a>
               <?php elseif ( $link_type === 'external' ) :
                   $btn_label = get_post_meta( $id, 'briefing_link_label', true );
                   $btn_url   = get_post_meta( $id, 'briefing_link_url', true );
@@ -129,7 +129,6 @@ get_header(); ?>
                 <?php echo esc_html( $val ); ?><br />
               <?php endif; endif; endforeach; ?>
               </p>
-              <?php
               <?php
               $link_type = get_post_meta( $id, 'outside_link_type', true ) ?: 'none';
               if ( $link_type === 'external' ) :
