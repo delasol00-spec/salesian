@@ -258,7 +258,8 @@ $(document).ready(function () {
   function isPageBottom(buffer = 400) {
     const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
     // スクロール余地が少ないページでは途中判定を避ける
-    if (scrollableHeight <= buffer) return false;
+    // 余白がほぼ無い（短い）ページでは「すでに最下部」とみなす
+    if (scrollableHeight <= buffer) return true;
     return window.scrollY >= scrollableHeight - buffer;
   }
 
