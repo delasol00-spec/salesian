@@ -333,7 +333,6 @@ a:hover {
   line-height: 1.4;
 }
 
-
 .info-card:hover {
   background: rgba(255, 255, 255, 0.95);
   transform: translateY(-2px);
@@ -1309,7 +1308,6 @@ a:hover {
 .sitemap-links a.active:hover {
   color: #f67088;
   padding-left: 7px;
-  
 }
 
 .sitemap-links a:hover {
@@ -1691,6 +1689,9 @@ a:hover {
   padding: 0;
 }
 
+/* =================================================
+  タイトル
+  ================================================= */
 .title-s {
   font-weight: bold;
   color: #f67088;
@@ -1732,12 +1733,10 @@ a:hover {
   }
 }
 
-/* =================================================
-  タイトル
-  ================================================= */
 .title-box-s {
   text-align: center;
   margin-bottom: 30px;
+  margin-top: 30px;
 }
 
 .title-box-s h2 {
@@ -1752,7 +1751,11 @@ a:hover {
   セクション
   ================================================= */
 .p-70-70 {
-  padding: 70px 0;
+  padding: 90px 0;
+}
+
+.p-100-100 {
+  padding: 100px 0;
 }
 
 .p-70-white {
@@ -1765,6 +1768,25 @@ a:hover {
   margin-bottom: 30px;
 }
 
+/* =================================================
+  スペーサー
+  ================================================= */
+.ml-10 {
+  margin-left: 10px;
+}
+
+.section50 {
+  padding: 50px 0;
+}
+
+.pb-70 {
+  padding-bottom: 70px;
+}
+
+
+/* =================================================
+  ガター
+  ================================================= */
 .row.row-gutter-5 {
   display: flex;
   flex-wrap: wrap;
@@ -1773,9 +1795,36 @@ a:hover {
   gap: 5px;
 }
 
+.row.row-gutter-1 {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  gap: 1px;
+}
+
 .row.row-gutter-5 > [class*="col-"] {
   padding-left: 0 !important;
   padding-right: 0 !important;
+}
+
+.row.row-gutter-1 > [class*="col-"] {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* .p-70-70 img の共通 margin-bottom:30px を打ち消して、天地も1pxガターに統一 */
+.row.row-gutter-1 img {
+  margin-bottom: 0;
+}
+
+/* 入学式ギャラリー: 縦長画像は上下をトリミングして横幅を揃える */
+.year-grid-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
 /* 見出し等、col 以外の全幅子要素 */
@@ -1789,10 +1838,42 @@ a:hover {
     flex: 0 0 calc((100% - 10px) / 3);
     max-width: calc((100% - 10px) / 3);
   }
+
+  .row.row-gutter-1 > .col-lg-3 {
+    flex: 0 0 calc((100% - 3px) / 4);
+    max-width: calc((100% - 3px) / 4);
+  }
 }
 
 @media (max-width: 991.98px) {
   .row.row-gutter-5 > .col-6 {
+    flex: 0 0 calc((100% - 5px) / 2);
+    max-width: calc((100% - 5px) / 2);
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .row.row-gutter-1 > .col-sm-6 {
+    flex: 0 0 calc((100% - 1px) / 2);
+    max-width: calc((100% - 1px) / 2);
+  }
+}
+
+/* col-md-6：flex + gap があると 50%+50%+gap で折り返すため幅を補正（col-lg-* 付きは既存の列幅指定を優先） */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .row.row-gutter-5 > .col-md-6 {
+    flex: 0 0 calc((100% - 5px) / 2);
+    max-width: calc((100% - 5px) / 2);
+  }
+
+  .row.row-gutter-1 > .col-md-4 {
+    flex: 0 0 calc((100% - 2px) / 3);
+    max-width: calc((100% - 2px) / 3);
+  }
+}
+
+@media (min-width: 992px) {
+  .row.row-gutter-5 > .col-md-6:not([class*="col-lg-"]) {
     flex: 0 0 calc((100% - 5px) / 2);
     max-width: calc((100% - 5px) / 2);
   }
@@ -1803,16 +1884,6 @@ a:hover {
   .p-70-70 > .container {
     padding-left: 55px;
   }
-}
-/* =================================================
-  スペーサー
-  ================================================= */
-.ml-10 {
-  margin-left: 10px;
-}
-
-.section50 {
-  padding: 50px 0;
 }
 
 /* =================================================
@@ -1872,6 +1943,10 @@ p small {
 }
 .bg-purple {
   background-color: #9c27b0;
+}
+
+.bg-gray {
+  background-color: #717171;
 }
 
 .bg-pgray {
@@ -2068,6 +2143,14 @@ p small {
     font-size: 1.1rem;
     padding: 15px 30px 17px;
   }
+
+  .btn-slide span {
+    font-size: 0.9rem;
+    ;
+  }
+  .btn-m {
+    padding: 10px 18px 8px;
+  }
 }
 
 /* =================================================
@@ -2126,28 +2209,13 @@ p small {
   z-index: 2;
 }
 
-/* col-md-6：flex + gap があると 50%+50%+gap で折り返すため幅を補正（col-lg-* 付きは既存の列幅指定を優先） */
-@media (min-width: 768px) and (max-width: 991.98px) {
-  .row.row-gutter-5 > .col-md-6 {
-    flex: 0 0 calc((100% - 5px) / 2);
-    max-width: calc((100% - 5px) / 2);
-  }
-}
-
-@media (min-width: 992px) {
-  .row.row-gutter-5 > .col-md-6:not([class*="col-lg-"]) {
-    flex: 0 0 calc((100% - 5px) / 2);
-    max-width: calc((100% - 5px) / 2);
-  }
-}
-
 /* =================================================
   ピル
   ================================================= */
 .gakunen-pill {
   background: #f67088;
   display: inline-block;
-  padding: 5px 10px 3px;
+  padding: 10px 15px 7px;
   border-radius: 100vh;
   color: #fff;
   font-size: 0.9rem;

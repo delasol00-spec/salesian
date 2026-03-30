@@ -38,7 +38,7 @@ function seibi_get_page_definitions(): array {
             'parent' => 'about',
         ],
         [
-            'title'  => '建学の精神・教育理念',
+            'title'  => '建学の精神･教育理念',
             'slug'   => 'method',
             'parent' => 'about',
         ],
@@ -48,7 +48,7 @@ function seibi_get_page_definitions(): array {
             'parent' => 'about',
         ],
         [
-            'title'  => '制服',
+            'title'  => '星美の制服',
             'slug'   => 'uniform',
             'parent' => 'about',
         ],
@@ -63,12 +63,12 @@ function seibi_get_page_definitions(): array {
             'parent' => 'about',
         ],
         [
-            'title'  => '施設・設備・環境',
+            'title'  => '施設･設備･環境',
             'slug'   => 'facility',
             'parent' => 'about',
         ],
         [
-            'title'  => '災害・セキュリティ対策',
+            'title'  => '災害･セキュリティ対策',
             'slug'   => 'security',
             'parent' => 'about',
         ],
@@ -147,7 +147,7 @@ function seibi_get_page_definitions(): array {
             'parent' => 'life',
         ],
         [
-            'title'  => '委員会・クラブ活動（特別音楽クラブ）',
+            'title'  => '委員会･クラブ活動',
             'slug'   => 'activity',
             'parent' => 'life',
         ],
@@ -174,9 +174,16 @@ function seibi_get_page_definitions(): array {
             'parent' => 'admission',
         ],
         [
-            'title'  => '編転入学について',
+            'title'  => '編転入について',
             'slug'   => 'transfer',
             'parent' => 'admission',
+        ],
+
+        // 保護者の方
+        [
+            'title'  => '保護者の方',
+            'slug'   => 'guardians',
+            'parent' => '',
         ],
     ];
 }
@@ -287,6 +294,67 @@ function seibi_delete_all_pages(): array {
 }
 
 // -----------------------------------------------
+// ページタイトル一括更新処理
+// -----------------------------------------------
+function seibi_update_page_titles(): array {
+    $definitions = seibi_get_page_definitions();
+    $results     = [];
+
+    foreach ( $definitions as $def ) {
+        $posts = get_posts( [
+            'post_type'   => 'page',
+            'post_status' => [ 'publish', 'draft', 'private' ],
+            'name'        => $def['slug'],
+            'numberposts' => 1,
+        ] );
+
+        if ( ! $posts ) {
+            $results[] = [
+                'status' => 'notfound',
+                'slug'   => $def['slug'],
+                'title'  => $def['title'],
+            ];
+            continue;
+        }
+
+        $post = $posts[0];
+        if ( $post->post_title === $def['title'] ) {
+            $results[] = [
+                'status' => 'skip',
+                'slug'   => $def['slug'],
+                'title'  => $def['title'],
+                'id'     => $post->ID,
+            ];
+            continue;
+        }
+
+        $updated = wp_update_post( [
+            'ID'         => $post->ID,
+            'post_title' => $def['title'],
+        ], true );
+
+        if ( is_wp_error( $updated ) ) {
+            $results[] = [
+                'status'  => 'error',
+                'slug'    => $def['slug'],
+                'title'   => $def['title'],
+                'message' => $updated->get_error_message(),
+            ];
+        } else {
+            $results[] = [
+                'status' => 'updated',
+                'slug'   => $def['slug'],
+                'title'  => $def['title'],
+                'id'     => $post->ID,
+                'before' => $post->post_title,
+            ];
+        }
+    }
+
+    return $results;
+}
+
+// -----------------------------------------------
 // 年間行事 月ターム 並び順フィルター（4月〜3月）
 // get_terms() を使う箇所すべてに適用（管理画面・フロントエンド共通）
 // -----------------------------------------------
@@ -391,7 +459,7 @@ function seibi_get_category_groups(): array {
             ],
         ],
         [
-            'label'    => '学校説明会',
+            'label'    => '学校説明会･学外説明会',
             'taxonomy' => 'briefing-flag',
             'items'    => [
                 [ 'name' => 'トップページ', 'slug' => 'top-page' ],
@@ -461,6 +529,7 @@ function seibi_create_categories(): array {
 // -----------------------------------------------
 function seibi_setup_page() {
     $create_results      = null;
+    $update_title_results = null;
     $category_results    = null;
     $year_month_results  = null;
     $delete_results      = null;
@@ -473,6 +542,11 @@ function seibi_setup_page() {
     // 固定ページ作成
     if ( isset( $_POST['seibi_create_pages'] ) && check_admin_referer( 'seibi_setup' ) ) {
         $create_results = seibi_create_pages();
+    }
+
+    // ページタイトル一括更新
+    if ( isset( $_POST['seibi_update_titles'] ) && check_admin_referer( 'seibi_setup' ) ) {
+        $update_title_results = seibi_update_page_titles();
     }
 
     // カテゴリー作成
@@ -599,7 +673,50 @@ function seibi_setup_page() {
 
             <hr>
 
-            <h2>1. 固定ページの一括作成</h2>
+            <h2>1. ページタイトルの一括更新</h2>
+            <p>既存の固定ページのタイトルをプラグイン定義の正しい値に更新します（半角中点などの文字修正に使用）。</p>
+
+            <?php if ( $update_title_results !== null ) : ?>
+                <div class="notice notice-success" style="margin: 10px 0;">
+                    <p>ページタイトル更新処理が完了しました。</p>
+                </div>
+                <table class="widefat striped" style="margin-bottom: 16px;">
+                    <thead>
+                        <tr><th>状態</th><th>スラッグ</th><th>更新後タイトル</th><th>更新前タイトル</th><th>ID</th></tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ( $update_title_results as $r ) : ?>
+                            <tr>
+                                <td>
+                                    <?php if ( $r['status'] === 'updated' ) : ?>
+                                        <span style="color:green;">✓ 更新</span>
+                                    <?php elseif ( $r['status'] === 'skip' ) : ?>
+                                        <span style="color:gray;">— スキップ（変更なし）</span>
+                                    <?php elseif ( $r['status'] === 'notfound' ) : ?>
+                                        <span style="color:#aaa;">— ページなし</span>
+                                    <?php else : ?>
+                                        <span style="color:red;">✗ エラー: <?php echo esc_html( $r['message'] ?? '' ); ?></span>
+                                    <?php endif; ?>
+                                </td>
+                                <td><code><?php echo esc_html( $r['slug'] ); ?></code></td>
+                                <td><?php echo esc_html( $r['title'] ); ?></td>
+                                <td><?php echo esc_html( $r['before'] ?? '—' ); ?></td>
+                                <td><?php echo isset( $r['id'] ) ? esc_html( $r['id'] ) : '—'; ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php endif; ?>
+
+            <p>
+                <button type="submit" name="seibi_update_titles" class="button button-primary button-large">
+                    ページタイトルを一括更新する
+                </button>
+            </p>
+
+            <hr>
+
+            <h2>2. 固定ページの一括作成</h2>
             <p>サイトマップに基づいてすべての固定ページを作成します。既存のページはスキップされます。</p>
 
             <table class="widefat striped" style="margin-bottom: 16px;">
@@ -640,7 +757,7 @@ function seibi_setup_page() {
 
             <hr>
 
-            <h2>2. お知らせカテゴリーの作成</h2>
+            <h2>3. お知らせカテゴリーの作成</h2>
             <p>カスタム分類 <code>information-category</code> にカテゴリーを登録します。既存のカテゴリーはスキップされます。</p>
 
             <table class="widefat striped" style="margin-bottom: 16px;">
@@ -676,7 +793,7 @@ function seibi_setup_page() {
 
             <hr>
 
-            <h2>3. 年間行事（月）タームの作成</h2>
+            <h2>4. 年間行事（月）タームの作成</h2>
             <p>タクソノミー <code>year_month</code> に4月〜3月のタームを登録します。既存のタームはスキップされます。</p>
 
             <?php if ( $year_month_results !== null ) : ?>

@@ -67,4 +67,34 @@ get_header(); ?>
   </div>
 </section>
 
+<section class="p-70-70 bg-white">
+  <div class="container">
+    <h2 class="col-12 sec-title-pink pink">交通安全に関する対策 / 指導</h2>
+    <div class="row">
+      <div class="col-sm-6 col-xs-12 security">
+        <h3 class="title-s">交通指導</h3>
+        <p>１年生とその保護者対象に、歩道の歩き方、横断の仕方について、地元警察署の方に指導していただきます。</p>
+      </div>
+      <div class="col-sm-6 col-xs-12 security">
+        <h3 class="title-s">交通見守り</h3>
+        <p>保護者様の協力で交通見守りを実施。子どもたちの安全を守るだけでなく、大人が見守ることで子どもたちに安心を与えます。</p>
+        <a class="btn-slide btn-m btn-pink" href="../../education/cooperation/parent/"><span class="text">父母の会 交通見守りについて</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="p-70-70">
+  <div class="container">
+    <h2 class="col-12 sec-title-pink pink">その他の訓練 / 指導</h2>
+    <div class="row">
+      <div class="col-sm-6 col-xs-12 security">
+        <h3 class="title-s">応急救護</h3>
+        <img src="<?php echo get_template_directory_uri(); ?>/img/security-img/security-img07.webp" alt="応急救護" class="img-fluid mb-2" />
+        <p>水泳指導の際、必要に応じて応急救護ができるようにするため、全教員を対象に、毎年、ＡＥＤと人工呼吸の訓練をしいてます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <?php get_footer();

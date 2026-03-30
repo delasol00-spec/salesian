@@ -100,4 +100,46 @@ get_header(); ?>
   </div>
 </section>
 
+<section class="p-70-70">
+  <div class="container">
+    <h2 class="sec-title-pink pink">設備</h2>
+    <div class="row">
+      <div class="col-sm-6 col-xs-12 shisetsu">
+        <img src="<?php echo get_template_directory_uri(); ?>/img/facility-img/fac02.webp" loading="lazy" alt="体育館" class="img-fluid" />
+        <p>
+          <span>子どもたちが発信する学内放送</span><br>
+          星美の放送設備は音声だけでなく、映像配信もできる最新の設備を整えています。<br />
+          放送委員が中心となって、朝会や各種案内などを全教室にあるテレビモニターを通して学内へ配信します。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="p-70-70 bg-white">
+  <div class="container">
+    <div class="row">
+      <h2 class="sec-title-pink pink">教育環境</h2>
+    </div>
+    <div class="row mt30">
+      <div class="col-sm-6 col-xs-12 shisetsu shisetsu2">
+        <img src="<?php echo get_template_directory_uri(); ?>/img/facility-img/fac03.webp" loading="lazy" alt="校庭" class="img-fluid" />
+        <p>
+          <span>緑豊かな落ち着いた学園</span><br />
+          本校のある星美学園キャンパスは赤羽の高台にあり、季節ごとに豊かな表情を見せる木々や草花に囲まれています。<br />
+          学習に集中できる環境のほか、キャンパス内の種類豊かな植物たちが自然の教材となっています。
+        </p>
+      </div>
+      <div class="col-sm-6 col-xs-12 shisetsu shisetsu2">
+        <img src="<?php echo get_template_directory_uri(); ?>/img/facility-img/fac04.webp" loading="lazy" alt="体育館" class="img-fluid" />
+        <p>
+          <span>校庭、運動施設の充実</span><br />
+          星美は都内にありながら広い校庭があり、体育の授業や休み時間には子どもたちが伸び伸びと駆け回る風景を見ることができます。<br />
+          その他、体育館、プール、多目的ホールなど子どもたちの教育に必要な教育設備を完備しています。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <?php get_footer();

@@ -26,13 +26,13 @@ function seibi_register_post_types() {
         'supports'     => [ 'title', 'editor', 'thumbnail', 'excerpt' ],
     ] );
 
-    // 学校説明会
+    // 学校説明会･学外説明会
     register_post_type( 'briefing', [
         'labels'       => [
-            'name'          => '学校説明会',
-            'singular_name' => '学校説明会',
-            'add_new_item'  => '学校説明会を追加',
-            'edit_item'     => '学校説明会を編集',
+            'name'          => '学校説明会･学外説明会',
+            'singular_name' => '学校説明会･学外説明会',
+            'add_new_item'  => '学校説明会･学外説明会を追加',
+            'edit_item'     => '学校説明会･学外説明会を編集',
         ],
         'public'       => true,
         'has_archive'  => 'admission/briefing',

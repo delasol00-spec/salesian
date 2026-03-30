@@ -43,7 +43,7 @@ define( 'WP_HOME',    'http://localhost:8110/seibi' );
 define( 'WP_SITEURL', 'http://localhost:8110/seibi/cms' );
 
 // ** デバッグ設定 ** //
-define( 'WP_DEBUG', false );
+define( 'WP_DEBUG', true );
 
 /* リバースプロキシ対応 */
 if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strpos($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') !== false) {

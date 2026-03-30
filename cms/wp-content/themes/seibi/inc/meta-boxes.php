@@ -59,13 +59,16 @@ function seibi_briefing_meta_box_callback( $post ) {
 
     $type = get_post_meta( $post->ID, 'briefing_type', true ) ?: 'school';
 
-    // 学校説明会フィールド
+    // 学校説明会フィールド（一覧ページ・詳細ページ共通）
     $school_fields = [
         'briefing_datetime'          => '日時',
-        'briefing_target'            => '対象',
+        'briefing_venue'             => '場所',
         'briefing_reception'         => '受付',
         'briefing_session'           => '説明会',
-        'briefing_web_cancel_period' => 'WEB予約・キャンセル受付期間',
+        'briefing_target'            => '対象',
+        'briefing_method'            => '参加方法',
+        'briefing_web_cancel_period' => '予約期間',
+        'briefing_notes'             => '注意事項',
     ];
 
     // 学外説明会フィールド
@@ -102,14 +105,6 @@ function seibi_briefing_meta_box_callback( $post ) {
 
     <div id="briefing-school-fields" style="<?php echo $type === 'school' ? '' : 'display:none;'; ?>">
       <table class="form-table"><tbody>
-      <?php foreach ( $school_fields as $key => $label ) :
-          $value = get_post_meta( $post->ID, $key, true ); ?>
-        <tr>
-          <th style="width:220px;"><label for="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $label ); ?></label></th>
-          <td><input type="text" id="<?php echo esc_attr( $key ); ?>" name="<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( $value ); ?>" class="widefat" /></td>
-        </tr>
-      <?php endforeach; ?>
-        <tr><td colspan="2"><hr style="margin:8px 0;" /></td></tr>
         <tr>
           <th>ボタン・リンク</th>
           <td>
@@ -139,33 +134,31 @@ function seibi_briefing_meta_box_callback( $post ) {
             </div>
           </td>
         </tr>
+        <tr><td colspan="2"><hr style="margin:8px 0;" /></td></tr>
+      <?php foreach ( $school_fields as $key => $label ) :
+          $value = get_post_meta( $post->ID, $key, true ); ?>
+        <tr>
+          <th style="width:220px;"><label for="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $label ); ?></label></th>
+          <td><input type="text" id="<?php echo esc_attr( $key ); ?>" name="<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( $value ); ?>" class="widefat" /></td>
+        </tr>
+      <?php endforeach; ?>
       </tbody></table>
+      <p style="margin:12px 0 4px; font-weight:bold;">自由入力欄</p>
+      <?php wp_editor(
+          get_post_meta( $post->ID, 'briefing_capacity_note', true ),
+          'briefing_capacity_note',
+          [ 'textarea_name' => 'briefing_capacity_note', 'media_buttons' => false, 'teeny' => true, 'textarea_rows' => 20 ]
+      ); ?>
     </div>
 
     <div id="briefing-outside-fields" style="<?php echo $type === 'outside' ? '' : 'display:none;'; ?>">
       <table class="form-table"><tbody>
-      <?php foreach ( $outside_fields as $key => $label ) :
-          $value = get_post_meta( $post->ID, $key, true ); ?>
-        <tr>
-          <th style="width:220px;"><label for="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $label ); ?></label></th>
-          <?php if ( $key === 'outside_description' ) : ?>
-          <td><textarea id="<?php echo esc_attr( $key ); ?>" name="<?php echo esc_attr( $key ); ?>" class="widefat" rows="3"><?php echo esc_textarea( $value ); ?></textarea></td>
-          <?php else : ?>
-          <td><input type="text" id="<?php echo esc_attr( $key ); ?>" name="<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( $value ); ?>" class="widefat" /></td>
-          <?php endif; ?>
-        </tr>
-      <?php endforeach; ?>
-        <tr><td colspan="2"><hr style="margin:8px 0;" /></td></tr>
         <tr>
           <th>ボタン・リンク</th>
           <td>
             <label style="display:block; margin-bottom:6px;">
               <input type="radio" name="outside_link_type" value="none" <?php checked( $outside_link_type, 'none' ); ?> />
               リンクなし
-            </label>
-            <label style="display:block; margin-bottom:6px;">
-              <input type="radio" name="outside_link_type" value="detail" <?php checked( $outside_link_type, 'detail' ); ?> />
-              詳細ページ（ボタン名:「詳細・参加予約はこちらから」）
             </label>
             <label style="display:block;">
               <input type="radio" name="outside_link_type" value="external" <?php checked( $outside_link_type, 'external' ); ?> />
@@ -185,6 +178,18 @@ function seibi_briefing_meta_box_callback( $post ) {
             </div>
           </td>
         </tr>
+        <tr><td colspan="2"><hr style="margin:8px 0;" /></td></tr>
+      <?php foreach ( $outside_fields as $key => $label ) :
+          $value = get_post_meta( $post->ID, $key, true ); ?>
+        <tr>
+          <th style="width:220px;"><label for="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $label ); ?></label></th>
+          <?php if ( $key === 'outside_description' ) : ?>
+          <td><textarea id="<?php echo esc_attr( $key ); ?>" name="<?php echo esc_attr( $key ); ?>" class="widefat" rows="3"><?php echo esc_textarea( $value ); ?></textarea></td>
+          <?php else : ?>
+          <td><input type="text" id="<?php echo esc_attr( $key ); ?>" name="<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( $value ); ?>" class="widefat" /></td>
+          <?php endif; ?>
+        </tr>
+      <?php endforeach; ?>
       </tbody></table>
     </div>
 
@@ -239,15 +244,19 @@ function seibi_briefing_meta_save( $post_id ) {
     // 学校説明会フィールド
     $school_text_fields = [
         'briefing_datetime',
-        'briefing_target',
+        'briefing_venue',
         'briefing_reception',
         'briefing_session',
+        'briefing_target',
+        'briefing_method',
         'briefing_web_cancel_period',
+        'briefing_notes',
         'briefing_link_label',
     ];
     foreach ( $school_text_fields as $key ) {
         update_post_meta( $post_id, $key, sanitize_text_field( wp_unslash( $_POST[ $key ] ?? '' ) ) );
     }
+    update_post_meta( $post_id, 'briefing_capacity_note', wp_kses_post( wp_unslash( $_POST['briefing_capacity_note'] ?? '' ) ) );
     $briefing_link_type = in_array( $_POST['briefing_link_type'] ?? '', [ 'none', 'detail', 'external' ], true )
         ? $_POST['briefing_link_type']
         : 'none';
@@ -639,11 +648,14 @@ function seibi_event_meta_box_callback( $post ) {
     wp_nonce_field( 'seibi_event_meta_save', 'seibi_event_meta_nonce' );
 
     $text_fields = [
-        'event_date'   => '日時',
-        'event_place'  => '場所',
-        'event_target' => '参加対象',
-        'event_method' => '参加方法',
-        'event_period' => '予約期間',
+        'event_date'      => '日時',
+        'event_place'     => '場所',
+        'event_reception' => '受付',
+        'event_items'     => '持ち物',
+        'event_target'    => '参加対象',
+        'event_method'    => '参加方法',
+        'event_period'    => '予約期間',
+        'event_notes'     => '注意事項',
     ];
     $event_link_type = get_post_meta( $post->ID, 'event_link_type', true ) ?: 'none';
     printf(
@@ -655,16 +667,6 @@ function seibi_event_meta_box_callback( $post ) {
         checked( get_post_meta( $post->ID, 'event_reservation_required', true ), '1', false )
     );
     echo '<table class="form-table"><tbody>';
-    foreach ( $text_fields as $key => $label ) {
-        $value = get_post_meta( $post->ID, $key, true );
-        printf(
-            '<tr><th style="width:260px;"><label for="%1$s">%2$s</label></th>'
-            . '<td><input type="text" id="%1$s" name="%1$s" value="%3$s" class="widefat" /></td></tr>',
-            esc_attr( $key ),
-            esc_html( $label ),
-            esc_attr( $value )
-        );
-    }
     ?>
     <tr>
       <th>ボタン・リンク</th>
@@ -695,6 +697,26 @@ function seibi_event_meta_box_callback( $post ) {
         </div>
       </td>
     </tr>
+    <tr><td colspan="2"><hr style="margin:8px 0;" /></td></tr>
+    <?php
+    foreach ( $text_fields as $key => $label ) {
+        $value = get_post_meta( $post->ID, $key, true );
+        printf(
+            '<tr><th style="width:260px;"><label for="%1$s">%2$s</label></th>'
+            . '<td><input type="text" id="%1$s" name="%1$s" value="%3$s" class="widefat" /></td></tr>',
+            esc_attr( $key ),
+            esc_html( $label ),
+            esc_attr( $value )
+        );
+    }
+    echo '</tbody></table>';
+    echo '<p style="margin:12px 0 4px; font-weight:bold;">自由入力欄</p>';
+    wp_editor(
+        get_post_meta( $post->ID, 'event_capacity_note', true ),
+        'event_capacity_note',
+        [ 'textarea_name' => 'event_capacity_note', 'media_buttons' => false, 'teeny' => true, 'textarea_rows' => 20 ]
+    );
+    ?>
     <script>
     (function() {
         document.querySelectorAll('input[name="event_link_type"]').forEach(function(radio) {
@@ -706,7 +728,6 @@ function seibi_event_meta_box_callback( $post ) {
     })();
     </script>
     <?php
-    echo '</tbody></table>';
 }
 
 function seibi_event_meta_save( $post_id ) {
@@ -715,8 +736,9 @@ function seibi_event_meta_save( $post_id ) {
     }
 
     $text_fields = [
-        'event_date', 'event_place', 'event_target',
-        'event_method', 'event_period', 'event_link_label',
+        'event_date', 'event_place', 'event_reception',
+        'event_items', 'event_target', 'event_method',
+        'event_period', 'event_notes', 'event_link_label',
     ];
     foreach ( $text_fields as $key ) {
         update_post_meta( $post_id, $key, sanitize_text_field( wp_unslash( $_POST[ $key ] ?? '' ) ) );
@@ -726,6 +748,7 @@ function seibi_event_meta_save( $post_id ) {
         : 'none';
     update_post_meta( $post_id, 'event_link_type', $event_link_type );
     update_post_meta( $post_id, 'event_link_url', esc_url_raw( wp_unslash( $_POST['event_link_url'] ?? '' ) ) );
+    update_post_meta( $post_id, 'event_capacity_note', wp_kses_post( wp_unslash( $_POST['event_capacity_note'] ?? '' ) ) );
     update_post_meta( $post_id, 'event_reservation_required', isset( $_POST['event_reservation_required'] ) ? '1' : '0' );
 }
 add_action( 'save_post_event', 'seibi_event_meta_save' );

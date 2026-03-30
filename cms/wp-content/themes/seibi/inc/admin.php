@@ -135,3 +135,67 @@ function seibi_remove_editor_for_requirements() {
     }
 }
 add_action( 'admin_init', 'seibi_remove_editor_for_requirements' );
+
+// -----------------------------------------------
+// 年間行事 一覧：月（year_month）絞り込みフィルター
+// -----------------------------------------------
+
+/**
+ * 「月」ドロップダウンを投稿一覧のフィルターバーに追加
+ */
+function seibi_year_month_filter_dropdown() {
+    $screen = get_current_screen();
+    if ( ! $screen || $screen->post_type !== 'year' ) {
+        return;
+    }
+
+    $selected = isset( $_GET['year_month_filter'] ) ? sanitize_text_field( $_GET['year_month_filter'] ) : '';
+
+    $terms = get_terms( [
+        'taxonomy'   => 'year_month',
+        'hide_empty' => false,
+    ] );
+
+    if ( is_wp_error( $terms ) || empty( $terms ) ) {
+        return;
+    }
+
+    echo '<select name="year_month_filter">';
+    echo '<option value="">すべての月</option>';
+    foreach ( $terms as $term ) {
+        printf(
+            '<option value="%s"%s>%s</option>',
+            esc_attr( $term->slug ),
+            selected( $selected, $term->slug, false ),
+            esc_html( $term->name )
+        );
+    }
+    echo '</select>';
+}
+add_action( 'restrict_manage_posts', 'seibi_year_month_filter_dropdown' );
+
+/**
+ * ドロップダウン選択値を WP_Query に反映
+ */
+function seibi_year_month_filter_query( $query ) {
+    if ( ! is_admin() || ! $query->is_main_query() ) {
+        return;
+    }
+    if ( $query->get( 'post_type' ) !== 'year' ) {
+        return;
+    }
+    $filter = isset( $_GET['year_month_filter'] ) ? sanitize_text_field( $_GET['year_month_filter'] ) : '';
+    if ( $filter === '' ) {
+        return;
+    }
+
+    $tax_query = [
+        [
+            'taxonomy' => 'year_month',
+            'field'    => 'slug',
+            'terms'    => $filter,
+        ],
+    ];
+    $query->set( 'tax_query', $tax_query );
+}
+add_action( 'pre_get_posts', 'seibi_year_month_filter_query' );
