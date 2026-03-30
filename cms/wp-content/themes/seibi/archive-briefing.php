@@ -130,10 +130,9 @@ get_header(); ?>
               <?php endif; endif; endforeach; ?>
               </p>
               <?php
+              <?php
               $link_type = get_post_meta( $id, 'outside_link_type', true ) ?: 'none';
-              if ( $link_type === 'detail' ) : ?>
-              <a class="btn-slide btn-m btn-pink" href="<?php echo esc_url( get_permalink() ); ?>"><span class="text">詳細・参加予約はこちらから</span></a>
-              <?php elseif ( $link_type === 'external' ) :
+              if ( $link_type === 'external' ) :
                   $btn_label = get_post_meta( $id, 'outside_link_label', true );
                   $btn_url   = get_post_meta( $id, 'outside_link_url', true );
                   if ( $btn_label && $btn_url ) : ?>

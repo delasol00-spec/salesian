@@ -153,28 +153,12 @@ function seibi_briefing_meta_box_callback( $post ) {
 
     <div id="briefing-outside-fields" style="<?php echo $type === 'outside' ? '' : 'display:none;'; ?>">
       <table class="form-table"><tbody>
-      <?php foreach ( $outside_fields as $key => $label ) :
-          $value = get_post_meta( $post->ID, $key, true ); ?>
-        <tr>
-          <th style="width:220px;"><label for="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $label ); ?></label></th>
-          <?php if ( $key === 'outside_description' ) : ?>
-          <td><textarea id="<?php echo esc_attr( $key ); ?>" name="<?php echo esc_attr( $key ); ?>" class="widefat" rows="3"><?php echo esc_textarea( $value ); ?></textarea></td>
-          <?php else : ?>
-          <td><input type="text" id="<?php echo esc_attr( $key ); ?>" name="<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( $value ); ?>" class="widefat" /></td>
-          <?php endif; ?>
-        </tr>
-      <?php endforeach; ?>
-        <tr><td colspan="2"><hr style="margin:8px 0;" /></td></tr>
         <tr>
           <th>ボタン・リンク</th>
           <td>
             <label style="display:block; margin-bottom:6px;">
               <input type="radio" name="outside_link_type" value="none" <?php checked( $outside_link_type, 'none' ); ?> />
               リンクなし
-            </label>
-            <label style="display:block; margin-bottom:6px;">
-              <input type="radio" name="outside_link_type" value="detail" <?php checked( $outside_link_type, 'detail' ); ?> />
-              詳細ページ（ボタン名:「詳細・参加予約はこちらから」）
             </label>
             <label style="display:block;">
               <input type="radio" name="outside_link_type" value="external" <?php checked( $outside_link_type, 'external' ); ?> />
@@ -194,6 +178,18 @@ function seibi_briefing_meta_box_callback( $post ) {
             </div>
           </td>
         </tr>
+        <tr><td colspan="2"><hr style="margin:8px 0;" /></td></tr>
+      <?php foreach ( $outside_fields as $key => $label ) :
+          $value = get_post_meta( $post->ID, $key, true ); ?>
+        <tr>
+          <th style="width:220px;"><label for="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $label ); ?></label></th>
+          <?php if ( $key === 'outside_description' ) : ?>
+          <td><textarea id="<?php echo esc_attr( $key ); ?>" name="<?php echo esc_attr( $key ); ?>" class="widefat" rows="3"><?php echo esc_textarea( $value ); ?></textarea></td>
+          <?php else : ?>
+          <td><input type="text" id="<?php echo esc_attr( $key ); ?>" name="<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( $value ); ?>" class="widefat" /></td>
+          <?php endif; ?>
+        </tr>
+      <?php endforeach; ?>
       </tbody></table>
     </div>
 
