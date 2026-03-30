@@ -648,11 +648,14 @@ function seibi_event_meta_box_callback( $post ) {
     wp_nonce_field( 'seibi_event_meta_save', 'seibi_event_meta_nonce' );
 
     $text_fields = [
-        'event_date'   => '日時',
-        'event_place'  => '場所',
-        'event_target' => '参加対象',
-        'event_method' => '参加方法',
-        'event_period' => '予約期間',
+        'event_date'      => '日時',
+        'event_place'     => '場所',
+        'event_reception' => '受付',
+        'event_items'     => '持ち物',
+        'event_target'    => '参加対象',
+        'event_method'    => '参加方法',
+        'event_period'    => '予約期間',
+        'event_notes'     => '注意事項',
     ];
     $event_link_type = get_post_meta( $post->ID, 'event_link_type', true ) ?: 'none';
     printf(
@@ -733,8 +736,9 @@ function seibi_event_meta_save( $post_id ) {
     }
 
     $text_fields = [
-        'event_date', 'event_place', 'event_target',
-        'event_method', 'event_period', 'event_link_label',
+        'event_date', 'event_place', 'event_reception',
+        'event_items', 'event_target', 'event_method',
+        'event_period', 'event_notes', 'event_link_label',
     ];
     foreach ( $text_fields as $key ) {
         update_post_meta( $post_id, $key, sanitize_text_field( wp_unslash( $_POST[ $key ] ?? '' ) ) );

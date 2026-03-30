@@ -13,11 +13,14 @@ if ( have_posts() ) :
     $id = get_the_ID();
 
     $detail_fields = [
-        'event_date'   => '日時',
-        'event_place'  => '場所',
-        'event_target' => '参加対象',
-        'event_method' => '参加方法',
-        'event_period' => '予約期間',
+        'event_date'      => '日時',
+        'event_place'     => '場所',
+        'event_reception' => '受付',
+        'event_items'     => '持ち物',
+        'event_target'    => '参加対象',
+        'event_method'    => '参加方法',
+        'event_period'    => '予約期間',
+        'event_notes'     => '注意事項',
     ];
 
     $capacity_note = get_post_meta( $id, 'event_capacity_note', true );
