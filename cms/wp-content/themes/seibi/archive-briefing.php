@@ -18,7 +18,7 @@ get_header(); ?>
       <img src="<?php echo get_template_directory_uri(); ?>/img/admission/admission-bg.webp" alt="" class="sub-hero-img" />
     </div>
     <section class="page-title">
-      <h1>学校説明会・公開行事</h1>
+      <h1>学校説明会･学外説明会</h1>
       <div class="inner-border"></div>
     </section>
   </main>

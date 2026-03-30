@@ -147,7 +147,7 @@ function seibi_get_page_definitions(): array {
             'parent' => 'life',
         ],
         [
-            'title'  => '委員会･クラブ活動（特別音楽クラブ）',
+            'title'  => '委員会･クラブ活動',
             'slug'   => 'activity',
             'parent' => 'life',
         ],
@@ -452,7 +452,7 @@ function seibi_get_category_groups(): array {
             ],
         ],
         [
-            'label'    => '学校説明会',
+            'label'    => '学校説明会･学外説明会',
             'taxonomy' => 'briefing-flag',
             'items'    => [
                 [ 'name' => 'トップページ', 'slug' => 'top-page' ],
