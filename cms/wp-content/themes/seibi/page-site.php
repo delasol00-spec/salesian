@@ -8,15 +8,150 @@
 
 get_header(); ?>
 
-<?php get_template_part( 'template-parts/page-hero', null, [ 'hero_img' => 'img/about/about-bg.webp' ] ); ?>
+<?php get_template_part( 'template-parts/page-hero', null, [ 'hero_img' => 'img/about/about-bg.webp', 'hero_sp_img' => 'img/about/hero-about-bg.webp' ] ); ?>
 
-<section class="p-70-70">
+<section class="p-70-70 about-site">
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-lg-8">
-        <?php if ( have_posts() ) : the_post(); ?>
-        <?php the_content(); ?>
-        <?php endif; ?>
+      <div class="sec-title-pink pink"><h3>このサイトについて</h3></div>
+
+      <div class="col-lg-8 col-md-6">
+        <p>
+          サレジアン国際学園小学校（以下「本校」といいます）のウェブサイト（以下「本ウェブサイト」といいます）をご利用いただきありがとうございます。<br />
+          ご利用前に、本規約をよくお読みいただき、全事項に同意される方のみご利用ください。 なお、本利用規約は予告なく変更されることがあります。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="p-70-70 bg-white about-site">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="sec-title-pink pink"><h3>著作権ならびに使用許諾条件</h3></div>
+
+      <div class="col-lg-8 col-md-6">
+        <p>
+          本ウェブサイトに記載されている情報の著作権は、本校および提供者に帰属します。 コンテンツとは、文章、図、写 真、動画・音声ファイルおよびそれらの構成・編集など、 著作権法その他の法令により保護されている著作物を指します。<br>
+          従って、本ウェブサイトのいかなる部分もダウンロード、または変更しないという制限の下でのみ、ご利用を認めています。<br />
+          書面による明示的な承諾を得ていない限り、営利・非営利にかかわらず、複製、複写、コピー、販売、転売、再販、その他の再利用は堅くお断りいたします。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="p-70-70 about-site">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="sec-title-pink pink"><h3>禁止事項</h3></div>
+
+      <div class="col-lg-8 col-md-6">
+        <p>本ウェブサイトのご利用に際し、次の行為を固く禁じます。</p>
+        <ol>
+          <li>第三者もしくは、利用者と本ウェブサイトおよび本校の財産もしくはプライバシー等を侵害する行為、または侵害する恐れのある行為。</li>
+          <li>第三者もしくは、利用者と本ウェブサイトおよび本校に、不利益もしくは損害を与える行為、またはその恐れのある行為。</li>
+          <li>公序良俗に反する行為、またはその恐れのある行為。</li>
+          <li>犯罪行為もしくは犯罪行為に結びつく行為、またはその恐れのある行為。</li>
+          <li>他人の電子メールアドレスを登録･取得する等、虚偽の申告、届出を行なう行為。</li>
+          <li>コンピュータウィルス等有害なプログラムを使用もしくは提供する行為、またはその恐れのある行為。</li>
+          <li>児童、教職員、保護者、その他第三者の肖像権を侵害する行為、またはその恐れのある行為（本ウェブサイト上の写真・動画等を無断で転載、複写、改ざん、SNS等へ配布する行為を含む）。</li>
+          <li>本校の校章、ロゴマーク、独自の教育コンテンツ、その他知的財産を無断で使用、再配布または営利目的に利用する行為。</li>
+          <li>プログラム、ボット、スクレイピング等の技術を用いて本ウェブサイトの情報を自動収集する行為、または収集した情報を生成AI等の機械学習に利用する行為。</li>
+          <li>本ウェブサイトの運営を妨げ、ネットワークまたはサーバーに過度な負荷をかける行為、および不正アクセスを試みる行為。</li>
+          <li>本ウェブサイトを通じて得た情報を、政治活動、宗教活動、営利活動、または公序良俗に反する宣伝行為に利用する行為。</li>
+          <li>その他、法律、法令もしくは条例に違反する行為、またはその恐れのある行為。</li>
+          <li>その他、本校または提供者が不適切と判断する行為。</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="p-70-70 bg-white about-site">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="sec-title-pink pink"><h3>免責事項</h3></div>
+
+      <div class="col-lg-8 col-md-6">
+        <ol>
+          <li>本ウェブサイトに記載された情報の内容が正確であるかどうか、有用なものであるか、確実なものであるか、ご使用になる皆様の目的に合ったものか、安全なものであるかについて、一切の保証を与えるものではありません。</li>
+          <li>本ウェブサイトに含まれる情報もしくは内容を利用することで直接・間接的に生じた損失に関し一切責任を負わないものとします。</li>
+          <li>本校は、予告なしに本ウェブサイト上の情報を変更することがあります。また、本ウェブサイトの運営を中断又は中止させて頂くことがあります。あらかじめご了承ください。</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="p-70-70 about-site">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="sec-title-pink pink"><h3>リンクについて</h3></div>
+
+      <div class="col-lg-8 col-md-6">
+        <p>
+          リンク先として設定するURLは、原則として本ウェブサイトのトップページ（ https://www.el.seibi.ac.jp/ ）とさせていただきます。<br />
+          本ウェブサイトのURLを予告なしに変更する場合があります。あらかじめご了承ください。
+        </p>
+        <p>次のようなウェブサイトからのリンクを固くお断りいたします。</p>
+        <ol>
+          <li>第三者もしくは、利用者と本ウェブサイトおよび本校を誹謗中傷したり、信用失墜を意図する内容を含んだウェブサイト。</li>
+          <li>第三者もしくは、利用者と本ウェブサイトおよび本校の著作権、商標権等の知的財産権、財産、プライバシーもしくは肖像権その他の権利を侵害する行為、または侵害するおそれのあるウェブサイト。</li>
+          <li>
+            フレーム内で本ウェブサイトが展開されるなど、本ウェブサイトのコンテンツであることが不明確となり、第三者に誤解を与える可能性があるウェブサイト。<br />
+            ※必ず画面が完全に本ウェブサイトに切り替わるか、新しいブラウザウインドウが開いて、本ウェブサイトが表示される形でリンクを設定してください。
+          </li>
+          <li>上記各項目の他、法律、条例、規則を含む法令または公序良俗に違反する行為、本ウェブサイトの運営を妨害行為するおそれのあるウェブサイト。</li>
+          <li>その他、本校が不適切と判断するウェブサイト。</li>
+        </ol>
+        <p>
+          本ウェブサイトは、本校関係者以外の団体等が作成または管理している他のウェブサイトとリンクされることがあります。<br />
+          本校においては、それらの他のウェブサイトの内容、動作または運営主体について何らの表明または保証も行うものではありません。<br />
+          また、当該リンク（本校関係者、非関係者によるとを問わず）によって、本校がそれらの他のウェブサイトの内容、動作または運営主体を承認したことを意味するものではありません。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="p-70-70 bg-white about-site">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="sec-title-pink pink"><h3>閲覧環境</h3></div>
+
+      <div class="col-lg-8 col-md-6">
+        <p>
+          本ウェブサイトをより安全で快適にご利用いただくために、下記のブラウザ、OS環境での閲覧を推奨いたします。<br />
+          ご利用のソフトウェアのバージョンをご確認の上、最新のアップデートを適用していただくようお願いいたします。
+        </p>
+        <p>
+          <strong>本ウェブサイトで利用している技術</strong><br />
+          本サイトは、W3C（World Wide Web Consortium）が推奨する最新のWeb標準技術（HTML/CSS）およびJavaScriptを利用して構築されています。<br />
+          これらの技術をサポートした現代的なブラウザであれば、快適に閲覧することが可能です。<br />
+          ※ご利用の環境（OS・ブラウザの組み合わせ）によっては、表示上の微細な差異が生じる場合があります。
+        </p>
+        <p>
+          <strong>推奨ブラウザ</strong><br />
+          各ブラウザの最新バージョンでの閲覧を推奨します。<br />
+          ・Google Chrome<br />
+          ・Microsoft Edge<br />
+          ・Mozilla Firefox<br />
+          ・Safari<br />
+          ※Internet Explorer（全バージョン）については、Microsoft社のサポート終了に伴い非対応となっております。
+        </p>
+        <p>
+          <strong>プラグイン</strong><br />
+          当ウェブサイトでは、資料の配布等にPDFファイルを使用しています。<br />
+          PDFファイルが開けない場合は、最新のWebブラウザ（Google Chrome, Microsoft Edge等）をご利用いただくか、 Adobe社のウェブサイトより無料で配布されている「Adobe Acrobat Reader」をインストールしてご確認ください。
+        </p>
+        <p>
+          <strong>JavaScript</strong><br />
+          本ウェブサイトでは、より便利にご利用いただくためJavaScriptを使用しております。全てのコンテンツを快適にご利用いただくために、ブラウザの設定でJavaScriptを有効にしていただくことを推奨いたします。
+        </p>
+        <noscript>
+          <p style="color: red;"><strong>※現在、ご使用のブラウザでJavaScriptが無効になっているため、一部の機能が正しく動作しません。</strong></p>
+        </noscript>
       </div>
     </div>
   </div>
