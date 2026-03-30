@@ -93,6 +93,11 @@
   margin: 0 !important;
   padding: 0 !important;
 }
+
+/* アコーディオン見出しとサブメニューの境目（開いたときだけ） */
+.menu-list .nav-item .sub-menu-wrapper.collapse.show {
+  border-top: 1px solid rgba(255, 255, 255, 0.28);
+}
 .sub-menu-wrapper ul {
   list-style: none;
   margin: 0 !important;
@@ -133,6 +138,11 @@
 /* 「入試について」専用のサブメニュー背景 */
 .menu-admission .sub-menu-wrapper {
   background-color: #e56078 !important;
+}
+
+/* 一般ルールより詳細度を上げて入試ブロック用の境界線を上書き */
+.menu-list .nav-item.menu-admission .sub-menu-wrapper.collapse.show {
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
 }
 
 /* サブメニュー内のリンクの色や枠線も調整する場合 */
@@ -291,20 +301,6 @@ body.menu-open #sidebar-overlay {
   transform: rotate(-45deg);
   width: 28px;
 }
-
-/* --- サイドバー (PC) --- */
-/*.sidebar {
-  background-color: rgba(0, 82, 151, 0.95);
-  color: white;
-  width: 260px;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 2000;
-  transition: transform 0.4s ease;
-  overflow-y: auto;
-}*/
 
 /* --- サイドバー本体 --- */
 #sidebarMenu {
@@ -547,7 +543,7 @@ body.menu-open #sidebar-overlay {
 
 /* アクティブな項目の基本スタイル */
 .menu-list .nav-link.current-active {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: transparent;
   color: #fff !important;
   font-weight: bold;
   position: relative;
@@ -566,14 +562,33 @@ body.menu-open #sidebar-overlay {
 
 /* サブメニュー（階層下）がアクティブな時のスタイル */
 .sub-menu-wrapper .nav-link.sub-link.current-active {
-  background-color: rgba(0, 0, 0, 0.1) !important;
+  background-color: transparent !important;
   color: #fff !important;
   padding-left: 30px !important;
 }
 
+/* 開いているアコーディオンのスイッチ — 通常スイッチをホバーしたときと同じ濃さ */
+#sidebarMenu .menu-list .nav-link[data-toggle="collapse"][aria-expanded="true"] {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+}
+
+/* 開いたスイッチをホバーしたときは「他のスイッチをホバーしたとき」と同じ色 */
+#sidebarMenu .menu-list .nav-link[data-toggle="collapse"][aria-expanded="true"]:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 入試について — 開いたときは通常時より少し濃いピンクにする */
+#sidebarMenu .menu-admission > .nav-link[data-toggle="collapse"][aria-expanded="true"] {
+  background-color: #d44d64 !important;
+}
+
+#sidebarMenu .menu-admission > .nav-link[data-toggle="collapse"][aria-expanded="true"]:hover {
+  background-color: #c7455c !important;
+}
+
 /* 入試情報など元々色が違う項目の場合 */
 .menu-admission .nav-link.current-active {
-  background-color: #d44d64 !important;
+  background-color: transparent !important;
 }
 
 .menu-admission .nav-link.current-active::before {
