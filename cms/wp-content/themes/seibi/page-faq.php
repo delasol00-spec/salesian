@@ -97,15 +97,6 @@ get_header(); ?>
           </div>
         </div>
 
-        <h2 class="sec-title-pink pink">その他</h2>
-
-        <div class="faq-q r-top-10">保護者が参加する行事はどれくらいありますか。</div>
-        <div class="faq-a r-bottom-10">
-          「家庭との連携･教育」のページをご参照ください。
-          <div class="btn-group">
-            <a href="<?php echo esc_url( home_url( '/life/cooperation/' ) ); ?>" class="btn-slide btn-mini btn-pink btn-right">家庭との連携･教育 <span class="material-symbols-outlined"> keyboard_double_arrow_right </span></a>
-          </div>
-        </div>
       </div>
     </div>
   </div>

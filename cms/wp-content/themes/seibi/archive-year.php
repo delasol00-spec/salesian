@@ -77,7 +77,7 @@ $months = [
                     if ( ! empty( $ids ) ) : ?>
                       <p>
                         <a href="<?php echo esc_url( get_permalink( $post->ID ) ); ?>">
-                          <?php echo esc_html( get_the_title( $post ) ); ?>
+                          <span class="material-symbols-outlined year-detail-symbol" aria-hidden="true">photo_camera</span><?php echo esc_html( get_the_title( $post ) ); ?>
                         </a>
                       </p>
                     <?php else : ?>

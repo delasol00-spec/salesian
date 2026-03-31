@@ -7,10 +7,26 @@
 
 get_header(); ?>
 
-<main id="main-404">
-    <h1>404 - ページが見つかりません</h1>
-    <p>お探しのページは存在しないか、移動した可能性があります。</p>
-    <a href="<?php echo esc_url( home_url( '/' ) ); ?>">トップページへ戻る</a>
-</main>
+<div class="container-fluid p-0">
+  <main class="sub-page-view">
+    <div class="sub-hero">
+      <picture>
+        <source media="(max-width: 991px)" srcset="<?php echo get_template_directory_uri(); ?>/img/404-sp.webp" />
+        <img src="<?php echo get_template_directory_uri(); ?>/img/404.webp" alt="" class="sub-hero-img" />
+      </picture>
+    </div>
+
+    <section class="page-title">
+      <h1>ページが見つかりませんでした</h1>
+      <div class="inner-border"></div>
+    </section>
+  </main>
+</div>
+
+<section class="page404">
+  <p>ゴメンナサイ、お探しのページが見つかりませんでした。<br>
+  メニューを開いてページをお探しいただくか、<br>
+  下のページ一覧でご希望のページをお探しください。</p>
+</section>
 
 <?php get_footer();

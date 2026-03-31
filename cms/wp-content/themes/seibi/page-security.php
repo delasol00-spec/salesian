@@ -8,7 +8,7 @@
 
 get_header(); ?>
 
-<?php get_template_part( 'template-parts/page-hero', null, [ 'hero_img' => 'img/about/about-bg.webp' ] ); ?>
+<?php get_template_part( 'template-parts/page-hero', null, [ 'hero_img' => 'img/about/about-bg.webp', 'hero_sp_img' => 'img/about/hero-about-bg.webp' ] ); ?>
 
 <section class="p-70-70">
   <div class="container">
@@ -61,7 +61,7 @@ get_header(); ?>
       <div class="col-sm-6 col-xs-12 security">
         <h3 class="title-s">登下校ミマモルメと保護者一斉メール配信</h3>
         <img src="<?php echo get_template_directory_uri(); ?>/img/security-img/security-img04.webp" alt="ミマモルメ" class="img-fluid mb-2" />
-        <p>平成23年9月から導入しました「登下校 ミマモルメ」は、子どもの登下校を見守ってくれます。子どものカバンなどに入れたICタグによって、子どもが校門を通過すると、ハンズフリーの無線ICタグが自動で感知してその情報を保護者様の携帯電話などにメールで自動配信します。<br />また、学校から、保護者様に対して、学級閉鎖や天候原因などによる登下校時間の変更などの通知といった緊急情報も、登録しているアドレスにメールで一斉送信することが可能です。</p>
+        <p>平成23年9月から導入しました「登下校 ミマモルメ」は、子どもの登下校を見守ってくれます。子どものカバンなどに入れたICタグによって、子どもが校門を通過すると、ハンズフリーの無線ICタグが自動で感知してその情報を保護者様の携帯電話などにメールで自動配信します。子ども達と保護者様に安心をお届けすることができます。<br />また、学校から、保護者様に対して、学級閉鎖や天候原因などによる登下校時間の変更などの通知といった緊急情報も、登録しているアドレスにメールで一斉送信することが可能です。電話連絡網で伝えるよりも確実に、素早く情報を伝達することができ「学校とお家を繋ぐ新しいコミュニケーションのツール」として機能します。</p>
       </div>
     </div>
   </div>
@@ -78,7 +78,6 @@ get_header(); ?>
       <div class="col-sm-6 col-xs-12 security">
         <h3 class="title-s">交通見守り</h3>
         <p>保護者様の協力で交通見守りを実施。子どもたちの安全を守るだけでなく、大人が見守ることで子どもたちに安心を与えます。</p>
-        <a class="btn-slide btn-m btn-pink" href="../../education/cooperation/parent/"><span class="text">父母の会 交通見守りについて</span></a>
       </div>
     </div>
   </div>
