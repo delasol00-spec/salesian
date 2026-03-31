@@ -179,6 +179,13 @@ function seibi_get_page_definitions(): array {
             'parent' => 'admission',
         ],
 
+        // 入学をお考えの方へ
+        [
+            'title'  => '入学をお考えの方へ',
+            'slug'   => 'examinee',
+            'parent' => '',
+        ],
+
         // 保護者の方
         [
             'title'  => '保護者の方',
