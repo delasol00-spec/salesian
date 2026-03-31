@@ -4,6 +4,19 @@
   <meta charset="<?php bloginfo( 'charset' ); ?>" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" href="<?php echo get_template_directory_uri(); ?>/img/favicon.svg" type="image/svg+xml" />
+<?php
+$ogp_image = get_template_directory_uri() . '/img/ogp.png';
+$ogp_title = is_front_page() ? get_bloginfo( 'name' ) : get_the_title() . ' | ' . get_bloginfo( 'name' );
+$ogp_url   = is_singular() ? get_permalink() : home_url( add_query_arg( null, null ) );
+?>
+  <meta property="og:type" content="<?php echo is_front_page() ? 'website' : 'article'; ?>" />
+  <meta property="og:site_name" content="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" />
+  <meta property="og:title" content="<?php echo esc_attr( $ogp_title ); ?>" />
+  <meta property="og:url" content="<?php echo esc_url( $ogp_url ); ?>" />
+  <meta property="og:image" content="<?php echo esc_url( $ogp_image ); ?>" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="<?php echo esc_attr( $ogp_title ); ?>" />
+  <meta name="twitter:image" content="<?php echo esc_url( $ogp_image ); ?>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700;900&display=swap" />
