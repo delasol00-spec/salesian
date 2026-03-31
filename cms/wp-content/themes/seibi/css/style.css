@@ -16,6 +16,13 @@ p {
   line-height: 1.9;
 }
 
+@media (max-width: 767.98px) {
+  p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}
+
 a,
 a:hover {
   text-decoration: none;
@@ -1754,6 +1761,10 @@ a:hover {
   padding: 90px 0;
 }
 
+.p-70-0 {
+  padding: 90px 0 0;
+}
+
 .p-100-100 {
   padding: 100px 0;
 }
@@ -2202,6 +2213,14 @@ p small {
 }
 .btn-purple::before {
   background: #9c27b0;
+}
+
+.btn-gray {
+  color: #717171;
+  border: 1px solid #717171;
+}
+.btn-gray::before {
+  background: #717171;
 }
 
 .text {
