@@ -158,10 +158,10 @@ get_header(); ?>
       <div class="col-12 sec-title pink">NEWS & TOPICS</div>
       <div class="news-cate-container">
         <a href="<?php echo esc_url(get_post_type_archive_link('information')); ?>" class="btn-slide btn-s btn-pink">全て</a>
-        <a href="<?php echo esc_url(add_query_arg('information-category', 'school-life', get_post_type_archive_link('information'))); ?>" class="btn-slide btn-s btn-blue">学校生活</a>
-        <a href="<?php echo esc_url(add_query_arg('information-category', 'admission', get_post_type_archive_link('information'))); ?>" class="btn-slide btn-s btn-green">入試関連</a>
-        <a href="<?php echo esc_url(add_query_arg('information-category', 'event', get_post_type_archive_link('information'))); ?>" class="btn-slide btn-s btn-orange">イベント</a>
-        <a href="<?php echo esc_url(add_query_arg('information-category', 'notice', get_post_type_archive_link('information'))); ?>" class="btn-slide btn-s btn-purple">お知らせ</a>
+        <a href="<?php echo esc_url(add_query_arg('info_cat','school-life', get_post_type_archive_link('information'))); ?>" class="btn-slide btn-s btn-blue">学校生活</a>
+        <a href="<?php echo esc_url(add_query_arg('info_cat','admission', get_post_type_archive_link('information'))); ?>" class="btn-slide btn-s btn-green">入試関連</a>
+        <a href="<?php echo esc_url(add_query_arg('info_cat','event', get_post_type_archive_link('information'))); ?>" class="btn-slide btn-s btn-orange">イベント</a>
+        <a href="<?php echo esc_url(add_query_arg('info_cat','news', get_post_type_archive_link('information'))); ?>" class="btn-slide btn-s btn-purple">お知らせ</a>
       </div>
     </div>
   </div>
@@ -183,7 +183,7 @@ get_header(); ?>
           'school-life' => 'bg-blue',
           'admission'   => 'bg-green',
           'event'       => 'bg-orange',
-          'notice'      => 'bg-purple',
+          'news'        => 'bg-purple',
         ];
         $cat_class = isset($bg_map[$cat_slug]) ? $bg_map[$cat_slug] : 'bg-blue';
     ?>

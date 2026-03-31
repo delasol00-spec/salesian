@@ -26,10 +26,10 @@ get_header(); ?>
     <div class="row">
       <div class="news-cate-container">
         <a href="<?php echo esc_url( get_post_type_archive_link( 'information' ) ); ?>" class="btn-slide btn-s btn-pink">全て</a>
-        <a href="<?php echo esc_url( add_query_arg( 'information-category', 'school-life', get_post_type_archive_link( 'information' ) ) ); ?>" class="btn-slide btn-s btn-blue">学校生活</a>
-        <a href="<?php echo esc_url( add_query_arg( 'information-category', 'admission', get_post_type_archive_link( 'information' ) ) ); ?>" class="btn-slide btn-s btn-green">入試関連</a>
-        <a href="<?php echo esc_url( add_query_arg( 'information-category', 'event', get_post_type_archive_link( 'information' ) ) ); ?>" class="btn-slide btn-s btn-orange">イベント</a>
-        <a href="<?php echo esc_url( add_query_arg( 'information-category', 'news', get_post_type_archive_link( 'information' ) ) ); ?>" class="btn-slide btn-s btn-purple">お知らせ</a>
+        <a href="<?php echo esc_url( add_query_arg( 'info_cat','school-life', get_post_type_archive_link( 'information' ) ) ); ?>" class="btn-slide btn-s btn-blue">学校生活</a>
+        <a href="<?php echo esc_url( add_query_arg( 'info_cat','admission', get_post_type_archive_link( 'information' ) ) ); ?>" class="btn-slide btn-s btn-green">入試関連</a>
+        <a href="<?php echo esc_url( add_query_arg( 'info_cat','event', get_post_type_archive_link( 'information' ) ) ); ?>" class="btn-slide btn-s btn-orange">イベント</a>
+        <a href="<?php echo esc_url( add_query_arg( 'info_cat','news', get_post_type_archive_link( 'information' ) ) ); ?>" class="btn-slide btn-s btn-purple">お知らせ</a>
       </div>
     </div>
   </div>

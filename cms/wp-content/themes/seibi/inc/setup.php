@@ -65,6 +65,26 @@ add_action( 'after_setup_theme', 'seibi_set_permalink_structure' );
  * 子ページが存在しない場合はトップページへ。
  * page-about.php / page-admission.php / page-life.php から呼び出す。
  */
+// -----------------------------------------------
+// お知らせアーカイブ: ?information-category=slug でカテゴリー絞り込み
+// -----------------------------------------------
+add_action( 'pre_get_posts', function ( $query ) {
+    if ( is_admin() || ! $query->is_main_query() ) {
+        return;
+    }
+    if ( ! $query->is_post_type_archive( 'information' ) ) {
+        return;
+    }
+    $cat = isset( $_GET['info_cat'] ) ? sanitize_key( $_GET['info_cat'] ) : '';
+    if ( $cat ) {
+        $query->set( 'tax_query', [ [
+            'taxonomy' => 'information-category',
+            'field'    => 'slug',
+            'terms'    => $cat,
+        ] ] );
+    }
+} );
+
 function seibi_redirect_to_first_child() {
     $children = get_pages( [
         'parent'      => get_the_ID(),
