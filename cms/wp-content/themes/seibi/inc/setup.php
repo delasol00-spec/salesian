@@ -108,20 +108,3 @@ add_action( 'pre_get_posts', function ( $query ) {
         ] ] );
     }
 } );
-
-function seibi_redirect_to_first_child() {
-    $children = get_pages( [
-        'parent'      => get_the_ID(),
-        'sort_order'  => 'ASC',
-        'sort_column' => 'menu_order',
-        'number'      => 1,
-    ] );
-
-    if ( $children ) {
-        wp_redirect( get_permalink( $children[0]->ID ), 301 );
-        exit;
-    }
-
-    wp_redirect( home_url( '/' ), 301 );
-    exit;
-}
