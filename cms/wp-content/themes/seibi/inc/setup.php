@@ -75,6 +75,9 @@ add_action( 'pre_get_posts', function ( $query ) {
     if ( ! $query->is_post_type_archive( 'information' ) ) {
         return;
     }
+    $per_page = (int) get_option( 'seibi_information_per_page', 10 );
+    $query->set( 'posts_per_page', $per_page );
+
     $cat = isset( $_GET['info_cat'] ) ? sanitize_key( $_GET['info_cat'] ) : '';
     if ( $cat ) {
         $query->set( 'tax_query', [ [

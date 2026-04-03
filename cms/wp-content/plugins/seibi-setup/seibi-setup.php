@@ -595,6 +595,14 @@ function seibi_setup_page() {
         $year_month_results = seibi_create_year_month_terms();
     }
 
+    // お知らせアーカイブ 表示件数保存
+    $information_per_page_saved = false;
+    if ( isset( $_POST['seibi_save_information_per_page'] ) && check_admin_referer( 'seibi_setup' ) ) {
+        $per_page = max( 1, (int) $_POST['seibi_information_per_page'] );
+        update_option( 'seibi_information_per_page', $per_page );
+        $information_per_page_saved = true;
+    }
+
     // 卒業生アーカイブ 表示件数保存
     $graduate_per_page_saved = false;
     if ( isset( $_POST['seibi_save_graduate_per_page'] ) && check_admin_referer( 'seibi_setup' ) ) {
@@ -900,7 +908,31 @@ function seibi_setup_page() {
 
             <hr>
 
-            <h2>5. 卒業生アーカイブ 表示件数</h2>
+            <h2>5. お知らせアーカイブ 表示件数</h2>
+            <p>NEWS &amp; TOPICS（<code>/information/</code>）一覧ページの1ページあたりの表示件数を設定します。</p>
+
+            <?php if ( $information_per_page_saved ) : ?>
+                <div class="notice notice-success" style="margin: 10px 0;">
+                    <p>表示件数を保存しました。</p>
+                </div>
+            <?php endif; ?>
+
+            <p>
+                <label for="seibi_information_per_page"><strong>1ページあたりの表示件数：</strong></label>
+                <input type="number" id="seibi_information_per_page" name="seibi_information_per_page"
+                    value="<?php echo esc_attr( get_option( 'seibi_information_per_page', 10 ) ); ?>"
+                    min="1" max="100" style="width: 80px;" />
+                件
+            </p>
+            <p>
+                <button type="submit" name="seibi_save_information_per_page" class="button button-primary button-large">
+                    表示件数を保存する
+                </button>
+            </p>
+
+            <hr>
+
+            <h2>6. 卒業生アーカイブ 表示件数</h2>
             <p>卒業生の方へ（<code>/graduate/</code>）一覧ページの1ページあたりの表示件数を設定します。</p>
 
             <?php if ( $graduate_per_page_saved ) : ?>
