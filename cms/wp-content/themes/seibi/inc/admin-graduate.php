@@ -35,13 +35,13 @@ function seibi_graduate_control_menu() {
         global $menu, $submenu;
         foreach ( $menu as $item ) {
             $slug = $item[2] ?? '';
-            if ( in_array( $slug, [ 'edit.php?post_type=graduate', 'profile.php' ], true ) ) {
+            if ( in_array( $slug, [ 'index.php', 'edit.php?post_type=graduate', 'profile.php' ], true ) ) {
                 continue;
             }
             remove_menu_page( $slug );
         }
-        // ダッシュボードのサブメニューも除去
-        remove_submenu_page( 'index.php', 'index.php' );
+        // ダッシュボードのサブメニュー（ホーム・更新）を除去
+        remove_submenu_page( 'index.php', 'update-core.php' );
         return;
     }
 
@@ -66,8 +66,8 @@ function seibi_graduate_block_other_screens() {
     if ( ! $screen ) {
         return;
     }
-    // 卒業生投稿・カテゴリー画面は通過
-    if ( $screen->post_type === 'graduate' || $screen->taxonomy === 'graduate-category' ) {
+    // ダッシュボード・卒業生投稿・カテゴリー画面は通過
+    if ( $screen->base === 'dashboard' || $screen->post_type === 'graduate' || $screen->taxonomy === 'graduate-category' ) {
         return;
     }
     wp_safe_redirect( admin_url( 'edit.php?post_type=graduate' ) );
@@ -88,10 +88,7 @@ function seibi_graduate_redirect_dashboard() {
     if ( in_array( $pagenow, [ 'profile.php', 'user-edit.php' ], true ) ) {
         return;
     }
-    if ( $pagenow === 'index.php' ) {
-        wp_safe_redirect( admin_url( 'edit.php?post_type=graduate' ) );
-        exit;
-    }
+    // ダッシュボードはそのまま通過
 }
 add_action( 'admin_init', 'seibi_graduate_redirect_dashboard' );
 

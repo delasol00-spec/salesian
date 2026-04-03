@@ -380,3 +380,23 @@ seibi_add_taxonomy_column( 'briefing', 'briefing-flag', 'briefing_flag_col', '�
 
 // 公開行事 → 表示設定
 seibi_add_taxonomy_column( 'event', 'event-flag', 'event_flag_col', '表示設定' );
+
+// -----------------------------------------------
+// ダッシュボード：不要なウィジェットを非表示
+// -----------------------------------------------
+function seibi_remove_dashboard_widgets() {
+    // WordPress ニュース
+    remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
+    // クイック下書き
+    remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
+    // 概要（At a Glance）
+    remove_meta_box( 'dashboard_right_now', 'dashboard', 'normal' );
+    // アクティビティ
+    remove_meta_box( 'dashboard_activity', 'dashboard', 'normal' );
+    // サイトヘルスステータス
+    remove_meta_box( 'dashboard_site_health', 'dashboard', 'normal' );
+}
+add_action( 'wp_dashboard_setup', 'seibi_remove_dashboard_widgets' );
+
+// ようこそパネルを非表示
+remove_action( 'welcome_panel', 'wp_welcome_panel' );
