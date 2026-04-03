@@ -1356,6 +1356,56 @@ p.news-card-excerpt {
   }
 }
 
+a.gra-cate {
+  font-size: 1rem;
+  color: #005297;
+  text-decoration: none;
+  transition: color 0.25s ease;
+  border-left: 3px solid #005297;
+  padding-left: 10px;
+  margin-bottom: 5px;
+  display: block;
+}
+
+a.gra-cate:hover {
+  color: #f67088;
+  border-left-color: #f67088;
+}
+
+/* -----------------------
+　保護者の方へ
+------------------------*/
+.dl {
+  margin-top: 30px ;
+  padding: 0 ;
+  }
+  
+  .dl ul {
+  clear: both ;
+  }
+  
+  .dl li {
+  border-bottom:1px dotted #CCC;
+  list-style: none ;
+  font-size: 1em ;
+  }
+  
+  .dl li span {
+  float: right ;
+  }
+  .dl li:hover {
+  background-color:#fafafa;
+  -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+  }
+  .dl li a {
+  display: block;
+  padding: 10px ;
+  }
+
 /* ----------------------
    パララックス
   ---------------------- */
