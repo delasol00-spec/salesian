@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "test": "bash tests/check-known-errors.sh",
+    "test": "bash tests/check-known-errors.sh && playwright test",
+    "test:check": "bash tests/check-known-errors.sh",
     "test:e2e": "playwright test"
   },
   "devDependencies": {
