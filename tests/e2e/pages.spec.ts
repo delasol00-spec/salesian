@@ -52,7 +52,7 @@ for (const { name, path } of pages) {
 // ============================================================
 const redirects = [
   { name: '学校紹介',         from: '/about/',     to: '/about/principal/' },
-  { name: '星美クラスの教育', from: '/feature/',   to: '/feature/integrated-studies/' },
+  { name: '星美クラスの教育', from: '/feature/',   to: '/feature/religion/' },
   { name: '学校生活',         from: '/life/',      to: '/life/daily/' },
   { name: '入試について',     from: '/admission/', to: '/admission/requirements/' },
 ];
