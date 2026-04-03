@@ -319,3 +319,64 @@ function seibi_category_filter_query( $query ) {
     ] ] );
 }
 add_action( 'pre_get_posts', 'seibi_category_filter_query' );
+
+// -----------------------------------------------
+// カスタム投稿タイプ一覧：タクソノミーカラムを追加
+// -----------------------------------------------
+
+/**
+ * 投稿タイプ一覧にタクソノミーカラムを追加する汎用ヘルパー
+ *
+ * @param string $post_type   投稿タイプスラッグ
+ * @param string $taxonomy    タクソノミースラッグ
+ * @param string $column_key  カラムキー
+ * @param string $label       カラムヘッダーラベル
+ */
+function seibi_add_taxonomy_column( $post_type, $taxonomy, $column_key, $label ) {
+    // カラムをタイトルの直後に追加
+    add_filter( "manage_{$post_type}_posts_columns", function( $columns ) use ( $column_key, $label ) {
+        $new = [];
+        foreach ( $columns as $key => $value ) {
+            $new[ $key ] = $value;
+            if ( $key === 'title' ) {
+                $new[ $column_key ] = $label;
+            }
+        }
+        return $new;
+    } );
+
+    // カラムの中身を出力
+    add_action( "manage_{$post_type}_posts_custom_column", function( $column, $post_id ) use ( $column_key, $taxonomy ) {
+        if ( $column !== $column_key ) {
+            return;
+        }
+        $terms = get_the_terms( $post_id, $taxonomy );
+        if ( $terms && ! is_wp_error( $terms ) ) {
+            $names = wp_list_pluck( $terms, 'name' );
+            echo esc_html( implode( ', ', $names ) );
+        } else {
+            echo '<span style="color:#aaa">—</span>';
+        }
+    }, 10, 2 );
+
+    // カラムをソート可能にする
+    add_filter( "manage_edit-{$post_type}_sortable_columns", function( $columns ) use ( $column_key ) {
+        $columns[ $column_key ] = $column_key;
+        return $columns;
+    } );
+}
+
+// お知らせ → カテゴリー
+seibi_add_taxonomy_column( 'information', 'information-category', 'info_category', 'カテゴリー' );
+
+// 卒業生 → カテゴリー
+seibi_add_taxonomy_column( 'graduate', 'graduate-category', 'grad_category', 'カテゴリー' );
+
+// 年間行事 → 月
+seibi_add_taxonomy_column( 'year', 'year_month', 'year_month_col', '月' );
+
+// 学校説明会 → 表示設定
+seibi_add_taxonomy_column( 'briefing', 'briefing-flag', 'briefing_flag_col', '表示設定' );
+
+// 公開行事 → 表示設定
+seibi_add_taxonomy_column( 'event', 'event-flag', 'event_flag_col', '表示設定' );
