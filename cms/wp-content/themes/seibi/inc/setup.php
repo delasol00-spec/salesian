@@ -85,6 +85,27 @@ add_action( 'pre_get_posts', function ( $query ) {
     }
 } );
 
+// 卒業生アーカイブ: ?grad_cat=slug でカテゴリー絞り込み・表示件数設定
+add_action( 'pre_get_posts', function ( $query ) {
+    if ( is_admin() || ! $query->is_main_query() ) {
+        return;
+    }
+    if ( ! $query->is_post_type_archive( 'graduate' ) ) {
+        return;
+    }
+    $per_page = (int) get_option( 'seibi_graduate_per_page', 10 );
+    $query->set( 'posts_per_page', $per_page );
+
+    $cat = isset( $_GET['grad_cat'] ) ? sanitize_key( $_GET['grad_cat'] ) : '';
+    if ( $cat ) {
+        $query->set( 'tax_query', [ [
+            'taxonomy' => 'graduate-category',
+            'field'    => 'slug',
+            'terms'    => $cat,
+        ] ] );
+    }
+} );
+
 function seibi_redirect_to_first_child() {
     $children = get_pages( [
         'parent'      => get_the_ID(),

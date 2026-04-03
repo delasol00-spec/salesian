@@ -199,3 +199,86 @@ function seibi_year_month_filter_query( $query ) {
     $query->set( 'tax_query', $tax_query );
 }
 add_action( 'pre_get_posts', 'seibi_year_month_filter_query' );
+
+// -----------------------------------------------
+// お知らせ・卒業生 一覧：カテゴリー絞り込みフィルター
+// -----------------------------------------------
+
+/**
+ * カテゴリードロップダウンを投稿一覧のフィルターバーに追加（汎用）
+ *
+ * @param string $post_type   対象投稿タイプ
+ * @param string $taxonomy    タクソノミースラッグ
+ * @param string $param_name  GETパラメーター名
+ * @param string $all_label   「すべて」の選択肢ラベル
+ */
+function seibi_category_filter_dropdown( $post_type, $taxonomy, $param_name, $all_label ) {
+    $screen = get_current_screen();
+    if ( ! $screen || $screen->post_type !== $post_type ) {
+        return;
+    }
+
+    $selected = isset( $_GET[ $param_name ] ) ? sanitize_text_field( $_GET[ $param_name ] ) : '';
+
+    $terms = get_terms( [
+        'taxonomy'   => $taxonomy,
+        'hide_empty' => false,
+    ] );
+
+    if ( is_wp_error( $terms ) || empty( $terms ) ) {
+        return;
+    }
+
+    echo '<select name="' . esc_attr( $param_name ) . '">';
+    echo '<option value="">' . esc_html( $all_label ) . '</option>';
+    foreach ( $terms as $term ) {
+        printf(
+            '<option value="%s"%s>%s</option>',
+            esc_attr( $term->slug ),
+            selected( $selected, $term->slug, false ),
+            esc_html( $term->name )
+        );
+    }
+    echo '</select>';
+}
+
+function seibi_information_category_dropdown() {
+    seibi_category_filter_dropdown( 'information', 'information-category', 'information_category_filter', 'すべてのカテゴリー' );
+}
+add_action( 'restrict_manage_posts', 'seibi_information_category_dropdown' );
+
+function seibi_graduate_category_dropdown() {
+    seibi_category_filter_dropdown( 'graduate', 'graduate-category', 'graduate_category_filter', 'すべてのカテゴリー' );
+}
+add_action( 'restrict_manage_posts', 'seibi_graduate_category_dropdown' );
+
+/**
+ * ドロップダウン選択値を WP_Query に反映（汎用）
+ */
+function seibi_category_filter_query( $query ) {
+    if ( ! is_admin() || ! $query->is_main_query() ) {
+        return;
+    }
+
+    $map = [
+        'information' => [ 'param' => 'information_category_filter', 'taxonomy' => 'information-category' ],
+        'graduate'    => [ 'param' => 'graduate_category_filter',    'taxonomy' => 'graduate-category' ],
+    ];
+
+    $post_type = $query->get( 'post_type' );
+    if ( ! isset( $map[ $post_type ] ) ) {
+        return;
+    }
+
+    $filter = isset( $_GET[ $map[ $post_type ]['param'] ] ) ? sanitize_text_field( $_GET[ $map[ $post_type ]['param'] ] ) : '';
+    if ( $filter === '' ) {
+        return;
+    }
+
+    $query->set( 'tax_query', [ [
+        'taxonomy' => $map[ $post_type ]['taxonomy'],
+        'field'    => 'slug',
+        'terms'    => $filter,
+    ] ] );
+}
+add_action( 'pre_get_posts', 'seibi_category_filter_query' );
