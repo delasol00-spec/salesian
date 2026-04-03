@@ -71,3 +71,5 @@ gen_sitemap.py
 sitemap.xlsx
 settings.json
 test-results
+.env.test
+playwright/.auth/
