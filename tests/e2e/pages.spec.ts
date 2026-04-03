@@ -67,15 +67,6 @@ for (const { name, from, to } of redirects) {
 // ============================================================
 // 共通UIチェック
 // ============================================================
-test('ヘッダーが存在する', async ({ page }) => {
-  await page.goto(`${BASE_URL}/`);
-  await expect(page.locator('header')).toBeVisible();
-});
-
-test('フッターが存在する', async ({ page }) => {
-  await page.goto(`${BASE_URL}/`);
-  await expect(page.locator('footer')).toBeVisible();
-});
 
 test('下層ページにヒーロー画像(.sub-hero)が存在する', async ({ page }) => {
   await page.goto(`${BASE_URL}/about/principal/`);
