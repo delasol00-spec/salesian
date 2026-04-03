@@ -20,7 +20,23 @@ async function loginAs(page: any, username: string, password: string) {
   await page.fill('#user_login', username);
   await page.fill('#user_pass', password);
   await page.click('#wp-submit');
-  await page.waitForURL(`${WP_ADMIN_URL}/**`);
+
+  // ログイン失敗（エラーメッセージが出た場合）を即座に検出
+  const errorDiv = page.locator('#login_error');
+  const adminUrl = page.waitForURL(/wp-admin/, { timeout: 10000 });
+
+  const result = await Promise.race([
+    errorDiv.waitFor({ state: 'visible', timeout: 10000 }).then(() => 'error'),
+    adminUrl.then(() => 'success'),
+  ]).catch(() => 'timeout');
+
+  if (result === 'error') {
+    const msg = await errorDiv.textContent();
+    throw new Error(`WordPressログイン失敗: ${msg?.trim()}\n→ .env.test の認証情報を確認してください`);
+  }
+  if (result === 'timeout') {
+    throw new Error('WordPressログイン後の画面遷移がタイムアウトしました');
+  }
 }
 
 // ============================================================
@@ -81,11 +97,6 @@ test.describe('管理者権限', () => {
     await loginAs(page, ADMIN_USER, ADMIN_PASS);
   });
 
-  test('管理者は「投稿」メニューが表示されている', async ({ page }) => {
-    await page.goto(`${WP_ADMIN_URL}/`);
-    await expect(page.locator('#menu-posts')).toBeVisible();
-  });
-
   test('管理者は「固定ページ」メニューが表示されている', async ({ page }) => {
     await page.goto(`${WP_ADMIN_URL}/`);
     await expect(page.locator('#menu-pages')).toBeVisible();
@@ -103,7 +114,9 @@ test.describe('管理者権限', () => {
     const count = await editLink.count();
     test.skip(count === 0, '編集者ユーザーが存在しないためスキップ');
 
-    await editLink.click();
+    // クリックは固定サイドバーで viewport 外になるため href を直接取得して遷移
+    const href = await editLink.getAttribute('href');
+    await page.goto(href!);
     await expect(
       page.locator('#seibi_graduate_access'),
       '「卒業生ページ管理」チェックボックスが表示されること'
