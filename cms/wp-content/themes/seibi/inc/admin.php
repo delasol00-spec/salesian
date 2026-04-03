@@ -6,6 +6,38 @@
  */
 
 // -----------------------------------------------
+// 編集者のプロフィール画面：不要項目を非表示
+// -----------------------------------------------
+function seibi_hide_editor_profile_fields() {
+    $user = wp_get_current_user();
+    if ( ! in_array( 'editor', (array) $user->roles, true ) ) {
+        return;
+    }
+    $screen = get_current_screen();
+    if ( ! $screen || $screen->base !== 'profile' ) {
+        return;
+    }
+    ?>
+    <style>
+        /* キーボードショートカット */
+        .user-comment-shortcuts-wrap,
+        /* 名・姓 */
+        .user-first-name-wrap,
+        .user-last-name-wrap,
+        /* サイト */
+        .user-url-wrap,
+        /* プロフィール写真・あなたについて・プロフィール情報 */
+        .user-profile-picture,
+        .user-description-wrap,
+        #profile-page .form-table + h2,
+        /* アプリケーションパスワード */
+        #application-passwords-section { display: none !important; }
+    </style>
+    <?php
+}
+add_action( 'admin_head', 'seibi_hide_editor_profile_fields' );
+
+// -----------------------------------------------
 // 年間行事 編集画面でメディアアップローダーを有効化
 // -----------------------------------------------
 function seibi_enqueue_media_for_year( $hook ) {
@@ -239,7 +271,7 @@ function seibi_graduate_control_menu() {
         global $menu, $submenu;
         foreach ( $menu as $item ) {
             $slug = $item[2] ?? '';
-            if ( $slug === 'edit.php?post_type=graduate' ) {
+            if ( in_array( $slug, [ 'edit.php?post_type=graduate', 'profile.php' ], true ) ) {
                 continue;
             }
             remove_menu_page( $slug );
@@ -261,16 +293,17 @@ function seibi_graduate_block_other_screens() {
     if ( ! is_admin() || ! seibi_is_graduate_only_user() ) {
         return;
     }
+    // プロフィール画面は通過（$pagenow で先に判定）
+    global $pagenow;
+    if ( in_array( $pagenow, [ 'profile.php', 'user-edit.php' ], true ) ) {
+        return;
+    }
     $screen = get_current_screen();
     if ( ! $screen ) {
         return;
     }
     // 卒業生投稿・カテゴリー画面は通過
     if ( $screen->post_type === 'graduate' || $screen->taxonomy === 'graduate-category' ) {
-        return;
-    }
-    // プロフィール画面は通過（パスワード変更等）
-    if ( $screen->base === 'profile' ) {
         return;
     }
     wp_safe_redirect( admin_url( 'edit.php?post_type=graduate' ) );
@@ -287,6 +320,10 @@ function seibi_graduate_redirect_dashboard() {
         return;
     }
     global $pagenow;
+    // プロフィール画面は通過
+    if ( in_array( $pagenow, [ 'profile.php', 'user-edit.php' ], true ) ) {
+        return;
+    }
     if ( $pagenow === 'index.php' ) {
         wp_safe_redirect( admin_url( 'edit.php?post_type=graduate' ) );
         exit;
