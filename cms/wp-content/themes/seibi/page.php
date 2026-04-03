@@ -14,8 +14,6 @@ get_header(); ?>
      MAIN: 固定ページ（汎用）
      ======================================= -->
 <main id="main-page">
-    <?php get_template_part( 'template-parts/breadcrumb' ); ?>
-
     <?php if ( have_posts() ) : the_post(); ?>
         <article id="post-<?php the_ID(); ?>">
             <h1><?php the_title(); ?></h1>
