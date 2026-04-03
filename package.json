@@ -1,0 +1,12 @@
+{
+  "name": "salesian-wp",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "bash tests/check-known-errors.sh",
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.59.1"
+  }
+}
