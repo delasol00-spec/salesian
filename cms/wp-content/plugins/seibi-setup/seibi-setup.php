@@ -362,6 +362,27 @@ function seibi_update_page_titles(): array {
 }
 
 // -----------------------------------------------
+// graduate 固定ページを一度だけ自動削除
+// カスタム投稿タイプ移行に伴い不要になった固定ページを除去
+// -----------------------------------------------
+function seibi_cleanup_graduate_fixed_page() {
+    if ( get_option( 'seibi_graduate_page_cleaned' ) === '1' ) {
+        return;
+    }
+    $posts = get_posts( [
+        'post_type'   => 'page',
+        'post_status' => [ 'publish', 'draft', 'private' ],
+        'name'        => 'graduate',
+        'numberposts' => 1,
+    ] );
+    if ( $posts ) {
+        wp_delete_post( $posts[0]->ID, true );
+    }
+    update_option( 'seibi_graduate_page_cleaned', '1' );
+}
+add_action( 'wp_loaded', 'seibi_cleanup_graduate_fixed_page' );
+
+// -----------------------------------------------
 // 年間行事 月ターム 並び順フィルター（4月〜3月）
 // get_terms() を使う箇所すべてに適用（管理画面・フロントエンド共通）
 // -----------------------------------------------
@@ -466,6 +487,14 @@ function seibi_get_category_groups(): array {
             ],
         ],
         [
+            'label'    => '卒業生の方へ',
+            'taxonomy' => 'graduate-category',
+            'items'    => [
+                [ 'name' => 'お知らせ',   'slug' => 'news'          ],
+                [ 'name' => '同窓会報告', 'slug' => 'alumni-report' ],
+            ],
+        ],
+        [
             'label'    => '学校説明会･学外説明会',
             'taxonomy' => 'briefing-flag',
             'items'    => [
@@ -564,6 +593,14 @@ function seibi_setup_page() {
     // 年間行事 月ターム作成
     if ( isset( $_POST['seibi_create_year_months'] ) && check_admin_referer( 'seibi_setup' ) ) {
         $year_month_results = seibi_create_year_month_terms();
+    }
+
+    // 卒業生アーカイブ 表示件数保存
+    $graduate_per_page_saved = false;
+    if ( isset( $_POST['seibi_save_graduate_per_page'] ) && check_admin_referer( 'seibi_setup' ) ) {
+        $per_page = max( 1, (int) $_POST['seibi_graduate_per_page'] );
+        update_option( 'seibi_graduate_per_page', $per_page );
+        $graduate_per_page_saved = true;
     }
 
     // 現在の状態を取得
@@ -858,6 +895,30 @@ function seibi_setup_page() {
             <p>
                 <button type="submit" name="seibi_create_year_months" class="button button-primary button-large">
                     年間行事タームを一括作成する
+                </button>
+            </p>
+
+            <hr>
+
+            <h2>5. 卒業生アーカイブ 表示件数</h2>
+            <p>卒業生の方へ（<code>/graduate/</code>）一覧ページの1ページあたりの表示件数を設定します。</p>
+
+            <?php if ( $graduate_per_page_saved ) : ?>
+                <div class="notice notice-success" style="margin: 10px 0;">
+                    <p>表示件数を保存しました。</p>
+                </div>
+            <?php endif; ?>
+
+            <p>
+                <label for="seibi_graduate_per_page"><strong>1ページあたりの表示件数：</strong></label>
+                <input type="number" id="seibi_graduate_per_page" name="seibi_graduate_per_page"
+                    value="<?php echo esc_attr( get_option( 'seibi_graduate_per_page', 10 ) ); ?>"
+                    min="1" max="100" style="width: 80px;" />
+                件
+            </p>
+            <p>
+                <button type="submit" name="seibi_save_graduate_per_page" class="button button-primary button-large">
+                    表示件数を保存する
                 </button>
             </p>
 

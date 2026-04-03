@@ -58,6 +58,22 @@ function seibi_register_post_types() {
         'supports'     => [ 'title', 'thumbnail' ],
     ] );
 
+    // 卒業生の方へ
+    register_post_type( 'graduate', [
+        'labels'       => [
+            'name'          => '卒業生の方へ',
+            'singular_name' => '卒業生の方へ',
+            'add_new_item'  => '卒業生記事を追加',
+            'edit_item'     => '卒業生記事を編集',
+        ],
+        'public'       => true,
+        'has_archive'  => true,
+        'rewrite'      => [ 'slug' => 'graduate' ],
+        'show_in_rest' => true,
+        'menu_icon'    => 'dashicons-groups',
+        'supports'     => [ 'title', 'editor', 'thumbnail', 'excerpt' ],
+    ] );
+
     // 年間行事（ギャラリー形式）
     register_post_type( 'year', [
         'labels'       => [
@@ -94,6 +110,20 @@ function seibi_register_taxonomies() {
         'show_ui'      => true,
         'show_in_rest' => true,
         'rewrite'      => false,
+    ] );
+
+    // 卒業生カテゴリー
+    register_taxonomy( 'graduate-category', 'graduate', [
+        'labels'       => [
+            'name'          => 'カテゴリー',
+            'singular_name' => 'カテゴリー',
+            'add_new_item'  => 'カテゴリーを追加',
+            'edit_item'     => 'カテゴリーを編集',
+        ],
+        'hierarchical' => true,
+        'public'       => true,
+        'rewrite'      => [ 'slug' => 'graduate-category' ],
+        'show_in_rest' => true,
     ] );
 
     // お知らせカテゴリー
@@ -150,6 +180,7 @@ add_action( 'init', 'seibi_register_flag_taxonomies' );
 function seibi_custom_post_type_rewrite_rules() {
     $post_types = [
         'information' => 'information',
+        'graduate'    => 'graduate',
         'year'        => 'life/year',
         'event'       => 'event',
         'briefing'    => 'briefing',
@@ -168,6 +199,7 @@ add_action( 'init', 'seibi_custom_post_type_rewrite_rules' );
 function seibi_post_type_link( $post_link, $post ) {
     $slugs = [
         'information' => 'information',
+        'graduate'    => 'graduate',
         'year'        => 'life/year',
         'event'       => 'event',
         'briefing'    => 'briefing',
@@ -190,12 +222,16 @@ add_action( 'template_redirect', function () {
 		wp_redirect( get_post_type_archive_link( 'information' ), 301 );
 		exit;
 	}
+	if ( is_tax( 'graduate-category' ) ) {
+		wp_redirect( get_post_type_archive_link( 'graduate' ), 301 );
+		exit;
+	}
 } );
 
 function seibi_flush_post_type_rewrite_once() {
-    if ( get_option( 'seibi_post_id_rewrite_v3' ) !== '1' ) {
+    if ( get_option( 'seibi_post_id_rewrite_v4' ) !== '1' ) {
         flush_rewrite_rules();
-        update_option( 'seibi_post_id_rewrite_v3', '1' );
+        update_option( 'seibi_post_id_rewrite_v4', '1' );
     }
 }
 add_action( 'wp_loaded', 'seibi_flush_post_type_rewrite_once' );
