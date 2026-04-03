@@ -100,20 +100,6 @@ get_header(); ?>
   </div>
 </section>
 
-<?php if ( $GLOBALS['wp_query']->max_num_pages > 1 ) : ?>
-<section class="pagenation">
-  <nav class="news-pagination" aria-label="ページネーション">
-    <?php
-    the_posts_pagination( [
-        'mid_size'  => 2,
-        'prev_text' => '←',
-        'next_text' => '→',
-        'before_page_number' => '<span class="news-page-num">',
-        'after_page_number'  => '</span>',
-    ] );
-    ?>
-  </nav>
-</section>
-<?php endif; ?>
+<?php get_template_part( 'template-parts/pagination' ); ?>
 
 <?php get_footer();
