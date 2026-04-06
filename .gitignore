@@ -73,3 +73,5 @@ settings.json
 test-results
 .env.test
 playwright/.auth/
+tora.sh
+.tora-last-sync

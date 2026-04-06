@@ -4,6 +4,7 @@ if (window.gsap && window.ScrollTrigger) {
 }
 
 (function ($) {
+
 $(document).ready(function () {
   const $mobileBtn = $("#mobileMenuBtn");
   const $overlay = $("#sidebar-overlay");
