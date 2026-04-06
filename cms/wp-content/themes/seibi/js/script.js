@@ -3,6 +3,7 @@ if (window.gsap && window.ScrollTrigger) {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+(function ($) {
 $(document).ready(function () {
   const $mobileBtn = $("#mobileMenuBtn");
   const $overlay = $("#sidebar-overlay");
@@ -644,3 +645,5 @@ if ($(".info-slider-track").length > 0) {
   moveSlider();
   startAutoSlide();
 }
+
+})(jQuery);

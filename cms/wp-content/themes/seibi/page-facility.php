@@ -37,10 +37,6 @@ get_header(); ?>
     </div>
     <div class="row">
       <div class="col-lg-3 col-xs-6 shisetsu">
-        <img src="<?php echo get_template_directory_uri(); ?>/img/facility-img/sodan.webp" loading="lazy" alt="相談室" class="img-fluid" />
-        <h5>相談室</h5>
-      </div>
-      <div class="col-lg-3 col-xs-6 shisetsu">
         <img src="<?php echo get_template_directory_uri(); ?>/img/facility-img/rika01.webp" loading="lazy" alt="第一理科室" class="img-fluid" />
         <h5>第一理科室</h5>
       </div>
@@ -57,16 +53,20 @@ get_header(); ?>
         <h5>第二音楽室</h5>
       </div>
       <div class="col-lg-3 col-xs-6 shisetsu">
-        <img src="<?php echo get_template_directory_uri(); ?>/img/facility-img/kateika.webp" loading="lazy" alt="アフタースクール" class="img-fluid" />
-        <h5>アフタースクール</h5>
-      </div>
-      <div class="col-lg-3 col-xs-6 shisetsu">
         <img src="<?php echo get_template_directory_uri(); ?>/img/facility-img/kaiga.webp" loading="lazy" alt="絵画室" class="img-fluid" />
         <h5>絵画室</h5>
       </div>
       <div class="col-lg-3 col-xs-6 shisetsu">
         <img src="<?php echo get_template_directory_uri(); ?>/img/facility-img/zukou.webp" loading="lazy" alt="工作室" class="img-fluid" />
         <h5>工作室</h5>
+      </div>
+      <div class="col-lg-3 col-xs-6 shisetsu">
+        <img src="<?php echo get_template_directory_uri(); ?>/img/facility-img/sodan.webp" loading="lazy" alt="相談室" class="img-fluid" />
+        <h5>相談室</h5>
+      </div>
+      <div class="col-lg-3 col-xs-6 shisetsu">
+        <img src="<?php echo get_template_directory_uri(); ?>/img/facility-img/kateika.webp" loading="lazy" alt="アフタースクール" class="img-fluid" />
+        <h5>アフタースクール</h5>
       </div>
     </div>
   </div>
