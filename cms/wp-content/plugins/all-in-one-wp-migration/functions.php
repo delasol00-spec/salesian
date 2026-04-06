@@ -1902,8 +1902,8 @@ function ai1wm_is_filename_supported( $file, $extensions = array( 'wpress' ) ) {
  */
 function ai1wm_is_filedata_supported( $file ) {
 	if ( ( $file_handle = @fopen( $file, 'rb' ) ) ) {
-		if ( ( $file_buffer = @fread( $file_handle, 4377 ) ) ) {
-			if ( ( $file_data = @unpack( 'a255filename/a14size/a12mtime/a4096path', $file_buffer ) ) !== false ) {
+		if ( ( $file_buffer = @fread( $file_handle, Ai1wm_Archiver::HEADER_SIZE ) ) ) {
+			if ( ( $file_data = @unpack( 'a255filename/a14size/a12mtime/a4088path/a8crc32', $file_buffer ) ) !== false ) {
 				if ( AI1WM_PACKAGE_NAME === trim( $file_data['filename'] ) ) {
 					return true;
 				}
@@ -1924,8 +1924,8 @@ function ai1wm_is_filedata_supported( $file ) {
  */
 function ai1wm_is_gzipped_filedata_supported( $file ) {
 	if ( ( $file_handle = @gzopen( $file, 'rb' ) ) ) {
-		if ( ( $file_buffer = @gzread( $file_handle, 4377 ) ) ) {
-			if ( ( $file_data = @unpack( 'a255filename/a14size/a12mtime/a4096path', $file_buffer ) ) !== false ) {
+		if ( ( $file_buffer = @gzread( $file_handle, Ai1wm_Archiver::HEADER_SIZE ) ) ) {
+			if ( ( $file_data = @unpack( 'a255filename/a14size/a12mtime/a4088path/a8crc32', $file_buffer ) ) !== false ) {
 				if ( AI1WM_PACKAGE_NAME === trim( $file_data['filename'] ) ) {
 					return true;
 				}

@@ -2,9 +2,9 @@
 Contributors: yani.iliev, bangelov, pimjitsawang
 Tags: backup, clone, migrate, move-wordpress, export-import
 Requires at least: 3.3
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 5.3
-Stable tag: 7.103
+Stable tag: 7.104
 License: GPLv3 or later
 
 Trusted by 60M+ sites: The gold standard for WordPress migration and backup. Migrate, backup, and restore your WordPress site with one click.
@@ -164,6 +164,20 @@ All-in-One WP Migration is in full compliance with General Data Protection Regul
 See our [GDPR Compliant Privacy Policy here](https://www.iubenda.com/privacy-policy/946881).
 
 == Changelog ==
+= 7.104 =
+**Added**
+
+* CRC32 checksum integrity verification for wpress archive file format
+
+**Fixed**
+
+* Infinite loop in compressor when timeout fires at exact end-of-file boundary
+
+**Improved**
+
+* Minimum required versions enforcement for extensions
+* WordPress 7.0 compatibility
+
 = 7.103 =
 **Added**
 
