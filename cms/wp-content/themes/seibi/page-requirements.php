@@ -182,7 +182,7 @@ $schedules = [
                 <div class="p-2 flex-grow-1" style="width: 60%">「なぜ」の疑問を大切にしましょう。</div>
               </div>
               <div class="d-flex border-bottom align-items-center pl-md-3">
-                <div class="p-2 font-weight-bold" style="width: 40%">分かりやすく話す力</div>
+                <div class="p-2 font-weight-bold" style="width: 40%">分かりやすく伝える力</div>
                 <div class="p-2 flex-grow-1" style="width: 60%">相手に伝わるように表現させましょう。</div>
               </div>
               <div class="d-flex border-bottom align-items-center pl-md-3">
@@ -272,7 +272,7 @@ $schedules = [
               </div>
             </div>
             <p>
-              その他副教材、iPad積立金、給食費、牛乳費等の年間の経費が必要となります。<br />
+              その他副教材、iPad購入･設定費、給食費、R-1ドリンク代等の年間の経費が必要となります。<br />
               <small>※学費・その他は変更する場合がございます。予めご了承ください。</small>
             </p>
           </div>

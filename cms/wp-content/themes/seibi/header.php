@@ -130,12 +130,12 @@ $ogp_url   = is_singular() ? get_permalink() : home_url( add_query_arg( null, nu
 
       <div class="button-group px-3 mt-4 pb-5">
         <a href="<?php echo esc_url( home_url( '/examinee/' ) ); ?>" class="btn btn-outline-light btn-block btn-sm mb-2">入学をお考えの方</a>
-        <a href="https://www.el.seibi.ac.jp/international/" target="_blank" class="btn btn-outline-light btn-block btn-sm mb-2">帰国生の方<span> (インターナショナルクラス)</span><span class="material-symbols-outlined">open_in_new</span></a>
-        <a href="<?php echo esc_url( home_url( '/graduate/' ) ); ?>" class="btn btn-outline-light btn-block btn-sm mb-2">卒業生の方</a>
+        <a href="https://www.el.seibi.ac.jp/international/" class="btn btn-outline-light btn-block btn-sm mb-2">帰国生の方<span> (インターナショナルクラス)</span></a>
+        <a href="<?php echo esc_url( home_url( '/graduate/' ) ); ?>" class="btn btn-outline-light btn-block btn-sm mb-2">卒業生の方<span> (同窓会)</span></a>
         <a href="<?php echo esc_url( home_url( '/guardians/' ) ); ?>" class="btn btn-white btn-block btn-sm mb-2"><span class="material-symbols-outlined">lock</span> 保護者の方</a>
         <div class="inter-banner position-relative">
           <img src="<?php echo get_template_directory_uri(); ?>/img/to-inter.webp" class="img-fluid" alt="サレジアン国際学園小学校インターナショナルクラス" />
-          <a href="https://www.el.seibi.ac.jp/international/" target="_blank" class="stretched-link"></a>
+          <a href="https://www.el.seibi.ac.jp/international/" class="stretched-link"></a>
         </div>
       </div>
     </div>

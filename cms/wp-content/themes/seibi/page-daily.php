@@ -42,11 +42,11 @@ get_header(); ?>
     <div class="row justify-content-center">
       <div class="col-lg-8 col-12 mb-5">
         <p>
-          星美の教育は、朝や放課後も大切にしています。<br />
+          星美クラスの教育は、朝や放課後も大切にしています。<br />
           朝は一日のスタートを切るための準備として、放課後は学習やクラブ練習、 子どもと教員が信頼関係を深めるための時間として、さまざまな取り組みをしています。
         </p>
       </div>
-      <div class="sec-title-pink pink"><h3>星美の朝</h3></div>
+      <div class="sec-title-pink pink"><h3>星美クラスの朝</h3></div>
 
       <div class="col-12 general-box">
         <div class="row">
@@ -69,7 +69,7 @@ get_header(); ?>
           <div class="col-lg-8 col-12 order-md-2">
             <h3 class="title-s">朝会／朝の会</h3>
             <p>
-              星美では、授業前に必ず朝会があります。 曜日ごとに全校、児童会、宗教、体育朝会などがあります。<br />
+              星美クラスでは、授業前に必ず朝会があり、曜日ごとに全校、児童会、宗教、体育朝会などがあります。<br />
               各朝会のテーマごとに心の糧になる講話があったり、児童会からのイベントの紹介があったり、運動をしたりします。<br />
               テレビ放送を通して行う朝会のときには、放送委員が放送機器を使って、全校に放送を流します。<br />
               その後、行われる各クラスの朝の会では、担任が朝会の内容を受けて指導し、その日の連絡事項を確認します。
@@ -104,19 +104,19 @@ get_header(); ?>
   <div class="container">
     <div class="row justify-content-center">
 
-      <div class="sec-title-pink pink"><h3>星美の放課後</h3></div>
+      <div class="sec-title-pink pink"><h3>星美クラスの放課後</h3></div>
 
       <div class="col-12 general-box">
         <div class="row">
           <div class="col-lg-8 col-12">
-            <h3 class="title-s">パワーアップの時間</h3>
+            <h3 class="title-s">7時間目</h3>
             <p>
-              ５・６年生を対象に、帰りの会の後「パワーアップ」の時間（火・木曜日）を設けています。<br>
-              この時間は、子どもたちの学力向上のために特別に設けた時間です。特に受験を意識し、発展的な問題の演習を行います。
+              ５・６年生を対象に、7時間目に学習の時間（火･木曜日）を設けています。<br>
+この時間は、子どもたちの学力向上のために特別に設けた時間です。特に受験を意識し、発展的な問題の演習を行います。
             </p>
           </div>
           <div class="col-lg-4 col-12">
-            <img src="<?php echo get_template_directory_uri(); ?>/img/day-img/04.webp" class="img-fluid" loading="lazy" alt="パワーアップの時間" />
+            <img src="<?php echo get_template_directory_uri(); ?>/img/day-img/04.webp" class="img-fluid" loading="lazy" alt="朝会／朝の会" />
           </div>
         </div>
       </div>

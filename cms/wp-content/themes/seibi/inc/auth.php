@@ -14,8 +14,20 @@ function seibi_basic_auth_parents() {
         return;
     }
 
-    $valid_user = 'admin';
-    $valid_pass = 'pass';
+    // .htpasswd ファイルからユーザー一覧を読み込む
+    $htpasswd_file = get_template_directory() . '/inc/.htpasswd';
+    $valid_users   = array();
+    if ( file_exists( $htpasswd_file ) ) {
+        $lines = file( $htpasswd_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES );
+        foreach ( $lines as $line ) {
+            $line = trim( $line );
+            if ( empty( $line ) || strpos( $line, ':' ) === false ) {
+                continue;
+            }
+            list( $u, $h ) = explode( ':', $line, 2 );
+            $valid_users[ trim( $u ) ] = trim( $h );
+        }
+    }
 
     // FastCGI 環境（エックスサーバー等）では PHP_AUTH_USER が自動設定されないため、
     // 複数の方法で Authorization ヘッダーを取得してフォールバックする。
@@ -51,11 +63,20 @@ function seibi_basic_auth_parents() {
     $auth_user = isset( $_SERVER['PHP_AUTH_USER'] ) ? $_SERVER['PHP_AUTH_USER'] : '';
     $auth_pass = isset( $_SERVER['PHP_AUTH_PW'] )   ? $_SERVER['PHP_AUTH_PW']   : '';
 
-    if ( $auth_user !== $valid_user || $auth_pass !== $valid_pass ) {
+    // .htpasswd の DES crypt ハッシュで検証
+    $authenticated = false;
+    if ( isset( $valid_users[ $auth_user ] ) ) {
+        $hash = $valid_users[ $auth_user ];
+        if ( crypt( $auth_pass, $hash ) === $hash ) {
+            $authenticated = true;
+        }
+    }
+
+    if ( ! $authenticated ) {
         header( 'WWW-Authenticate: Basic realm="保護者専用ページ"' );
         status_header( 401 );
         echo '認証が必要です。正しいユーザー名とパスワードを入力してください。';
         exit;
     }
 }
-// add_action( 'template_redirect', 'seibi_basic_auth_parents' );
+add_action( 'template_redirect', 'seibi_basic_auth_parents' );

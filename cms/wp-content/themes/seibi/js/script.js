@@ -3,9 +3,6 @@ if (window.gsap && window.ScrollTrigger) {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-// WordPress の jQuery は no-conflict モードのため、$ をローカルに束縛する
-(function ($) {
-
 $(document).ready(function () {
   const $mobileBtn = $("#mobileMenuBtn");
   const $overlay = $("#sidebar-overlay");
@@ -261,7 +258,8 @@ $(document).ready(function () {
   function isPageBottom(buffer = 400) {
     const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
     // スクロール余地が少ないページでは途中判定を避ける
-    if (scrollableHeight <= buffer) return false;
+    // 余白がほぼ無い（短い）ページでは「すでに最下部」とみなす
+    if (scrollableHeight <= buffer) return true;
     return window.scrollY >= scrollableHeight - buffer;
   }
 
@@ -283,8 +281,8 @@ $(document).ready(function () {
       .off("mouseleave.sidebarPC", "#sidebarMenu")
       .on("mouseleave.sidebarPC", "#sidebarMenu", function () {
         if (isPC() && !isLocked && $(window).scrollTop() > 50) {
-          // 非トップページでは最下部時は表示を維持
-          if (!isTopPage() && isPageBottom()) {
+          // 最下部付近ではハンドル露出を維持（トップ／下層共通）
+          if (isPageBottom()) {
             getSidebar().removeClass("is-hidden");
           } else {
             getSidebar().addClass("is-hidden");
@@ -305,8 +303,8 @@ $(document).ready(function () {
       .off("scroll.sidebarAutoHide")
       .on("scroll.sidebarAutoHide", function () {
         if (isPC() && !isLocked) {
-          if (!isTopPage() && isPageBottom()) {
-            // 非トップページは最下部到達時に自動表示
+          if (isPageBottom()) {
+            // 最下部到達時は自動表示（トップ／下層共通）
             getSidebar().removeClass("is-hidden");
           } else if ($(window).scrollTop() > 50) {
             getSidebar().addClass("is-hidden");
@@ -323,14 +321,14 @@ $(document).ready(function () {
 
     // 初期表示状態をスクロール位置に合わせて反映
     if (isPC() && !isLocked) {
-      if (!isTopPage()) {
-        if (isPageBottom()) {
-          $sidebar.removeClass("is-hidden");
-        } else {
-          $sidebar.addClass("is-hidden");
-        }
-      } else {
+      if (isPageBottom()) {
         $sidebar.removeClass("is-hidden");
+      } else if ($(window).scrollTop() > 50) {
+        $sidebar.addClass("is-hidden");
+      } else if (isTopPage()) {
+        $sidebar.removeClass("is-hidden");
+      } else {
+        $sidebar.addClass("is-hidden");
       }
     }
 
@@ -364,6 +362,7 @@ $(document).ready(function () {
   }
 
   // --- 4. スライドショー・トップへ戻る（共通機能） ---
+  // (ここには以前のスライドショーやトップへ戻るボタンのコードをそのまま入れてください)
   const slides = $(".slideshow .slide-item");
   const captionTextElement = $("#caption-text");
   let currentSlideIndex = 0;
@@ -645,5 +644,3 @@ if ($(".info-slider-track").length > 0) {
   moveSlider();
   startAutoSlide();
 }
-
-})(jQuery);

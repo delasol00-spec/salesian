@@ -841,10 +841,10 @@ a:hover {
   align-items: center !important;
 }
 .gallery-bg-p {
-  background-color: #faa9b8 !important;
+  background-color: #b7b7b7 !important;
 }
 .gallery-bg-g {
-  background-color: #b7b7b7 !important;
+  background-color: #faa9b8 !important;
 }
 
 .icon-wrapper {
@@ -1794,7 +1794,6 @@ a:hover {
   padding-bottom: 70px;
 }
 
-
 /* =================================================
   ガター
   ================================================= */
@@ -2157,7 +2156,6 @@ p small {
 
   .btn-slide span {
     font-size: 0.9rem;
-    ;
   }
   .btn-m {
     padding: 10px 18px 8px;
