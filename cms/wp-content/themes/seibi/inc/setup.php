@@ -45,6 +45,19 @@ function seibi_setup() {
 add_action( 'after_setup_theme', 'seibi_setup' );
 
 // -----------------------------------------------
+// サイト基本設定の自動適用（テーマ有効化時）
+// -----------------------------------------------
+function seibi_setup_site_options() {
+    if ( get_option( 'blogname' ) !== 'サレジアン国際学園小学校 - 星美クラス' ) {
+        update_option( 'blogname', 'サレジアン国際学園小学校 - 星美クラス' );
+    }
+    if ( get_option( 'blogdescription' ) !== '' ) {
+        update_option( 'blogdescription', '' );
+    }
+}
+add_action( 'after_setup_theme', 'seibi_setup_site_options' );
+
+// -----------------------------------------------
 // パーマリンク構造の自動設定
 // -----------------------------------------------
 function seibi_set_permalink_structure() {
