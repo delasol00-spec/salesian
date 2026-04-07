@@ -123,7 +123,7 @@ get_header(); ?>
     </div>
     <div class="row mt30">
       <div class="col-sm-6 col-xs-12 shisetsu shisetsu2">
-        <img src="<?php echo get_template_directory_uri(); ?>/img/facility-img/fac05.webp" loading="lazy" alt="校庭" class="img-fluid" />
+        <img src="<?php echo get_template_directory_uri(); ?>/img/facility-img/fac06.webp" loading="lazy" alt="校庭" class="img-fluid" />
         <p>
           <span>緑豊かな落ち着いた学園</span><br />
           本校のある星美学園キャンパスは赤羽の高台にあり、季節ごとに豊かな表情を見せる木々や草花に囲まれています。<br />
@@ -131,7 +131,7 @@ get_header(); ?>
         </p>
       </div>
       <div class="col-sm-6 col-xs-12 shisetsu shisetsu2">
-        <img src="<?php echo get_template_directory_uri(); ?>/img/facility-img/fac04.webp" loading="lazy" alt="体育館" class="img-fluid" />
+        <img src="<?php echo get_template_directory_uri(); ?>/img/facility-img/fac07.webp" loading="lazy" alt="体育館" class="img-fluid" />
         <p>
           <span>校庭、運動施設の充実</span><br />
           都内にありながら広い校庭があり、体育の授業や休み時間には子どもたちが伸び伸びと駆け回る風景を見ることができます。<br />

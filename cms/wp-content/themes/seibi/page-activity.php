@@ -124,7 +124,7 @@ get_header(); ?>
 </section>
 
 <div class="row justify-content-center bg-white p-70-70">
-  <div class="col-md-7 col-12">
+  <div class="col-lg-7 col-12">
     <div class="sec-title-pink pink"><h3>特別音楽クラブ</h3></div>
     <div class="col-12 activity-box">
       <p class="mb-5">

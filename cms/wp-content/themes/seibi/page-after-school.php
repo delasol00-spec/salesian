@@ -169,7 +169,7 @@ get_header(); ?>
         </div>
       </div>
 
-      <div class="col-lg-4 col-12">
+      <div class="col-lg-4 col-md-6">
         <div class="program-box h-100">
           <div class="row">
             <div class="col-12">
@@ -182,7 +182,7 @@ get_header(); ?>
         </div>
       </div>
 
-      <div class="col-lg-4 col-12">
+      <div class="col-lg-4 col-md-6">
         <div class="program-box h-100">
           <div class="row">
             <div class="col-12">
@@ -195,7 +195,7 @@ get_header(); ?>
         </div>
       </div>
 
-      <div class="col-lg-4 col-12">
+      <div class="col-lg-4 col-md-6">
         <div class="program-box h-100">
           <div class="row">
             <div class="col-12">
@@ -208,7 +208,7 @@ get_header(); ?>
         </div>
       </div>
 
-      <div class="col-lg-4 col-12">
+      <div class="col-lg-4 col-md-6">
         <div class="program-box h-100">
           <div class="row">
             <div class="col-12">
@@ -221,7 +221,7 @@ get_header(); ?>
         </div>
       </div>
 
-      <div class="col-lg-4 col-12">
+      <div class="col-lg-4 col-md-6">
         <div class="program-box h-100">
           <div class="row">
             <div class="col-12">
@@ -234,7 +234,7 @@ get_header(); ?>
         </div>
       </div>
 
-      <div class="col-lg-4 col-12">
+      <div class="col-lg-4 col-md-6">
         <div class="program-box h-100">
           <div class="row">
             <div class="col-12">
@@ -247,7 +247,7 @@ get_header(); ?>
         </div>
       </div>
 
-      <div class="col-lg-4 col-12">
+      <div class="col-lg-4 col-md-6">
         <div class="program-box h-100">
           <div class="row">
             <div class="col-12">
@@ -260,7 +260,7 @@ get_header(); ?>
         </div>
       </div>
 
-      <div class="col-lg-4 col-12">
+      <div class="col-lg-4 col-md-6">
         <div class="program-box h-100">
           <div class="row">
             <div class="col-12">
@@ -351,7 +351,7 @@ get_header(); ?>
 <section class="p-70-70">
   <div class="container">
     <div class="row">
-      <div class="col-md-8 col-12">
+      <div class="col-lg-8 col-12">
         <h3 class="title-s">サレジアンアフタースクールの概要</h3>
         <table class="after-table">
           <thead></thead>
@@ -397,7 +397,7 @@ get_header(); ?>
           </tbody>
         </table>
       </div>
-      <div class="col-md-4 col-12">
+      <div class="col-lg-4 col-12">
         <h3 class="title-s">お問い合せ／ご相談</h3>
         <div class="after-inq">
           <strong>サレジアンアフタースクール</strong><br />
@@ -420,7 +420,7 @@ get_header(); ?>
     <div class="row">
       <div class="sec-title-pink pink"><h3>Q&amp;A よくお寄せいただくご質問</h3></div>
 
-      <div class="col-md-6 col-12 qa">
+      <div class="col-lg-6 col-12 qa">
         <h3 class="title-s">ご利用について</h3>
 
         <div class="faq-q r-top-10">利用するにはどうしたらよいですか？</div>
@@ -473,7 +473,7 @@ get_header(); ?>
         <div class="faq-a r-bottom-10">アフタースクール内で想定されるリスクを広範囲にカバーする保険に入ります。保険料はご利用の料金に含まれております。</div>
       </div>
 
-      <div class="col-md-6 col-12 qa">
+      <div class="col-lg-6 col-12 qa">
         <h3 class="title-s">プログラムについて</h3>
 
         <div class="faq-q r-top-10">プログラムは見学できますか？</div>

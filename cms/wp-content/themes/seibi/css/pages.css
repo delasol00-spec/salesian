@@ -1468,6 +1468,17 @@ a.gra-cate:hover {
   background: url("../img/assistenza-img/para.webp") left center / cover no-repeat fixed;
 }
 
+/* iOS Safari は background-attachment:fixed 非対応で画像が巨大化するため
+   タッチ端末では scroll に切り替える */
+@media (hover: none) {
+  .religion-para-img,
+  .english-para-img,
+  .general-para-img,
+  .assistenza-para-img {
+    background-attachment: scroll;
+  }
+}
+
 /* ----------------------
    このサイトについて
   ---------------------- */
