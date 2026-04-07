@@ -311,8 +311,10 @@ body.menu-open #sidebar-overlay {
   height: 100vh;
   background-color: rgba(0, 51, 102, 0.95) !important; /* メニュー全開時は青の半透明 */
   z-index: 2000;
-  transform: translateX(0);
-  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+  /* iOS Safari では position:fixed + transform の組み合わせでスタッキングコンテキストが
+     崩れ、タッチのヒットテストがズレる。transform は使わず left で制御する。 */
+  transform: none;
+  transition: left 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
   overflow: hidden; /* スクロールは中身（.sidebar-container）側で行う */
 }
 
@@ -346,8 +348,8 @@ body.menu-open #sidebar-overlay {
 
 /* --- 隠れている状態：帯の幅を50px〜60pxほど見せる --- */
 #sidebarMenu.is-hidden {
-  /* 280px - 55px(帯の幅) = 225px分を左へ隠す */
-  transform: translateX(-225px) !important;
+  /* 280px - 55px(帯の幅) = 225px分を左へ隠す。transform は使わない（iOS Safari バグ回避） */
+  left: -225px !important;
   overflow: hidden !important;
 }
 
@@ -446,14 +448,21 @@ body.menu-open #sidebar-overlay {
   #sidebarMenu {
     left: 0 !important;
     width: 280px;
-    /* 最初は全開 */
-    transform: translateX(0);
+    /* 最初は全開。transform ではなく left でアニメーション */
+    transform: none !important;
+    transition: left 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
     background-color: rgba(0, 79, 153, 0.95) !important;
   }
 
   /* PCでスクロールした時だけ隠す */
   #sidebarMenu.is-hidden {
-    transform: translateX(-225px) !important;
+    left: -225px !important;
+    transform: none !important;
+  }
+
+  /* is-hidden 時はコンテンツ側のタップを無効化。ピンク帯だけが反応するようにする */
+  #sidebarMenu.is-hidden .sidebar-container {
+    pointer-events: none;
   }
 
   /* PCの時だけピンクの帯を表示する */
@@ -466,6 +475,8 @@ body.menu-open #sidebar-overlay {
     height: 100%;
     background-color: #e56078;
     cursor: pointer;
+    /* iOS Safari 300ms ダブルタップ遅延を除去 */
+    touch-action: manipulation;
   }
 
   /* メニュー全開時は帯を消す */
