@@ -83,7 +83,7 @@ get_header(); ?>
                 <a href="<?php echo esc_url( get_post_type_archive_link( 'graduate' ) ); ?>" class="gra-cate<?php echo $current_cat === '' ? ' is-current' : ''; ?>">全て</a><br />
                 <a href="<?php echo esc_url( add_query_arg( 'grad_cat', 'news', get_post_type_archive_link( 'graduate' ) ) ); ?>" class="gra-cate<?php echo $current_cat === 'news' ? ' is-current' : ''; ?>">お知らせ</a><br />
                 <a href="<?php echo esc_url( add_query_arg( 'grad_cat', 'alumni-report', get_post_type_archive_link( 'graduate' ) ) ); ?>" class="gra-cate<?php echo $current_cat === 'alumni-report' ? ' is-current' : ''; ?>">同窓会報告</a><br />
-                <a href="http://el-seibi.tokyo/blog/" class="gra-cate" target="_blank" rel="noopener noreferrer">去年以前の記事</a>
+                <a href="<?php echo esc_url( add_query_arg( 'grad_cat', 'past-articles', get_post_type_archive_link( 'graduate' ) ) ); ?>" class="gra-cate<?php echo $current_cat === 'past-articles' ? ' is-current' : ''; ?>">去年以前の記事</a>
               </div>
             </div>
           </div>

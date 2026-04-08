@@ -490,8 +490,9 @@ function seibi_get_category_groups(): array {
             'label'    => '卒業生の方へ',
             'taxonomy' => 'graduate-category',
             'items'    => [
-                [ 'name' => 'お知らせ',   'slug' => 'news'          ],
-                [ 'name' => '同窓会報告', 'slug' => 'alumni-report' ],
+                [ 'name' => 'お知らせ',       'slug' => 'news'          ],
+                [ 'name' => '同窓会報告',     'slug' => 'alumni-report' ],
+                [ 'name' => '去年以前の記事', 'slug' => 'past-articles' ],
             ],
         ],
         [
