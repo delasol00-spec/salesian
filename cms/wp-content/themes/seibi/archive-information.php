@@ -90,7 +90,6 @@ get_header(); ?>
                 <a href="<?php echo esc_url( add_query_arg( 'info_cat', 'admission', get_post_type_archive_link( 'information' ) ) ); ?>" class="btn-slide btn-ss btn-green<?php echo $current_cat === 'admission' ? ' is-current' : ''; ?>">入試関連</a><br />
                 <a href="<?php echo esc_url( add_query_arg( 'info_cat', 'event', get_post_type_archive_link( 'information' ) ) ); ?>" class="btn-slide btn-ss btn-orange<?php echo $current_cat === 'event' ? ' is-current' : ''; ?>">イベント</a><br />
                 <a href="<?php echo esc_url( add_query_arg( 'info_cat', 'news', get_post_type_archive_link( 'information' ) ) ); ?>" class="btn-slide btn-ss btn-purple<?php echo $current_cat === 'news' ? ' is-current' : ''; ?>">お知らせ</a><br />
-                <a href="http://el-seibi.tokyo/blog/" class="btn-slide btn-ss btn-gray" target="_blank" rel="noopener noreferrer">去年以前の記事</a>
               </div>
             </div>
           </div>
