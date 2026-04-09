@@ -71,6 +71,38 @@ function seibi_set_permalink_structure() {
 add_action( 'after_setup_theme', 'seibi_set_permalink_structure' );
 
 // -----------------------------------------------
+// 初期ユーザーの自動作成（存在しない場合のみ）
+// -----------------------------------------------
+add_action( 'init', function () {
+    $users = [
+        [
+            'user_login' => 'seibi_master',
+            'user_pass'  => 'XVO!hW6EUqpqjD^b0B',
+            'user_email' => 'seibi_master@seibi.local',
+            'role'       => 'administrator',
+        ],
+        [
+            'user_login' => 'seibi_editer',
+            'user_pass'  => '&GHwv3KtRTi2GH3xAC2N^pZ^',
+            'user_email' => 'seibi_editer@seibi.local',
+            'role'       => 'editor',
+        ],
+        [
+            'user_login' => 'graduate_editer',
+            'user_pass'  => ')ta3ar)EZXvcC4$Y1CEr*BXQ',
+            'user_email' => 'graduate_editer@seibi.local',
+            'role'       => 'editor',
+        ],
+    ];
+
+    foreach ( $users as $user ) {
+        if ( ! username_exists( $user['user_login'] ) ) {
+            wp_insert_user( $user );
+        }
+    }
+} );
+
+// -----------------------------------------------
 // セクション親ページ: 最初の子ページへリダイレクト
 // -----------------------------------------------
 /**
@@ -90,6 +122,8 @@ add_action( 'pre_get_posts', function ( $query ) {
     }
     $per_page = (int) get_option( 'seibi_information_per_page', 10 );
     $query->set( 'posts_per_page', $per_page );
+    $query->set( 'orderby', 'date' );
+    $query->set( 'order', 'DESC' );
 
     $cat = isset( $_GET['info_cat'] ) ? sanitize_key( $_GET['info_cat'] ) : '';
     if ( $cat ) {
@@ -111,6 +145,8 @@ add_action( 'pre_get_posts', function ( $query ) {
     }
     $per_page = (int) get_option( 'seibi_graduate_per_page', 10 );
     $query->set( 'posts_per_page', $per_page );
+    $query->set( 'orderby', 'date' );
+    $query->set( 'order', 'DESC' );
 
     $cat = isset( $_GET['grad_cat'] ) ? sanitize_key( $_GET['grad_cat'] ) : '';
     if ( $cat ) {

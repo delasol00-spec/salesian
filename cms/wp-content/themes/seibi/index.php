@@ -170,8 +170,8 @@ get_header(); ?>
     $news_query = new WP_Query([
       'post_type'      => 'information',
       'posts_per_page' => 8,
-      'orderby'        => 'menu_order',
-      'order'          => 'ASC',
+      'orderby'        => 'date',
+      'order'          => 'DESC',
     ]);
     if ($news_query->have_posts()) :
       while ($news_query->have_posts()) : $news_query->the_post();
