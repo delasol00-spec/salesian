@@ -235,20 +235,3 @@ function seibi_flush_post_type_rewrite_once() {
     }
 }
 add_action( 'wp_loaded', 'seibi_flush_post_type_rewrite_once' );
-
-// -----------------------------------------------
-// year_month デフォルトターム（4月〜3月）自動作成
-// -----------------------------------------------
-function seibi_create_year_month_defaults() {
-    if ( get_option( 'seibi_year_month_terms_created' ) === '1' ) {
-        return;
-    }
-    $months = [ '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月', '1月', '2月', '3月' ];
-    foreach ( $months as $month ) {
-        if ( ! term_exists( $month, 'year_month' ) ) {
-            wp_insert_term( $month, 'year_month' );
-        }
-    }
-    update_option( 'seibi_year_month_terms_created', '1' );
-}
-add_action( 'init', 'seibi_create_year_month_defaults', 20 );
