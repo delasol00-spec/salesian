@@ -669,8 +669,8 @@ a:hover {
 /* レスポンシブ対応 */
 @media (max-width: 1024px) {
   .news-card-grid {
-    grid-template-columns: repeat(2, 1fr);
-  } /* 画面が狭いときは2列 */
+    grid-template-columns: repeat(3, 1fr);
+  } /* iPad縦以下は3列 */
 }
 
 @media (max-width: 599px) {
