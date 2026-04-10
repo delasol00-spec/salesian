@@ -41,6 +41,7 @@ get_header(); ?>
         <div class="row">
           <?php while ( $event_query->have_posts() ) : $event_query->the_post();
             $event_date      = get_post_meta( get_the_ID(), 'event_date', true );
+            $event_time      = get_post_meta( get_the_ID(), 'event_time', true );
             $event_place     = get_post_meta( get_the_ID(), 'event_place', true );
             $event_target    = get_post_meta( get_the_ID(), 'event_target', true );
             $event_method    = get_post_meta( get_the_ID(), 'event_method', true );
@@ -54,9 +55,11 @@ get_header(); ?>
               <img src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'large' ) ); ?>" alt="<?php the_title_attribute(); ?>" class="img-fluid" />
               <?php endif; ?>
               <dl class="event-detail">
-                <?php if ( $event_date ) : ?>
+                <?php
+                $event_datetime_display = trim( seibi_format_datetime( $event_date ) . ( $event_time ? '　' . $event_time : '' ) );
+                if ( $event_datetime_display !== '' ) : ?>
                 <dd>日時</dd>
-                <dt><?php echo esc_html( $event_date ); ?></dt>
+                <dt><?php echo esc_html( $event_datetime_display ); ?></dt>
                 <?php endif; ?>
                 <?php if ( $event_place ) : ?>
                 <dd>場所</dd>

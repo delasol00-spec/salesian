@@ -50,7 +50,7 @@ get_header(); ?>
           <?php while ( $school_query->have_posts() ) : $school_query->the_post();
               $id = get_the_ID();
               $school_fields = [
-                  'briefing_datetime'          => '日時',
+                  'briefing_date'              => '日時',
                   'briefing_target'            => '対象',
                   'briefing_reception'         => '受付',
                   'briefing_session'           => '説明会',
@@ -62,9 +62,18 @@ get_header(); ?>
             <div class="event-spec">
               <p>
               <?php foreach ( $school_fields as $key => $label ) :
+                  if ( $key === 'briefing_date' ) :
+                      $date_val = get_post_meta( $id, 'briefing_date', true );
+                      $time_val = get_post_meta( $id, 'briefing_time', true );
+                      $display  = trim( seibi_format_datetime( $date_val ) . ( $time_val ? '　' . $time_val : '' ) );
+                      if ( $display !== '' ) : ?>
+                <span><?php echo esc_html( $label ); ?>：</span><?php echo esc_html( $display ); ?><br />
+                      <?php endif;
+                      continue;
+                  endif;
                   $val = get_post_meta( $id, $key, true );
                   if ( $val !== '' ) : ?>
-                <span><?php echo esc_html( $label ); ?>：</span><?php echo esc_html( $val ); ?><br />
+                <span><?php echo esc_html( $label ); ?>：</span><?php echo esc_html( seibi_format_datetime( $val ) ); ?><br />
               <?php endif; endforeach; ?>
               </p>
               <?php
@@ -110,9 +119,8 @@ get_header(); ?>
           <?php while ( $outside_query->have_posts() ) : $outside_query->the_post();
               $id = get_the_ID();
               $outside_fields = [
-                  'outside_datetime'    => '日時',
+                  'outside_date'        => '日時',
                   'outside_venue'       => '会場',
-                  'outside_time'        => '時間',
                   'outside_description' => false,
               ];
           ?>
@@ -121,12 +129,21 @@ get_header(); ?>
             <div class="event-spec">
               <p>
               <?php foreach ( $outside_fields as $key => $label ) :
+                  if ( $key === 'outside_date' ) :
+                      $date_val = get_post_meta( $id, 'outside_date', true );
+                      $time_val = get_post_meta( $id, 'outside_time', true );
+                      $display  = trim( seibi_format_datetime( $date_val ) . ( $time_val ? '　' . $time_val : '' ) );
+                      if ( $display !== '' ) : ?>
+                <span><?php echo esc_html( $label ); ?>：</span><?php echo esc_html( $display ); ?><br />
+                      <?php endif;
+                      continue;
+                  endif;
                   $val = get_post_meta( $id, $key, true );
                   if ( $val !== '' ) :
                       if ( $label ) : ?>
-                <span><?php echo esc_html( $label ); ?>：</span><?php echo esc_html( $val ); ?><br />
+                <span><?php echo esc_html( $label ); ?>：</span><?php echo esc_html( seibi_format_datetime( $val ) ); ?><br />
               <?php else : ?>
-                <?php echo esc_html( $val ); ?><br />
+                <?php echo esc_html( seibi_format_datetime( $val ) ); ?><br />
               <?php endif; endif; endforeach; ?>
               </p>
               <?php

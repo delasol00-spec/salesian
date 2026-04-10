@@ -9,6 +9,36 @@
  */
 
 // -----------------------------------------------
+// 共通: 日時フォーマットヘルパー
+// -----------------------------------------------
+/**
+ * datetime-local（YYYY-MM-DDTHH:mm）または date（YYYY-MM-DD）形式の値を
+ * 日本語表示用文字列に変換する。それ以外の値はそのまま返す（既存テキスト互換）。
+ *
+ * @param string $value カスタムフィールドの保存値
+ * @return string        整形後の文字列
+ */
+function seibi_format_datetime( $value ) {
+    if ( ! $value ) {
+        return $value;
+    }
+    $days_ja = [ '日', '月', '火', '水', '木', '金', '土' ];
+    // datetime-local 形式: YYYY-MM-DDTHH:mm
+    if ( preg_match( '/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/', $value ) ) {
+        $dt  = new DateTime( $value );
+        $dow = $days_ja[ (int) $dt->format( 'w' ) ];
+        return $dt->format( 'Y年n月j日' ) . '（' . $dow . '）' . $dt->format( 'H:i' );
+    }
+    // date 形式: YYYY-MM-DD
+    if ( preg_match( '/^\d{4}-\d{2}-\d{2}$/', $value ) ) {
+        $dt  = new DateTime( $value );
+        $dow = $days_ja[ (int) $dt->format( 'w' ) ];
+        return $dt->format( 'Y年n月j日' ) . '（' . $dow . '）';
+    }
+    return $value;
+}
+
+// -----------------------------------------------
 // 共通: メタボックス nonce 検証
 // -----------------------------------------------
 /**
@@ -61,7 +91,8 @@ function seibi_briefing_meta_box_callback( $post ) {
 
     // 学校説明会フィールド（一覧ページ・詳細ページ共通）
     $school_fields = [
-        'briefing_datetime'          => '日時',
+        'briefing_date'              => '日',
+        'briefing_time'              => '時間',
         'briefing_venue'             => '場所',
         'briefing_reception'         => '受付',
         'briefing_session'           => '説明会',
@@ -73,9 +104,9 @@ function seibi_briefing_meta_box_callback( $post ) {
 
     // 学外説明会フィールド
     $outside_fields = [
-        'outside_datetime'    => '日時',
-        'outside_venue'       => '会場',
+        'outside_date'        => '日',
         'outside_time'        => '時間',
+        'outside_venue'       => '会場',
         'outside_description' => '説明文',
     ];
     ?>
@@ -136,10 +167,11 @@ function seibi_briefing_meta_box_callback( $post ) {
         </tr>
         <tr><td colspan="2"><hr style="margin:8px 0;" /></td></tr>
       <?php foreach ( $school_fields as $key => $label ) :
-          $value = get_post_meta( $post->ID, $key, true ); ?>
+          $value     = get_post_meta( $post->ID, $key, true );
+          $input_type = ( $key === 'briefing_date' ) ? 'date' : 'text'; ?>
         <tr>
           <th style="width:220px;"><label for="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $label ); ?></label></th>
-          <td><input type="text" id="<?php echo esc_attr( $key ); ?>" name="<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( $value ); ?>" class="widefat" /></td>
+          <td><input type="<?php echo esc_attr( $input_type ); ?>" id="<?php echo esc_attr( $key ); ?>" name="<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( $value ); ?>" class="widefat" /></td>
         </tr>
       <?php endforeach; ?>
       </tbody></table>
@@ -185,6 +217,8 @@ function seibi_briefing_meta_box_callback( $post ) {
           <th style="width:220px;"><label for="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $label ); ?></label></th>
           <?php if ( $key === 'outside_description' ) : ?>
           <td><textarea id="<?php echo esc_attr( $key ); ?>" name="<?php echo esc_attr( $key ); ?>" class="widefat" rows="3"><?php echo esc_textarea( $value ); ?></textarea></td>
+          <?php elseif ( $key === 'outside_date' ) : ?>
+          <td><input type="date" id="<?php echo esc_attr( $key ); ?>" name="<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( $value ); ?>" class="widefat" /></td>
           <?php else : ?>
           <td><input type="text" id="<?php echo esc_attr( $key ); ?>" name="<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( $value ); ?>" class="widefat" /></td>
           <?php endif; ?>
@@ -243,7 +277,8 @@ function seibi_briefing_meta_save( $post_id ) {
 
     // 学校説明会フィールド
     $school_text_fields = [
-        'briefing_datetime',
+        'briefing_date',
+        'briefing_time',
         'briefing_venue',
         'briefing_reception',
         'briefing_session',
@@ -265,9 +300,9 @@ function seibi_briefing_meta_save( $post_id ) {
 
     // 学外説明会フィールド
     $outside_text_fields = [
-        'outside_datetime',
-        'outside_venue',
+        'outside_date',
         'outside_time',
+        'outside_venue',
         'outside_link_label',
     ];
     foreach ( $outside_text_fields as $key ) {
@@ -648,7 +683,8 @@ function seibi_event_meta_box_callback( $post ) {
     wp_nonce_field( 'seibi_event_meta_save', 'seibi_event_meta_nonce' );
 
     $text_fields = [
-        'event_date'      => '日時',
+        'event_date'      => '日',
+        'event_time'      => '時間',
         'event_place'     => '場所',
         'event_reception' => '受付',
         'event_items'     => '持ち物',
@@ -700,13 +736,15 @@ function seibi_event_meta_box_callback( $post ) {
     <tr><td colspan="2"><hr style="margin:8px 0;" /></td></tr>
     <?php
     foreach ( $text_fields as $key => $label ) {
-        $value = get_post_meta( $post->ID, $key, true );
+        $value      = get_post_meta( $post->ID, $key, true );
+        $input_type = ( $key === 'event_date' ) ? 'date' : 'text';
         printf(
             '<tr><th style="width:260px;"><label for="%1$s">%2$s</label></th>'
-            . '<td><input type="text" id="%1$s" name="%1$s" value="%3$s" class="widefat" /></td></tr>',
+            . '<td><input type="%4$s" id="%1$s" name="%1$s" value="%3$s" class="widefat" /></td></tr>',
             esc_attr( $key ),
             esc_html( $label ),
-            esc_attr( $value )
+            esc_attr( $value ),
+            esc_attr( $input_type )
         );
     }
     echo '</tbody></table>';
@@ -736,7 +774,7 @@ function seibi_event_meta_save( $post_id ) {
     }
 
     $text_fields = [
-        'event_date', 'event_place', 'event_reception',
+        'event_date', 'event_time', 'event_place', 'event_reception',
         'event_items', 'event_target', 'event_method',
         'event_period', 'event_notes', 'event_link_label',
     ];

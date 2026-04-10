@@ -53,10 +53,20 @@ endif;
           <h3 class="mb-3"><?php the_title(); ?></h3>
           <dl class="event-detail">
             <?php foreach ( $detail_fields as $key => $label ) :
+                if ( $key === 'event_date' ) :
+                    $date_val = get_post_meta( $id, 'event_date', true );
+                    $time_val = get_post_meta( $id, 'event_time', true );
+                    $display  = trim( seibi_format_datetime( $date_val ) . ( $time_val ? '　' . $time_val : '' ) );
+                    if ( $display !== '' ) : ?>
+              <dd><?php echo esc_html( $label ); ?></dd>
+              <dt><?php echo nl2br( esc_html( $display ) ); ?></dt>
+                    <?php endif;
+                    continue;
+                endif;
                 $val = get_post_meta( $id, $key, true );
                 if ( $val !== '' ) : ?>
               <dd><?php echo esc_html( $label ); ?></dd>
-              <dt><?php echo nl2br( esc_html( $val ) ); ?></dt>
+              <dt><?php echo nl2br( esc_html( seibi_format_datetime( $val ) ) ); ?></dt>
             <?php endif; endforeach; ?>
           </dl>
 

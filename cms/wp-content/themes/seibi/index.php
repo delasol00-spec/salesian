@@ -41,39 +41,51 @@ get_header(); ?>
       <div class="info-slider-container">
         <div class="info-slider-track">
           <?php
-          // briefing: 「トップページ」タームがついたものだけ
-          $briefing_ids = get_posts([
+          // briefing: 「トップページ」タームがついたものだけ（フル投稿オブジェクトで取得）
+          $_briefing_posts = get_posts([
             'post_type'   => 'briefing',
             'numberposts' => -1,
-            'fields'      => 'ids',
             'tax_query'   => [[
               'taxonomy' => 'briefing-flag',
               'field'    => 'slug',
               'terms'    => 'top-page',
             ]],
           ]);
-          // event: 「トップページ」タームがついたものだけ
-          $event_ids = get_posts([
+          // event: 「トップページ」タームがついたものだけ（フル投稿オブジェクトで取得）
+          $_event_posts = get_posts([
             'post_type'   => 'event',
             'numberposts' => -1,
-            'fields'      => 'ids',
             'tax_query'   => [[
               'taxonomy' => 'event-flag',
               'field'    => 'slug',
               'terms'    => 'top-page',
             ]],
           ]);
-          $top_ids = array_merge($briefing_ids, $event_ids);
 
-          $info_query = ! empty($top_ids) ? new WP_Query([
-            'post_type'      => ['briefing', 'event'],
-            'post__in'       => $top_ids,
-            'posts_per_page' => 8,
-            'orderby'        => 'menu_order',
-            'order'          => 'ASC',
-          ]) : null;
-          if ($info_query && $info_query->have_posts()) :
-            while ($info_query->have_posts()) : $info_query->the_post();
+          // 日付メタを付加してマージ（briefing_date / event_date）
+          $_slide_posts = [];
+          foreach ($_briefing_posts as $_p) {
+            $_btype = get_post_meta($_p->ID, 'briefing_type', true) ?: 'school';
+            $_date_key = ('outside' === $_btype) ? 'outside_date' : 'briefing_date';
+            $_slide_posts[] = ['post' => $_p, 'date' => get_post_meta($_p->ID, $_date_key, true)];
+          }
+          foreach ($_event_posts as $_p) {
+            $_slide_posts[] = ['post' => $_p, 'date' => get_post_meta($_p->ID, 'event_date', true)];
+          }
+
+          // YYYY-MM-DD 形式で新しい順にソート
+          usort($_slide_posts, function($a, $b) {
+            return strcmp($b['date'], $a['date']);
+          });
+
+          // 最大8件
+          $_slide_posts = array_slice($_slide_posts, 0, 8);
+
+          global $post;
+          if (! empty($_slide_posts)) :
+            foreach ($_slide_posts as $_item) :
+              $post = $_item['post'];
+              setup_postdata($post);
               $post_type = get_post_type();
               $tag_class = ('briefing' === $post_type) ? 'bg-pink' : 'bg-orange';
               $tag_label = ('briefing' === $post_type) ? '説明会' : 'イベント';
@@ -127,7 +139,22 @@ get_header(); ?>
                 </div>
                 <div class="card-body">
                   <span class="material-symbols-outlined">calendar_month</span>
-                  <span class="event-date"><?php echo esc_html( get_the_date('Y年n月j日(D) H:i〜') ); ?></span>
+                  <span class="event-date"><?php
+                    if ( 'briefing' === $post_type ) {
+                        $btype = get_post_meta( get_the_ID(), 'briefing_type', true ) ?: 'school';
+                        if ( 'outside' === $btype ) {
+                            $d = seibi_format_datetime( get_post_meta( get_the_ID(), 'outside_date', true ) );
+                            $t = get_post_meta( get_the_ID(), 'outside_time', true );
+                        } else {
+                            $d = seibi_format_datetime( get_post_meta( get_the_ID(), 'briefing_date', true ) );
+                            $t = get_post_meta( get_the_ID(), 'briefing_time', true );
+                        }
+                    } else {
+                        $d = seibi_format_datetime( get_post_meta( get_the_ID(), 'event_date', true ) );
+                        $t = get_post_meta( get_the_ID(), 'event_time', true );
+                    }
+                    echo esc_html( trim( $d . ( $t ? '　' . $t : '' ) ) );
+                  ?></span>
                 </div>
                 <div class="card-footer">
                   <span class="info-tag bg-blue"><?php echo esc_html($res_label); ?></span><?php if ( $res_period ) echo esc_html($res_period); ?>
@@ -138,7 +165,7 @@ get_header(); ?>
               </div>
               <?php endif; ?>
           <?php
-            endwhile;
+            endforeach;
             wp_reset_postdata();
           endif;
           ?>
