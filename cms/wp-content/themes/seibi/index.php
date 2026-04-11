@@ -73,9 +73,9 @@ get_header(); ?>
             $_slide_posts[] = ['post' => $_p, 'date' => get_post_meta($_p->ID, 'event_date', true)];
           }
 
-          // YYYY-MM-DD 形式で新しい順にソート
+          // YYYY-MM-DD 形式で古い順にソート
           usort($_slide_posts, function($a, $b) {
-            return strcmp($b['date'], $a['date']);
+            return strcmp($a['date'], $b['date']);
           });
 
           // 最大8件
