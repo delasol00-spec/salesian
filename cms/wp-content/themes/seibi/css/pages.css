@@ -10,7 +10,7 @@
 ---------------------- */
 .sub-hero {
   width: 100%;
-  height: auto;
+  height: 300px;
   position: relative;
   overflow: hidden;
 }
@@ -23,15 +23,17 @@
   width: 100%;
   height: 30px;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent);
-  pointer-events: none; /* 画像のクリックなどの邪魔をしない */
+  pointer-events: none;
 }
 
 .sub-hero-img {
   display: block;
-  height: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
-/* スマホ: 画像は実寸の天地（縦は切らない）／横幅ははみ出してよいので親でクリップ／中央寄せ */
 @media (max-width: 991px) {
   .sub-page-view {
     padding-top: 60px; /* スマホヘッダー分 */
@@ -40,12 +42,12 @@
   .sub-hero {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
   }
 
   .sub-hero-img {
     width: auto;
-    height: auto;
+    height: 300px;
     max-width: none;
     flex-shrink: 0;
   }
@@ -248,7 +250,7 @@ h3.sub-title {
   color: #555;
 }
 
-@media (max-width: 767.98px) {
+@media (max-width: 1024px) {
   .history-img {
     display: none;
   }
@@ -1376,35 +1378,35 @@ a.gra-cate:hover {
 　保護者の方へ
 ------------------------*/
 .dl {
-  margin-top: 30px ;
-  padding: 0 ;
-  }
-  
-  .dl ul {
-  clear: both ;
-  }
-  
-  .dl li {
-  border-bottom:1px dotted #CCC;
-  list-style: none ;
-  font-size: 1em ;
-  }
-  
-  .dl li span {
-  float: right ;
-  }
-  .dl li:hover {
-  background-color:#fafafa;
+  margin-top: 30px;
+  padding: 0;
+}
+
+.dl ul {
+  clear: both;
+}
+
+.dl li {
+  border-bottom: 1px dotted #ccc;
+  list-style: none;
+  font-size: 1em;
+}
+
+.dl li span {
+  float: right;
+}
+.dl li:hover {
+  background-color: #fafafa;
   -webkit-transition: all 0.5s ease-in-out;
-    -moz-transition: all 0.5s ease-in-out;
-    -o-transition: all 0.5s ease-in-out;
-    -ms-transition: all 0.5s ease-in-out;
-    transition: all 0.5s ease-in-out;
-  }
-  .dl li a {
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+.dl li a {
   display: block;
-  padding: 10px ;
-  }
+  padding: 10px;
+}
 
 /* ----------------------
    パララックス

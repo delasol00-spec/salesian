@@ -13,12 +13,12 @@ get_header(); ?>
 <section class="p-70-70">
   <div class="container">
     <div class="row map">
-      <div class="col-md-8 col-12 mb-3">
+      <div class="col-lg-8 col-12 mb-3">
         <a href="javascript:void(0);" data-toggle="modal" data-target="#mapModal">
           <img src="<?php echo get_template_directory_uri(); ?>/img/about/map.webp" alt="アクセスマップ" class="img-fluid" />
         </a>
       </div>
-      <div class="col-md-4 col-12">
+      <div class="col-lg-4 col-12">
         <div class="access-col">
           <h4 class="access-title">JR赤羽駅から</h4>
           <p>
@@ -42,12 +42,10 @@ get_header(); ?>
 <section class="p-70-70 bg-white">
   <div class="container">
     <div class="row map">
-      <div class="col-md-8 col-12 mb-3">
-        <a href="javascript:void(0);" data-toggle="modal" data-target="#mapModal">
-          <img src="<?php echo get_template_directory_uri(); ?>/img/about/map2.webp" alt="アクセスマップ" class="img-fluid" />
-        </a>
+      <div class="col-lg-8 col-12 mb-3">
+        <img src="<?php echo get_template_directory_uri(); ?>/img/about/map2.webp" alt="アクセスマップ" class="img-fluid" />
       </div>
-      <div class="col-md-4 col-12">
+      <div class="col-lg-4 col-12">
         <div class="access-col">
           <h4 class="access-title">JR赤羽駅利用</h4>
           <div class="line">

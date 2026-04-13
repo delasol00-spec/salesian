@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 保護者の方
  * URL: /guardians/
@@ -26,15 +27,18 @@ get_header(); ?>
 <section class="p-70-70">
   <div class="container">
     <div class="row justify-content-center">
-      <div class="sec-title-pink pink"><h3>各種届出ダウンロード</h3></div>
+      <div class="sec-title-pink pink">
+        <h3>各種届出ダウンロード</h3>
+      </div>
       <div class="col-lg-10 col-12">
         <p>
           各種届出・申請フォームのダウンロードがご利用いただけます。<br>
           ダウンロードしたフォームをプリントアウトしていただき、必要事項をご記入の上、学校へご提出ください。
         </p>
         <ul class="dl">
-          <li><a href="<?php echo get_template_directory_uri(); ?>/docs/toukoukakuninsyo.pdf" target="_blank"><strong>登校許可確認証</strong>（学校保健法に指定された伝染性の疾病と診断された医療機関で必要）<span><i class="fa fa-file-pdf-o" aria-hidden="true"></i>（PDF 578KB）</span></a></li>
-          <li><a href="<?php echo get_template_directory_uri(); ?>/docs/jidoushinjouhenkoutodoke.pdf" target="_blank"><strong>児童身上変更届</strong>（住所その他登下校経路変更時に必要）<span><i class="fa fa-file-pdf-o" aria-hidden="true"></i>（PDF 1.5MB）</span></a></li>
+          <li><a href="<?php echo get_template_directory_uri(); ?>/docs/toukoukakuninsyo.pdf" target="_blank"><strong>登校許可確認証</strong>（学校保健法に指定された伝染性の疾病と診断された医療機関で必要）<span>（PDF 578KB）</span></a></li>
+          <li><a href="<?php echo get_template_directory_uri(); ?>/docs/jidoushinjouhenkoutodoke.pdf" target="_blank"><strong>児童身上変更届</strong>（住所その他登下校経路変更時に必要）<span>（PDF 196KB）</span></a></li>
+          <li><a href="<?php echo get_template_directory_uri(); ?>/docs/jidoushinjouhenkoutodoke.docx" target="_blank">　<span>（Word 413KB）</span></a></li>
         </ul>
       </div>
     </div>
@@ -44,7 +48,9 @@ get_header(); ?>
 <section class="p-70-70 bg-white">
   <div class="container">
     <div class="row justify-content-center">
-      <div class="sec-title-pink pink"><h3>制服販売サイト</h3></div>
+      <div class="sec-title-pink pink">
+        <h3>制服販売サイト</h3>
+      </div>
       <div class="col-lg-8">
         <p>
           制服販売サイトを利用するには、7iDに登録いただく必要があります。<br>
@@ -63,7 +69,9 @@ get_header(); ?>
 <section class="p-70-70">
   <div class="container">
     <div class="row justify-content-center">
-      <div class="sec-title-pink pink"><h3>体操着等販売サイト</h3></div>
+      <div class="sec-title-pink pink">
+        <h3>体操着等販売サイト</h3>
+      </div>
       <div class="col-lg-8">
         <p>
           体操着等販売サイトを利用するには、ご利用前に会員登録が必要です。初めて利用される方は下記「会員登録」より必要事項をご記入の上ご利用ください。<br>

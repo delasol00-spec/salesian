@@ -669,8 +669,8 @@ a:hover {
 /* レスポンシブ対応 */
 @media (max-width: 1024px) {
   .news-card-grid {
-    grid-template-columns: repeat(2, 1fr);
-  } /* 画面が狭いときは2列 */
+    grid-template-columns: repeat(3, 1fr);
+  } /* iPad縦以下は3列 */
 }
 
 @media (max-width: 599px) {
@@ -841,10 +841,10 @@ a:hover {
   align-items: center !important;
 }
 .gallery-bg-p {
-  background-color: #b7b7b7 !important;
+  background-color: #faa9b8 !important;
 }
 .gallery-bg-g {
-  background-color: #faa9b8 !important;
+  background-color: #b7b7b7 !important;
 }
 
 .icon-wrapper {

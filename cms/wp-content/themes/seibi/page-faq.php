@@ -14,7 +14,7 @@ get_header(); ?>
   <div class="container">
     <div class="row justify-content-center">
       <h2 class="sec-title-pink pink">入学／入試／学費について</h2>
-      <div class="col-md-8">
+      <div class="col-lg-8 col-md-10 col-12">
         <div class="faq-q r-top-10">通学可能地域の基準・指定はありますか。</div>
         <div class="faq-a r-bottom-10">
           特にありません。

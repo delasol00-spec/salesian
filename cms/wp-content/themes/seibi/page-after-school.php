@@ -1,4 +1,5 @@
 <?php
+
 /**
  * サレジアンアフタースクール
  * URL: /life/after-school/
@@ -120,7 +121,9 @@ get_header(); ?>
 <section class="p-70-70 bg-white">
   <div class="container">
     <div class="row justify-content-center">
-      <div class="sec-title-pink pink"><h3>アフタースクールのプログラム</h3></div>
+      <div class="sec-title-pink pink">
+        <h3>アフタースクールのプログラム</h3>
+      </div>
       <div class="col-lg-8 col-12 mb-5">
         <p>お子様が学校で過ごす大切な放課後を、より豊かに過ごしていただけるよう、様々な体験プログラム をご用意しています。 毎週決まった曜日に受講する「定期プログラム」と単発で受講可能な「スペシャルプログラム」が あります。</p>
       </div>
@@ -307,7 +310,9 @@ get_header(); ?>
     <div class="row">
       <div class="col-12">
         <div class="row justify-content-center">
-          <div class="sec-title-pink pink"><h3>アフタースクール Instagram</h3></div>
+          <div class="sec-title-pink pink">
+            <h3>アフタースクール Instagram</h3>
+          </div>
 
           <div class="col-lg-4 col-12 special-progrum">
             <a href="https://www.instagram.com/afterschool_seibi/" target="_blank">
@@ -328,7 +333,9 @@ get_header(); ?>
 <section class="p-100-100 bg-white">
   <div class="container">
     <div class="row">
-      <div class="sec-title-pink pink"><h3>各種お申し込み・変更</h3></div>
+      <div class="sec-title-pink pink">
+        <h3>各種お申し込み・変更</h3>
+      </div>
       <div class="col-xl-12">
         <div class="row">
           <div class="col-12 text-center">
@@ -401,7 +408,7 @@ get_header(); ?>
         <h3 class="title-s">お問い合せ／ご相談</h3>
         <div class="after-inq">
           <strong>サレジアンアフタースクール</strong><br />
-          <strong>メール</strong>：<a href="mailto:seibi@npoafterschool.org">seibi@npoafterschool.org</a><br />
+          <strong>メール</strong>：<a href="mailto:salesian@npoafterschool.org">salesian@npoafterschool.org</a><br />
           <strong>電話</strong>：080-3395-6396（10:00-18:45）
         </div>
 
@@ -418,7 +425,9 @@ get_header(); ?>
 <section class="p-100-100 bg-white">
   <div class="container">
     <div class="row">
-      <div class="sec-title-pink pink"><h3>Q&amp;A よくお寄せいただくご質問</h3></div>
+      <div class="sec-title-pink pink">
+        <h3>Q&amp;A よくお寄せいただくご質問</h3>
+      </div>
 
       <div class="col-lg-6 col-12 qa">
         <h3 class="title-s">ご利用について</h3>
@@ -427,7 +436,7 @@ get_header(); ?>
         <div class="faq-a r-bottom-10">
           サレジアン国際学園小学校在学中で、入会手続きを行っていただいた方がご利用いただけます。就労要件はございませんので、どなたでもお申込み可能です。 <br />
           <strong class="text-Pink">お問い合せ・ご相談はサレジアンアフタースクール事務局まで</strong><br />
-          <strong>メール</strong>：<a href="mailto:seibi@npoafterschool.org">seibi@npoafterschool.org</a> <strong>電話</strong>：080-3395-6396（10:30〜18:45）
+          <strong>メール</strong>：<a href="mailto:salesian@npoafterschool.org">salesian@npoafterschool.org</a> <strong>電話</strong>：080-3395-6396（10:30〜18:45）
         </div>
 
         <div class="faq-q r-top-10">利用したい日の何日前までに申し込みをすればよいですか？</div>
@@ -489,7 +498,9 @@ get_header(); ?>
 <section class="p-100-100">
   <div class="container">
     <div class="row justify-content-center">
-      <div class="sec-title-pink pink"><h3>お問い合せ・ご相談</h3></div>
+      <div class="sec-title-pink pink">
+        <h3>お問い合せ・ご相談</h3>
+      </div>
       <div class="col-md-8 col-12 text-center">
         <p>サレジアンアフタースクールへのお問い合せ・ご相談は、<br />下記までお気軽にお寄せください。</p>
         <div class="after-inq text-center">

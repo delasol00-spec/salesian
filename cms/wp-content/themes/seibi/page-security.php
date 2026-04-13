@@ -14,10 +14,10 @@ get_header(); ?>
   <div class="container">
     <h2 class="col-12 sec-title-pink pink">危機管理体制の徹底</h2>
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-5 col-md-offset-0 col-sm-8 col-sm-offset-2 wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.3s">
         <img src="<?php echo get_template_directory_uri(); ?>/img/security-img/security-img01.webp" alt="危機管理体制の徹底" class="img-fluid" />
       </div>
-      <div class="col-md-7">
+      <div class="col-md-7 col-sm-12 wow fadeInRight title-L" demo data-wow-duration="1s" data-wow-delay="0.3s">
         <p>
               子どもたちの安全と安心を確保するため、様々な対策と訓練を実施しています。<br />
               特に子どもたちは都内近郊の様々な地区から通学しているため、通学時の危機管理も徹底しています。
@@ -32,7 +32,7 @@ get_header(); ?>
   <div class="container">
     <h2 class="col-12 sec-title-pink pink">震災などの災害時対策</h2>
     <div class="row">
-      <div class="col-lg-6 col-xs-12 security">
+      <div class="col-lg-6 col-xs-12 security wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
         <h3 class="title-s">防災訓練</h3>
         <p>地震や火災などの災害時に、迅速かつ安全に子どもたちを校庭などの安全な屋外に避難させるための訓練を実施しています。</p>
         <h3 class="title-s">地区別による班編成</h3>
@@ -46,7 +46,7 @@ get_header(); ?>
               保護者が迎えに来られるまでは、学校で責任をもって保護しています。
             </p>
       </div>
-      <div class="col-lg-6 col-xs-12 security">
+      <div class="col-lg-6 col-xs-12 security wow fadeInUp">
         <h3 class="title-s">防災倉庫の設置</h3>
         <img src="<?php echo get_template_directory_uri(); ?>/img/security-img/security-img02.webp" alt="防災倉庫" class="img-fluid mb-2" />
         <p>
@@ -60,15 +60,16 @@ get_header(); ?>
   <div class="container">
     <h2 class="col-12 sec-title-pink pink">防犯･セキュリティ対策</h2>
     <div class="row">
-      <div class="col-sm-6 col-xs-12 security">
+      <div class="col-sm-6 col-xs-12 security wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
         <h3 class="title-s">守衛室の設置と入場者の管理</h3>
         <img src="<?php echo get_template_directory_uri(); ?>/img/security-img/security-img03.webp" class="img-fluid mb-2" alt="守衛室" />
         <p>本学園では、正門に守衛室を設置。学外からの来校者はこの守衛室で入退場を管理され、不審者が入場できないよう監視しています。</p>
         <h3 class="title-s">防犯訓練</h3>
         <img src="<?php echo get_template_directory_uri(); ?>/img/security-img/security-img05.webp" class="img-fluid mb-2" alt="防犯訓練" />
         <p>子どもたちを対象に防犯、不審者対応訓練を実施。地元警察署と連携し、犯罪に巻き込まれそうになった時、不審者に遭遇した時にどのように行動したら良いかを指導しています。</p>
+        <h5>&nbsp;</h5>
       </div>
-      <div class="col-sm-6 col-xs-12 security">
+      <div class="col-sm-6 col-xs-12 security wow fadeInUp">
         <h3 class="title-s">登下校ミマモルメと保護者一斉メール配信</h3>
         <img src="<?php echo get_template_directory_uri(); ?>/img/security-img/security-img04.webp" alt="ミマモルメ" class="img-fluid mb-2" />
         <p>
@@ -84,11 +85,11 @@ get_header(); ?>
   <div class="container">
     <h2 class="col-12 sec-title-pink pink">交通安全に関する対策 / 指導</h2>
     <div class="row">
-      <div class="col-sm-6 col-xs-12 security">
+      <div class="col-sm-6 col-xs-12 security wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
         <h3 class="title-s">交通指導</h3>
         <p>１年生とその保護者対象に、歩道の歩き方、横断の仕方について、地元警察署の方に指導していただきます。</p>
       </div>
-      <div class="col-sm-6 col-xs-12 security">
+      <div class="col-sm-6 col-xs-12 security wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
         <h3 class="title-s">交通見守り</h3>
         <img src="<?php echo get_template_directory_uri(); ?>/img/security-img/security-img06.webp" alt="校庭" class="img-fluid mb-2" />
         <p>保護者様の協力で交通見守りを実施。子どもたちの安全を守るだけでなく、大人が見守ることで子どもたちに安心を与えます。</p>
@@ -100,8 +101,8 @@ get_header(); ?>
 <section class="p-70-70">
   <div class="container">
     <h2 class="col-12 sec-title-pink pink">その他の訓練 / 指導</h2>
-    <div class="row">
-      <div class="col-sm-6 col-xs-12 security">
+    <div class="row justify-content-center">
+      <div class="col-sm-6 col-xs-12 security wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
         <h3 class="title-s">応急救護</h3>
         <img src="<?php echo get_template_directory_uri(); ?>/img/security-img/security-img07.webp" alt="応急救護" class="img-fluid mb-2" />
         <p>水泳指導の際、必要に応じて応急救護ができるようにするため、全教員を対象に、毎年、ＡＥＤと人工呼吸の訓練をしいてます。</p>

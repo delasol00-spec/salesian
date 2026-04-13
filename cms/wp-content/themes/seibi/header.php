@@ -100,7 +100,7 @@ $ogp_url   = is_singular() ? get_permalink() : home_url( add_query_arg( null, nu
             <ul class="sub-menu-list">
               <li><a href="<?php echo esc_url( home_url( '/life/daily/' ) ); ?>" class="nav-link sub-link">星美クラスの一日</a></li>
               <li><a href="<?php echo esc_url( home_url( '/life/year/' ) ); ?>" class="nav-link sub-link">年間行事</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/life/activity/' ) ); ?>" class="nav-link sub-link">委員会・クラブ活動（特別音楽クラブ）</a></li>
+              <li><a href="<?php echo esc_url( home_url( '/life/activity/' ) ); ?>" class="nav-link sub-link">委員会･クラブ活動（特別音楽クラブ）</a></li>
               <li><a href="<?php echo esc_url( home_url( '/life/after-school/' ) ); ?>" class="nav-link sub-link">サレジアンアフタースクール</a></li>
             </ul>
           </div>

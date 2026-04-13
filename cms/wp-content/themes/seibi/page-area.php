@@ -13,11 +13,11 @@ get_header(); ?>
 <section class="p-70-70">
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-sm-8 area">
+      <div class="col-lg-8 area">
         <p>都内近郊のさまざまな地区から子どもたちが通学する星美学園小学校では、子どもたちに目が行き届くよう、通学地区別に班を編成しております。<br>
         登下校だけでなく、災害時などの緊急時の際にも、この地区別編成で行動いたします。</p>
       </div>
-      <div class="col-md-10">
+      <div class="col-lg-10">
         <table class="area-formation">
           <tr class="bgp"><td>ブロック</td><td>番号</td><td>地域／行き先／駅名等</td></tr>
           <tr><td rowspan="2" class="bgpb">徒歩西側</td><td class="bg-ppink">１</td><td>赤羽台、小豆沢、志村、浮間、赤羽北、桐ヶ丘（坂をおりない）</td></tr>

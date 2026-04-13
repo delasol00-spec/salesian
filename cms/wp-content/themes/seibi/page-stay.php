@@ -70,8 +70,8 @@ get_header(); ?>
       <div class="col-md-6 col-12">
         <div class="stay-box">
           <h3>希望者のみ　オーストラリア・ホームステイ</h3>
-          <img src="<?php echo get_template_directory_uri(); ?>/img/stay-img/07.webp" alt="オーストラリア・ホームステイ" class="img-fluid" />
-          <p>シドニーの姉妹校であるセント・リーターズ小学校で現地の子ども達と創立者ドン・ボスコの精神を大切に一緒に学び、交流を深めます。</p>
+          <img src="<?php echo get_template_directory_uri(); ?>/img/stay-img/08.webp" alt="オーストラリア・ホームステイ" class="img-fluid" />
+          <p>ブリスベンにあるセント・リーターズ小学校で現地の子ども達交流を深め、一緒に学びます。</p>
         </div>
       </div>
     </div>
