@@ -8,6 +8,55 @@ Header always set X-Content-Type-Options "nosniff"
 Header always set X-XSS-Protection "1; mode=block"
 </IfModule>
 
+# ---- 旧サイト → 新サイト リダイレクト (301) ----
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+
+# 学校紹介
+RewriteRule ^introduction/greeting(/index\.html)?/?$ /seibi/about/principal/ [R=301,L]
+RewriteRule ^introduction/method(/index\.html)?/?$ /seibi/about/method/ [R=301,L]
+RewriteRule ^introduction/history(/index\.html)?/?$ /seibi/about/history/ [R=301,L]
+RewriteRule ^introduction/uniform(/index\.html)?/?$ /seibi/about/uniform/ [R=301,L]
+RewriteRule ^introduction/access(/index\.html)?/?$ /seibi/about/access/ [R=301,L]
+RewriteRule ^admission/area(/index\.html)?/?$ /seibi/about/area/ [R=301,L]
+RewriteRule ^introduction/facility(/index\.html)?/?$ /seibi/about/facility/ [R=301,L]
+RewriteRule ^introduction/security(/index\.html)?/?$ /seibi/about/security/ [R=301,L]
+RewriteRule ^qa(/index\.html)?/?$ /seibi/about/faq/ [R=301,L]
+
+# 星美クラスの教育
+RewriteRule ^feature/religious(/index\.html)?/?$ /seibi/feature/religion/ [R=301,L]
+RewriteRule ^feature/english(/index\.html)?/?$ /seibi/feature/english/ [R=301,L]
+RewriteRule ^feature/overall/international(/index\.html)?/?$ /seibi/feature/integrated-studies/ [R=301,L]
+RewriteRule ^feature/overall/stay(/index\.html)?/?$ /seibi/feature/stay/ [R=301,L]
+RewriteRule ^education/curriculum(/index\.html)?/?$ /seibi/feature/currciculum/ [R=301,L]
+RewriteRule ^education/achievement/career(/index\.html)?/?$ /seibi/feature/career/ [R=301,L]
+RewriteRule ^feature/assistenza(/index\.html)?/?$ /seibi/feature/assistenza/ [R=301,L]
+
+# 学校生活
+RewriteRule ^day/schedule(/index\.html)?/?$ /seibi/life/daily/ [R=301,L]
+RewriteRule ^day/morning-after(/index\.html)?/?$ /seibi/life/daily/ [R=301,L]
+RewriteRule ^year(/index\.html)?/?$ /seibi/life/year/ [R=301,L]
+RewriteRule ^education/activity/committee(/index\.html)?/?$ /seibi/life/activity/ [R=301,L]
+RewriteRule ^activity/music(/index\.html)?/?$ /seibi/ [R=301,L]
+RewriteRule ^after-school(/index\.html)?/?$ /seibi/life/after-school/ [R=301,L]
+
+# 入試について
+RewriteRule ^admission/requirement(/index\.html)?/?$ /seibi/admission/requirements/ [R=301,L]
+RewriteRule ^admission/flow(/index\.html)?/?$ /seibi/admission/flow/ [R=301,L]
+RewriteRule ^briefing/at-school(/index\.html)?/?$ /seibi/admission/briefing/ [R=301,L]
+RewriteRule ^admission/briefing/out-school(/index\.html)?/?$ /seibi/admission/briefing/ [R=301,L]
+RewriteRule ^admission/briefing/event(/index\.html)?/?$ /seibi/admission/event/ [R=301,L]
+RewriteRule ^admission/transfer(/index\.html)?/?$ /seibi/admission/transfer/ [R=301,L]
+
+# その他
+RewriteRule ^alumni(/index\.html)?/?$ /seibi/graduate/ [R=301,L]
+RewriteRule ^guardians(/index\.html)?/?$ /seibi/guardians/ [R=301,L]
+RewriteRule ^about(/index\.html)?/?$ /seibi/about/site/ [R=301,L]
+RewriteRule ^privacy(/index\.html)?/?$ /seibi/about/privacy/ [R=301,L]
+</IfModule>
+# ---- ここまで ----
+
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
 RewriteEngine On
