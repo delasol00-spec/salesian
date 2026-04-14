@@ -360,7 +360,7 @@ get_header(); ?>
       </div>
     </a>
 
-    <a href="<?php echo esc_url(home_url('/feature/currciculum/')); ?>" class="school-topics-box">
+    <a href="<?php echo esc_url(home_url('/feature/integrated-studies/')); ?>" class="school-topics-box">
       <div class="school-topics-image">
         <img src="<?php echo get_template_directory_uri(); ?>/img/sougou.webp" loading="lazy" alt="総合的な学習" />
       </div>
