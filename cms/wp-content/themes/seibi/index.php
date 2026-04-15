@@ -196,7 +196,7 @@ get_header(); ?>
     <?php
     $news_query = new WP_Query([
       'post_type'      => 'information',
-      'posts_per_page' => 8,
+      'posts_per_page' => 12,
       'orderby'        => 'date',
       'order'          => 'DESC',
     ]);
@@ -283,37 +283,37 @@ get_header(); ?>
       <div class="col-md-6 order-2">
         <div class="gallery-item2">
           <div class="icon-wrapper">
-            <img src="<?php echo get_template_directory_uri(); ?>/img/yobou03.svg" class="icon-white" alt="" />
+            <img src="<?php echo get_template_directory_uri(); ?>/img/yobou03.svg" class="icon-white" alt="愛情による信頼と理解" />
           </div>
         </div>
       </div>
 
       <div class="col-md-6 order-4 order-md-3">
-        <div class="gallery-item2 gallery-bg-p">
+        <div class="gallery-item2 gallery-bg-g">
           <div class="icon-wrapper">
-            <img src="<?php echo get_template_directory_uri(); ?>/img/yobou02.svg" class="icon-white" alt="" />
+            <img src="<?php echo get_template_directory_uri(); ?>/img/yobou01.svg" class="icon-white" alt="" />
           </div>
         </div>
       </div>
 
       <div class="col-md-6 order-3 order-md-4">
         <div class="gallery-item">
-          <div class="curtain-overlay curtain-overlay2"></div>
-          <img src="<?php echo get_template_directory_uri(); ?>/img/edu02.webp" loading="lazy" alt="共に生きる愛の現存" />
+          <div class="curtain-overlay curtain-overlay3"></div>
+          <img src="<?php echo get_template_directory_uri(); ?>/img/edu01.webp" loading="lazy" alt="共に生きる愛の現存" />
         </div>
       </div>
 
       <div class="col-md-6 order-5">
         <div class="gallery-item">
-          <div class="curtain-overlay curtain-overlay3"></div>
-          <img src="<?php echo get_template_directory_uri(); ?>/img/edu01.webp" loading="lazy" alt="祈りと心の喜び" />
+          <div class="curtain-overlay curtain-overlay2"></div>
+          <img src="<?php echo get_template_directory_uri(); ?>/img/edu02.webp" loading="lazy" alt="祈りと心の喜び" />
         </div>
       </div>
 
       <div class="col-md-6 order-6">
-        <div class="gallery-item2 gallery-bg-g">
+        <div class="gallery-item2 gallery-bg-p">
           <div class="icon-wrapper">
-            <img src="<?php echo get_template_directory_uri(); ?>/img/yobou01.svg" class="icon-white" alt="" />
+            <img src="<?php echo get_template_directory_uri(); ?>/img/yobou02.svg" class="icon-white" alt="" />
           </div>
         </div>
       </div>

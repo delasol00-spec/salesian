@@ -14,7 +14,7 @@ get_header(); ?>
   <div class="container">
     <div class="row">
       <div class="col-lg-4 col-md-6">
-        <img src="<?php echo get_template_directory_uri(); ?>/img/religion-img/01.webp" class="img-fluid" loading="lazy" alt="聖母マリア像" />
+        <img src="<?php echo get_template_directory_uri(); ?>/img/religion-img/01.webp" class="img-fluid" loading="lazy" alt="イエス様像" />
       </div>
       <div class="col-lg-8 col-md-6">
         <h3 class="sub-title">神様のまなざしと聖母マリア様の導きのもとで 生き生きと学び、成長する。</h3>
@@ -83,11 +83,11 @@ get_header(); ?>
         <img src="<?php echo get_template_directory_uri(); ?>/img/religion-img/03.webp" class="img-fluid" alt="毎日の祈りと聖歌" />
       </div>
       <div class="col-lg-4 col-6">
-        <h4>担任による心の栄養を注ぐ朝の会</h4>
+        <h4>からしの種の時間</h4>
         <img src="<?php echo get_template_directory_uri(); ?>/img/religion-img/04.webp" class="img-fluid" alt="担任による心の栄養を注ぐ朝の会" />
       </div>
       <div class="col-lg-4 col-6">
-        <h4>週一回のみことば朝会（TV朝会）</h4>
+        <h4>週一回のみことば朝会<small>（TV朝会）</small></h4>
         <img src="<?php echo get_template_directory_uri(); ?>/img/religion-img/15.webp" class="img-fluid" alt="週一回のみことば朝会" />
       </div>
       <div class="col-lg-4 col-6">
