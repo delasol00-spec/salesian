@@ -64,10 +64,6 @@ get_header(); ?>
             <a href="<?php echo esc_url( get_permalink( $prev->ID ) ); ?>" class="btn-slide btn-s btn-pink">
               <span class="text">前の記事</span>
             </a>
-            <?php else : ?>
-            <span class="btn-slide btn-s btn-pink disabled" aria-disabled="true">
-              <span class="text">前の記事</span>
-            </span>
             <?php endif; ?>
 
             <?php $next = get_adjacent_post( false, '', false ); ?>
@@ -75,10 +71,6 @@ get_header(); ?>
             <a href="<?php echo esc_url( get_permalink( $next->ID ) ); ?>" class="btn-slide btn-s btn-pink">
               <span class="text">次の記事</span>
             </a>
-            <?php else : ?>
-            <span class="btn-slide btn-s btn-pink disabled" aria-disabled="true">
-              <span class="text">次の記事</span>
-            </span>
             <?php endif; ?>
           </div>
           <div class="mt-5 text-center">
