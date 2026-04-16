@@ -626,6 +626,12 @@ tr th {
   border-bottom-right-radius: 10px;
 }
 
+p.note {
+  font-size: 0.9rem;
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
 @media (max-width: 991px) {
   .religion-parallax-image {
     background-attachment: scroll;

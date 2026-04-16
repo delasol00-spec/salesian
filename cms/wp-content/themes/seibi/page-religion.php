@@ -83,8 +83,8 @@ get_header(); ?>
         <img src="<?php echo get_template_directory_uri(); ?>/img/religion-img/03.webp" class="img-fluid" alt="毎日の祈りと聖歌" />
       </div>
       <div class="col-lg-4 col-6">
-        <h4>からしの種の時間</h4>
-        <img src="<?php echo get_template_directory_uri(); ?>/img/religion-img/04.webp" class="img-fluid" alt="担任による心の栄養を注ぐ朝の会" />
+        <h4>からし種の時間<span>※</span></h4>
+        <img src="<?php echo get_template_directory_uri(); ?>/img/religion-img/04.webp" class="img-fluid" alt="からし種の時間" />
       </div>
       <div class="col-lg-4 col-6">
         <h4>週一回のみことば朝会<small>（TV朝会）</small></h4>
@@ -111,6 +111,8 @@ get_header(); ?>
         </h4>
         <img src="<?php echo get_template_directory_uri(); ?>/img/religion-img/08.webp" class="img-fluid" alt="助け合い・連帯の実践" />
       </div>
+      <p class="note">※<strong>からし種の時間</strong>：子どもたちの一人ひとりの中に神様からいただいた小さな種があります。<br>
+      その種を大きく育てるために全教員が聖書の言葉を基に心を耕す宗教家道徳を全教員で実施しています。</p>
     </div>
   </div>
 </section>
