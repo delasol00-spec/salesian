@@ -73,7 +73,6 @@ $ogp_url   = is_singular() ? get_permalink() : home_url( add_query_arg( null, nu
           <a href="#menu-school" class="nav-link" data-toggle="collapse" aria-expanded="false">学校紹介 <span class="arrow">∨</span></a>
           <div class="collapse sub-menu-wrapper" id="menu-school" data-parent="#sidebarMenuList">
             <ul class="sub-menu-list">
-              <li><a href="<?php echo esc_url( home_url( '/about/principal/' ) ); ?>" class="nav-link sub-link">校長メッセージ</a></li>
               <li><a href="<?php echo esc_url( home_url( '/about/method/' ) ); ?>" class="nav-link sub-link">建学の精神･教育理念</a></li>
               <li><a href="<?php echo esc_url( home_url( '/about/history/' ) ); ?>" class="nav-link sub-link">星美の歩み</a></li>
               <li><a href="<?php echo esc_url( home_url( '/about/uniform/' ) ); ?>" class="nav-link sub-link">制服</a></li>

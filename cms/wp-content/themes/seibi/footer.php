@@ -18,7 +18,6 @@
       <div class="sitemap-col">
         <h4 class="sitemap-head">学校紹介</h4>
         <ul class="sitemap-links">
-          <li><a href="<?php echo esc_url( home_url( '/about/principal/' ) ); ?>">校長メッセージ</a></li>
           <li><a href="<?php echo esc_url( home_url( '/about/method/' ) ); ?>">建学の精神･教育理念</a></li>
           <li><a href="<?php echo esc_url( home_url( '/about/history/' ) ); ?>">星美の歩み</a></li>
           <li><a href="<?php echo esc_url( home_url( '/about/uniform/' ) ); ?>">制服</a></li>
