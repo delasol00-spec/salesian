@@ -33,11 +33,6 @@ function seibi_get_page_definitions(): array {
             'parent' => '',
         ],
         [
-            'title'  => '校長メッセージ',
-            'slug'   => 'principal',
-            'parent' => 'about',
-        ],
-        [
             'title'  => '建学の精神･教育理念',
             'slug'   => 'method',
             'parent' => 'about',
