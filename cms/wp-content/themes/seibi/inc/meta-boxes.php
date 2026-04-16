@@ -344,7 +344,7 @@ function seibi_year_gallery_meta_box_callback( $post ) {
         <?php foreach ( $id_array as $id ) :
             $url = wp_get_attachment_image_url( (int) $id, 'thumbnail' );
             if ( ! $url ) continue; ?>
-            <div class="year-gallery-thumb" data-id="<?php echo esc_attr( $id ); ?>" style="position:relative;width:80px;height:80px;">
+            <div class="year-gallery-thumb" data-id="<?php echo esc_attr( $id ); ?>" style="position:relative;width:80px;height:80px;cursor:grab;">
                 <img src="<?php echo esc_url( $url ); ?>" style="width:80px;height:80px;object-fit:cover;display:block;" />
                 <button type="button" class="year-gallery-remove" data-id="<?php echo esc_attr( $id ); ?>" style="position:absolute;top:2px;right:2px;background:rgba(0,0,0,.6);color:#fff;border:none;cursor:pointer;width:20px;height:20px;border-radius:50%;line-height:1;padding:0;font-size:14px;">×</button>
             </div>
@@ -374,7 +374,7 @@ function seibi_year_gallery_meta_box_callback( $post ) {
                     var sizes = attachment.get('sizes');
                     var thumb = sizes && sizes.thumbnail ? sizes.thumbnail.url : attachment.get('url');
                     $('#year-gallery-preview').append(
-                        '<div class="year-gallery-thumb" data-id="' + id + '" style="position:relative;width:80px;height:80px;">' +
+                        '<div class="year-gallery-thumb" data-id="' + id + '" style="position:relative;width:80px;height:80px;cursor:grab;">' +
                         '<img src="' + thumb + '" style="width:80px;height:80px;object-fit:cover;display:block;" />' +
                         '<button type="button" class="year-gallery-remove" data-id="' + id + '" style="position:absolute;top:2px;right:2px;background:rgba(0,0,0,.6);color:#fff;border:none;cursor:pointer;width:20px;height:20px;border-radius:50%;line-height:1;padding:0;font-size:14px;">×</button>' +
                         '</div>'

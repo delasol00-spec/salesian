@@ -44,6 +44,27 @@ function seibi_enqueue_media_for_year( $hook ) {
     $screen = get_current_screen();
     if ( $screen && $screen->post_type === 'year' && in_array( $hook, [ 'post.php', 'post-new.php' ], true ) ) {
         wp_enqueue_media();
+        wp_enqueue_script( 'jquery-ui-sortable' );
+        wp_add_inline_script( 'jquery-ui-sortable', "(function($){
+            $('<style>.year-gallery-placeholder{width:80px;height:80px;background:#e8f0fe;border:2px dashed #7baaf7;border-radius:2px;flex-shrink:0;}</style>').appendTo('head');
+            $(function(){
+                $('#year-gallery-preview').sortable({
+                    cancel: '.year-gallery-remove',
+                    placeholder: 'year-gallery-placeholder',
+                    forcePlaceholderSize: true,
+                    tolerance: 'pointer',
+                    opacity: 0.75,
+                    cursor: 'grabbing',
+                    update: function() {
+                        var ids = [];
+                        $(this).find('.year-gallery-thumb').each(function(){
+                            ids.push($(this).data('id'));
+                        });
+                        $('#year_gallery_ids').val(ids.join(','));
+                    }
+                });
+            });
+        })(jQuery);" );
     }
 }
 add_action( 'admin_enqueue_scripts', 'seibi_enqueue_media_for_year' );
