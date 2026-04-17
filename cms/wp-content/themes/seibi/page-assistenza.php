@@ -26,7 +26,7 @@ get_header(); ?>
     <div class="row justify-content-center">
         <h2 class="col-12 sec-title-pink pink">子どもたちに安心感と信頼感を。</h2>
         <div class="col-lg-8 col-12">
-        <p>星美では、"アシステンツァ"という合い言葉があります。<br>
+        <p>星美クラスでは、"アシステンツァ"という合い言葉があります。<br>
           イタリア語で"常に寄り添う"という意味のこの言葉は、子どもたちと行動を共にし、何かあったときには、すぐに手を差しのべられる関わり方を指します。<br>
           この関わりを通して、安心と信頼関係が子どもたちとの間に生まれ、家族的雰囲気を作り出しています。 </p>
         </div>
@@ -39,7 +39,7 @@ get_header(); ?>
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10">
-          <h2 class="col-12 sec-title-pink pink">星美の予防教育法</h2>
+          <h2 class="col-12 sec-title-pink pink">星美クラスの予防教育法</h2>
           <div class="religion-text">
             <p class="gakunen-pill">理性</p>
             <h4 class="assistenza-title">愛情による信頼と理解</h4>

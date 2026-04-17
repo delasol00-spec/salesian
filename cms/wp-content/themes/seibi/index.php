@@ -265,7 +265,7 @@ get_header(); ?>
 <section class="section50 always-bg">
   <div class="container">
     <div class="row">
-      <div class="col-12 sec-title pink">星美の予防教育法</div>
+      <div class="col-12 sec-title pink">星美クラスの予防教育法</div>
     </div>
   </div>
 </section>
@@ -344,7 +344,7 @@ get_header(); ?>
       </div>
       <div class="school-topics-content">
         <h3 class="school-topics-title">英語教育</h3>
-        <p class="school-topics-text">星美の英語教育は、１年生から６年生までの６年間実施しています。 英語の音に慣れ親しみ、英語で表現する基本的なコミュニケーション能力の育成はもちろん、コミュニケーションを通して海外の文化に目を向け、国際理解の感覚を養うことを大切にしています。</p>
+        <p class="school-topics-text">星美クラスの英語教育は、１年生から６年生までの６年間実施しています。 英語の音に慣れ親しみ、英語で表現する基本的なコミュニケーション能力の育成はもちろん、コミュニケーションを通して海外の文化に目を向け、国際理解の感覚を養うことを大切にしています。</p>
         <div class="btn-slide school-topics-link-ui">詳しく見る</div>
       </div>
     </a>

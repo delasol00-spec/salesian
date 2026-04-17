@@ -486,7 +486,7 @@ tr th {
   color: #fff;
   padding: 15px 0 8px;
   letter-spacing: 0.1rem;
-  margin-bottom: 0;
+  margin-bottom: 15px;
 }
 
 .event-detail {
