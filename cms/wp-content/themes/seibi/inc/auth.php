@@ -79,5 +79,4 @@ function seibi_basic_auth_parents() {
         exit;
     }
 }
-// Basic認証を一時解除中（再有効化する場合はコメントアウトを外す）
-// add_action( 'template_redirect', 'seibi_basic_auth_parents' );
+add_action( 'template_redirect', 'seibi_basic_auth_parents' );
