@@ -138,7 +138,7 @@
 .event-col-white {
   background: #fff;
   box-shadow: 0 0px 15px 0 rgba(0, 0, 0, 0.2);
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   border-radius: 10px;
 }
 
@@ -486,7 +486,7 @@ tr th {
   color: #fff;
   padding: 15px 0 8px;
   letter-spacing: 0.1rem;
-  margin-bottom: 15px;
+  margin-bottom: 0;
 }
 
 .event-detail {
@@ -624,12 +624,6 @@ tr th {
   margin-bottom: 3px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-}
-
-p.note {
-  font-size: 0.9rem;
-  margin-bottom: 0;
-  line-height: 1.5;
 }
 
 @media (max-width: 991px) {
@@ -1230,6 +1224,7 @@ tr th {
   padding: 2px 12px 1px;
   border-radius: 50px;
   color: #fff;
+  background: #005297;
 }
 
 h2.blog-title {
@@ -1461,19 +1456,19 @@ a.gra-cate:hover {
 }
 
 .religion-para-img {
-  background: url("../img/religion-img/02.webp") left center / cover no-repeat fixed;
+  background: url("../feature/religion-img/02.webp") left center / cover no-repeat fixed;
 }
 
 .english-para-img {
-  background: url("../img/english-img/para.webp") left center / cover no-repeat fixed;
+  background: url("../feature/english-img/para.webp") left center / cover no-repeat fixed;
 }
 
 .general-para-img {
-  background: url("../img/general-img/para.webp") left center / cover no-repeat fixed;
+  background: url("../feature/general-img/para.webp") left center / cover no-repeat fixed;
 }
 
 .assistenza-para-img {
-  background: url("../img/assistenza-img/para.webp") left center / cover no-repeat fixed;
+  background: url("../feature/assistenza-img/para.webp") left center / cover no-repeat fixed;
 }
 
 /* iOS Safari は background-attachment:fixed 非対応で画像が巨大化するため
