@@ -164,7 +164,9 @@ function seibi_editor_restrict_page_edit() {
 
     // 固定ページの編集画面：許可ページ以外を禁止
     if ( $screen->base === 'post' && $screen->post_type === 'page' ) {
-        $post_id = isset( $_GET['post'] ) ? (int) $_GET['post'] : 0;
+        // GET（閲覧）は $_GET['post']、POST（保存フォーム送信）は $_POST['post_ID'] で取得
+        $post_id = isset( $_GET['post'] ) ? (int) $_GET['post'] :
+                   ( isset( $_POST['post_ID'] ) ? (int) $_POST['post_ID'] : 0 );
         $allowed  = get_page_by_path( 'admission/requirements' );
         if ( ! $allowed || $post_id !== $allowed->ID ) {
             wp_safe_redirect( admin_url( 'edit.php?post_type=page' ) );
