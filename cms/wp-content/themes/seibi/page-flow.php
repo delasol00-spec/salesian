@@ -26,28 +26,91 @@ get_header(); ?>
             </div>
           </div>
         </div>
+        <div class="col-12 text-center">
+          <span class="material-symbols-outlined after-flow-arrow" aria-hidden="true">arrow_circle_down</span>
+        </div>
 
+        <?php
+        // 児童募集要項（requirementsページ）から表示中の各日程データをまとめて取得
+        // $req_schedules = [ 'A日程' => [ 'app' => '...', 'int' => '...', 'exam' => '...', 'result' => '...' ], ... ]
+        $req_pages = get_posts( [
+            'name'        => 'requirements',
+            'post_type'   => 'page',
+            'post_status' => 'publish',
+            'numberposts' => 1,
+        ] );
+        $req_schedules = [];
+        if ( $req_pages ) {
+            $req_id = $req_pages[0]->ID;
+            foreach ( [ 'a', 'b', 'c' ] as $s ) {
+                if ( '1' === get_post_meta( $req_id, "req_seibi_show_{$s}", true ) ) {
+                    $req_schedules[ strtoupper( $s ) . '日程' ] = [
+                        'app'    => get_post_meta( $req_id, "req_seibi_app_{$s}",    true ),
+                        'int'    => get_post_meta( $req_id, "req_seibi_int_{$s}",    true ),
+                        'exam'   => get_post_meta( $req_id, "req_seibi_exam_{$s}",   true ),
+                        'result' => get_post_meta( $req_id, "req_seibi_result_{$s}", true ),
+                    ];
+                }
+            }
+        }
+        ?>
         <div class="event-col-white">
           <h3 class="r-top-10">出願（Web出願）</h3>
           <div class="event-spec">
             <p>
-              <strong>A日程：</strong>10月1日(木)〜10月4日(日)<br>
-              <strong>B日程：</strong>11月10日(火)〜11月14日(土)<br>
-              詳細は児童受験要項でご確認ください。
+              <?php foreach ( $req_schedules as $label => $d ) : if ( ! $d['app'] ) continue; ?>
+                <strong><?php echo esc_html( $label ); ?>：</strong><?php echo esc_html( $d['app'] ); ?><br>
+              <?php endforeach; ?>
+              詳細は児童募集要項でご確認ください。
             </p>
             <div class="btn-group d-flex justify-content-end w-100">
               <a href="<?php echo esc_url( home_url( '/admission/requirements/' ) ); ?>" class="btn-slide btn-mini btn-pink btn-right">児童募集要項 <span class="material-symbols-outlined"> keyboard_double_arrow_right </span></a>
             </div>
           </div>
         </div>
+        <div class="col-12 text-center">
+          <span class="material-symbols-outlined after-flow-arrow" aria-hidden="true">arrow_circle_down</span>
+        </div>
+
+        <div class="event-col-white">
+          <h3 class="r-top-10">選考</h3>
+          <div class="event-spec">
+            <p>面接＋ペーパーテスト＋社会性のテスト<br>
+              選考は面接とペーパーテスト、社会性のテストの結果をもとに合否を判断いたします。</p>
+            <p>
+              <strong class="pink">面接期間</strong><br>
+              <?php foreach ( $req_schedules as $label => $d ) : if ( ! $d['int'] ) continue; ?>
+                <strong><?php echo esc_html( $label ); ?>：</strong><?php echo esc_html( $d['int'] ); ?><br>
+              <?php endforeach; ?>
+            </p>
+            <p>
+              <strong class="pink">入学試験</strong><br>
+              <?php foreach ( $req_schedules as $label => $d ) : if ( ! $d['exam'] ) continue; ?>
+                <strong><?php echo esc_html( $label ); ?>：</strong><?php echo esc_html( $d['exam'] ); ?><br>
+              <?php endforeach; ?>
+            </p>
+            <div class="btn-group d-flex justify-content-end w-100">
+              <a href="<?php echo esc_url( home_url( '/admission/requirements/' ) ); ?>" class="btn-slide btn-mini btn-pink btn-right">児童募集要項 <span class="material-symbols-outlined"> keyboard_double_arrow_right </span></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 text-center">
+          <span class="material-symbols-outlined after-flow-arrow" aria-hidden="true">arrow_circle_down</span>
+        </div>
 
         <div class="event-col-white">
           <h3 class="r-top-10">合格発表（Web合格発表）</h3>
           <div class="event-spec">
             <p>
+              <?php foreach ( $req_schedules as $label => $d ) : if ( ! $d['result'] ) continue; ?>
+                <strong><?php echo esc_html( $label ); ?>：</strong><?php echo esc_html( $d['result'] ); ?><br>
+              <?php endforeach; ?>
               試験日の翌日にWebにて発表いたします。
             </p>
           </div>
+        </div>
+        <div class="col-12 text-center">
+          <span class="material-symbols-outlined after-flow-arrow" aria-hidden="true">arrow_circle_down</span>
         </div>
 
         <div class="event-col-white">
