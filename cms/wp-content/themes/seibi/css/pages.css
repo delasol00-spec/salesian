@@ -641,10 +641,17 @@ tr th {
 /* ----------------------
    英語教育
   ---------------------- */
-.english-text p {
+.english-text p,
+.english-text ul li {
   color: #fff;
   font-size: 0.95rem;
   line-height: 1.6;
+}
+
+.english-text ul {
+  margin-left: 0;
+  padding-left: 1rem;
+  margin-bottom: 30px;
 }
 
 .english-text p span {
@@ -1451,24 +1458,25 @@ a.gra-cate:hover {
   margin-bottom: 30px;
 }
 
-.page-parallax p {
+.page-parallax p,
+.page-parallax ul li {
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
 }
 
 .religion-para-img {
-  background: url("../feature/religion-img/02.webp") left center / cover no-repeat fixed;
+  background: url("../img/religion-img/02.webp") left center / cover no-repeat fixed;
 }
 
 .english-para-img {
-  background: url("../feature/english-img/para.webp") left center / cover no-repeat fixed;
+  background: url("../img//english-img/para.webp") left center / cover no-repeat fixed;
 }
 
 .general-para-img {
-  background: url("../feature/general-img/para.webp") left center / cover no-repeat fixed;
+  background: url("../imggeneral-img/para.webp") left center / cover no-repeat fixed;
 }
 
 .assistenza-para-img {
-  background: url("../feature/assistenza-img/para.webp") left center / cover no-repeat fixed;
+  background: url("../img/assistenza-img/para.webp") left center / cover no-repeat fixed;
 }
 
 /* iOS Safari は background-attachment:fixed 非対応で画像が巨大化するため
