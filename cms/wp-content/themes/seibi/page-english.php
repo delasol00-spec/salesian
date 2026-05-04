@@ -43,7 +43,7 @@ get_header(); ?>
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10">
-          <h2 class="col-12 sec-title-pink pink">英語科の取り組み</h2>
+          <!--<h2 class="col-12 sec-title-pink pink">英語科の取り組み</h2>-->
           <div class="english-text">
             <p class="gakunen-pill">低学年 Foundation（基礎）</p>
             <p><span>Listen & Speak<br>
@@ -90,9 +90,9 @@ get_header(); ?>
 <section class="p-70-70">
   <div class="container">
     <div class="row religion-event row-gutter-5">
-      <div class="sec-title-pink pink">
+      <!--<div class="sec-title-pink pink">
         <h3>その他の取り組み</h3>
-      </div>
+      </div>-->
       <div class="col-md-6 col-12">
         <p class="gakunen-pill">英検</p>
         <p>日頃の学習で身につけた実力を試すことができるように「英検２〜５級」にチャレンジできる場を設けています。<br>
@@ -103,11 +103,11 @@ get_header(); ?>
         <p>5年生で、オーストラリアのセント リーターズ小学校とのオンライン交流会を行います。<br>
           海外をすぐそばに感じながら、自分の英語が実際に通じた時の喜びを感じることができます。</p>
       </div>
-      <div class="col-md-6 col-12">
+      <!--<div class="col-md-6 col-12">
         <p class="gakunen-pill">英語通信の発行</p>
         <p>学習内容や英語圏の国々の文化、教職員の英語・海外体験談などを、学年に分けて作成しています。<br>
           ご家庭でも学習内容に応じた英語を使っていただけるように、保護者の方への連絡も兼ねて発行しています。</p>
-      </div>
+      </div>-->
     </div>
   </div>
 </section>
