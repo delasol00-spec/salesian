@@ -18,7 +18,7 @@ get_header(); ?>
         <div class="event-col-white">
           <h3 class="r-top-10">転入試験のお知らせ</h3>
           <div class="event-spec">
-            <p>本年度の転入試験は、終了いたしました。</p>
+            <p>転編入テストを実施する場合は、こちらのページにてお知らせいたします。</p>
           </div>
         </div>
 
