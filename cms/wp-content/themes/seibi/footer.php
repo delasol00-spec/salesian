@@ -77,7 +77,7 @@
             <a href="https://www.seibi.ac.jp/" target="_blank">星美学園<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-left: 2px">open_in_new</span></a>
           </li>
           <li>
-            <a href="https://www.seibi.ac.jp/ki/" target="_blank">星美学園幼稚園<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-left: 2px">open_in_new</span></a>
+          <a href="https://salesian-intlkinder-seibi.ed.jp/" target="_blank">サレジアン国際学園幼稚園<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-left: 2px">open_in_new</span></a>
           </li>
           <li>
             <a href="https://www.salesian.international.seibi.ac.jp/" target="_blank">サレジアン国際中学校高等学校<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-left: 2px">open_in_new</span></a>
@@ -90,7 +90,7 @@
     </div>
   </div>
   <div class="copy">
-    <p class="copyright">&copy; SALESIAN INTERNATIONAL SCHOOL. All Rights Reserved.</p>
+    <p class="copyright">&copy; SALESIAN INTERNATIONAL PRIMARY SCHOOL. All Rights Reserved.</p>
   </div>
 </footer>
 
