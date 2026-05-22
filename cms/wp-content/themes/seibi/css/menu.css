@@ -1,13 +1,11 @@
 @charset "UTF-8";
 
-/* スマホヘッダーのロゴ（横長対応） */
 .mobile-logo {
   display: flex;
   align-items: center;
   height: 100%;
 }
 
-/* PCサイドバーのロゴエリア（修正） */
 .mobile-logo img,
 .header-logo,
 .sidebar-logo {
@@ -16,7 +14,7 @@
   opacity: 1 !important;
   height: 46px !important;
   width: auto !important;
-  min-width: 100px !important; /* 最低限の幅を確保 */
+  min-width: 100px !important;
 }
 
 .brand-area {
@@ -24,8 +22,8 @@
   padding-bottom: 30px !important;
   width: 100%;
   display: flex;
-  flex-direction: column; /* 縦に並べる */
-  align-items: center; /* 左右中央に配置 */
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   box-sizing: border-box;
 }
@@ -39,31 +37,28 @@
   display: block !important;
   height: 46px !important;
   width: auto !important;
-  margin: 0 auto; /* 中央に寄せる */
+  margin: 0 auto;
 }
 
 .school-branch-text {
   color: #f9f8f6;
-  font-size: 1.4rem; /* ロゴの下に添えるのに程よいサイズ */
-  font-family: "Noto Serif JP", serif; /* フォントを太い明朝体に指定 */
-  font-weight: 700; /* 最も太い設定 */
-  letter-spacing: 0.1rem; /* 文字の間隔を広げて高級感を出す */
+  font-size: 1.4rem;
+  font-family: "Noto Serif JP", serif;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
   margin-bottom: 0;
   text-shadow: 2px 3px 3px rgba(0, 0, 0, 0.4);
 }
 
-/* PCサイドバーのロゴ本体（修正） */
 .sidebar-logo {
-  max-width: 90%; /* サイドバーからはみ出さないガード */
-  flex-shrink: 0; /* これが重要！勝手に小さくなるのを防ぎます */
+  max-width: 90%;
+  flex-shrink: 0;
   height: auto !important;
-  margin-bottom: 5px; /* 下の文字との間隔 */
+  margin-bottom: 5px;
   display: block;
-  /* もしこれでも寄って見えるなら、数ピクセル左に微調整する「隠し技」 */
-  /* transform: translateX(-2px); */
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.8));
 }
 
-/* --- メニューリストの装飾 (style.cssから移動) --- */
 .menu-list {
   padding: 0;
   margin: 0;
@@ -87,14 +82,12 @@
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* --- プルダウン (style.cssから移動) --- */
 .sub-menu-wrapper {
   background-color: rgba(0, 0, 0, 0.2);
   margin: 0 !important;
   padding: 0 !important;
 }
 
-/* アコーディオン見出しとサブメニューの境目（開いたときだけ） */
 .menu-list .nav-item .sub-menu-wrapper.collapse.show {
   border-top: 1px solid rgba(255, 255, 255, 0.28);
 }
@@ -111,15 +104,6 @@
   display: block;
   text-decoration: none;
 }
-
-/*.sub-menu-wrapper .nav-link.sub-link {
-  padding: 12px 20px 12px 30px !important;
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.8) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-  display: block;
-  text-decoration: none;
-}*/
 
 .sub-menu-wrapper ul li:last-child .sub-link {
   border-bottom: 0 !important;
@@ -153,16 +137,16 @@
 
 /* 1. 土台となる span.arrow の設定 */
 .nav-item .arrow {
-  display: inline-flex !important; /* inline-blockより安定します */
+  display: inline-flex !important;
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 20px !important; /* 枠を広めに取って「欠け」を防ぐ */
+  width: 20px !important;
   height: 20px !important;
   color: transparent !important;
-  margin-left: 10px; /* 文字との距離 */
-  margin-right: 5px; /* 右端にぶつからないよう隙間を作る */
-  overflow: visible !important; /* 絶対に中身を切り取らない */
+  margin-left: 10px;
+  margin-right: 5px;
+  overflow: visible !important;
 }
 
 /* 2. 左右対称な「角度の広いV」を作る */
