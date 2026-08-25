@@ -45,16 +45,17 @@ get_header(); ?>
         ];
         $cat_class = isset( $bg_map[ $cat_slug ] ) ? $bg_map[ $cat_slug ] : 'bg-blue';
         ?>
+        
+        <h2 class="blog-title"><?php the_title(); ?></h2>
+
+        <div class="single-news-content">
+          <?php the_content(); ?>
+        </div>
         <div class="blog-header">
           <span class="news-date"><?php echo esc_html( get_the_date( 'Y.m.d' ) ); ?></span>
           <?php if ( $cat_label ) : ?>
           <span class="news-category <?php echo esc_attr( $cat_class ); ?>"><?php echo $cat_label; ?></span>
           <?php endif; ?>
-        </div>
-        <h2 class="blog-title"><?php the_title(); ?></h2>
-
-        <div class="single-news-content">
-          <?php the_content(); ?>
         </div>
 
         <div class="page-direction mt-5">
