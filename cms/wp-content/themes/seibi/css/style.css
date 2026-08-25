@@ -637,7 +637,7 @@ a:hover {
 
 /* 3段目：タイトル */
 .news-card-body {
-  margin-top: 7px;
+  /*margin-top: 7px;*/
   text-align: left;
 }
 
