@@ -60,7 +60,7 @@
           <li><a href="<?php echo esc_url( home_url( '/admission/flow/' ) ); ?>">入学までの流れ</a></li>
           <li><a href="<?php echo esc_url( home_url( '/admission/briefing/' ) ); ?>">学校説明会･学外説明会</a></li>
           <li><a href="<?php echo esc_url( home_url( '/admission/event/' ) ); ?>">公開行事</a></li>
-          <li><a href="<?php echo esc_url( home_url( '/admission/transfer/' ) ); ?>">編転入について</a></li>
+          <li><a href="<?php echo esc_url( home_url( '/admission/transfer/' ) ); ?>">転入について</a></li>
         </ul>
       </div>
     </div>
