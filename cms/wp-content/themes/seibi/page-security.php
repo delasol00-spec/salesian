@@ -105,7 +105,7 @@ get_header(); ?>
       <div class="col-sm-6 col-xs-12 security wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
         <h3 class="title-s">応急救護</h3>
         <img src="<?php echo get_template_directory_uri(); ?>/img/security-img/security-img07.webp" alt="応急救護" class="img-fluid mb-2" />
-        <p>水泳指導の際、必要に応じて応急救護ができるようにするため、全教員を対象に、毎年、ＡＥＤと人工呼吸の訓練をしいてます。</p>
+        <p>水泳指導の際、必要に応じて応急救護ができるようにするため、全教員を対象に、毎年、ＡＥＤと人工呼吸の訓練をしてます。</p>
       </div>
     </div>
   </div>
