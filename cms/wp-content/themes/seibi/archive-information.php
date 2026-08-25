@@ -46,8 +46,8 @@ get_header(); ?>
                     $cat_slug  = $term ? $term->slug : '';
                     $cat_class = isset( $bg_map[ $cat_slug ] ) ? $bg_map[ $cat_slug ] : 'bg-blue';
                     $excerpt   = get_the_excerpt();
-                    if ( mb_strlen( $excerpt ) > 75 ) {
-                        $excerpt = mb_substr( $excerpt, 0, 75 ) . '…';
+                    if ( mb_strlen( $excerpt ) > 83 ) {
+                        $excerpt = mb_substr( $excerpt, 0, 83 ) . '…';
                     }
                     ?>
                     <div class="news-list">
@@ -59,15 +59,16 @@ get_header(); ?>
                             <img src="<?php echo get_template_directory_uri(); ?>/img/news-title.webp" alt="<?php the_title_attribute(); ?>" class="img-fluid" />
                           <?php endif; ?>
                           <div class="news-card-body">
-                            <div class="blog-header">
-                              <span class="news-date"><?php echo esc_html( get_the_date( 'Y.m.d' ) ); ?></span>
-                              <?php if ( $cat_label ) : ?>
-                              <span class="news-category <?php echo esc_attr( $cat_class ); ?>"><?php echo $cat_label; ?></span>
-                              <?php endif; ?>
-                            </div>
+                            
                             <h2 class="news-card-title"><?php the_title(); ?></h2>
                             <?php if ( $excerpt ) : ?>
                             <p class="news-card-excerpt"><?php echo esc_html( $excerpt ); ?></p>
+                    <div class="blog-header">
+                      <span class="news-date"><?php echo esc_html( get_the_date( 'Y.m.d' ) ); ?></span>
+                      <?php if ( $cat_label ) : ?>
+                      <span class="news-category <?php echo esc_attr( $cat_class ); ?>"><?php echo $cat_label; ?></span>
+                      <?php endif; ?>
+                    </div>
                             <?php endif; ?>
                           </div>
                         </a>
