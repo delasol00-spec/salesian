@@ -71,7 +71,7 @@ get_header(); ?>
         <div class="stay-box">
           <h3>希望者のみ　オーストラリア・ホームステイ</h3>
           <img src="<?php echo get_template_directory_uri(); ?>/img/stay-img/08.webp" alt="オーストラリア・ホームステイ" class="img-fluid" />
-          <p>ブリスベンにあるセント・リーターズ小学校で現地の子ども達交流を深め、一緒に学びます。</p>
+          <p>ブリスベンにあるセント・リーターズ小学校で現地の子ども達と交流を深め、一緒に学びます。</p>
         </div>
       </div>
     </div>
