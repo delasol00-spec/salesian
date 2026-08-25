@@ -1223,7 +1223,7 @@ tr th {
   align-items: center;
   justify-content: flex-end;
   gap: 0 10px;
-  margin-bottom: 5px;
+  margin-top: 10px;
 }
 
 .blog-header .news-category {
