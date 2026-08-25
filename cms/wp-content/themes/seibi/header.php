@@ -39,7 +39,7 @@ $ogp_url   = is_singular() ? get_permalink() : home_url( add_query_arg( null, nu
   <div class="splash-wipe"></div>
 </div>
 
-<header class="mobile-header d-xl-none fixed-top">
+<header class="mobile-header d-lg-none fixed-top">
   <div class="d-flex justify-content-between align-items-center px-3 h-100">
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="mobile-logo">
       <img src="<?php echo get_template_directory_uri(); ?>/img/top-logo-sm.svg" alt="Logo" class="header-logo" />
@@ -121,7 +121,7 @@ $ogp_url   = is_singular() ? get_permalink() : home_url( add_query_arg( null, nu
               <li><a href="<?php echo esc_url( home_url( '/admission/flow/' ) ); ?>" class="nav-link sub-link">入学までの流れ</a></li>
               <li><a href="<?php echo esc_url( home_url( '/admission/briefing/' ) ); ?>" class="nav-link sub-link">学校説明会･学外説明会</a></li>
               <li><a href="<?php echo esc_url( home_url( '/admission/event/' ) ); ?>" class="nav-link sub-link">公開行事</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/admission/transfer/' ) ); ?>" class="nav-link sub-link">編転入について</a></li>
+              <li><a href="<?php echo esc_url( home_url( '/admission/transfer/' ) ); ?>" class="nav-link sub-link">転入について</a></li>
             </ul>
           </div>
         </li>
